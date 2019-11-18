@@ -184,7 +184,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item has-treeview menu-open">
+          <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="ion ion-person-add""></i>
               <p>
@@ -207,29 +207,12 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon far fa-plus-square"></i>
-              <p>
-                Obat -Obatan
-                <i class="fas fa-angle-left right"></i>
-                <span class="badge badge-info right"></span>
-              </p>
+         
+        <li class="nav-item">
+            <a href="Obat.aspx" class="nav-link">
+              <i class="nav-icon fas fa-capsules"></i>
+              <p> Obat</p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="AdminLTE/pages/layout/top-nav.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Input Obat</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="AdminLTE/pages/layout/boxed.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>View Obat</p>
-                </a>
-              </li>
-            </ul>
           </li>
 		  
 		 <li class="nav-item">
@@ -238,55 +221,21 @@
               <p>Jenis Obat</p>
             </a>
           </li>
-		  
-		   <li class="nav-item has-treeview">
-            <a href="#" class="nav-link active">
-              <i class="fas fa-tag""></i>
-              <p>
-                Supplier
-                <i class="fas fa-angle-left right"></i>
-              </p>
+
+		 <li class="nav-item">
+            <a href="Supplier.aspx" class="nav-link">
+              <i class="nav-icon fas fa-capsules"></i>
+              <p>Supplier</p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="Supplier.aspx" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Input Supplier</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="viewSupplier.aspx" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>View Supplier</p>
-                </a>
-              </li>
-			 </li>
-			</ul> 
+          </li>
 			
-			
-			<li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-table"></i>
-              <p>
-                Lokasi Penyimpanan
-                <i class="fas fa-angle-left right"></i>
-              </p>
+            <li class="nav-item">
+            <a href="jenisObat.aspx" class="nav-link">
+              <i class="nav-icon fas fa-capsules"></i>
+              <p>Lokasi Penyimpanan</p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="AdminLTE/pages/tables/simple.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Input Lokasi</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="AdminLTE/pages/tables/data.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>View Lokasi</p>
-                </a>
-              </li>
-            </ul>
-			
+          </li>
+
 			<li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>

@@ -1,0 +1,96 @@
+USE [PRG4_APOTEK]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_HapusSupplier]    Script Date: 18/11/2019 14:04:42 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[sp_HapusSupplier]
+	@IDSupplier int,
+	@ModifiedBy int
+	
+AS
+BEGIN
+	UPDATE Supplier
+	set
+	[Status]=0 ,
+	ModifiedBy=@ModifiedBy 
+	WHERE IDSupplier = @IDSupplier
+END
+
+
+ALTER PROCEDURE [dbo].[sp_InputSupplier]
+    @NamaSupplier varchar(50),
+    @AlamatSupplier varchar(100),
+	@Email varchar(30),
+	@NoHp varchar (15),
+	@Status int,
+	@CreateBy int,
+	@CreateDate date,
+	@ModifiedBy int,
+	@ModifiedDate date
+	
+AS
+BEGIN
+	INSERT INTO Supplier
+	(
+    NamaSupplier ,
+    AlamatSupplier,
+	EmailSupplier ,
+	noTelp ,
+	Status ,
+	CreateBy ,
+	CreateDate ,
+	ModifiedBy ,
+	ModifiedDate 
+	)
+	VALUES
+	(
+	@NamaSupplier ,
+    @AlamatSupplier ,
+	@Email,
+	@NoHp,
+	@Status ,
+	@CreateBy ,
+	@CreateDate ,
+	@ModifiedBy ,
+	@ModifiedDate
+	)
+END
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[sp_SearchSupplier]
+	@NamaSupplier nvarchar (50)
+AS
+BEGIN
+		SELECT s.IDSupplier,s.NamaSupplier, s.AlamatSupplier, s.EmailSupplier, s.noTelp, case when Status=1 then
+	 'Aktif' when status=0 then 'Tidak Aktif' end AS 'Status', s.CreateBy, s.CreateDate, s.ModifiedBy, s.ModifiedDate FROM Supplier s
+	WHERE NamaSupplier LIKE '%'+@NamaSupplier+'%'
+END
+
+GO
+ALTER PROCEDURE [dbo].[sp_UpdateSupplier]
+	@IDSupplier int,
+    @NamaSupplier varchar(50),
+    @AlamatSupplier varchar(100),
+	@Email varchar(30),
+	@NoHp varchar (15),
+	@Status int,
+	@ModifiedBy int,
+	@ModifiedDate date
+	
+AS
+BEGIN
+	UPDATE Supplier
+	set
+    NamaSupplier=@NamaSupplier ,
+    AlamatSupplier=@AlamatSupplier,
+	EmailSupplier=@Email,
+	noTelp=@NoHp ,
+	Status=@Status ,
+	ModifiedBy=@ModifiedBy ,
+	ModifiedDate =@ModifiedDate
+	WHERE IDSupplier = @IDSupplier
+END
