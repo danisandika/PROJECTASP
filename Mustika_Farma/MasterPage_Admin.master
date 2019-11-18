@@ -21,6 +21,8 @@
   <link rel="stylesheet" href="AdminLTE/plugins/jqvmap/jqvmap.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="AdminLTE/dist/css/adminlte.min.css">
+    <!-- DataTables -->
+  <link rel="stylesheet" href="AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="AdminLTE/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Daterange picker -->
@@ -230,29 +232,11 @@
             </ul>
           </li>
 		  
-		 <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon far fa-plus-square"></i>
-              <p>
-                Jenis-Obat
-                <i class="fas fa-angle-left right"></i>
-                <span class="badge badge-info right"></span>
-              </p>
+		 <li class="nav-item">
+            <a href="jenisObat.aspx" class="nav-link">
+              <i class="nav-icon fas fa-capsules"></i>
+              <p>Jenis Obat</p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="AdminLTE/pages/layout/top-nav.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Input Jenis</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="AdminLTE/pages/layout/boxed.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>View Jenis</p>
-                </a>
-              </li>
-            </ul>
           </li>
 		  
 		   <li class="nav-item has-treeview">
@@ -604,5 +588,8 @@
 <script src="AdminLTE/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="AdminLTE/dist/js/demo.js"></script>
+<!-- DataTables -->
+<script src="AdminLTE/plugins/datatables/jquery.dataTables.js"></script>
+
 </body>
 </html>
