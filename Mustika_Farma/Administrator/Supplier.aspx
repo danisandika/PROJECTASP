@@ -1,10 +1,17 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage_Admin.master" AutoEventWireup="true" CodeFile="viewSupplier.aspx.cs" Inherits="viewSupplier" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Administrator/MasterPage_Admin.master" AutoEventWireup="true" CodeFile="Supplier.aspx.cs" Inherits="Administrator_Supplier" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-<h1 class="m-0 text-dark">Supplier</h1>
+<asp:Content ID="Content1" ContentPlaceHolderID="title" Runat="Server">
+    Supplier
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" Runat="Server">
-<form runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="head" Runat="Server">
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="sub_Title" Runat="Server">
+    <h1 class="m-0 text-dark">Supplier</h1>
+</asp:Content>
+<asp:Content ID="Content4" ContentPlaceHolderID="title2" Runat="Server">
+    Supplier
+</asp:Content>
+<asp:Content ID="Content5" ContentPlaceHolderID="Content" Runat="Server">
 <div class="card-body" id="AddMenu" runat="server">
      <div class="row">
         <div class="col-12 table-responsive">
@@ -432,7 +439,8 @@
       </div>
     </div>
 </div>
-</form>
+</asp:Content>
+<asp:Content ID="Content6" ContentPlaceHolderID="footer" Runat="Server">
 </asp:Content>
 
 

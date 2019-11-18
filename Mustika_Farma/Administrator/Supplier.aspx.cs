@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class viewSupplier : System.Web.UI.Page
+public partial class Administrator_Supplier : System.Web.UI.Page
 {
     SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["Apotek"].ConnectionString);
     DataSet ds = new DataSet();

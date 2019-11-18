@@ -1,10 +1,18 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage_Admin.master" AutoEventWireup="true" CodeFile="JenisObat.aspx.cs" Inherits="JenisObat" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Administrator/MasterPage_Admin.master" AutoEventWireup="true" CodeFile="JenisObat.aspx.cs" Inherits="Administrator_JenisObat" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-   <h1 class="m-0 text-dark">Jenis Obat</h1>
+<asp:Content ID="Content1" ContentPlaceHolderID="title" Runat="Server">
+    Jenis Obat
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" Runat="Server">
-    <form role="form" runat="server" id="form1">
+<asp:Content ID="Content2" ContentPlaceHolderID="head" Runat="Server">
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="sub_Title" Runat="Server">
+    <h1 class="m-0 text-dark">Jenis Obat</h1>
+</asp:Content>
+<asp:Content ID="Content4" ContentPlaceHolderID="title2" Runat="Server">
+    Jenis Obat
+</asp:Content>
+<asp:Content ID="Content5" ContentPlaceHolderID="Content" Runat="Server">
+
     
       <!--SECTION ADD-->
      <section class="content" id="secAdd" runat="server">
@@ -123,13 +131,13 @@
                                 </asp:LinkButton>
                                 |
                                 <asp:LinkButton runat="server" ID="linkDelete" CommandName="cmDelete" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
-                                    ToolTip="Delete Data"><span class="far fa-trash-alt nav-icon">Delete</span>
+                                    ToolTip="Delete Data"><span class="far fa-trash-alt nav-icon" onclick="return confirm('Are you sure you want to delete this item?');">Delete</span>
                                 </asp:LinkButton>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
                 </asp:GridView>
-                </center>
+                
               
             </div>
                 </div>
@@ -138,7 +146,7 @@
             </div>
           </div>
         </section>
-
-        </form>
+</asp:Content>
+<asp:Content ID="Content6" ContentPlaceHolderID="footer" Runat="Server">
 </asp:Content>
 
