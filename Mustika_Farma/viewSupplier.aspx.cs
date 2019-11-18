@@ -23,6 +23,7 @@ public partial class viewSupplier : System.Web.UI.Page
             ViewMenu.Visible = true;
             EditMenu.Visible = false;
             AddMenu.Visible = false;
+            
             txtTanggal.Text = DateTime.Now.ToString("dd-MM-yyyy");
             txtTanggal.Enabled = false;
             txtTanggalE.Text = DateTime.Now.ToString("dd-MM-yyyy");
@@ -68,18 +69,36 @@ public partial class viewSupplier : System.Web.UI.Page
             txtNoTelpE.Text = grdMenu.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[5].Text;
             txtTanggalE.Text = grdMenu.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[8].Text;
             txtTanggalME.Text = DateTime.Now.ToString("dd-MM-yyyy");
-            string status = grdMenu.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[6].Text;
-            if (status.Equals(0))
-            {
-                rbAktif.Checked = true;
+            //string status = grdMenu.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[6].Text;
+            //if (status.Equals(0))
+            //{
+            //    rbAktif.Checked = true;
 
-            }
-            else
-            {
-                rbTidak.Checked = true;
-            }
+            //}
+            //else
+            //{
+            //    rbTidak.Checked = true;
+            //}
             AddMenu.Visible = false;
             EditMenu.Visible = true;
+            ViewMenu.Visible = false;
+        }
+        else if (e.CommandName == "Hapus")
+        {
+            SqlCommand com = new SqlCommand();
+            com.Connection = con;
+            com.CommandText = "[sp_HapusSupplier]";
+            com.CommandType = CommandType.StoredProcedure;
+            string id = grdMenu.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
+            com.Parameters.AddWithValue("@IDSupplier", id);
+            com.Parameters.AddWithValue("@ModifiedBy", 1);
+            con.Open();
+            int result = Convert.ToInt32(com.ExecuteNonQuery());
+            con.Close();
+            loadData();
+            ViewMenu.Visible = true;
+            EditMenu.Visible = false;
+            AddMenu.Visible = false;
         }
     }
 
@@ -136,10 +155,6 @@ public partial class viewSupplier : System.Web.UI.Page
         grdMenu.DataBind();
     }
 
-    protected void btnTambah_Click(object sender, EventArgs e)
-    {
-
-    }
 
     protected void btnAdd_Click(object sender, EventArgs e)
     {
@@ -254,5 +269,12 @@ public partial class viewSupplier : System.Web.UI.Page
     protected void btnCancelEdit_Click(object sender, EventArgs e)
     {
 
+    }
+
+    protected void btnTambah_Click1(object sender, EventArgs e)
+    {
+        AddMenu.Visible = true;
+        ViewMenu.Visible = false;
+        EditMenu.Visible = false;
     }
 }

@@ -378,9 +378,12 @@
                     class="form-control form-control-user"
                     Text="Tambah"
                     Runat="server"
-                    OnClick="btnTambah_Click" />
+                    OnClick="btnTambah_Click1" />
             </td>
             </tr>
+         </table>
+         <div class="card-body">
+         <table class="table table-bordered">
             <tr>
                 <asp:GridView
                 id="grdMenu"
@@ -426,6 +429,7 @@
             </tr>
 
         </table>
+      </div>
     </div>
 </div>
 </form>

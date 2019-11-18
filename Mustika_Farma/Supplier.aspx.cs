@@ -94,8 +94,7 @@ public partial class Supplier : System.Web.UI.Page
         catch
         {
             con.Close();
-            Response.Write("<script>alert('Data gagal Disimpan!')</script>");
-            Server.Transfer("Supplier.aspx");
+          
         }
     }
 }
