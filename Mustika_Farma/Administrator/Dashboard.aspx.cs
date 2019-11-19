@@ -11,4 +11,24 @@ public partial class Dashboard : System.Web.UI.Page
     {
 
     }
+
+    protected void btnEdit_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void btnCancelEdit_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void btnCancelAdd_Click(object sender, EventArgs e)
+    {
+
+    }
 }

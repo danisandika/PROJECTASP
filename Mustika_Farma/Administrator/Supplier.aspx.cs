@@ -26,10 +26,8 @@ public partial class Administrator_Supplier : System.Web.UI.Page
             
             txtTanggal.Text = DateTime.Now.ToString("dd-MM-yyyy");
             txtTanggal.Enabled = false;
-            txtTanggalE.Text = DateTime.Now.ToString("dd-MM-yyyy");
-            txtTanggalE.Enabled = false;
-            txtTanggalME.Text = DateTime.Now.ToString("dd-MM-yyyy");
-            txtTanggalME.Enabled = false;
+           
+           
         }
     }
 
@@ -63,12 +61,12 @@ public partial class Administrator_Supplier : System.Web.UI.Page
         {
             String id = grdMenu.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
             lblIdEdit.Text = id;
-            txtNamaE.Text = grdMenu.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[2].Text;
-            txtAlamatE.Text = grdMenu.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[3].Text;
-            txtEmailE.Text = grdMenu.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[4].Text;
-            txtNoTelpE.Text = grdMenu.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[5].Text;
-            txtTanggalE.Text = grdMenu.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[8].Text;
-            txtTanggalME.Text = DateTime.Now.ToString("dd-MM-yyyy");
+            txtNamaE.Text = grdMenu.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[1].Text;
+            txtAlamatE.Text = grdMenu.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[2].Text;
+            txtEmailE.Text = grdMenu.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[3].Text;
+            txtNoTelpE.Text = grdMenu.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[4].Text;
+            //txtTanggalE.Text = grdMenu.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[8].Text;
+            //txtTanggalME.Text = DateTime.Now.ToString("dd-MM-yyyy");
             //string status = grdMenu.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[6].Text;
             //if (status.Equals(0))
             //{
@@ -235,15 +233,8 @@ public partial class Administrator_Supplier : System.Web.UI.Page
     protected void btnEdit_Click(object sender, EventArgs e)
     {
         int nilai = 1;
-        int status = 0;
-        if (rbAktif.Checked == true)
-        {
-            status = 1;
-        }
-        if (rbTidak.Checked == true)
-        {
-            status = 0;
-        }
+        int status = 1;
+       
         SqlCommand com = new SqlCommand();
         com.Connection = con;
         com.CommandText = "[sp_UpdateSupplier]";
@@ -255,7 +246,7 @@ public partial class Administrator_Supplier : System.Web.UI.Page
         com.Parameters.AddWithValue("@NoHp", txtNoTelpE.Text);
         com.Parameters.AddWithValue("@Status",status);
         com.Parameters.AddWithValue("@ModifiedBy",nilai);
-        com.Parameters.AddWithValue("@ModifiedDate", Convert.ToDateTime(txtTanggalE.Text));
+        com.Parameters.AddWithValue("@ModifiedDate", Convert.ToDateTime(DateTime.Now));
         con.Open();
         int result = Convert.ToInt32(com.ExecuteNonQuery());
         con.Close();
