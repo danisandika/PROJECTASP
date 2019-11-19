@@ -1,20 +1,17 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Administrator/MasterPage_Admin.master" AutoEventWireup="true" CodeFile="Role.aspx.cs" Inherits="Administrator_Role" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Administrator/MasterPage_Admin.master" AutoEventWireup="true" CodeFile="Lokasi_penyimpanan.aspx.cs" Inherits="Administrator_Lokasi_penyimpanan" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="title" Runat="Server">
-    Role
+    Lokasi Penyimpanan
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="sub_Title" Runat="Server">
-    <h1 class="m-0 text-dark">Role</h1>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="title2" Runat="Server">
-    Role
+    Lokasi Penyimpanan
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="Content" Runat="Server">
-    
-    
-      <!--SECTION ADD-->
+   <!--SECTION ADD-->
      <section class="content" id="secAdd" runat="server">
       <div class="container-fluid">
         <div class="row">
@@ -23,15 +20,18 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Tambah Role</h3>
+                <h3 class="card-title">Tambah Jenis Obat</h3>
               </div>
                 
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Nama Role</label>
-                    <asp:TextBox ID="txtDeskripsi" CssClass="form-control" runat="server"/>
+                    <label for="exampleInputEmail1">Nama Jenis Obat</label>
+                    <asp:TextBox ID="txtnamaJenis" CssClass="form-control" runat="server"/>
                   </div>
-                  
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Deskripsi</label>
+                    <asp:TextBox ID="txtDeskripsi" CssClass="form-control" runat="server" TextMode="MultiLine" />
+                  </div>
                   
                 </div>
                 <!-- /.card-body -->
@@ -62,8 +62,12 @@
                 <div class="card-body">
                 <asp:Label ID="lblID" runat="server" Visible="false"></asp:Label>
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Nama Role</label>
-                    <asp:TextBox ID="txtDeskripsiE" CssClass="form-control" runat="server"/>
+                    <label for="exampleInputEmail1">Nama Jenis Obat</label>
+                    <asp:TextBox ID="txtEditnamaJenis" CssClass="form-control" runat="server"/>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Deskripsi</label>
+                    <asp:TextBox ID="txtEditDeskripsi" CssClass="form-control" runat="server" TextMode="MultiLine" />
                   </div>
                   
                 </div>
@@ -114,8 +118,8 @@
                                 <%# Container.DataItemIndex +1 %>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:BoundField DataField="Deskripsi" HeaderText="Nama Role"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Deskripsi" />
-                        <asp:BoundField DataField="Status" HeaderText="Status"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Status" />
+                        <asp:BoundField DataField="namaJenis" HeaderText="Nama Jenis"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Nama" />
+                        <asp:BoundField DataField="deskripsi" HeaderText="Deskripsi"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Deskripsi" />
                        
                         <asp:TemplateField HeaderText="Aksi" ItemStyle-HorizontalAlign="Center">
                             <ItemTemplate>

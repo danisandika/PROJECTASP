@@ -19,7 +19,7 @@
   <!-- iCheck -->
   <link rel="stylesheet" href="../AdminLTE/plugins/icheck-bootstrap/icheck-bootstrap.min.css"/>
   <!-- JQVMap -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/jqvmap/jqvmap.min.css"/>
+  <link rel="stylesheet" href="../AdminLTE/plugins/jqvmap/jlokaqvmap.min.css"/>
   <!-- Theme style -->
   <link rel="stylesheet" href="../AdminLTE/dist/css/adminlte.min.css"/>
     <!-- DataTables -->
@@ -198,7 +198,7 @@
             </a>
           </li>
            <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="Lokasi_penyimpanan.aspx" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>Lokasi Penyimpanan</p>
             </a>
@@ -222,7 +222,7 @@
             </a>
           </li>
             <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="Role.aspx" class="nav-link">
               <i class="nav-icon fas fa-users-cog"></i>
               <p>Role</p>
             </a>
