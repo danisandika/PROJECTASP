@@ -30,7 +30,7 @@ public partial class Administrator_Role : System.Web.UI.Page
     {
         SqlCommand com = new SqlCommand();
         com.Connection = conn;
-        com.CommandText = "sp_SelectJenis";
+        com.CommandText = "sp_SelectRole";
         com.CommandType = CommandType.StoredProcedure;
         com.Parameters.AddWithValue("@deskripsi", txtSearch.Text);
       
@@ -50,10 +50,9 @@ public partial class Administrator_Role : System.Web.UI.Page
 
         SqlCommand com = new SqlCommand();
         com.Connection = conn;
-        com.CommandText = "sp_InsertJenis";
+        com.CommandText = "sp_InsertRole";
         com.CommandType = CommandType.StoredProcedure;
         com.Parameters.AddWithValue("@deskripsi", txtDeskripsi.Text);
-        com.Parameters.AddWithValue("@status", status);
         com.Parameters.AddWithValue("@createDate", CreateDate);
         com.Parameters.AddWithValue("@createBy", CreateBy);
 
@@ -75,9 +74,9 @@ public partial class Administrator_Role : System.Web.UI.Page
 
         SqlCommand com = new SqlCommand();
         com.Connection = conn;
-        com.CommandText = "sp_UpdateJenis";
+        com.CommandText = "sp_UpdateRole";
         com.CommandType = CommandType.StoredProcedure;
-        com.Parameters.AddWithValue("@idRole", lblID.Text);
+        com.Parameters.AddWithValue("@IDRole", lblID.Text);
         com.Parameters.AddWithValue("@deskripsi", txtDeskripsiE.Text);
         com.Parameters.AddWithValue("@ModifiedDate", ModifiedDate);
         com.Parameters.AddWithValue("@ModifiedBy", ModifiedBy);
@@ -99,7 +98,7 @@ public partial class Administrator_Role : System.Web.UI.Page
         {
             String id = gridJenis.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
             lblID.Text = id;
-            txtDeskripsiE.Text = gridJenis.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[2].Text;
+            txtDeskripsiE.Text = gridJenis.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[1].Text;
 
 
             secAdd.Visible = false;
@@ -112,7 +111,7 @@ public partial class Administrator_Role : System.Web.UI.Page
             lblID.Text = id;
             SqlCommand com = new SqlCommand();
             com.Connection = conn;
-            com.CommandText = "sp_DeleteJenis";
+            com.CommandText = "sp_DeleteRole";
             com.CommandType = CommandType.StoredProcedure;
             com.Parameters.AddWithValue("@idRole", lblID.Text);
 
@@ -195,4 +194,9 @@ public partial class Administrator_Role : System.Web.UI.Page
         secView.Visible = false;
     }
 
+
+    protected void EditbtnCancel_Click(object sender, EventArgs e)
+    {
+
+    }
 }

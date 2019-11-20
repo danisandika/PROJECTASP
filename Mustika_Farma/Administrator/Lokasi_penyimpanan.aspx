@@ -20,19 +20,22 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Tambah Jenis Obat</h3>
+                <h3 class="card-title">Tambah Lokasi Penyimpanan</h3>
               </div>
                 
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Nama Jenis Obat</label>
-                    <asp:TextBox ID="txtnamaJenis" CssClass="form-control" runat="server"/>
+                    <label for="exampleInputEmail1">Nama Lokasi</label>
+                    <asp:TextBox ID="txtNamaLok" CssClass="form-control" runat="server"/>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Tempat Lokasi</label>
+                    <asp:TextBox ID="txtTempatLok" CssClass="form-control" runat="server" TextMode="MultiLine" />
                   </div>
                   <div class="form-group">
                     <label for="exampleInputPassword1">Deskripsi</label>
                     <asp:TextBox ID="txtDeskripsi" CssClass="form-control" runat="server" TextMode="MultiLine" />
                   </div>
-                  
                 </div>
                 <!-- /.card-body -->
 
@@ -56,19 +59,24 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Edit Jenis Obat</h3>
+                <h3 class="card-title">Edit Lokasi Penyimpanan</h3>
               </div>
-                
-                <div class="card-body">
-                <asp:Label ID="lblID" runat="server" Visible="false"></asp:Label>
+                 <asp:Label ID="lblID" Visible="false" runat="server"></asp:Label>
+                 <div class="card-body">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Nama Jenis Obat</label>
-                    <asp:TextBox ID="txtEditnamaJenis" CssClass="form-control" runat="server"/>
+                    <label for="exampleInputEmail1">Nama Lokasi</label>
+                    <asp:TextBox ID="txtNamaE" CssClass="form-control" runat="server"/>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Tempat Lokasi</label>
+                    <asp:TextBox ID="txtTempatE" CssClass="form-control" runat="server" TextMode="MultiLine" />
                   </div>
                   <div class="form-group">
                     <label for="exampleInputPassword1">Deskripsi</label>
-                    <asp:TextBox ID="txtEditDeskripsi" CssClass="form-control" runat="server" TextMode="MultiLine" />
+                    <asp:TextBox ID="txtDeskE" CssClass="form-control" runat="server" TextMode="MultiLine" />
                   </div>
+                </div>
+
                   
                 </div>
                 <!-- /.card-body -->
@@ -79,8 +87,7 @@
                 </div>
               
             </div>
-              </div>
-            </div>
+           </div>
           </div>
         </section>
 
@@ -91,7 +98,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Table Jenis Obat</h3>
+                <h3 class="card-title">Table Lokasi Penyimpanan</h3>
                   <br />
 
                 <asp:linkbutton CssClass="btn btn-block bg-gradient-primary col-2" runat="server" ID="btntambah" OnClick="btntambah_Click"><i class="fas fa-plus"></i> | Tambah</asp:linkbutton>
@@ -106,11 +113,11 @@
               </div>
                 <div class="card-body table-responsive p-0 col-12">
                 
-                <asp:GridView ID="gridJenis" runat="server" CssClass="table table-hover"
+                <asp:GridView ID="gridLokasi" runat="server" CssClass="table table-hover"
                     AllowPaging="true"
-                    AllowSorting="true" AutoGenerateColumns="false" DataKeyNames="idjenis" EmptyDataText="Tidak Ada Data" 
-                    PageSize="5" PagerStyle-CssClass="pagination" ShowHeaderWhenEmpty="true" OnPageIndexChanging="gridJenis_PageIndexChanging"
-                    OnRowCommand="gridJenis_RowCommand" OnSorting="gridJenis_Sorting" OnSelectedIndexChanged="gridJenis_SelectedIndexChanged" >
+                    AllowSorting="true" AutoGenerateColumns="false" DataKeyNames="IDLokasi" EmptyDataText="Tidak Ada Data" 
+                    PageSize="5" PagerStyle-CssClass="pagination" ShowHeaderWhenEmpty="true" OnPageIndexChanging="gridLokasi_PageIndexChanging"
+                    OnRowCommand="gridLokasi_RowCommand" OnSorting="gridLokasi_Sorting" OnSelectedIndexChanged="gridLokasi_SelectedIndexChanged" >
                     <PagerSettings Mode="NumericFirstLast" FirstPageText="<<" LastPageText=">>" />
                     <Columns>
                         <asp:TemplateField HeaderText="No" ItemStyle-HorizontalAlign="Center">
@@ -118,9 +125,11 @@
                                 <%# Container.DataItemIndex +1 %>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:BoundField DataField="namaJenis" HeaderText="Nama Jenis"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Nama" />
-                        <asp:BoundField DataField="deskripsi" HeaderText="Deskripsi"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Deskripsi" />
-                       
+                        <asp:BoundField DataField="Nama_Lokasi" HeaderText="Nama Lokasi"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Nama_Lokasi" />
+                        <asp:BoundField DataField="tempatLokasi" HeaderText="tempatLokasi"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="tempatLokasi" />
+                        <asp:BoundField DataField="deskripsi" HeaderText="Deskripsi"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="deskripsi" />
+                        <asp:BoundField DataField="status" HeaderText="Status"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Status" />
+                                             
                         <asp:TemplateField HeaderText="Aksi" ItemStyle-HorizontalAlign="Center">
                             <ItemTemplate>
                                 <asp:LinkButton runat="server" ID="linkEdit" CommandName="cmEdit" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
