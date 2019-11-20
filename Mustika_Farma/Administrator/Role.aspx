@@ -56,7 +56,7 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Edit Jenis Obat</h3>
+                <h3 class="card-title">Edit Role</h3>
               </div>
                 
                 <div class="card-body">
@@ -102,9 +102,9 @@
               </div>
                 <div class="card-body table-responsive p-0 col-12">
                 
-                <asp:GridView ID="gridRole" runat="server" CssClass="table table-hover"
+                <asp:GridView ID="gridJenis" runat="server" CssClass="table table-hover"
                     AllowPaging="true"
-                    AllowSorting="true" AutoGenerateColumns="false" DataKeyNames="idRole" EmptyDataText="Tidak Ada Data" 
+                    AllowSorting="true" AutoGenerateColumns="false" DataKeyNames="IDRole" EmptyDataText="Tidak Ada Data" 
                     PageSize="5" PagerStyle-CssClass="pagination" ShowHeaderWhenEmpty="true" OnPageIndexChanging="gridJenis_PageIndexChanging"
                     OnRowCommand="gridJenis_RowCommand" OnSorting="gridJenis_Sorting" OnSelectedIndexChanged="gridJenis_SelectedIndexChanged" >
                     <PagerSettings Mode="NumericFirstLast" FirstPageText="<<" LastPageText=">>" />
