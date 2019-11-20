@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 public partial class Administrator_Role : System.Web.UI.Page
 {
-    SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Apotek"].ConnectionString);
+    SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Default"].ConnectionString);
     DataSet ds = new DataSet();
     private const string Ascending = " ASC";
     private const string Descending = " DESC";
@@ -37,8 +37,8 @@ public partial class Administrator_Role : System.Web.UI.Page
 
         SqlDataAdapter adap = new SqlDataAdapter(com);
         adap.Fill(ds);
-        gridJenis.DataSource = ds;
-        gridJenis.DataBind();
+        gridRole.DataSource = ds;
+        gridRole.DataBind();
         return ds;
     }
 
@@ -46,7 +46,7 @@ public partial class Administrator_Role : System.Web.UI.Page
     {
         DateTime CreateDate = DateTime.Now;
         int CreateBy = 1;
-        int status = 1;
+        //int status = 1;
 
         SqlCommand com = new SqlCommand();
         com.Connection = conn;
@@ -76,7 +76,7 @@ public partial class Administrator_Role : System.Web.UI.Page
         com.Connection = conn;
         com.CommandText = "sp_UpdateRole";
         com.CommandType = CommandType.StoredProcedure;
-        com.Parameters.AddWithValue("@IDRole", lblID.Text);
+        com.Parameters.AddWithValue("@idRole", lblID.Text);
         com.Parameters.AddWithValue("@deskripsi", txtDeskripsiE.Text);
         com.Parameters.AddWithValue("@ModifiedDate", ModifiedDate);
         com.Parameters.AddWithValue("@ModifiedBy", ModifiedBy);
@@ -96,9 +96,9 @@ public partial class Administrator_Role : System.Web.UI.Page
     {
         if (e.CommandName == "cmEdit")
         {
-            String id = gridJenis.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
+            String id = gridRole.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
             lblID.Text = id;
-            txtDeskripsiE.Text = gridJenis.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[1].Text;
+            txtDeskripsiE.Text = gridRole.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[1].Text;
 
 
             secAdd.Visible = false;
@@ -107,14 +107,17 @@ public partial class Administrator_Role : System.Web.UI.Page
         }
         else if (e.CommandName == "cmDelete")
         {
-            String id = gridJenis.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
+            DateTime ModifiedDate = DateTime.Now;
+            int ModifiedBy = 1;
+            String id = gridRole.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
             lblID.Text = id;
             SqlCommand com = new SqlCommand();
             com.Connection = conn;
             com.CommandText = "sp_DeleteRole";
             com.CommandType = CommandType.StoredProcedure;
             com.Parameters.AddWithValue("@idRole", lblID.Text);
-
+            com.Parameters.AddWithValue("@ModifiedDate", ModifiedDate);
+            com.Parameters.AddWithValue("@ModifiedBy", ModifiedBy);
 
             conn.Open();
 
@@ -146,7 +149,7 @@ public partial class Administrator_Role : System.Web.UI.Page
 
     protected void gridJenis_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
-        gridJenis.PageIndex = e.NewPageIndex;
+        gridRole.PageIndex = e.NewPageIndex;
         loadData();
     }
 
@@ -173,8 +176,8 @@ public partial class Administrator_Role : System.Web.UI.Page
         DataView dv = new DataView(dt);
         dv.Sort = sortExpression + direction;
 
-        gridJenis.DataSource = dv;
-        gridJenis.DataBind();
+        gridRole.DataSource = dv;
+        gridRole.DataBind();
     }
 
     protected void gridJenis_SelectedIndexChanged(object sender, EventArgs e)
