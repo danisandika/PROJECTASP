@@ -26,34 +26,32 @@
                 <div class="card-body">
                   <div class="form-group">
                     <label for="Obat">Nama Obat</label>
-                    <asp:TextBox ID="txtnamaJenis" CssClass="form-control" runat="server"/>
+                    <asp:TextBox ID="txtnamaObat" CssClass="form-control" runat="server"/>
                   </div>
 
                   <div class="form-group">
                     <label for="IDJenisObat">ID Jenis Obat</label>
-                  <asp:DropDownList ID="DDLJenisObat" runat="server" CssClass="form-control">
+                  <asp:DropDownList ID="DDLJenisObat" runat="server" CssClass="form-control" DataSourceID="dsJenis" DataTextField="namaJenis" DataValueField="IDJenis">
                     </asp:DropDownList>
+                      <asp:SqlDataSource ID="dsJenis" runat="server" ConnectionString="<%$ ConnectionStrings:Apotek %>" SelectCommand="SELECT * FROM [JenisObat]"></asp:SqlDataSource>
                   </div>
 
-                  <div class="form-group">
-                    <label for="jumlahObat">Jumlah Obat</label>
-                    <asp:TextBox ID="txtJumlah" CssClass="form-control" runat="server"/>
-                  </div>
 
                   <div class="form-group">
                    <label for="Ket">Keterangan</label>
-                   <asp:TextBox ID="TextBox1" CssClass="form-control" runat="server" TextMode="MultiLine" />
+                   <asp:TextBox ID="txtKet" CssClass="form-control" runat="server" TextMode="MultiLine" />
                   </div>
 
                    <div class="form-group">
                     <label for="IDJenisObat">Lokasi</label>
-                  <asp:DropDownList ID="DDLLokasi" runat="server" CssClass="form-control">
+                  <asp:DropDownList ID="DDLLokasi" runat="server" CssClass="form-control" DataSourceID="dsLokasi" DataTextField="Nama_Lokasi" DataValueField="IDLokasi">
                     </asp:DropDownList>
+                       <asp:SqlDataSource ID="dsLokasi" runat="server" ConnectionString="<%$ ConnectionStrings:Apotek %>" SelectCommand="SELECT IDLokasi, Nama_Lokasi, tempatLokasi, Deskripsi, Status, CreateBy, CreateDate, ModifiedBy, ModifiedDate FROM Lokasi_Penyimpanan WHERE (Status = 1)"></asp:SqlDataSource>
                   </div>
 
                    <div class="form-group">
                    <label for="Ket">Satuan</label>
-                   <asp:TextBox ID="txtSatuan" CssClass="form-control" runat="server" TextMode="Number" />
+                   <asp:TextBox ID="txtSatuan" CssClass="form-control" runat="server" />
                   </div>
 
                    <div class="form-group">
@@ -63,7 +61,12 @@
 
                    <div class="form-group">
                    <label for="Ket">Expired</label>
-                   <asp:TextBox ID="txtExpired" CssClass="form-control" runat="server" TextMode="DateTime" />
+                   <asp:TextBox CssClass="form-control" ID="txtExpired" placeholder="Tanggal Lahir" runat="server" TextMode="Date" required></asp:TextBox>
+                  </div>
+
+                 <div class="form-group">
+                   <label for="Ket">Foto</label>
+                   <asp:TextBox ID="txtFoto" CssClass="form-control" runat="server" />
                   </div>
 
                   
@@ -71,7 +74,7 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <asp:Button ID="btnSave" CssClass="btn btn-primary" runat="server" Text="Submit" OnClick="btnSave_Click"/>
+                  <asp:Button ID="btnSave" CssClass="btn btn-primary" runat="server" Text="Submit" OnClick="btnSave_Click1"/>
                 </div>
               
             </div>
