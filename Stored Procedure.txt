@@ -94,3 +94,18 @@ BEGIN
 	ModifiedDate =@ModifiedDate
 	WHERE IDSupplier = @IDSupplier
 END
+
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER proc [dbo].[DdlJenis]
+as
+begin
+select IDJenis,namaJenis from JenisObat where statusJenis =1
+end
+
+
+select * from JenisObat

@@ -115,7 +115,7 @@
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:BoundField DataField="Deskripsi" HeaderText="Nama Role"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Deskripsi" />
-                        <asp:BoundField DataField="Status" HeaderText="Status"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Status" />
+                        
                        
                         <asp:TemplateField HeaderText="Aksi" ItemStyle-HorizontalAlign="Center">
                             <ItemTemplate>

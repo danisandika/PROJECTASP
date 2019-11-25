@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 public partial class Administrator_Obat : System.Web.UI.Page
 {
-    SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Apotek"].ConnectionString);
+    SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Default"].ConnectionString);
     DataSet ds = new DataSet();
     private const string Ascending = " ASC";
     private const string Descending = " DESC";
@@ -19,15 +19,15 @@ public partial class Administrator_Obat : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            loadData();
+           // loadData();
             secAdd.Visible = true;
             //secEdit.Visible = false;
             //secView.Visible = true;
         }
     }
 
-    private DataSet loadData()
-    {
+    //private DataSet loadData()
+   // {
        // SqlCommand com = new SqlCommand();
         //com.Connection = conn;
        //com.CommandText = "sp_Selectobat";
@@ -40,8 +40,8 @@ public partial class Administrator_Obat : System.Web.UI.Page
         //adap.Fill(ds);
         //gridJenis.DataSource = ds;
         //gridJenis.DataBind();
-        return ds;
-    }
+       // return ds;
+    //}
 
     protected void btnSave_Click1(object sender, EventArgs e)
     {
@@ -68,7 +68,7 @@ public partial class Administrator_Obat : System.Web.UI.Page
 
         int result = Convert.ToInt32(com.ExecuteNonQuery());
         conn.Close();
-        loadData();
+        //loadData();
     }
 
 
