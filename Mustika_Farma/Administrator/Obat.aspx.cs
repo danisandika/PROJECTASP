@@ -70,4 +70,10 @@ public partial class Administrator_Obat : System.Web.UI.Page
         conn.Close();
         loadData();
     }
+
+
+    protected void DDLJenisObat_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
 }

@@ -31,9 +31,10 @@
 
                   <div class="form-group">
                     <label for="IDJenisObat">ID Jenis Obat</label>
-                  <asp:DropDownList ID="DDLJenisObat" runat="server" CssClass="form-control" DataSourceID="dsJenis" DataTextField="namaJenis" DataValueField="IDJenis">
+                  <asp:DropDownList ID="DDLJenisObat" runat="server" CssClass="form-control" DataSourceID="dsJenis" DataTextField="namaJenis" DataValueField="IDJenis" OnSelectedIndexChanged="DDLJenisObat_SelectedIndexChanged">
                     </asp:DropDownList>
-                      <asp:SqlDataSource ID="dsJenis" runat="server" ConnectionString="<%$ ConnectionStrings:Apotek %>" SelectCommand="SELECT * FROM [JenisObat]"></asp:SqlDataSource>
+                      <asp:SqlDataSource ID="dsJenis" runat="server" ConnectionString="<%$ ConnectionStrings:Apotek %>" SelectCommand="DdlJenis" SelectCommandType="StoredProcedure">
+                      </asp:SqlDataSource>
                   </div>
 
 
