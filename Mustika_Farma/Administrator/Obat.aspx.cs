@@ -68,10 +68,6 @@ public partial class Administrator_Obat : System.Web.UI.Page
 
         int result = Convert.ToInt32(com.ExecuteNonQuery());
         conn.Close();
-<<<<<<< HEAD
-        //loadData();
-=======
-        loadData();
->>>>>>> parent of a5ce323... Mentahan Management
+       
     }
 }
