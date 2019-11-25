@@ -35,11 +35,15 @@
                     </asp:DropDownList>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                       <asp:SqlDataSource ID="dsJenis" runat="server" ConnectionString="<%$ ConnectionStrings:Apotek %>" SelectCommand="DdlJenis" SelectCommandType="StoredProcedure">
                       </asp:SqlDataSource>
 =======
                       <asp:SqlDataSource ID="dsJenis" runat="server" ConnectionString="<%$ ConnectionStrings:Default %>" SelectCommand="SELECT * FROM [JenisObat]"></asp:SqlDataSource>
 >>>>>>> 44a413d8ef3f4f01e80355940498f88214a095aa
+=======
+                      <asp:SqlDataSource ID="dsJenis" runat="server" ConnectionString="<%$ ConnectionStrings:Apotek %>" SelectCommand="SELECT * FROM [JenisObat]"></asp:SqlDataSource>
+>>>>>>> parent of a5ce323... Mentahan Management
 =======
                       <asp:SqlDataSource ID="dsJenis" runat="server" ConnectionString="<%$ ConnectionStrings:Apotek %>" SelectCommand="SELECT * FROM [JenisObat]"></asp:SqlDataSource>
 >>>>>>> parent of a5ce323... Mentahan Management
