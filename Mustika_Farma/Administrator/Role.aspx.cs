@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 public partial class Administrator_Role : System.Web.UI.Page
 {
-    SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Default"].ConnectionString);
+    SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Apotek"].ConnectionString);
     DataSet ds = new DataSet();
     private const string Ascending = " ASC";
     private const string Descending = " DESC";
