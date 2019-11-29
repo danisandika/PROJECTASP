@@ -121,8 +121,8 @@
                                 <%# Container.DataItemIndex +1 %>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:BoundField DataField="namaJenis" HeaderText="Nama Jenis"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Nama" />
-                        <asp:BoundField DataField="deskripsi" HeaderText="Deskripsi"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Deskripsi" />
+                        <asp:BoundField DataField="namaJenis" HeaderText="Nama Jenis"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="namaJenis" />
+                        <asp:BoundField DataField="deskripsi" HeaderText="Deskripsi"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="deskripsi" />
                        
                         <asp:TemplateField HeaderText="Aksi" ItemStyle-HorizontalAlign="Center">
                             <ItemTemplate>

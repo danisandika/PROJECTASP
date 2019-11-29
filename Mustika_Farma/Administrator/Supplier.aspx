@@ -23,31 +23,6 @@
               <div class="card-header">
                 <h3 class="card-title">Tambah Supplier</h3>
               </div>
-           <%-- <tr>
-            <td>
-            <asp:Label
-                id="lblIdSupp"
-                Text="ID Supplier : "
-                AssociatedControlID="txtIDSupplier"
-                Runat="server" />
-            </td>
-            <td>
-            <asp:TextBox
-                id="txtIDSupplier"
-                class="form-control form-control-user"
-                Text='<%# Bind("IDSupplier") %>'
-                Runat="server" />
-            </td>
-            <td>
-            <asp:RequiredFieldValidator
-                id="valIDSupplier"
-                ControlToValidate="txtIDSupplier"
-                Text="(Required)"
-                ValidationGroup="frmAdd"
-                Runat="server" />
-            </td>
-            </tr>--%>
-
             <div class="card-body">
              <div class="form-group">
             <asp:Label
