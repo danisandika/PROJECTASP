@@ -17,13 +17,10 @@ public partial class Administrator_User : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!IsPostBack)
-        {
-            loadData();
-            secAdd.Visible = false;
-            secEdit.Visible = false;
-            secView.Visible = true;
-        }
+        loadData();
+        secAdd.Visible = false;
+        secEdit.Visible = false;
+        secView.Visible = true;
     }
 
     private DataSet loadData()

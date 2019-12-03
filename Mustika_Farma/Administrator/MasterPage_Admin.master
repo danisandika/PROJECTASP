@@ -233,6 +233,12 @@
               <p>Management Keuangan</p>
             </a>
           </li>
+           <li class="nav-item">
+            <a href="InfoKesehatan.aspx" class="nav-link">
+              <i class="nav-icon fas fa-info-circle"></i>
+              <p>Info Kesehatan</p>
+            </a>
+          </li>
           </ul> 
          
       </nav>
