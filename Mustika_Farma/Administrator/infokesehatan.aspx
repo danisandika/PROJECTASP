@@ -24,13 +24,21 @@ Info Kesehatan
               </div>
                 
                 <div class="card-body">
-                  <div class="form-group">
+                  <div class="row form-group">
+                    <div class="col-md-3">
                     <label for="Judul">Judul</label>
+                    </div>
+                     <div class="col-md-5">
                     <asp:TextBox ID="txtJudul" CssClass="form-control" runat="server"/>
                   </div>
+                </div>
 
-                  <div class="form-group">
+
+                  <div class="row form-group">
+                   <div class="col-md-3">
                    <label for="kategori">Kategori</label>
+                   </div>
+                   <div class="col-md-5">
                    <asp:DropDownList ID="ddlKategori" runat="server" CssClass="form-control" >
                         <asp:ListItem Value="Ibu dan Anak">Ibu dan Anak</asp:ListItem>
                         <asp:ListItem Value="Sehari hari">Sehari hari</asp:ListItem>
@@ -38,19 +46,32 @@ Info Kesehatan
                        <asp:ListItem Value="Penyakit">Penyakit</asp:ListItem>
                        
                     </asp:DropDownList>
+                    </div>
+                    </div>
 
-                   <div class="form-group">
+                   <div class="row form-group">
+                    <div class="col-md-3">
                    <label for="waktuPost">Waktu Post</label>
+                    </div>
+                    <div class="col-md-5">
                    <asp:TextBox ID="txtWaktuPost" CssClass="form-control" runat="server" TextMode="Date" />
                   </div>
+                  </div>
 
-                  <div class="form-group">
+                  <div class="row form-group">
+                   <div class="col-md-3">
                    <label for="Konten">Konten</label>
+                    </div>
+                    <div class="col-md-5">
                    <asp:TextBox ID="txtKonten" CssClass="form-control" runat="server" TextMode="MultiLine" />
+                  </div>
                   </div>
 
                  <div class="form-group row align-items-center">
+                <div class="col-md-3">
                  <label class="col-sm-3 col-form-label text-label">Foto</label>
+                </div>
+
                  <div class="col-sm-9">
                  <div class="input-group">
                  <figure class="img-upload-preview">
@@ -98,9 +119,15 @@ Info Kesehatan
               <div class="card-header">
                 <h3 class="card-title">Table Info Kesehatan</h3>
                   <br />
-
                 <asp:linkbutton CssClass="btn btn-block bg-gradient-primary col-2" runat="server" ID="btntambah" OnClick="btntambah_Click"><i class="fas fa-plus"></i> | Tambah</asp:linkbutton>
-                <div class="card-tools">
+                <label>Lihat Bedasarkan Status</label>
+                <asp:DropDownList ID="ddlStatusView" runat="server" class="form-control" Width="200px" OnTextChanged="ddlStatusView_TextChanged" AutoPostBack="true">
+                 <asp:ListItem value="1" >Aktif</asp:ListItem>
+                 <asp:ListItem Value="0" >Tidak Aktif</asp:ListItem>
+                 <asp:ListItem Value="2" Selected="True">Semua</asp:ListItem>
+             </asp:DropDownList>
+
+                  <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
                     <asp:TextBox id="txtSearch" CssClass="form-control float-right" runat="server"/>
                     <div class="input-group-append">
@@ -164,13 +191,20 @@ Info Kesehatan
                 <div class="card-body">
                     <asp:Label ID="lblID" runat="server" Visible="false"></asp:Label>
                 <div class="card-body">
-                  <div class="form-group">
+                  <div class="row form-group">
+                    <div class="col-md-3">
                     <label for="Judul">Judul</label>
+                    </div>
+                    <div class="col-md-5">
                     <asp:TextBox ID="txtJudulE" CssClass="form-control" runat="server"/>
                   </div>
+                </div>
 
-                  <div class="form-group">
+                  <div class="row form-group">
+                    <div class="col-md-3">
                    <label for="kategori">Kategori</label>
+                    </div>
+                    <div class="col-md-5">
                    <asp:DropDownList ID="ddlKatE" runat="server" CssClass="form-control" >
                         <asp:ListItem Value="Ibu dan Anak">Ibu dan Anak</asp:ListItem>
                         <asp:ListItem Value="Sehari hari">Sehari hari</asp:ListItem>
@@ -178,19 +212,31 @@ Info Kesehatan
                        <asp:ListItem Value="Penyakit">Penyakit</asp:ListItem>
                        
                     </asp:DropDownList>
+                    </div>
+                    </div>
 
-                  <div class="form-group">
+                  <div class="row form-group">
+                    <div class="col-md-3">
                    <label for="Konten">Konten</label>
+                    </div>
+                    <div class="col-md-5">
                    <asp:TextBox ID="txtJontenE" CssClass="form-control" runat="server" TextMode="MultiLine" />
                   </div>
+                </div>
 
-                 <div class="form-group">
+                 <div class="row form-group">
+                 <div class="col-md-3">
                    <label for="waktuPost">Waktu Post</label>
+                 </div>
+                 <div class="col-md-5">
                    <asp:TextBox ID="txtWaktuE" CssClass="form-control" runat="server" TextMode="Date" />
+                  </div>
                   </div>
 
                  <div class="form-group row align-items-center">
+                <div class="col-md-3">
                  <label class="col-sm-3 col-form-label text-label">Foto</label>
+                </div>
                  <div class="col-sm-9">
                  <div class="input-group">
                  <figure class="img-upload-preview">
@@ -203,7 +249,7 @@ Info Kesehatan
                             Text="(Required)"
                             ValidationGroup="frmAdd"
                             Runat="server" />
-                     </div>
+               </div>
                </div>
 
                 <div class="form-group row align-items-center">

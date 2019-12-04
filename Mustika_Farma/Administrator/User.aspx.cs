@@ -211,4 +211,41 @@ public partial class Administrator_User : System.Web.UI.Page
         gridUser.DataBind();
     }
 
+
+    protected void ddlStatusView_TextChanged(object sender, EventArgs e)
+    {
+        if (ddlStatusView.Text.Equals("2"))
+        {
+            SqlCommand com = new SqlCommand();
+            com.Connection = conn;
+            com.CommandText = "[sp_SelectUserAll]";
+            com.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter adapt = new SqlDataAdapter(com);
+            adapt.Fill(ds);
+            gridUser.DataSource = ds;
+            gridUser.DataBind();
+        }
+        else if (ddlStatusView.Text.Equals("1"))
+        {
+            SqlCommand com = new SqlCommand();
+            com.Connection = conn;
+            com.CommandText = "[sp_SelectUserAktif]";
+            com.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter adapt = new SqlDataAdapter(com);
+            adapt.Fill(ds);
+            gridUser.DataSource = ds;
+            gridUser.DataBind();
+        }
+        else if (ddlStatusView.Text.Equals("0"))
+        {
+            SqlCommand com = new SqlCommand();
+            com.Connection = conn;
+            com.CommandText = "[sp_SelectUserNA]";
+            com.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter adapt = new SqlDataAdapter(com);
+            adapt.Fill(ds);
+            gridUser.DataSource = ds;
+            gridUser.DataBind();
+        }
+    }
 }

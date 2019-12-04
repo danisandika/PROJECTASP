@@ -202,4 +202,41 @@ public partial class Administrator_JenisObat : System.Web.UI.Page
     {
 
     }
+
+    protected void ddlStatusView_TextChanged(object sender, EventArgs e)
+    {
+        if (ddlStatusView.Text.Equals("2"))
+        {
+            SqlCommand com = new SqlCommand();
+            com.Connection = conn;
+            com.CommandText = "[sp_SelectJenisALL]";
+            com.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter adapt = new SqlDataAdapter(com);
+            adapt.Fill(ds);
+            gridJenis.DataSource = ds;
+            gridJenis.DataBind();
+        }
+        else if (ddlStatusView.Text.Equals("1"))
+        {
+            SqlCommand com = new SqlCommand();
+            com.Connection = conn;
+            com.CommandText = "[sp_SelectJenisAktif]";
+            com.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter adapt = new SqlDataAdapter(com);
+            adapt.Fill(ds);
+            gridJenis.DataSource = ds;
+            gridJenis.DataBind();
+        }
+        else if (ddlStatusView.Text.Equals("0"))
+        {
+            SqlCommand com = new SqlCommand();
+            com.Connection = conn;
+            com.CommandText = "[sp_SelectJenisNA]";
+            com.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter adapt = new SqlDataAdapter(com);
+            adapt.Fill(ds);
+            gridJenis.DataSource = ds;
+            gridJenis.DataBind();
+        }
+    }
 }

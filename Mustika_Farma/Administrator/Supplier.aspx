@@ -24,19 +24,21 @@
                 <h3 class="card-title">Tambah Supplier</h3>
               </div>
             <div class="card-body">
-             <div class="form-group">
+             <div class="row form-group">
+            <div class="col-md-3">
             <asp:Label
                 id="lblNama"
                 Text="Nama Supplier  : "
                 AssociatedControlID="txtNamaSupplier"
                 Runat="server" />
-          
+            </div>
+            <div class="col-md-5">
             <asp:TextBox
                 id="txtNamaSupplier"
                 class="form-control form-control-user"
                 Text='<%# Bind("NamaSupplier") %>'
                 Runat="server" />
-           
+           </div>
             <asp:RequiredFieldValidator
                 id="valNama"
                 ControlToValidate="txtNamaSupplier"
@@ -44,13 +46,16 @@
                 ValidationGroup="frmAdd"
                 Runat="server" />
             </div>
-            <div class="form-group">
+
+            <div class="row form-group">
+            <div class="col-md-3">
             <asp:Label
                 id="lblAlamat"
                 Text="Alamat supplier : "
                 AssociatedControlID="txtAlamat"
                 Runat="server" />
-           
+           </div>
+            <div class="col-md-5">
             <asp:TextBox
                 id="txtAlamat"
                 class="form-control form-control-user"
@@ -64,13 +69,17 @@
                 ValidationGroup="frmAdd"
                 Runat="server" />
             </div>
-            <div class="form-group">
+            </div>
+
+            <div class="row form-group">
+             <div class="col-md-3">
             <asp:Label
                 id="lblEmail"
                 Text="Email : "
                 AssociatedControlID="txtEmail"
                 Runat="server" />
-           
+           </div>
+           <div class="col-md-5">
             <asp:TextBox
                 id="txtEmail"
                 class="form-control form-control-user"
@@ -92,13 +101,17 @@
                  ValidationExpression="^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"
                  ErrorMessage = "Format Email Salah"/>
            </div>
-            <div class="form-group">
+            </div>
+
+            <div class="row form-group">
+             <div class="col-md-3">
             <asp:Label
                 id="Label1"
                 Text="Nomor Telephone  : "
                 AssociatedControlID="txtNamaSupplier"
                 Runat="server" />
-           
+           </div>
+             <div class="col-md-5">
             <asp:TextBox
                 id="txtPhoneInsert"
                   class="form-control form-control-user"
@@ -119,15 +132,17 @@
                 ErrorMessage="Only numeric allowed"
                 Text="Only Numeric"
                 ValidationExpression="^[0-9]*$"/>
-            
             </div>
-            <div class="form-group">
+            </div>
+            <div class="row form-group">
+             <div class="col-md-3">
              <asp:Label
                 id="lblCreateBy"
                 Text="Create Date  : "
                 AssociatedControlID="txtTanggal"
                 Runat="server" />
-          
+            </div>
+             <div class="col-md-5">
              <asp:TextBox CssClass="form-control" ID="txtTanggal" placeholder="Create Date" runat="server"></asp:TextBox>
              <asp:RequiredFieldValidator ID="valTanggal"
                  runat="server"
@@ -135,12 +150,12 @@
                  ForeColor="Red"
                  ErrorMessage="Harus diisi"></asp:RequiredFieldValidator>
             </div>
+            </div>
         <div class="card-footer">
         <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" class="btn btn-primary col-1" />
         <asp:Button ID="btnCancelAdd" runat="server" Text="Cancel" OnClick="btnCancelAdd_Click" class="btn btn-danger col-1"/>
     </div>
     </div>
-</div>
 </div>
 </div>
 </div>
@@ -159,13 +174,15 @@
               </div>
                     <asp:Label ID="lblIdEdit" Visible="false" runat="server"></asp:Label>
             <div class="card-body">
-            <div class="form-group">
+            <div class="row form-group">
+             <div class="col-md-3">
             <asp:Label
                 id="lblENama"
                 Text="Nama Supplier  : "
                 AssociatedControlID="txtNamaE"
                 Runat="server" />
-
+            </div>
+             <div class="col-md-5">
             <asp:TextBox
                 id="txtNamaE"
                 class="form-control form-control-user"
@@ -179,13 +196,16 @@
                 ValidationGroup="frmedit"
                 Runat="server" />
             </div>
-            <div class="form-group">
+            </div>
+            <div class="row form-group">
+             <div class="col-md-3">
             <asp:Label
                 id="Label3"
                 Text="Alamat supplier : "
                 AssociatedControlID="txtAlamatE"
                 Runat="server" />
-
+           </div>
+             <div class="col-md-5">
             <asp:TextBox
                 id="txtAlamatE"
                 class="form-control form-control-user"
@@ -199,13 +219,16 @@
                 ValidationGroup="frmedit"
                 Runat="server" />
             </div>
-            <div class="form-group">
+            </div>
+            <div class="row form-group">
+             <div class="col-md-3">
             <asp:Label
                 id="Label4"
                 Text="Email : "
                 AssociatedControlID="txtEmailE"
                 Runat="server" />
-
+            </div>
+             <div class="col-md-5">
             <asp:TextBox
                 id="txtEmailE"
                 class="form-control form-control-user"
@@ -227,13 +250,16 @@
                  ValidationExpression="^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"
                  ErrorMessage = "Format Email Salah"/>
             </div>
-            <div class="form-group">
+            </div>
+            <div class="row form-group">
+             <div class="col-md-3">
             <asp:Label
                 id="Label5"
                 Text="Nomor Telephone  : "
                 AssociatedControlID="txtNoTelpE"
                 Runat="server" />
-
+            </div>
+             <div class="col-md-5">
             <asp:TextBox
                 id="txtNoTelpE"
                   class="form-control form-control-user"
@@ -255,7 +281,7 @@
                 Text="Only Numeric"
                 ValidationExpression="^[0-9]*$"/>
             </div>
-            
+            </div>
         <div class="card-footer">
         <asp:Button ID="btnEdit" runat="server" Text="Ubah" OnClick="btnEdit_Click" class="btn btn-primary" />
         <asp:Button ID="btnCancelEdit" runat="server" Text="Cancel" OnClick="btnCancelEdit_Click" class="btn btn-danger"/>
@@ -277,7 +303,13 @@
                 <h3 class="card-title">Table Jenis Obat</h3>
                   <br />
                 <asp:linkbutton CssClass="btn btn-block bg-gradient-primary col-2" runat="server" ID="Linkbutton1" OnClick="btnTambah_Click1"><i class="fas fa-plus"></i> | Tambah</asp:linkbutton>
-                <div class="card-tools">
+                 <label>Lihat Bedasarkan Status</label>
+                <asp:DropDownList ID="ddlStatusView" runat="server" class="form-control" Width="200px" OnTextChanged="ddlStatusView_TextChanged" AutoPostBack="true">
+                 <asp:ListItem value="1" >Aktif</asp:ListItem>
+                 <asp:ListItem Value="0" >Tidak Aktif</asp:ListItem>
+                 <asp:ListItem Value="2" Selected="True">Semua</asp:ListItem>
+                 </asp:DropDownList>
+                  <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
                     <asp:TextBox id="txtSearch" CssClass="form-control float-right" runat="server"/>
                     <div class="input-group-append">

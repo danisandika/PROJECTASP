@@ -268,4 +268,41 @@ public partial class Administrator_Supplier : System.Web.UI.Page
         ViewMenu.Visible = false;
         EditMenu.Visible = false;
     }
+
+    protected void ddlStatusView_TextChanged(object sender, EventArgs e)
+    {
+        if (ddlStatusView.Text.Equals("2"))
+        {
+            SqlCommand com = new SqlCommand();
+            com.Connection = con;
+            com.CommandText = "[sp_SelectSupplierAll]";
+            com.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter adapt = new SqlDataAdapter(com);
+            adapt.Fill(ds);
+            grdMenu.DataSource = ds;
+            grdMenu.DataBind();
+        }
+        else if (ddlStatusView.Text.Equals("1"))
+        {
+            SqlCommand com = new SqlCommand();
+            com.Connection = con;
+            com.CommandText = "[sp_SelectSupplierAktif]";
+            com.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter adapt = new SqlDataAdapter(com);
+            adapt.Fill(ds);
+            grdMenu.DataSource = ds;
+            grdMenu.DataBind();
+        }
+        else if (ddlStatusView.Text.Equals("0"))
+        {
+            SqlCommand com = new SqlCommand();
+            com.Connection = con;
+            com.CommandText = "[sp_SelectSupplierNA]";
+            com.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter adapt = new SqlDataAdapter(com);
+            adapt.Fill(ds);
+            grdMenu.DataSource = ds;
+            grdMenu.DataBind();
+        }
+    }
 }

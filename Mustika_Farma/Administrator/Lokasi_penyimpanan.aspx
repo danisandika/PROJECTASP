@@ -24,18 +24,31 @@
               </div>
                 
                 <div class="card-body">
-                  <div class="form-group">
+                  <div class="row form-group">
+                    <div class="col-md-3">
                     <label for="exampleInputEmail1">Nama Lokasi</label>
+                    </div>
+                    <div class="col-md-5">
                     <asp:TextBox ID="txtNamaLok" CssClass="form-control" runat="server"/>
                   </div>
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">Tempat Lokasi</label>
-                    <asp:TextBox ID="txtTempatLok" CssClass="form-control" runat="server" TextMode="MultiLine" />
+                </div>
+                  <div class="row form-group">
+                    <div class="col-md-3">
+                      <label for="exampleInputPassword1">Tempat Lokasi</label>
+                    </div>
+                      <div class="col-md-5">
+                        <asp:TextBox ID="txtTempatLok" CssClass="form-control" runat="server" TextMode="MultiLine" />
                   </div>
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">Deskripsi</label>
+                </div>
+
+                  <div class="row form-group">
+                    <div class="col-md-3">
+                      <label for="exampleInputPassword1">Deskripsi</label>
+                    </div>
+                      <div class="col-md-5">
                     <asp:TextBox ID="txtDeskripsi" CssClass="form-control" runat="server" TextMode="MultiLine" />
                   </div>
+                </div>
                 </div>
                 <!-- /.card-body -->
 
@@ -63,18 +76,31 @@
               </div>
                  <asp:Label ID="lblID" Visible="false" runat="server"></asp:Label>
                  <div class="card-body">
-                  <div class="form-group">
+                  <div class="row form-group">
+                    <div class="col-md-3">
                     <label for="exampleInputEmail1">Nama Lokasi</label>
+                    </div>
+                    <div class="col-md-5">
                     <asp:TextBox ID="txtNamaE" CssClass="form-control" runat="server"/>
                   </div>
-                  <div class="form-group">
+                </div>
+
+                  <div class="row form-group">
+                    <div class="col-md-3">
                     <label for="exampleInputPassword1">Tempat Lokasi</label>
+                    </div>
+                    <div class="col-md-5">
                     <asp:TextBox ID="txtTempatE" CssClass="form-control" runat="server" TextMode="MultiLine" />
                   </div>
-                  <div class="form-group">
+                </div>
+                  <div class="row form-group">
+                    <div class="col-md-3">
                     <label for="exampleInputPassword1">Deskripsi</label>
+                    </div>
+                    <div class="col-md-5">
                     <asp:TextBox ID="txtDeskE" CssClass="form-control" runat="server" TextMode="MultiLine" />
                   </div>
+                </div>
                 </div>
 
                   
@@ -102,7 +128,13 @@
                   <br />
 
                 <asp:linkbutton CssClass="btn btn-block bg-gradient-primary col-2" runat="server" ID="btntambah" OnClick="btntambah_Click"><i class="fas fa-plus"></i> | Tambah</asp:linkbutton>
-                <div class="card-tools">
+                 <label>Lihat Bedasarkan Status</label>
+                <asp:DropDownList ID="ddlStatusView" runat="server" class="form-control" Width="200px" OnTextChanged="ddlStatusView_TextChanged" AutoPostBack="true">
+                 <asp:ListItem value="1" >Aktif</asp:ListItem>
+                 <asp:ListItem Value="0" >Tidak Aktif</asp:ListItem>
+                 <asp:ListItem Value="2" Selected="True">Semua</asp:ListItem>
+             </asp:DropDownList>
+                  <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
                     <asp:TextBox id="txtSearch" CssClass="form-control float-right" runat="server"/>
                     <div class="input-group-append">

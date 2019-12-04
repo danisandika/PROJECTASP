@@ -204,4 +204,41 @@ public partial class Administrator_Lokasi_penyimpanan : System.Web.UI.Page
             secAdd.Visible = false;
         }
     }
+
+    protected void ddlStatusView_TextChanged(object sender, EventArgs e)
+    {
+        if (ddlStatusView.Text.Equals("2"))
+        {
+            SqlCommand com = new SqlCommand();
+            com.Connection = conn;
+            com.CommandText = "[sp_SelectLokasiAll]";
+            com.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter adapt = new SqlDataAdapter(com);
+            adapt.Fill(ds);
+            gridLokasi.DataSource = ds;
+            gridLokasi.DataBind();
+        }
+        else if (ddlStatusView.Text.Equals("1"))
+        {
+            SqlCommand com = new SqlCommand();
+            com.Connection = conn;
+            com.CommandText = "[sp_SelectLokasiAktif]";
+            com.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter adapt = new SqlDataAdapter(com);
+            adapt.Fill(ds);
+            gridLokasi.DataSource = ds;
+            gridLokasi.DataBind();
+        }
+        else if (ddlStatusView.Text.Equals("0"))
+        {
+            SqlCommand com = new SqlCommand();
+            com.Connection = conn;
+            com.CommandText = "[sp_SelectLokasiNA]";
+            com.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter adapt = new SqlDataAdapter(com);
+            adapt.Fill(ds);
+            gridLokasi.DataSource = ds;
+            gridLokasi.DataBind();
+        }
+    }
 }

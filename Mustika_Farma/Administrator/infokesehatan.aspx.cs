@@ -212,4 +212,41 @@ public partial class Administrator_infokesehatan : System.Web.UI.Page
     {
 
     }
+
+    protected void ddlStatusView_TextChanged(object sender, EventArgs e)
+    {
+        if (ddlStatusView.Text.Equals("2"))
+        {
+            SqlCommand com = new SqlCommand();
+            com.Connection = conn;
+            com.CommandText = "[sp_SelectInfoAll]";
+            com.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter adapt = new SqlDataAdapter(com);
+            adapt.Fill(ds);
+            gridInfo.DataSource = ds;
+            gridInfo.DataBind();
+        }
+        else if (ddlStatusView.Text.Equals("1"))
+        {
+            SqlCommand com = new SqlCommand();
+            com.Connection = conn;
+            com.CommandText = "[sp_SelectInfoAktif]";
+            com.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter adapt = new SqlDataAdapter(com);
+            adapt.Fill(ds);
+            gridInfo.DataSource = ds;
+            gridInfo.DataBind();
+        }
+        else if (ddlStatusView.Text.Equals("0"))
+        {
+            SqlCommand com = new SqlCommand();
+            com.Connection = conn;
+            com.CommandText = "[sp_SelectInfoNA]";
+            com.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter adapt = new SqlDataAdapter(com);
+            adapt.Fill(ds);
+            gridInfo.DataSource = ds;
+            gridInfo.DataBind();
+        }
+    }
 }

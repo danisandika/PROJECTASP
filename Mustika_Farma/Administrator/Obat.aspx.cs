@@ -224,4 +224,41 @@ public partial class Administrator_Obat : System.Web.UI.Page
         secEdit.Visible = false;
         secAdd.Visible = false;
     }
+
+    protected void ddlStatusView_TextChanged(object sender, EventArgs e)
+    {
+        if (ddlStatusView.Text.Equals("2"))
+        {
+            SqlCommand com = new SqlCommand();
+            com.Connection = conn;
+            com.CommandText = "[sp_SelectObatAll]";
+            com.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter adapt = new SqlDataAdapter(com);
+            adapt.Fill(ds);
+            gridObat.DataSource = ds;
+            gridObat.DataBind();
+        }
+        else if (ddlStatusView.Text.Equals("1"))
+        {
+            SqlCommand com = new SqlCommand();
+            com.Connection = conn;
+            com.CommandText = "[sp_SelectObatAktif]";
+            com.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter adapt = new SqlDataAdapter(com);
+            adapt.Fill(ds);
+            gridObat.DataSource = ds;
+            gridObat.DataBind();
+        }
+        else if (ddlStatusView.Text.Equals("0"))
+        {
+            SqlCommand com = new SqlCommand();
+            com.Connection = conn;
+            com.CommandText = "[sp_SelectObatNA]";
+            com.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter adapt = new SqlDataAdapter(com);
+            adapt.Fill(ds);
+            gridObat.DataSource = ds;
+            gridObat.DataBind();
+        }
+    }
 }

@@ -24,8 +24,11 @@
               </div>
                 
                 <div class="card-body">
-                  <div class="form-group">
+                  <div class="row form-group">
+                     <div class="col-md-3">
                     <label for="Obat">Nama User</label>
+                    </div>
+                     <div class="col-md-5">
                     <asp:TextBox ID="txtNama" CssClass="form-control" runat="server"/>
                      <asp:RequiredFieldValidator ID="RequiredFieldValidator5"
                         runat="server"
@@ -33,15 +36,23 @@
                         ForeColor="Red"
                         ErrorMessage="Harus diisi"></asp:RequiredFieldValidator>
                   </div>
+                </div>
 
-                 <div class="form-group">
-                   <label for="Ket">Alamat </label>
+                 <div class="row form-group">
+                    <div class="col-md-3">
+                     <label for="Ket">Alamat </label>
+                    </div>
+                 <div class="col-md-5">
                    <asp:TextBox ID="txtadds" CssClass="form-control" runat="server" TextMode="MultiLine"/>
                   </div> 
+                </div>
 
-                 <div class="form-group">
+                 <div class="row form-group">
+                   <div class="col-md-3">
                    <label for="Ket">Nomor Telepon</label>
-                   <asp:TextBox ID="txtNotelp" CssClass="form-control" runat="server" TextMode="Number" />
+                    </div>
+                    <div class="col-md-5">
+                     <asp:TextBox ID="txtNotelp" CssClass="form-control" runat="server" TextMode="Number" />
                     <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" 
                          ControlToValidate="txtNotelp"
                          ForeColor="Red" ValidationExpression="(\d[0-9]{12,13})$"
@@ -53,16 +64,23 @@
                         ValidationGroup="numb"
                         ErrorMessage="Data Harus diisi dengan Angk"></asp:RequiredFieldValidator>
                   </div>
+                </div>
 
-                  <div class="form-group">
+                  <div class="row form-group">
+                 <div class="col-md-3">
                   <label for="Role">Role</label>
+                </div>
+                 <div class="col-md-5">
                   <asp:DropDownList ID="ddlRole" runat="server" CssClass="form-control" DataSourceID="dsrole" DataTextField="Deskripsi" DataValueField="IDROle">
                   </asp:DropDownList>
                        <asp:SqlDataSource ID="dsrole" runat="server" ConnectionString="<%$ ConnectionStrings:Default %>" SelectCommand="select IDRole, Deskripsi from Role where [status] =1"></asp:SqlDataSource>
                   </div>
-
-                  <div class="form-group">
-                   <label for="satuan">Tanggal</label>
+                </div>
+                  <div class="row form-group">
+                    <div class="col-md-3">
+                      <label for="satuan">Tanggal</label>
+                    </div>
+                     <div class="col-md-5">
                    <asp:TextBox ID="txtTanggal" CssClass="form-control" runat="server" TextMode="Date" />
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3"
                         runat="server"
@@ -70,9 +88,13 @@
                         ForeColor="Red"
                         ErrorMessage="Data Harus diisi"></asp:RequiredFieldValidator>
                   </div>
+                </div>
 
-                   <div class="form-group">
+                   <div class="row form-group">
+                   <div class="col-md-3">
                    <label for="Ket">Email</label>
+                    </div>
+                     <div class="col-md-5">
                    <asp:TextBox ID="txtEmail" CssClass="form-control" runat="server" />
                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4"
                         runat="server"
@@ -83,20 +105,28 @@
                          ControlToValidate="txtEmail"
                          ForeColor="Red" ValidationExpression="^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"
                          ErrorMessage = "Format Email Salah"/>
+                  </div>
                   </div>   
                      
-                   <div class="form-group">
+                   <div class="row form-group">
+                     <div class="col-md-3">
                    <label for="Ket">Username</label>
+                    </div>
+                     <div class="col-md-5">
                    <asp:TextBox ID="txtUsername" CssClass="form-control" runat="server" />
                   <asp:RequiredFieldValidator ID="RequiredFieldValidator6"
                         runat="server"
                         ControlToValidate="txtUsername"
                         ForeColor="Red"
                         ErrorMessage="Harus diisi"></asp:RequiredFieldValidator>
-                  </div>         
+                  </div>  
+                  </div>       
                      
-                   <div class="form-group">
+                   <div class="row form-group">
+                     <div class="col-md-3">
                    <label for="Ket">Password</label>
+                    </div>
+                    <div class="col-md-5">
                    <asp:TextBox ID="txtPass" CssClass="form-control" runat="server" />
                    <asp:RequiredFieldValidator ID="RequiredFieldValidator7"
                         runat="server"
@@ -104,6 +134,8 @@
                         ForeColor="Red"
                         ErrorMessage="Harus diisi"></asp:RequiredFieldValidator>
                   </div> 
+                </div>
+            </div>
                                              
             </div>
             </div> 
@@ -131,8 +163,11 @@
                 <div class="card-body">
                 <asp:Label ID="lblID" runat="server" Visible="false"></asp:Label>
                  <div class="card-body">
-                  <div class="form-group">
+                  <div class="row form-group">
+                     <div class="col-md-3">
                     <label for="Obat">Nama User</label>
+                    </div>
+                     <div class="col-md-5">
                     <asp:TextBox ID="txtNamaE" CssClass="form-control" runat="server"/>
                      <asp:RequiredFieldValidator ID="RequiredFieldValidator8"
                         runat="server"
@@ -140,14 +175,22 @@
                         ForeColor="Red"
                         ErrorMessage="Harus diisi"></asp:RequiredFieldValidator>
                   </div>
+                </div>
 
-                 <div class="form-group">
+                 <div class="row form-group">
+                 <div class="col-md-3">
                    <label for="Ket">Alamat </label>
+                 </div>
+                 <div class="col-md-5">
                    <asp:TextBox ID="txtAlamatE" CssClass="form-control" runat="server" TextMode="MultiLine"/>
                   </div> 
+                </div>
 
-                 <div class="form-group">
+                 <div class="row form-group">
+                   <div class="col-md-3">
                    <label for="Ket">Nomor Telepon</label>
+                    </div>
+                   <div class="col-md-5">
                    <asp:TextBox ID="txtNoTelpE" CssClass="form-control" runat="server" TextMode="Number" />
                    <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" 
                          ControlToValidate="txtNoTelpE"
@@ -160,21 +203,33 @@
                         ValidationGroup="numb"
                         ErrorMessage="Isi data dengan benar"></asp:RequiredFieldValidator>
                   </div>
+                </div>
 
-                 <div class="form-group">
+                 <div class="row form-group">
+                 <div class="col-md-3">
                   <label for="Role">Role</label>
+                  </div>
+                 <div class="col-md-5">
                   <asp:DropDownList ID="ddlROlee" runat="server" CssClass="form-control" DataSourceID="dsroles" DataTextField="Deskripsi" DataValueField="IDROle">
                   </asp:DropDownList>
                        <asp:SqlDataSource ID="dsroles" runat="server" ConnectionString="<%$ ConnectionStrings:Default %>" SelectCommand="select IDRole, Deskripsi from Role where [status] =1"></asp:SqlDataSource>
                   </div>
-
-                  <div class="form-group">
-                   <label for="satuan">Tanggal</label>
-                   <asp:TextBox ID="txtTanggalE" CssClass="form-control" runat="server" TextMode="Date" />
                   </div>
 
-                   <div class="form-group">
+                  <div class="row form-group">
+                   <div class="col-md-3">
+                   <label for="satuan">Tanggal</label>
+                    </div>
+                     <div class="col-md-5">
+                   <asp:TextBox ID="txtTanggalE" CssClass="form-control" runat="server" TextMode="Date" />
+                  </div>
+                </div>
+
+                   <div class="row form-group">
+                    <div class="col-md-3">
                    <label for="Ket">Email</label>
+                    </div>
+                   <div class="col-md-5">
                    <asp:TextBox ID="txtEmailE" CssClass="form-control" runat="server" />
                      <asp:RequiredFieldValidator ID="RequiredFieldValidator9"
                         runat="server"
@@ -186,19 +241,27 @@
                          ForeColor="Red" ValidationExpression="^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"
                          ErrorMessage = "Format Email Salah"/>
                   </div>   
-                     
-                   <div class="form-group">
+                  </div>
+                       
+                   <div class="row form-group">
+                   <div class="col-md-3">
                    <label for="Ket">Username</label>
+                    </div>
+                     <div class="col-md-5">
                    <asp:TextBox ID="txtUsernameE" CssClass="form-control" runat="server" />
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator10"
                         runat="server"
                         ControlToValidate="txtUsernameE"
                         ForeColor="Red"
                         ErrorMessage="Harus diisi"></asp:RequiredFieldValidator>
-                  </div>         
+                  </div> 
+                  </div>        
                      
-                   <div class="form-group">
+                   <div class="row form-group">
+                     <div class="col-md-3">
                    <label for="Ket">Password</label>
+                    </div>
+                     <div class="col-md-5">
                    <asp:TextBox ID="txtPasswordE" CssClass="form-control" runat="server" />
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator11"
                         runat="server"
@@ -206,6 +269,7 @@
                         ForeColor="Red"
                         ErrorMessage="Harus diisi"></asp:RequiredFieldValidator>
                   </div> 
+                </div>
      
 
                 <div class="card-footer">
@@ -232,7 +296,13 @@
                   <br />
 
                 <asp:linkbutton CssClass="btn btn-block bg-gradient-primary col-2" runat="server" ID="btntambah" OnClick="btntambah_Click"><i class="fas fa-plus"></i> | Tambah</asp:linkbutton>
-                <div class="card-tools">
+                 <label>Lihat Bedasarkan Status</label>
+                <asp:DropDownList ID="ddlStatusView" runat="server" class="form-control" Width="200px" OnTextChanged="ddlStatusView_TextChanged" AutoPostBack="true">
+                 <asp:ListItem value="1" >Aktif</asp:ListItem>
+                 <asp:ListItem Value="0" >Tidak Aktif</asp:ListItem>
+                 <asp:ListItem Value="2" Selected="True">Semua</asp:ListItem>
+                 </asp:DropDownList>
+                  <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
                     <asp:TextBox id="txtSearch" CssClass="form-control float-right" runat="server"/>
                     <div class="input-group-append">
@@ -262,7 +332,7 @@
                         <asp:BoundField DataField="Email" HeaderText="Email"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Email" />
                         <asp:BoundField DataField="Username" HeaderText="Username"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="username" />
                         <asp:BoundField DataField="Password" HeaderText="Password"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="password" />
-                        <asp:BoundField DataField="IDROle" HeaderText="ID Role"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="IDRole" />
+                        <asp:BoundField DataField="Deskripsi" HeaderText="ID Role"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="IDRole" />
                         
                         <asp:TemplateField HeaderText="Aksi" ItemStyle-HorizontalAlign="Center">
                             <ItemTemplate>
