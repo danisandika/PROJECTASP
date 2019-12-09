@@ -262,7 +262,6 @@
                         <asp:BoundField DataField="Email" HeaderText="Email"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Email" />
                         <asp:BoundField DataField="Username" HeaderText="Username"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="username" />
                         <asp:BoundField DataField="Password" HeaderText="Password"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="password" />
-                        <asp:BoundField DataField="IDROle" HeaderText="ID Role"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="IDRole" />
                         
                         <asp:TemplateField HeaderText="Aksi" ItemStyle-HorizontalAlign="Center">
                             <ItemTemplate>

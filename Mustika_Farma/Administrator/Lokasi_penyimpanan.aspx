@@ -152,17 +152,30 @@
                     OnRowCommand="gridLokasi_RowCommand" OnSorting="gridLokasi_Sorting" OnSelectedIndexChanged="gridLokasi_SelectedIndexChanged" >
                     <PagerSettings Mode="NumericFirstLast" FirstPageText="<<" LastPageText=">>" />
                     <Columns>
-                        <asp:TemplateField HeaderText="No" ItemStyle-HorizontalAlign="Center">
+                        <asp:TemplateField HeaderText="No"  HeaderStyle-CssClass="table-bordered" ItemStyle-HorizontalAlign="Center">
+                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="2%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
                                 <%# Container.DataItemIndex +1 %>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:BoundField DataField="Nama_Lokasi" HeaderText="Nama Lokasi"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Nama_Lokasi" />
-                        <asp:BoundField DataField="tempatLokasi" HeaderText="tempatLokasi"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="tempatLokasi" />
-                        <asp:BoundField DataField="deskripsi" HeaderText="Deskripsi"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="deskripsi" />
-                        <asp:BoundField DataField="status" HeaderText="Status"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Status" />
+                        <asp:BoundField DataField="Nama_Lokasi"  HeaderStyle-CssClass="table-bordered" HeaderText="Nama Lokasi"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Nama_Lokasi" >
+                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="15%"  CssClass="table table-bordered table-striped" />
+                        </asp:BoundField>
+
+                        <asp:BoundField DataField="tempatLokasi"  HeaderStyle-CssClass="table-bordered" HeaderText="tempatLokasi"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="tempatLokasi" >
+                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="20%"  CssClass="table table-bordered table-striped" />
+                        </asp:BoundField>
+
+                        <asp:BoundField DataField="deskripsi"  HeaderStyle-CssClass="table-bordered" HeaderText="Deskripsi"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="deskripsi" >
+                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="20%"  CssClass="table table-bordered table-striped" />
+                        </asp:BoundField>
+
+                        <asp:BoundField DataField="status"  HeaderStyle-CssClass="table-bordered" HeaderText="Status"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Status" >
+                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
+                        </asp:BoundField>
                                              
-                        <asp:TemplateField HeaderText="Aksi" ItemStyle-HorizontalAlign="Center">
+                        <asp:TemplateField HeaderText="Aksi" HeaderStyle-CssClass="table-bordered" ItemStyle-HorizontalAlign="Center">
+                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="20%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
                                 <asp:LinkButton runat="server" ID="linkEdit" CommandName="cmEdit" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
                                     ToolTip="Edit Data"><span class="far fa-edit nav-icon">Edit</span>

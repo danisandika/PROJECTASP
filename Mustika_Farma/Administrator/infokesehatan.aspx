@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Administrator/MasterPage_Admin.master" AutoEventWireup="true" CodeFile="infokesehatan.aspx.cs" Inherits="Administrator_infokesehatan" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="title" Runat="Server">
     Info Kesehatan
 </asp:Content>
@@ -11,7 +13,14 @@
 Info Kesehatan
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="Content" Runat="Server">
-      <!--SECTION ADD-->
+    <style type="text/css">
+        .hiddencol
+        {
+        display:none;
+        } 
+    </style>
+     
+     <!--SECTION ADD-->
      <section class="content" id="secAdd" runat="server">
       <div class="container-fluid">
         <div class="row">
@@ -142,29 +151,53 @@ Info Kesehatan
                     AllowPaging="true"
                     AllowSorting="true" AutoGenerateColumns="false" DataKeyNames="IDInfo" EmptyDataText="Tidak Ada Data" 
                     PageSize="5" PagerStyle-CssClass="pagination" ShowHeaderWhenEmpty="true" OnPageIndexChanging="gridInfo_PageIndexChanging"
-                    OnRowCommand="gridInfo_RowCommand" OnSorting="gridInfo_Sorting" OnSelectedIndexChanged="gridInfo_SelectedIndexChanged" >
+                    OnRowCommand="gridInfo_RowCommand" OnSorting="gridInfo_Sorting" OnSelectedIndexChanged="gridInfo_SelectedIndexChanged"
+                    OnRowDeleting="gridInfo_RowDeleting" OnRowDataBound="gridInfo_RowDataBound" >
                     <PagerSettings Mode="NumericFirstLast" FirstPageText="<<" LastPageText=">>" />
                     <Columns>
-                        <asp:TemplateField HeaderText="No" ItemStyle-HorizontalAlign="Center">
+                        <asp:TemplateField HeaderText="No" HeaderStyle-CssClass="table-bordered" ItemStyle-HorizontalAlign ="Center">
+                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="2%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
                                 <%# Container.DataItemIndex +1 %>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:BoundField DataField="Judul" HeaderText="Judul"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Judul" />                      
-                         <asp:BoundField DataField="Kategori" HeaderText="Kategori"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Kategori" />
-                        <asp:BoundField DataField="Konten" HeaderText="Konten"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Konten" />
-                        <asp:BoundField DataField="waktuPost" HeaderText="waktuPost"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="waktuPost" />
-                        <asp:ImageField ControlStyle-Width="100" ControlStyle-Height = "100" DataImageUrlField ="foto" HeaderText="Foto"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" ></asp:ImageField>
-                        
-                        <asp:TemplateField HeaderText="Aksi" ItemStyle-HorizontalAlign="Center">
-                            <ItemTemplate>
+                        <asp:BoundField DataField="Judul" HeaderStyle-CssClass="table-bordered"  HeaderText="Judul"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Judul">                      
+                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="Kategori" HeaderText="Kategori" HeaderStyle-CssClass="table-bordered"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Kategori" >
+                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="Konten" HeaderText="Konten" HeaderStyle-CssClass="table-bordered"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Konten" >
+                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="30%"  CssClass="table table-bordered table-striped" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="waktuPost" HeaderText="waktuPost" HeaderStyle-CssClass="table-bordered" NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="waktuPost">
+                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="createBy" ItemStyle-CssClass="hiddencol" HeaderText="Creby" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
+                        <asp:BoundField DataField="createDate" ItemStyle-CssClass="hiddencol" HeaderText="createDate" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
+                        <asp:BoundField DataField="ModifiedBy" ItemStyle-CssClass="hiddencol" HeaderText="ModifiedBy" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
+                        <asp:BoundField DataField="ModifiedDate" ItemStyle-CssClass="hiddencol" HeaderText="ModifiedDate" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
+                        <asp:BoundField DataField="status" ItemStyle-CssClass="hiddencol" HeaderText="ModifiedDate" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
+
+                         <asp:ImageField ControlStyle-Width="100" ControlStyle-Height = "100" HeaderStyle-CssClass="table-bordered" DataImageUrlField ="foto" HeaderText="Foto"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" >
+                        <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
+                        </asp:ImageField>
+                        <asp:TemplateField HeaderText="Aksi" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="table-bordered" >
+                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
+                             <ItemTemplate>
                                 <asp:LinkButton runat="server" ID="linkEdit" CommandName="cmEdit" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
                                     ToolTip="Edit Data"><span class="far fa-edit nav-icon">Edit</span>
                                 </asp:LinkButton>
-                                |
-                                <asp:LinkButton runat="server" ID="linkDelete" CommandName="cmDelete" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
-                                    ToolTip="Delete Data"><span class="far fa-trash-alt nav-icon" onclick="return confirm('Are you sure you want to delete this item?');">Delete</span>
-                                </asp:LinkButton>
+                                
+                                  <asp:LinkButton runat="server" ID="linkDelete" CommandName="Delete" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
+                                ToolTip="linkDelete"><span class="far fa-trash-alt nav-icon" onclick="return confirm('Are you sure you want to delete this item?');">Delete</span></asp:LinkButton>
+                                
+                                
+                                 <asp:LinkButton runat="server" ID="linkAktif" CommandName="Delete" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
+                                ToolTip="linkAktif"><span class="far fa-check-circle" onclick="return confirm('Are you sure you want to delete this item?');">Aktif</span></asp:LinkButton>
+                                
+                                <asp:LinkButton ID="lnkViewDetails" runat="server" CommandArgument='<%# Eval("IDInfo")%>' 
+                                OnClick="lnkViewDetails_Click" Text="Detail" style="margin-left:20px"  CssClass="far fa-check-square"/>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
@@ -175,6 +208,37 @@ Info Kesehatan
           </div>
          </div>
         </section>
+
+    
+     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+    <asp:Panel ID="pnlGridViewDetails" runat="server" Width="490px" Height="400px"
+        CssClass="pnlBackGround">
+
+        <br /><br />
+        <asp:label style="margin-left:20px;" runat="server" class="col-sm-3 col-form-label text-label" Font-bold="true">DETAIL</asp:label>
+        <br /><br />
+        
+        <asp:label style="margin-left:20px" runat="server" class="col-sm-3 col-form-label text-label">Nama</asp:label>
+        <asp:Label ID="Judul" runat="server" Text="Judul"></asp:Label>
+        <br /><br />
+        <asp:label style="margin-left:20px" runat="server" class="col-sm-3 col-form-label text-label">Created By</asp:label>
+        <asp:Label ID="CreateBy" runat="server" Text="CreateBy"></asp:Label>
+        <br /><br />
+        <asp:label style="margin-left:20px" runat="server" class="col-sm-3 col-form-label text-label">Created date</asp:Label>
+        <asp:Label ID="CreateDate" runat="server" Text="Create Date"></asp:Label>
+        <br /><br />
+        <asp:label style="margin-left:20px" runat="server" class="col-sm-3 col-form-label text-label">Modified By</asp:Label>
+        <asp:Label ID="ModifiedBy" runat="server" Text="modiby"></asp:Label>
+        <br /><br />
+        <asp:label style="margin-left:20px" runat="server" class="col-sm-3 col-form-label text-label">Modified date</asp:Label>
+        <asp:Label ID="ModifiedDate" runat="server" Text="modidate"></asp:Label>
+
+        <br /><br /><br />
+        <asp:Button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-left:25px" ID="btnclose" runat="server" Text="Kembali" OnClick="btnclose_Click" />
+    </asp:Panel>
+        <asp:Button ID="btnDummy" runat="server" Style="display: none;" />
+    <asp:ModalPopupExtender ID="GridViewDetails" runat="server" TargetControlID="btnDummy"
+        PopupControlID="pnlGridViewDetails" BackgroundCssClass="modalBackground"></asp:ModalPopupExtender>
 
   <!--SECTION EDIT-->
      <section class="content" id="secEdit" runat="server">
@@ -276,7 +340,7 @@ Info Kesehatan
           </div>
         </section>
 
-<script>
+    <script>
         function img() {
             var url = inputToURL(document.getElementById("<%=uploadfile.ClientID%>"));
             document.getElementById("<%=foto.ClientID%>").src = url;

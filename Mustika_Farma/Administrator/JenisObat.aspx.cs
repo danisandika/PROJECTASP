@@ -109,27 +109,27 @@ public partial class Administrator_JenisObat : System.Web.UI.Page
             secEdit.Visible = true;
             secView.Visible = false;
         }
-        else if(e.CommandName == "cmDelete")
-        {
-            String id = gridJenis.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
-            lblID.Text = id;
-            SqlCommand com = new SqlCommand();
-            com.Connection = conn;
-            com.CommandText = "sp_DeleteJenis";
-            com.CommandType = CommandType.StoredProcedure;
-            com.Parameters.AddWithValue("@idJenis", lblID.Text);
+        //else if(e.CommandName == "cmDelete")
+        //{
+        //    String id = gridJenis.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
+        //    lblID.Text = id;
+        //    SqlCommand com = new SqlCommand();
+        //    com.Connection = conn;
+        //    com.CommandText = "sp_DeleteJenis";
+        //    com.CommandType = CommandType.StoredProcedure;
+        //    com.Parameters.AddWithValue("@idJenis", lblID.Text);
             
 
-            conn.Open();
+        //    conn.Open();
 
-            int result = Convert.ToInt32(com.ExecuteNonQuery());
-            conn.Close();
-            loadData();
+        //    int result = Convert.ToInt32(com.ExecuteNonQuery());
+        //    conn.Close();
+        //    loadData();
 
-            secView.Visible = true;
-            secEdit.Visible = false;
-            secAdd.Visible = false;
-        }
+        //    secView.Visible = true;
+        //    secEdit.Visible = false;
+        //    secAdd.Visible = false;
+        //}
     }
 
     protected void gridJenis_Sorting(object sender, GridViewSortEventArgs e)
@@ -211,6 +211,8 @@ public partial class Administrator_JenisObat : System.Web.UI.Page
             com.Connection = conn;
             com.CommandText = "[sp_SelectJenisALL]";
             com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@namaJenis", txtSearch.Text);
+            com.Parameters.AddWithValue("@deskripsi", txtSearch.Text);
             SqlDataAdapter adapt = new SqlDataAdapter(com);
             adapt.Fill(ds);
             gridJenis.DataSource = ds;
@@ -222,6 +224,8 @@ public partial class Administrator_JenisObat : System.Web.UI.Page
             com.Connection = conn;
             com.CommandText = "[sp_SelectJenisAktif]";
             com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@namaJenis", txtSearch.Text);
+            com.Parameters.AddWithValue("@deskripsi", txtSearch.Text);
             SqlDataAdapter adapt = new SqlDataAdapter(com);
             adapt.Fill(ds);
             gridJenis.DataSource = ds;
@@ -233,10 +237,66 @@ public partial class Administrator_JenisObat : System.Web.UI.Page
             com.Connection = conn;
             com.CommandText = "[sp_SelectJenisNA]";
             com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@namaJenis", txtSearch.Text);
+            com.Parameters.AddWithValue("@deskripsi", txtSearch.Text);
             SqlDataAdapter adapt = new SqlDataAdapter(com);
             adapt.Fill(ds);
             gridJenis.DataSource = ds;
             gridJenis.DataBind();
+        }
+    }
+
+    protected void gridJenis_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        TableCell cell = gridJenis.Rows[e.RowIndex].Cells[3];
+        string cells = cell.Text;
+
+        SqlCommand com = new SqlCommand();
+        com.Connection = conn;
+
+        int id = Convert.ToInt32(gridJenis.DataKeys[e.RowIndex].Value.ToString());
+        com.CommandText = "sp_DeleteJenis";
+
+
+        com.Parameters.AddWithValue("@idJenis", id);
+        com.Parameters.AddWithValue("@status", cells);
+        com.CommandType = CommandType.StoredProcedure;
+
+        conn.Open();
+        int result = Convert.ToInt32(com.ExecuteNonQuery());
+        conn.Close();
+        if (result > 0)
+        {
+            gridJenis.EditIndex = -1;
+            loadData();
+            secView.Visible = true;
+            secEdit.Visible = false;
+            secAdd.Visible = false;
+        }
+        else
+        {
+            loadData();
+        }
+
+    }
+
+    protected void gridJenis_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+
+        var linkDelete = (LinkButton)e.Row.FindControl("linkDelete");
+        var linkAktif = (LinkButton)e.Row.FindControl("linkAktif");
+
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            TableCell statusCell = e.Row.Cells[3];
+            if (statusCell.Text == "1")
+            {
+                linkAktif.Visible = false;
+            }
+            else if (statusCell.Text == "0")
+            {
+                linkDelete.Visible = false;
+            }
         }
     }
 }

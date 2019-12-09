@@ -213,6 +213,8 @@ public partial class Administrator_Lokasi_penyimpanan : System.Web.UI.Page
             com.Connection = conn;
             com.CommandText = "[sp_SelectLokasiAll]";
             com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@Nama_Lokasi", txtSearch.Text);
+
             SqlDataAdapter adapt = new SqlDataAdapter(com);
             adapt.Fill(ds);
             gridLokasi.DataSource = ds;
@@ -224,6 +226,8 @@ public partial class Administrator_Lokasi_penyimpanan : System.Web.UI.Page
             com.Connection = conn;
             com.CommandText = "[sp_SelectLokasiAktif]";
             com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@Nama_Lokasi", txtSearch.Text);
+
             SqlDataAdapter adapt = new SqlDataAdapter(com);
             adapt.Fill(ds);
             gridLokasi.DataSource = ds;
@@ -235,6 +239,8 @@ public partial class Administrator_Lokasi_penyimpanan : System.Web.UI.Page
             com.Connection = conn;
             com.CommandText = "[sp_SelectLokasiNA]";
             com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@Nama_Lokasi", txtSearch.Text);
+
             SqlDataAdapter adapt = new SqlDataAdapter(com);
             adapt.Fill(ds);
             gridLokasi.DataSource = ds;

@@ -125,7 +125,15 @@ public partial class Administrator_User : System.Web.UI.Page
 
     protected void gridUser_SelectedIndexChanged(object sender, EventArgs e)
     {
-
+        foreach (GridViewRow rw in gridUser.Rows)
+        {
+            Button btn = rw.FindControl("btnActive") as Button;
+            if (btn.Text == "Activate")
+            {
+                btn.Text = "DeActivate";
+            }
+            else { btn.Text = "Activate"; }
+        }
     }
 
     protected void gridUser_Sorting(object sender, GridViewSortEventArgs e)
@@ -162,28 +170,64 @@ public partial class Administrator_User : System.Web.UI.Page
             secEdit.Visible = true;
             secView.Visible = false;
         }
-        else if (e.CommandName == "cmDelete")
-        {
-            String id = gridUser.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
-            lblID.Text = id;
-            SqlCommand com = new SqlCommand();
-            com.Connection = conn;
-            com.CommandText = "sp_DeleteUser";
-            com.CommandType = CommandType.StoredProcedure;
-            com.Parameters.AddWithValue("@IDUser", lblID.Text);
+        //else if (e.CommandName == "cmDelete")
+        //{
+        //    String id = gridUser.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
+        //    lblID.Text = id;
+        //    SqlCommand com = new SqlCommand();
+        //    com.Connection = conn;
+        //    com.CommandText = "sp_DeleteUser";
+        //    com.CommandType = CommandType.StoredProcedure;
+        //    com.Parameters.AddWithValue("@IDUser", lblID.Text);
+
+        //    conn.Open();
+
+        //    int result = Convert.ToInt32(com.ExecuteNonQuery());
+        //    conn.Close();
+        //    loadData();
 
 
-            conn.Open();
+        //    secView.Visible = true;
+        //    secEdit.Visible = false;
+        //    secAdd.Visible = false;
+        //}
+        //else if (e.CommandName == "CMActivate")
+        //{
+        //    {
+        //        foreach (GridViewRow rw in gridUser.Rows)
+        //        {
+        //            Button btn = rw.FindControl("btnActive") as Button;
+        //            if (btn.Text == "DeActivate")
+        //            {
+        //                btn.Text = "Activate";
+        //                String id = gridUser.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
+        //                lblID.Text = id;
+        //                SqlCommand com = new SqlCommand();
+        //                com.Connection = conn;
+        //                com.CommandText = "sp_DeleteUser";
+        //                com.CommandType = CommandType.StoredProcedure;
+        //                com.Parameters.AddWithValue("@IDUser", lblID.Text);
 
-            int result = Convert.ToInt32(com.ExecuteNonQuery());
-            conn.Close();
-            loadData();
+        //                conn.Open();
 
-            secView.Visible = true;
-            secEdit.Visible = false;
-            secAdd.Visible = false;
+        //                int result = Convert.ToInt32(com.ExecuteNonQuery());
+        //                conn.Close();
+        //                loadData();
+
+
+        //                secView.Visible = true;
+        //                secEdit.Visible = false;
+        //                secAdd.Visible = false;
+        //            }
+        //            else if (btn.Text == "Activate")
+        //            {
+        //                btn.Text = "DeActivate";
+        //            }
+        //        }
+        //    }
+
         }
-    }
+      
 
     public SortDirection GridViewSortDirection
     {
@@ -220,6 +264,8 @@ public partial class Administrator_User : System.Web.UI.Page
             com.Connection = conn;
             com.CommandText = "[sp_SelectUserAll]";
             com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@Nama", txtSearch.Text);
+
             SqlDataAdapter adapt = new SqlDataAdapter(com);
             adapt.Fill(ds);
             gridUser.DataSource = ds;
@@ -231,6 +277,8 @@ public partial class Administrator_User : System.Web.UI.Page
             com.Connection = conn;
             com.CommandText = "[sp_SelectUserAktif]";
             com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@Nama", txtSearch.Text);
+
             SqlDataAdapter adapt = new SqlDataAdapter(com);
             adapt.Fill(ds);
             gridUser.DataSource = ds;
@@ -242,10 +290,91 @@ public partial class Administrator_User : System.Web.UI.Page
             com.Connection = conn;
             com.CommandText = "[sp_SelectUserNA]";
             com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@Nama", txtSearch.Text);
+
             SqlDataAdapter adapt = new SqlDataAdapter(com);
             adapt.Fill(ds);
             gridUser.DataSource = ds;
             gridUser.DataBind();
         }
+    }
+
+    protected void lbtnStatus_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void btnclose_Click(object sender, EventArgs e)
+    {
+        //Hide the modal popup extender
+        GridViewDetails.Hide();
+    }
+
+    protected void lnkViewDetails_Click(object sender, EventArgs e)
+    {
+        //Grab the selected row
+        GridViewRow row = (GridViewRow)((LinkButton)sender).Parent.Parent;
+        //Get the column value and assign it to label in panel
+        //Change the index as per your need
+        Nama.Text = row.Cells[1].Text;
+        CreateBy.Text = row.Cells[9].Text;
+        CreateDate.Text = row.Cells[10].Text;
+        ModifiedBy.Text = row.Cells[11].Text;
+        ModifiedDate.Text = row.Cells[12].Text;
+        //Show the modal popup extender
+        GridViewDetails.Show();
+    }
+
+    protected void gridUser_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        var linkDelete = (LinkButton)e.Row.FindControl("linkDelete");
+        var linkAktif = (LinkButton)e.Row.FindControl("linkAktif");
+
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            TableCell statusCell = e.Row.Cells[8];
+            if (statusCell.Text == "1")
+            {
+                linkAktif.Visible = false;
+            }
+            else if (statusCell.Text == "0")
+            {
+                linkDelete.Visible = false;
+            }
+        }
+    }
+
+    protected void gridUser_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        TableCell cell = gridUser.Rows[e.RowIndex].Cells[8];
+        string cells = cell.Text;
+
+        SqlCommand com = new SqlCommand();
+        com.Connection = conn;
+
+        int id = Convert.ToInt32(gridUser.DataKeys[e.RowIndex].Value.ToString());
+        com.CommandText = "sp_DeleteUser";
+
+
+        com.Parameters.AddWithValue("@IDUser",id);
+        com.Parameters.AddWithValue("@status", cells);
+        com.CommandType = CommandType.StoredProcedure;
+
+        conn.Open();
+        int result = Convert.ToInt32(com.ExecuteNonQuery());
+        conn.Close();
+        if (result > 0)
+        {
+            gridUser.EditIndex = -1;
+            loadData();
+            secView.Visible = true;
+            secEdit.Visible = false;
+            secAdd.Visible = false;
+        }
+        else
+        {
+            loadData();
+        }
+     
     }
 }

@@ -81,23 +81,23 @@ public partial class Administrator_Supplier : System.Web.UI.Page
             EditMenu.Visible = true;
             ViewMenu.Visible = false;
         }
-        else if (e.CommandName == "Hapus")
-        {
-            SqlCommand com = new SqlCommand();
-            com.Connection = con;
-            com.CommandText = "[sp_HapusSupplier]";
-            com.CommandType = CommandType.StoredProcedure;
-            string id = grdMenu.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
-            com.Parameters.AddWithValue("@IDSupplier", id);
-            com.Parameters.AddWithValue("@ModifiedBy", 1);
-            con.Open();
-            int result = Convert.ToInt32(com.ExecuteNonQuery());
-            con.Close();
-            loadData();
-            ViewMenu.Visible = true;
-            EditMenu.Visible = false;
-            AddMenu.Visible = false;
-        }
+        //else if (e.CommandName == "Hapus")
+        //{
+        //    SqlCommand com = new SqlCommand();
+        //    com.Connection = con;
+        //    com.CommandText = "[sp_HapusSupplier]";
+        //    com.CommandType = CommandType.StoredProcedure;
+        //    string id = grdMenu.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
+        //    com.Parameters.AddWithValue("@IDSupplier", id);
+        //    com.Parameters.AddWithValue("@ModifiedBy", 1);
+        //    con.Open();
+        //    int result = Convert.ToInt32(com.ExecuteNonQuery());
+        //    con.Close();
+        //    loadData();
+        //    ViewMenu.Visible = true;
+        //    EditMenu.Visible = false;
+        //    AddMenu.Visible = false;
+        //}
     }
 
     protected void grdMenu_Sorting(object sender, GridViewSortEventArgs e)
@@ -219,8 +219,7 @@ public partial class Administrator_Supplier : System.Web.UI.Page
         catch
         {
             con.Close();
-            Response.Write("<script>alert('Data gagal Disimpan!')</script>");
-            Server.Transfer("Supplier.aspx");
+      
         }
     
     }
@@ -277,6 +276,8 @@ public partial class Administrator_Supplier : System.Web.UI.Page
             com.Connection = con;
             com.CommandText = "[sp_SelectSupplierAll]";
             com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@Nama", txtSearch.Text);
+
             SqlDataAdapter adapt = new SqlDataAdapter(com);
             adapt.Fill(ds);
             grdMenu.DataSource = ds;
@@ -288,6 +289,8 @@ public partial class Administrator_Supplier : System.Web.UI.Page
             com.Connection = con;
             com.CommandText = "[sp_SelectSupplierAktif]";
             com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@Nama", txtSearch.Text);
+
             SqlDataAdapter adapt = new SqlDataAdapter(com);
             adapt.Fill(ds);
             grdMenu.DataSource = ds;
@@ -299,10 +302,86 @@ public partial class Administrator_Supplier : System.Web.UI.Page
             com.Connection = con;
             com.CommandText = "[sp_SelectSupplierNA]";
             com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@Nama", txtSearch.Text);
+
             SqlDataAdapter adapt = new SqlDataAdapter(com);
             adapt.Fill(ds);
             grdMenu.DataSource = ds;
             grdMenu.DataBind();
         }
+    }
+
+    protected void grdMenu_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        TableCell cell = grdMenu.Rows[e.RowIndex].Cells[5];
+        string cells = cell.Text;
+
+        SqlCommand com = new SqlCommand();
+        com.Connection = con;
+
+        int id = Convert.ToInt32(grdMenu.DataKeys[e.RowIndex].Value.ToString());
+        com.CommandText = "[sp_HapusSupplier]";
+
+
+        com.Parameters.AddWithValue("@IDSupplier", id);
+        com.Parameters.AddWithValue("@status", cells);
+        com.CommandType = CommandType.StoredProcedure;
+
+        con.Open();
+        int result = Convert.ToInt32(com.ExecuteNonQuery());
+        con.Close();
+        if (result > 0)
+        {
+            grdMenu.EditIndex = -1;
+            loadData();
+            ViewMenu.Visible = true;
+            EditMenu.Visible = false;
+            AddMenu.Visible = false;
+        }
+        else
+        {
+            loadData();
+        }
+
+    }
+
+    protected void grdMenu_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        var linkDelete = (LinkButton)e.Row.FindControl("linkDelete");
+        var linkAktif = (LinkButton)e.Row.FindControl("linkAktif");
+
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            TableCell statusCell = e.Row.Cells[5];
+            if (statusCell.Text == "1")
+            {
+                linkAktif.Visible = false;
+            }
+            else if (statusCell.Text == "0")
+            {
+                linkDelete.Visible = false;
+            }
+        }
+    }
+
+    protected void lnkViewDetails_Click(object sender, EventArgs e)
+    {
+        //Grab the selected row
+        GridViewRow row = (GridViewRow)((LinkButton)sender).Parent.Parent;
+        //Get the column value and assign it to label in panel
+        //Change the index as per your need
+        Nama.Text = row.Cells[1].Text;
+        CreateBy.Text = row.Cells[6].Text;
+        CreateDate.Text = row.Cells[7].Text;
+        ModifiedBy.Text = row.Cells[8].Text;
+        ModifiedDate.Text = row.Cells[9].Text;
+        //Show the modal popup extender
+        GridViewDetails.Show();
+    }
+
+    protected void btnclose_Click(object sender, EventArgs e)
+    {
+        //Hide the modal popup extender
+        GridViewDetails.Hide();
     }
 }

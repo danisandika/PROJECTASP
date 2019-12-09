@@ -123,15 +123,18 @@
                     OnRowCommand="gridJenis_RowCommand" OnSorting="gridJenis_Sorting" OnSelectedIndexChanged="gridJenis_SelectedIndexChanged" >
                     <PagerSettings Mode="NumericFirstLast" FirstPageText="<<" LastPageText=">>" />
                     <Columns>
-                        <asp:TemplateField HeaderText="No" ItemStyle-HorizontalAlign="Center">
+                        <asp:TemplateField HeaderText="No"  HeaderStyle-CssClass="table-bordered" ItemStyle-HorizontalAlign="Center">
+                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="2%"  CssClass="table table-bordered table-striped"  />
                             <ItemTemplate>
                                 <%# Container.DataItemIndex +1 %>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:BoundField DataField="Deskripsi" HeaderText="Nama Role"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Deskripsi" />
-                        
+                        <asp:BoundField DataField="Deskripsi" HeaderStyle-CssClass="table-bordered"   HeaderText="Nama Role"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Deskripsi" >
+                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="20%"  CssClass="table table-bordered table-striped"  />
+                        </asp:BoundField>
                        
-                        <asp:TemplateField HeaderText="Aksi" ItemStyle-HorizontalAlign="Center">
+                        <asp:TemplateField HeaderText="Aksi" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
+                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="30%"  CssClass="table table-bordered table-striped"  />
                             <ItemTemplate>
                                 <asp:LinkButton runat="server" ID="linkEdit" CommandName="cmEdit" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
                                     ToolTip="Edit Data"><span class="far fa-edit nav-icon">Edit</span>

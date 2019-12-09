@@ -58,7 +58,7 @@ public partial class Administrator_User : System.Web.UI.Page
         com.Parameters.AddWithValue("@password", txtPass.Text);
         com.Parameters.AddWithValue("@createDate", CreateDate);
         com.Parameters.AddWithValue("@createBy", CreateBy);
-        com.Parameters.AddWithValue("@IDROle", ddlRole.SelectedValue);
+        com.Parameters.AddWithValue("@IDRole", ddlRole.SelectedValue);
         conn.Open();
 
         int result = Convert.ToInt32(com.ExecuteNonQuery());

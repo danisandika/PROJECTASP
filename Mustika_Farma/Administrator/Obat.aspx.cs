@@ -105,27 +105,27 @@ public partial class Administrator_Obat : System.Web.UI.Page
             secEdit.Visible = true;
             secView.Visible = false;
         }
-        else if (e.CommandName == "cmDelete")
-        {
-            String id = gridObat.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
-            lblID.Text = id;
-            SqlCommand com = new SqlCommand();
-            com.Connection = conn;
-            com.CommandText = "sp_DeleteObat";
-            com.CommandType = CommandType.StoredProcedure;
-            com.Parameters.AddWithValue("@IDObat", lblID.Text);
+        //else if (e.CommandName == "cmDelete")
+        //{
+        //    String id = gridObat.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
+        //    lblID.Text = id;
+        //    SqlCommand com = new SqlCommand();
+        //    com.Connection = conn;
+        //    com.CommandText = "sp_DeleteObat";
+        //    com.CommandType = CommandType.StoredProcedure;
+        //    com.Parameters.AddWithValue("@IDObat", lblID.Text);
 
 
-            conn.Open();
+        //    conn.Open();
 
-            int result = Convert.ToInt32(com.ExecuteNonQuery());
-            conn.Close();
-            loadData();
+        //    int result = Convert.ToInt32(com.ExecuteNonQuery());
+        //    conn.Close();
+        //    loadData();
 
-            secView.Visible = true;
-            secEdit.Visible = false;
-            secAdd.Visible = false;
-        }
+        //    secView.Visible = true;
+        //    secEdit.Visible = false;
+        //    secAdd.Visible = false;
+        //}
     }
 
     protected void gridObat_Sorting(object sender, GridViewSortEventArgs e)
@@ -231,8 +231,10 @@ public partial class Administrator_Obat : System.Web.UI.Page
         {
             SqlCommand com = new SqlCommand();
             com.Connection = conn;
-            com.CommandText = "[sp_SelectObatAll]";
+            com.CommandText = "[sp_Selectobat]";
             com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@namaObat", txtSearch.Text);
+
             SqlDataAdapter adapt = new SqlDataAdapter(com);
             adapt.Fill(ds);
             gridObat.DataSource = ds;
@@ -244,6 +246,9 @@ public partial class Administrator_Obat : System.Web.UI.Page
             com.Connection = conn;
             com.CommandText = "[sp_SelectObatAktif]";
             com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@namaObat", txtSearch.Text);
+
+
             SqlDataAdapter adapt = new SqlDataAdapter(com);
             adapt.Fill(ds);
             gridObat.DataSource = ds;
@@ -255,10 +260,88 @@ public partial class Administrator_Obat : System.Web.UI.Page
             com.Connection = conn;
             com.CommandText = "[sp_SelectObatNA]";
             com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@namaObat", txtSearch.Text);
+
+
+
             SqlDataAdapter adapt = new SqlDataAdapter(com);
             adapt.Fill(ds);
             gridObat.DataSource = ds;
             gridObat.DataBind();
+        }
+    }
+
+    protected void btnclose_Click(object sender, EventArgs e)
+    {
+        GridViewDetails.Hide();
+    }
+
+    protected void lnkViewDetails_Click(object sender, EventArgs e)
+    {
+        //Grab the selected row
+        GridViewRow row = (GridViewRow)((LinkButton)sender).Parent.Parent;
+        //Get the column value and assign it to label in panel
+        //Change the index as per your need
+        namaObat.Text = row.Cells[1].Text;
+        CreateBy.Text = row.Cells[11].Text;
+        CreateDate.Text = row.Cells[12].Text;
+        ModifiedBy.Text = row.Cells[13].Text;
+        ModifiedDate.Text = row.Cells[14].Text;
+        Expired.Text = row.Cells[8].Text;
+
+        //Show the modal popup extender
+        GridViewDetails.Show();
+    }
+
+    protected void gridObat_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        TableCell cell = gridObat.Rows[e.RowIndex].Cells[15];
+        string cells = cell.Text;
+
+        SqlCommand com = new SqlCommand();
+        com.Connection = conn;
+
+        int id = Convert.ToInt32(gridObat.DataKeys[e.RowIndex].Value.ToString());
+        com.CommandText = "sp_DeleteObat";
+
+
+        com.Parameters.AddWithValue("@IDObat", id);
+        com.Parameters.AddWithValue("@status", cells);
+        com.CommandType = CommandType.StoredProcedure;
+
+        conn.Open();
+        int result = Convert.ToInt32(com.ExecuteNonQuery());
+        conn.Close();
+        if (result > 0)
+        {
+            gridObat.EditIndex = -1;
+            loadData();
+            secView.Visible = true;
+            secEdit.Visible = false;
+            secAdd.Visible = false;
+        }
+        else
+        {
+            loadData();
+        }
+    }
+
+    protected void gridObat_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        var linkDelete = (LinkButton)e.Row.FindControl("linkDelete");
+        var linkAktif = (LinkButton)e.Row.FindControl("linkAktif");
+
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            TableCell statusCell = e.Row.Cells[15];
+            if (statusCell.Text == "1")
+            {
+                linkAktif.Visible = false;
+            }
+            else if (statusCell.Text == "0")
+            {
+                linkDelete.Visible = false;
+            }
         }
     }
 }

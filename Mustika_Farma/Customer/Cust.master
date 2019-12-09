@@ -1,0 +1,96 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Cust.master.cs" Inherits="Customer_Cust" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<form runat="server">
+<head>
+    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+</head>
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+  <div id="wrapper">
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+      <div class="top-area">     
+			<div class="cta-btn">
+			  <a href="../Login.aspx" class="btn btn-skin btn-lg">Login/Register</a>
+			</div>         
+      </div>
+      <div class="container navigation">
+
+        <div class="navbar-header page-scroll">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+          <a class="navbar-brand" href="index.html">
+                    <img src="Medicio/img/logo1.png" alt="" width="150" height="60"/>
+                </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+          <asp:ContentPlaceHolder ID="mainMenu" runat="server"></asp:ContentPlaceHolder>
+        
+        <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container -->
+    </nav>
+
+    <!-- Section: intro -->
+      <asp:ContentPlaceHolder ID="Section1" runat="server"></asp:ContentPlaceHolder>
+    
+
+    <!-- /Section: intro -->
+
+    <!-- Section: boxes -->
+      <asp:ContentPlaceHolder ID="Section2" runat="server"></asp:ContentPlaceHolder>
+   
+    <!-- /Section: boxes -->
+
+      <asp:ContentPlaceHolder ID="Section3" runat="server"></asp:ContentPlaceHolder>
+   
+
+
+    <!-- Section: services -->
+      <asp:ContentPlaceHolder ID="Section4" runat="server"></asp:ContentPlaceHolder>
+   
+    <!-- /Section: services -->
+
+
+    <!-- Section: team -->
+      <asp:ContentPlaceHolder ID="Section5" runat="server"></asp:ContentPlaceHolder>
+   
+    <!-- /Section: team -->
+
+
+
+    <!-- Section: works -->
+      <asp:ContentPlaceHolder ID="Section6" runat="server"></asp:ContentPlaceHolder>
+  
+    <!-- /Section: works -->
+
+      <asp:ContentPlaceHolder ID="section7" runat="server"></asp:ContentPlaceHolder>
+   
+    <!-- /Section: pricing -->
+
+      <asp:ContentPlaceHolder ID="footer" runat="server"></asp:ContentPlaceHolder>
+   
+  </div>
+    <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server"></asp:ContentPlaceHolder>
+  <a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
+
+  <!-- Core JavaScript Files -->
+  <script src="Medicio/js/jquery.min.js"></script>
+  <script src="Medicio/js/bootstrap.min.js"></script>
+  <script src="Medicio/js/jquery.easing.min.js"></script>
+  <script src="Medicio/js/wow.min.js"></script>
+  <script src="Medicio/js/jquery.scrollTo.js"></script>
+  <script src="Medicio/js/jquery.appear.js"></script>
+  <script src="Medicio/js/stellar.js"></script>
+  <script src="Medicio/plugins/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
+  <script src="Medicio/js/owl.carousel.min.js"></script>
+  <script src="Medicio/js/nivo-lightbox.min.js"></script>
+  <script src="Medicio/js/custom.js"></script>
+
+</body>
+
+</html>
+</form>

@@ -102,27 +102,27 @@ public partial class Administrator_infokesehatan : System.Web.UI.Page
             secEdit.Visible = true;
             secView.Visible = false;
         }
-        else if (e.CommandName == "cmDelete")
-        {
-            String id = gridInfo.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
-            lblID.Text = id;
-            SqlCommand com = new SqlCommand();
-            com.Connection = conn;
-            com.CommandText = "[sp_DeleteInfo]";
-            com.CommandType = CommandType.StoredProcedure;
-            com.Parameters.AddWithValue("@IDInfo", lblID.Text);
+        //else if (e.CommandName == "cmDelete")
+        //{
+        //    String id = gridInfo.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
+        //    lblID.Text = id;
+        //    SqlCommand com = new SqlCommand();
+        //    com.Connection = conn;
+        //    com.CommandText = "[sp_DeleteInfo]";
+        //    com.CommandType = CommandType.StoredProcedure;
+        //    com.Parameters.AddWithValue("@IDInfo", lblID.Text);
 
 
-            conn.Open();
+        //    conn.Open();
 
-            int result = Convert.ToInt32(com.ExecuteNonQuery());
-            conn.Close();
-            loadData();
+        //    int result = Convert.ToInt32(com.ExecuteNonQuery());
+        //    conn.Close();
+        //    loadData();
 
-            secView.Visible = true;
-            secEdit.Visible = false;
-            secAdd.Visible = false;
-        }
+        //    secView.Visible = true;
+        //    secEdit.Visible = false;
+        //    secAdd.Visible = false;
+        //}
     }
 
     protected void gridInfo_Sorting(object sender, GridViewSortEventArgs e)
@@ -221,6 +221,7 @@ public partial class Administrator_infokesehatan : System.Web.UI.Page
             com.Connection = conn;
             com.CommandText = "[sp_SelectInfoAll]";
             com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@Judul", txtSearch.Text);
             SqlDataAdapter adapt = new SqlDataAdapter(com);
             adapt.Fill(ds);
             gridInfo.DataSource = ds;
@@ -232,6 +233,7 @@ public partial class Administrator_infokesehatan : System.Web.UI.Page
             com.Connection = conn;
             com.CommandText = "[sp_SelectInfoAktif]";
             com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@Judul", txtSearch.Text);
             SqlDataAdapter adapt = new SqlDataAdapter(com);
             adapt.Fill(ds);
             gridInfo.DataSource = ds;
@@ -243,10 +245,84 @@ public partial class Administrator_infokesehatan : System.Web.UI.Page
             com.Connection = conn;
             com.CommandText = "[sp_SelectInfoNA]";
             com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@Judul", txtSearch.Text);
             SqlDataAdapter adapt = new SqlDataAdapter(com);
             adapt.Fill(ds);
             gridInfo.DataSource = ds;
             gridInfo.DataBind();
+        }
+    }
+
+    protected void lnkViewDetails_Click(object sender, EventArgs e)
+    {
+        //Grab the selected row
+        GridViewRow row = (GridViewRow)((LinkButton)sender).Parent.Parent;
+        //Get the column value and assign it to label in panel
+        //Change the index as per your need
+        Judul.Text = row.Cells[1].Text;
+        CreateBy.Text = row.Cells[5].Text;
+        CreateDate.Text = row.Cells[6].Text;
+        ModifiedBy.Text = row.Cells[7].Text;
+        ModifiedDate.Text = row.Cells[8].Text;
+        //Show the modal popup extender
+        GridViewDetails.Show();
+    }
+
+    protected void btnclose_Click(object sender, EventArgs e)
+    {
+        //Hide the modal popup extender
+        GridViewDetails.Hide();
+    }
+
+    protected void gridInfo_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        TableCell cell = gridInfo.Rows[e.RowIndex].Cells[9];
+        string cells = cell.Text;
+
+        SqlCommand com = new SqlCommand();
+        com.Connection = conn;
+
+        int id = Convert.ToInt32(gridInfo.DataKeys[e.RowIndex].Value.ToString());
+        com.CommandText = "sp_DeleteInfo";
+
+
+        com.Parameters.AddWithValue("@IDInfo", id);
+        com.Parameters.AddWithValue("@status", cells);
+        com.CommandType = CommandType.StoredProcedure;
+
+        conn.Open();
+        int result = Convert.ToInt32(com.ExecuteNonQuery());
+        conn.Close();
+        if (result > 0)
+        {
+            gridInfo.EditIndex = -1;
+            loadData();
+            secView.Visible = true;
+            secEdit.Visible = false;
+            secAdd.Visible = false;
+        }
+        else
+        {
+            loadData();
+        }
+    }
+
+    protected void gridInfo_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        var linkDelete = (LinkButton)e.Row.FindControl("linkDelete");
+        var linkAktif = (LinkButton)e.Row.FindControl("linkAktif");
+
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            TableCell statusCell = e.Row.Cells[9];
+            if (statusCell.Text == "1")
+            {
+                linkAktif.Visible = false;
+            }
+            else if (statusCell.Text == "0")
+            {
+                linkDelete.Visible = false;
+            }
         }
     }
 }

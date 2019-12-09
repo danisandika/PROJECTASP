@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
      <form runat="server">
      <div class="input-group mb-3">
-         <asp:TextBox ID="txtNama" CssClass="form-control" runat="server" TextMode="MultiLine" />
+         <asp:TextBox ID="txtNama" CssClass="form-control" runat="server"/>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -12,7 +12,7 @@
         </div>
 
         <div class="input-group mb-3">
-        <asp:TextBox ID="txtPass" CssClass="form-control" runat="server" TextMode="MultiLine" />    
+        <asp:TextBox ID="txtPass" CssClass="form-control" runat="server" TextMode="Password" />    
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>

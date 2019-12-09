@@ -211,6 +211,8 @@ public partial class Administrator_Role : System.Web.UI.Page
             com.Connection = conn;
             com.CommandText = "[sp_SelectRoleAll]";
             com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@Nama", txtSearch.Text);
+
             SqlDataAdapter adapt = new SqlDataAdapter(com);
             adapt.Fill(ds);
             gridRole.DataSource = ds;
@@ -222,6 +224,8 @@ public partial class Administrator_Role : System.Web.UI.Page
             com.Connection = conn;
             com.CommandText = "[sp_SelectRoleAktif]";
             com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@Nama", txtSearch.Text);
+
             SqlDataAdapter adapt = new SqlDataAdapter(com);
             adapt.Fill(ds);
             gridRole.DataSource = ds;
@@ -233,6 +237,8 @@ public partial class Administrator_Role : System.Web.UI.Page
             com.Connection = conn;
             com.CommandText = "[sp_SelectRoleNA]";
             com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@Nama", txtSearch.Text);
+
             SqlDataAdapter adapt = new SqlDataAdapter(com);
             adapt.Fill(ds);
             gridRole.DataSource = ds;
