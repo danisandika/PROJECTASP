@@ -47,8 +47,6 @@ public partial class Administrator_JenisObat : System.Web.UI.Page
     protected void btnSave_Click(object sender, EventArgs e)
     {
         DateTime CreateDate = DateTime.Now;
-        int CreateBy = 1;
-
         SqlCommand com = new SqlCommand();
         com.Connection = conn;
         com.CommandText = "sp_InsertJenis";
@@ -56,7 +54,7 @@ public partial class Administrator_JenisObat : System.Web.UI.Page
         com.Parameters.AddWithValue("@namaJenis", txtnamaJenis.Text);
         com.Parameters.AddWithValue("@deskripsi", txtDeskripsi.Text);
         com.Parameters.AddWithValue("@createDate", CreateDate);
-        com.Parameters.AddWithValue("@createBy", CreateBy);
+        com.Parameters.AddWithValue("@createBy", Session["creaby"]);
 
         conn.Open();
 
@@ -72,7 +70,6 @@ public partial class Administrator_JenisObat : System.Web.UI.Page
     protected void EditbtnSave_Click(object sender, EventArgs e)
     {
         DateTime ModifiedDate = DateTime.Now;
-        int ModifiedBy = 1;
 
         SqlCommand com = new SqlCommand();
         com.Connection = conn;
@@ -82,7 +79,7 @@ public partial class Administrator_JenisObat : System.Web.UI.Page
         com.Parameters.AddWithValue("@namaJenis", txtEditnamaJenis.Text);
         com.Parameters.AddWithValue("@deskripsi", txtEditDeskripsi.Text);
         com.Parameters.AddWithValue("@ModifiedDate", ModifiedDate);
-        com.Parameters.AddWithValue("@ModifiedBy", ModifiedBy);
+        com.Parameters.AddWithValue("@ModifiedBy", Session["creaby"]);
 
         conn.Open();
 
@@ -109,27 +106,7 @@ public partial class Administrator_JenisObat : System.Web.UI.Page
             secEdit.Visible = true;
             secView.Visible = false;
         }
-        //else if(e.CommandName == "cmDelete")
-        //{
-        //    String id = gridJenis.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
-        //    lblID.Text = id;
-        //    SqlCommand com = new SqlCommand();
-        //    com.Connection = conn;
-        //    com.CommandText = "sp_DeleteJenis";
-        //    com.CommandType = CommandType.StoredProcedure;
-        //    com.Parameters.AddWithValue("@idJenis", lblID.Text);
-            
-
-        //    conn.Open();
-
-        //    int result = Convert.ToInt32(com.ExecuteNonQuery());
-        //    conn.Close();
-        //    loadData();
-
-        //    secView.Visible = true;
-        //    secEdit.Visible = false;
-        //    secAdd.Visible = false;
-        //}
+       
     }
 
     protected void gridJenis_Sorting(object sender, GridViewSortEventArgs e)
@@ -200,7 +177,9 @@ public partial class Administrator_JenisObat : System.Web.UI.Page
 
     protected void EditbtnCancel_Click(object sender, EventArgs e)
     {
-
+        secView.Visible = true;
+        secEdit.Visible = false;
+        secAdd.Visible = false;
     }
 
     protected void ddlStatusView_TextChanged(object sender, EventArgs e)
@@ -298,5 +277,26 @@ public partial class Administrator_JenisObat : System.Web.UI.Page
                 linkDelete.Visible = false;
             }
         }
+    }
+
+    protected void btnclose_Click(object sender, EventArgs e)
+    {
+        GridViewDetails.Hide();
+    }
+
+    protected void lnkViewDetails_Click(object sender, EventArgs e)
+    {
+        //Grab the selected row
+        GridViewRow row = (GridViewRow)((LinkButton)sender).Parent.Parent;
+        //Get the column value and assign it to label in panel
+        //Change the index as per your need
+        namaJenis.Text = row.Cells[1].Text;
+        CreateBy.Text = row.Cells[4].Text;
+        CreateDate.Text = row.Cells[5].Text;
+        ModifiedBy.Text = row.Cells[6].Text;
+        ModifiedDate.Text = row.Cells[7].Text;
+
+        //Show the modal popup extender
+        GridViewDetails.Show();
     }
 }

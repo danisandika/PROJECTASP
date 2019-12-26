@@ -23,6 +23,7 @@ public partial class Customer_Registrasi : System.Web.UI.Page
         DateTime tglLahir = Convert.ToDateTime(txtTanggal.Text);
         int CreateBy = 1;
         int role = 3;
+        string pass = "MUSTIKA2019";
 
         SqlCommand com = new SqlCommand();
         com.Connection = conn;
@@ -35,7 +36,7 @@ public partial class Customer_Registrasi : System.Web.UI.Page
         com.Parameters.AddWithValue("@Email", txtEmail.Text);
         com.Parameters.AddWithValue("@status", 1);
         com.Parameters.AddWithValue("@username", txtUsername.Text);
-        com.Parameters.AddWithValue("@password", txtPass.Text);
+        com.Parameters.AddWithValue("@password",pass);
         com.Parameters.AddWithValue("@createDate", CreateDate);
         com.Parameters.AddWithValue("@createBy", CreateBy);
         com.Parameters.AddWithValue("@IDROle", role);

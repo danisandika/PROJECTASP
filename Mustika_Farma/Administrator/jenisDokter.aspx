@@ -1,20 +1,20 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Administrator/MasterPage_Admin.master" AutoEventWireup="true" CodeFile="JenisObat.aspx.cs" Inherits="Administrator_JenisObat" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Administrator/MasterPage_Admin.master" AutoEventWireup="true" CodeFile="jenisDokter.aspx.cs" Inherits="Administrator_jenisDokter" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="title" Runat="Server">
-    Jenis Obat
+     Jenis Dokter
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="sub_Title" Runat="Server">
-    <h1 class="m-0 text-dark">Jenis Obat</h1>
+      <h1 class="m-0 text-dark">Jenis Dokter</h1>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="title2" Runat="Server">
-    Jenis Obat
+     Jenis Dokter
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="Content" Runat="Server">
-      <style type="text/css">
+     <style type="text/css">
         .hiddencol
         {
         display:none;
@@ -30,13 +30,13 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Tambah Jenis Obat</h3>
+                <h3 class="card-title">Tambah Jenis Dokter</h3>
               </div>
                 
                 <div class="card-body">
                   <div class="row form-group">
                     <div class="col-md-3">
-                    <label for="exampleInputEmail1">Nama Jenis Obat</label>
+                    <label for="exampleInputEmail1">Nama Jenis Dokter</label>
                     </div>
                       <div class="col-md-5">
                     <asp:TextBox ID="txtnamaJenis" CssClass="form-control" runat="server"/>
@@ -75,14 +75,14 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Edit Jenis Obat</h3>
+                <h3 class="card-title">Edit Jenis Dokter</h3>
               </div>
                 
                 <div class="card-body">
                 <asp:Label ID="lblID" runat="server" Visible="false"></asp:Label>
                   <div class="row form-group">
                     <div class="col-md-3">
-                    <label for="exampleInputEmail1">Nama Jenis Obat</label>
+                    <label for="exampleInputEmail1">Nama Jenis Dokter</label>
                     </div>
                     <div class="col-md-5">
                     <asp:TextBox ID="txtEditnamaJenis" CssClass="form-control" runat="server"/>
@@ -119,7 +119,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Table Jenis Obat</h3>
+                <h3 class="card-title">Table Jenis Dokter</h3>
                   <br />
 
                 <asp:linkbutton CssClass="btn btn-block bg-gradient-primary col-2" runat="server" ID="btntambah" OnClick="btntambah_Click"><i class="fas fa-plus"></i> | Tambah</asp:linkbutton>
@@ -142,7 +142,7 @@
                 
                 <asp:GridView ID="gridJenis" runat="server" CssClass="table table-hover"
                     AllowPaging="true" 
-                    AllowSorting="true" AutoGenerateColumns="false" DataKeyNames="idjenis" EmptyDataText="Tidak Ada Data" 
+                    AllowSorting="true" AutoGenerateColumns="false" DataKeyNames="ID_SP" EmptyDataText="Tidak Ada Data" 
                     PageSize="5" ShowHeaderWhenEmpty="true" OnPageIndexChanging="gridJenis_PageIndexChanging"
                     OnRowCommand="gridJenis_RowCommand" OnSorting="gridJenis_Sorting" OnSelectedIndexChanged="gridJenis_SelectedIndexChanged"
                     OnRowDeleting="gridJenis_RowDeleting" OnRowDataBound="gridJenis_RowDataBound">
@@ -154,15 +154,15 @@
                                 <%# Container.DataItemIndex +1 %>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:BoundField DataField="namaJenis"  HeaderStyle-CssClass="table-bordered" HeaderText="Nama Jenis"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="namaJenis" >
+                        <asp:BoundField DataField="nama_jenis"  HeaderStyle-CssClass="table-bordered" HeaderText="Nama Jenis"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="nama_jenis" >
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="20%"  CssClass="table table-bordered table-striped" />
                         </asp:BoundField>
                         <asp:BoundField DataField="deskripsi"  HeaderStyle-CssClass="table-bordered" HeaderText="Deskripsi"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="deskripsi" >
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="60%"  CssClass="table table-bordered table-striped" />
                         </asp:BoundField>
-                        <asp:BoundField DataField="statusJenis" ItemStyle-CssClass="hiddencol" HeaderText="Status" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
+                        <asp:BoundField DataField="status" ItemStyle-CssClass="hiddencol" HeaderText="Status" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
                         <asp:BoundField DataField="nama" ItemStyle-CssClass="hiddencol" HeaderText="Status" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
-                        <asp:BoundField DataField="CreateDate" ItemStyle-CssClass="hiddencol" HeaderText="Status" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
+                        <asp:BoundField DataField="createDate" ItemStyle-CssClass="hiddencol" HeaderText="Status" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
                         <asp:BoundField DataField="nama" ItemStyle-CssClass="hiddencol" HeaderText="Status" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
                         <asp:BoundField DataField="modifiedDate" ItemStyle-CssClass="hiddencol" HeaderText="Status" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
 
@@ -180,7 +180,7 @@
                                  <asp:LinkButton runat="server" ID="linkAktif" CommandName="Delete" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
                                 ToolTip="linkAktif"><span class="far fa-check-circle" onclick="return confirm('Are you sure you want to delete this item?');">Aktif</span></asp:LinkButton>
                                 
-                                <asp:LinkButton ID="lnkViewDetails" runat="server" CommandArgument='<%# Eval("IDJenis")%>' 
+                                <asp:LinkButton ID="lnkViewDetails" runat="server" CommandArgument='<%# Eval("ID_SP")%>' 
                                 OnClick="lnkViewDetails_Click" Text="Detail" style="margin-left:20px"  CssClass="far fa-check-square"/>
                             </ItemTemplate>
                         </asp:TemplateField>
@@ -200,11 +200,11 @@
 
     <asp:Panel ID="pnlGridViewDetails" runat="server" Width="490px" Height="400px"
         CssClass="pnlBackGround">
-
+         <br /><br />
         <asp:label style="margin-left:20px;" runat="server" class="col-sm-3 col-form-label text-label" Font-bold="true">DETAIL</asp:label>
         <br /><br />
         <asp:label style="margin-left:20px" runat="server" class="col-sm-3 col-form-label text-label">Nama</asp:label>
-        <asp:Label ID="namaJenis" runat="server" Text="nama"></asp:Label>
+        <asp:Label ID="nama_jenis" runat="server" Text="nama"></asp:Label>
         <br /><br />
         <asp:label style="margin-left:20px" runat="server" class="col-sm-3 col-form-label text-label">Dibuat Oleh</asp:label>
         <asp:Label ID="CreateBy" runat="server" Text="CreateBy"></asp:Label>
@@ -225,7 +225,6 @@
     <asp:ModalPopupExtender ID="GridViewDetails" runat="server"  TargetControlID="btnDummy"
         PopupControlID="pnlGridViewDetails" BackgroundCssClass="modalBackground"></asp:ModalPopupExtender>
     
-  
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="footer" Runat="Server">
 </asp:Content>

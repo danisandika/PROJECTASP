@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Customer/Cust.master" AutoEventWireup="true" CodeFile="Transaksi.aspx.cs" Inherits="Customer_Input" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Customer/Cust.master" AutoEventWireup="true" CodeFile="Pembelian.aspx.cs" Inherits="Customer_Pembelian" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
   <meta charset="utf-8">
@@ -38,72 +38,17 @@
             <li class="active"><a href="#intro">Home</a></li>
             <li><a href="#service">Transaksi Penjualan</a></li>
             <li><a href="#doctor">Pembayaran</a></li>
-            <li><a href="#facilities">Pembelian</a></li>
+            <li><a href="Pembelian.aspx">Pembelian</a></li>
             <li><a href="#pricing">Antrian</a></li>
             
           </ul>
         </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Section1" Runat="Server">
-    <section id="intro" class="intro">
+     <section id="intro" class="intro">
       <div class="intro-content">
         <div class="container">
-          <div class="row">
-            <div class="col-lg-5">
-              <div class="wow fadeInDown" data-wow-offset="0" data-wow-delay="0.1s">
-                <h2 class="h-ultra">Transaksi Penjualan</h2>
-              <div class="card card-primary">
-                <div class="card-body">
-                  <div class="row form-group">
-                    <div class="col-md-3">
-                    <label for="exampleInputEmail1">Tanggal Order</label>
-                    </div>
-                      <div class="col-md-5">
-                    <asp:TextBox ID="txtnamaJenis" CssClass="form-control" runat="server" TextMode="Date"/>
-                  </div>
-                </div>
-
-                  <div class="row form-group">
-                    <div class="col-md-3">
-                    <label for="exampleInputPassword1">Nomor Antrian</label>
-                    </div>
-                    <div class="col-md-5">
-                    <asp:TextBox ID="txtDeskripsi" CssClass="form-control" runat="server" />
-                  </div>
-                </div>
-
-                <div class="row form-group">
-                    <div class="col-md-3">
-                    <label for="exampleInputPassword1">Resep Dokter</label>
-                    </div>
-                    <div class="col-md-5">
-                   <asp:RadioButton ID="rbAda" runat="server" Text="Ada" />
-                    <asp:RadioButton ID="rbTidak" runat="server" Text="Tidak Ada" />
-                  </div>
-                </div>
-
-                <div class="row form-group">
-                    <div class="col-md-3">
-                    <label for="exampleInputPassword1">Jumlah</label>
-                    </div>
-                    <div class="col-md-5">
-                    <asp:TextBox ID="txtJumlah" CssClass="form-control" runat="server" />
-                  </div>
-                </div>
-
-                 <div class="row form-group">
-                    <div class="col-md-3">
-                    <label for="exampleInputPassword1">Total Harga</label>
-                    </div>
-                    <div class="col-md-5">
-                    <asp:TextBox ID="txtHarga" CssClass="form-control" runat="server" />
-                  </div>
-                </div>
-
-             </div> 
-            </div>
-             </div>
-            </div>
+          
             <div class="col-lg-7">
               <div class="wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.2s">
                <section class="content" id="secView" runat="server">
@@ -113,7 +58,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Table Obat - Obat</h3>
+                <h3 class="card-title">Table Obat</h3>
                    <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
                 <div class="row form-group">
@@ -197,6 +142,68 @@
         </section>
               </div>
             </div>
+
+            <div class="row">
+            <div class="col-lg-5">
+            <div class="well well-trans">
+                <div class="wow fadeInRight" data-wow-delay="0.1s">
+
+              <div class="wow fadeInDown" data-wow-offset="0" data-wow-delay="0.1s">
+                <h2 class="h-ultra">Transaksi Pembelian</h2>
+              <div class="card card-primary">
+                <div class="card-body">
+                  <div class="row form-group">
+                    <div class="col-md-3">
+                    <label for="exampleInputEmail1">Tanggal Order</label>
+                    </div>
+                      <div class="col-md-5">
+                    <asp:TextBox ID="txtnamaJenis" CssClass="form-control" runat="server" TextMode="Date"/>
+                  </div>
+                </div>
+
+                  <div class="row form-group">
+                    <div class="col-md-3">
+                    <label for="exampleInputPassword1">Nomor Antrian</label>
+                    </div>
+                    <div class="col-md-5">
+                    <asp:TextBox ID="txtDeskripsi" CssClass="form-control" runat="server" />
+                  </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-md-3">
+                    <label for="exampleInputPassword1">Resep Dokter</label>
+                    </div>
+                    <div class="col-md-5">
+                   <asp:RadioButton ID="rbAda" runat="server" Text="Ada" />
+                    <asp:RadioButton ID="rbTidak" runat="server" Text="Tidak Ada" />
+                  </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-md-3">
+                    <label for="exampleInputPassword1">Jumlah</label>
+                    </div>
+                    <div class="col-md-5">
+                    <asp:TextBox ID="txtJumlah" CssClass="form-control" runat="server" />
+                  </div>
+                </div>
+
+                 <div class="row form-group">
+                    <div class="col-md-3">
+                    <label for="exampleInputPassword1">Total Harga</label>
+                    </div>
+                    <div class="col-md-5">
+                    <asp:TextBox ID="txtHarga" CssClass="form-control" runat="server" />
+                  </div>
+                </div>
+            </div>
+            </div>
+
+             </div> 
+            </div>
+             </div>
+            </div>
           </div>
        
       </div>
@@ -236,130 +243,8 @@
 </asp:Content>
 <asp:Content ID="Content9" ContentPlaceHolderID="section7" Runat="Server">
 </asp:Content>
-<asp:Content ID="Content11" ContentPlaceHolderID="footer" Runat="Server">
-     <footer>
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-6 col-md-4">
-            <div class="wow fadeInDown" data-wow-delay="0.1s">
-              <div class="widget">
-                <h5>About Mustika farma</h5>
-                <p>
-				Mustika Farma is one of the solutions to the purchase of standard medicines or non-prescription medicines that can be purchased via the website</p>
-              </div>
-            </div>
-            <div class="wow fadeInDown" data-wow-delay="0.1s">
-              <div class="widget">
-                <h5>Information</h5>
-                <ul>
-                  <li><a href="#">Home</a></li>
-                  <li><a href="#">Laboratory</a></li>
-                  <li><a href="#">Medical treatment</a></li>
-                  <li><a href="#">Terms & conditions</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-md-4">
-            <div class="wow fadeInDown" data-wow-delay="0.1s">
-              <div class="widget">
-                <h5>Mustika farma</h5>
-                <p>
-					Hi Mustika farma Customers!
-					We will be happy to assist you in finding health products
-				</p>
-                <ul>
-                  <li>
-                    <span class="fa-stack fa-lg">
-									<i class="fa fa-circle fa-stack-2x"></i>
-									<i class="fa fa-calendar-o fa-stack-1x fa-inverse"></i>
-								</span> Monday - Saturday, 8am to 10pm
-                  </li>
-                  <li>
-                    <span class="fa-stack fa-lg">
-									<i class="fa fa-circle fa-stack-2x"></i>
-									<i class="fa fa-phone fa-stack-1x fa-inverse"></i>
-								</span> +62 0888 904 711
-                  </li>
-                  <li>
-                    <span class="fa-stack fa-lg">
-									<i class="fa fa-circle fa-stack-2x"></i>
-									<i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
-								</span> MustikaFarma@gmail.com
-                  </li>
-
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-md-4">
-            <div class="wow fadeInDown" data-wow-delay="0.1s">
-              <div class="widget">
-                <h5>Our location</h5>
-                <p>Jl Kakak Tua Putih,Cadika,Muara Bungo,Jambi,Indonesia 14430</p>
-
-              </div>
-            </div>
-            <div class="wow fadeInDown" data-wow-delay="0.1s">
-              <div class="widget">
-                <h5>Follow us</h5>
-                <ul class="company-social">
-                  <li class="social-facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                  <li class="social-twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                  <li class="social-google"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                  <li class="social-vimeo"><a href="#"><i class="fa fa-vimeo-square"></i></a></li>
-                  <li class="social-dribble"><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="sub-footer">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-6 col-md-6 col-lg-6">
-              <div class="wow fadeInLeft" data-wow-delay="0.1s">
-                <div class="text-left">
-                  <p>&copy;Copyright - Mustika Farma. All rights reserved.</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-md-6 col-lg-6">
-              <div class="wow fadeInRight" data-wow-delay="0.1s">
-                <div class="text-right">
-                  <div class="credits">
-                    <!--
-                      All the links in the footer should remain intact. 
-                      You can delete the links only if you purchased the pro version.
-                      Licensing information: https://bootstrapmade.com/license/
-                      Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Medicio
-                    -->
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-
+<asp:Content ID="Content10" ContentPlaceHolderID="footer" Runat="Server">
 </asp:Content>
-<asp:Content ID="Content10" ContentPlaceHolderID="ContentPlaceHolder2" Runat="Server">
-     <a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
-
-  <!-- Core JavaScript Files -->
-  <script src="Medicio/js/jquery.min.js"></script>
-  <script src="Medicio/js/bootstrap.min.js"></script>
-  <script src="Medicio/js/jquery.easing.min.js"></script>
-  <script src="Medicio/js/wow.min.js"></script>
-  <script src="Medicio/js/jquery.scrollTo.js"></script>
-  <script src="Medicio/js/jquery.appear.js"></script>
-  <script src="Medicio/js/stellar.js"></script>
-  <script src="Medicio/plugins/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
-  <script src="Medicio/js/owl.carousel.min.js"></script>
-  <script src="Medicio/js/nivo-lightbox.min.js"></script>
-  <script src="Medicio/js/custom.js"></script>
-
+<asp:Content ID="Content11" ContentPlaceHolderID="ContentPlaceHolder2" Runat="Server">
 </asp:Content>
 

@@ -210,7 +210,9 @@ public partial class Administrator_infokesehatan : System.Web.UI.Page
 
     protected void EditbtnCancel_Click(object sender, EventArgs e)
     {
-
+        secView.Visible = true;
+        secEdit.Visible = false;
+        secAdd.Visible = false;
     }
 
     protected void ddlStatusView_TextChanged(object sender, EventArgs e)

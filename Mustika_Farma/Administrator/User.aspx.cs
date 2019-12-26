@@ -45,7 +45,7 @@ public partial class Administrator_User : System.Web.UI.Page
     {
         DateTime CreateDate = DateTime.Now;
         DateTime tglLahir = Convert.ToDateTime(txtTanggal.Text);
-        int CreateBy = 1;
+        
 
         SqlCommand com = new SqlCommand();
         com.Connection = conn;
@@ -60,7 +60,7 @@ public partial class Administrator_User : System.Web.UI.Page
         com.Parameters.AddWithValue("@username", txtUsername.Text);
         com.Parameters.AddWithValue("@password", txtPass.Text);
         com.Parameters.AddWithValue("@createDate", CreateDate);
-        com.Parameters.AddWithValue("@createBy", CreateBy);
+        com.Parameters.AddWithValue("@createBy", Session["creaby"]);
         com.Parameters.AddWithValue("@IDROle", ddlRole.SelectedValue);
         conn.Open();
 
@@ -71,23 +71,24 @@ public partial class Administrator_User : System.Web.UI.Page
     protected void EditbtnSave_Click(object sender, EventArgs e)
     {
         DateTime CreateDate = DateTime.Now;
-        DateTime tglLahir = Convert.ToDateTime(txtTanggalE.Text);
         DateTime ModifiedDate = DateTime.Now;
+        DateTime tglLahir = Convert.ToDateTime(txtTanggalE.Text);
 
         SqlCommand com = new SqlCommand();
         com.Connection = conn;
         com.CommandText = "sp_UpdateUser";
         com.CommandType = CommandType.StoredProcedure;
+        com.Parameters.AddWithValue("@IDUser",lblID.Text);
         com.Parameters.AddWithValue("@Nama", txtNamaE.Text);
         com.Parameters.AddWithValue("@Alamat", txtAlamatE.Text);
         com.Parameters.AddWithValue("@NoTelp", txtNoTelpE.Text);
-        com.Parameters.AddWithValue("@TglLahir", tglLahir);
+        com.Parameters.AddWithValue("@TglLahir", txtTanggalE.Text);
         com.Parameters.AddWithValue("@Email", txtEmailE.Text);
         com.Parameters.AddWithValue("@status", 1);
         com.Parameters.AddWithValue("@username", txtUsernameE.Text);
         com.Parameters.AddWithValue("@password", txtPasswordE.Text);
         com.Parameters.AddWithValue("@ModifiedDate", ModifiedDate);
-        com.Parameters.AddWithValue("@ModifiedBy", 1);
+        com.Parameters.AddWithValue("@ModifiedBy",Session["creaby"]);
 
         conn.Open();
 
@@ -170,62 +171,7 @@ public partial class Administrator_User : System.Web.UI.Page
             secEdit.Visible = true;
             secView.Visible = false;
         }
-        //else if (e.CommandName == "cmDelete")
-        //{
-        //    String id = gridUser.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
-        //    lblID.Text = id;
-        //    SqlCommand com = new SqlCommand();
-        //    com.Connection = conn;
-        //    com.CommandText = "sp_DeleteUser";
-        //    com.CommandType = CommandType.StoredProcedure;
-        //    com.Parameters.AddWithValue("@IDUser", lblID.Text);
-
-        //    conn.Open();
-
-        //    int result = Convert.ToInt32(com.ExecuteNonQuery());
-        //    conn.Close();
-        //    loadData();
-
-
-        //    secView.Visible = true;
-        //    secEdit.Visible = false;
-        //    secAdd.Visible = false;
-        //}
-        //else if (e.CommandName == "CMActivate")
-        //{
-        //    {
-        //        foreach (GridViewRow rw in gridUser.Rows)
-        //        {
-        //            Button btn = rw.FindControl("btnActive") as Button;
-        //            if (btn.Text == "DeActivate")
-        //            {
-        //                btn.Text = "Activate";
-        //                String id = gridUser.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
-        //                lblID.Text = id;
-        //                SqlCommand com = new SqlCommand();
-        //                com.Connection = conn;
-        //                com.CommandText = "sp_DeleteUser";
-        //                com.CommandType = CommandType.StoredProcedure;
-        //                com.Parameters.AddWithValue("@IDUser", lblID.Text);
-
-        //                conn.Open();
-
-        //                int result = Convert.ToInt32(com.ExecuteNonQuery());
-        //                conn.Close();
-        //                loadData();
-
-
-        //                secView.Visible = true;
-        //                secEdit.Visible = false;
-        //                secAdd.Visible = false;
-        //            }
-        //            else if (btn.Text == "Activate")
-        //            {
-        //                btn.Text = "DeActivate";
-        //            }
-        //        }
-        //    }
-
+       
         }
       
 

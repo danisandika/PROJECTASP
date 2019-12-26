@@ -192,7 +192,7 @@ public partial class Administrator_Supplier : System.Web.UI.Page
 
             param = insertCmd.Parameters.Add("@CreateBy", SqlDbType.Int);
             param.Direction = ParameterDirection.Input;
-            param.Value = Convert.ToInt16(nilai);
+            param.Value = Convert.ToInt16(Session["creaby"]);
             // masih diakalin, karena belum buat login
 
 
@@ -202,11 +202,11 @@ public partial class Administrator_Supplier : System.Web.UI.Page
 
             param = insertCmd.Parameters.Add("@ModifiedBy", SqlDbType.Int);
             param.Direction = ParameterDirection.Input;
-            param.Value = Convert.ToInt16(nilai);
+            param.Value = "NULL";
 
             param = insertCmd.Parameters.Add("@ModifiedDate", SqlDbType.Date);
             param.Direction = ParameterDirection.Input;
-            param.Value = Convert.ToDateTime(txtTanggal.Text);
+            param.Value = "NULL";
             con.Open();
 
             insertCmd.ExecuteNonQuery();
@@ -244,7 +244,7 @@ public partial class Administrator_Supplier : System.Web.UI.Page
         com.Parameters.AddWithValue("@Email", txtEmailE.Text);
         com.Parameters.AddWithValue("@NoHp", txtNoTelpE.Text);
         com.Parameters.AddWithValue("@Status",status);
-        com.Parameters.AddWithValue("@ModifiedBy",nilai);
+        com.Parameters.AddWithValue("@ModifiedBy", Session["creaby"]);
         com.Parameters.AddWithValue("@ModifiedDate", Convert.ToDateTime(DateTime.Now));
         con.Open();
         int result = Convert.ToInt32(com.ExecuteNonQuery());

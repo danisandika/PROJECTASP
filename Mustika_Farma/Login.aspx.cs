@@ -23,6 +23,7 @@ public partial class Login : System.Web.UI.Page
         String nextPage = null;
         FormsAuthenticationTicket ticket = null;
         string role;
+        string nama;
         HttpCookie cookie = null;
         String encryptedStr = null;
 
@@ -31,14 +32,17 @@ public partial class Login : System.Web.UI.Page
         {
             //mengambil role dari user
             role = "";
+            nama = "";
             DataSet ds = new DataSet();
             ds = GetRoles(txtNama.Text);
 
             foreach (DataRow row in ds.Tables[0].Rows)
             {
                 role = role + row["idrole"].ToString() + ",";
+                nama = nama + row["iduser"].ToString();
             }
             role = role.Remove(role.Length - 1, 1);
+            Session["creaby"] = nama;
 
 
             //user crendentials were found in the database sonotify the system
@@ -55,35 +59,34 @@ public partial class Login : System.Web.UI.Page
 
             encryptedStr = FormsAuthentication.Encrypt(ticket);
 
-            //add the encrypted authentication ticket in the cookies collection
-            //and if the cookie is to be persisted, set the expiration for
-            // 10 years from now. Otherwise do not set the expiration or the
-            // cookie willbe created as a persistent cookie.
-
-
+          
             cookie = new HttpCookie(FormsAuthentication.FormsCookieName,
                 encryptedStr);
-            //cookie.Expired = ticket.IssueDate.AddYears(10);
-            //cookie.Expired = ticket.IssueDate.AddMinutes(15);
             Response.Cookies.Add(cookie);
 
             if (Request.QueryString[QS_RETURN_URL] != null)
             {
-                //user attempted to access a page without logging in so redirect
-                //them to their originality requested page
-                Response.Cookies["Guest"].Value = txtNama.Text;
-                Response.Cookies["Guest"].Expires = DateTime.Now.AddMinutes(15);
-                Response.Cookies["message"].Value = txtNama.Text;
-                nextPage = Request.QueryString[QS_RETURN_URL];
-
+                 nextPage = Request.QueryString[QS_RETURN_URL];
             }
-            else
+            if (role == "1")
             {
                 //user came straight to the login page so just send them to the 
                 //homepage
                 nextPage = "Administrator/Dashboard.aspx";
 
             }
+            else if (role == "3")
+            {
+                nextPage = "Customer/Transaksi.aspx";
+            }
+            else
+            {
+                //user came straight to the login page so just send them to the 
+                //homepage
+                nextPage = "Customer/Transaksi.aspx";
+
+            }
+
             Response.Redirect(nextPage, true);
         }
         else
@@ -127,7 +130,7 @@ public partial class Login : System.Web.UI.Page
     private DataSet GetRoles(string username)
     {
         DataSet ds = new DataSet();
-        string cmd = "SELECT IDRole FROM [User] WHERE username = '" + username + "'";
+        string cmd = "SELECT idUser,idrole FROM [User] WHERE username = '" + username + "'";
         try
         {
             //buat object connection

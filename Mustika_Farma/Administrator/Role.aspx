@@ -119,7 +119,7 @@
                 <asp:GridView ID="gridRole" runat="server" CssClass="table table-hover"
                     AllowPaging="true"
                     AllowSorting="true" AutoGenerateColumns="false" DataKeyNames="idRole" EmptyDataText="Tidak Ada Data" 
-                    PageSize="5" PagerStyle-CssClass="pagination" ShowHeaderWhenEmpty="true" OnPageIndexChanging="gridJenis_PageIndexChanging"
+                    PageSize="5"  ShowHeaderWhenEmpty="true" OnPageIndexChanging="gridJenis_PageIndexChanging"
                     OnRowCommand="gridJenis_RowCommand" OnSorting="gridJenis_Sorting" OnSelectedIndexChanged="gridJenis_SelectedIndexChanged" >
                     <PagerSettings Mode="NumericFirstLast" FirstPageText="<<" LastPageText=">>" />
                     <Columns>

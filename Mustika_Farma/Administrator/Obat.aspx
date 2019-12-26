@@ -188,13 +188,20 @@
                   </div>
                 </div>
               </div>
-                <div class="card-body table-responsive p-0 col-12">
+                <%--<div class="card-body table-responsive p-0 col-12">--%>
                 
-                <asp:GridView ID="gridObat" runat="server" CssClass="table table-hover"
+                <asp:GridView ID="gridObat" runat="server" 
                     AllowPaging="true"
-                    AllowSorting="true" AutoGenerateColumns="false" DataKeyNames="IDObat" EmptyDataText="Tidak Ada Data" 
-                    PageSize="5" PagerStyle-CssClass="pagination" ShowHeaderWhenEmpty="true" OnPageIndexChanging="gridObat_PageIndexChanging"
-                    OnRowCommand="gridObat_RowCommand" OnSorting="gridObat_Sorting" OnSelectedIndexChanged="gridObat_SelectedIndexChanged" 
+                    AllowSorting="true"
+                     AutoGenerateColumns="false"
+                     DataKeyNames="IDObat"
+                     EmptyDataText="Tidak Ada Data" 
+                    PageSize="5"
+                     ShowHeaderWhenEmpty="true"
+                     OnPageIndexChanging="gridObat_PageIndexChanging"
+                    GridLines="Both" 
+                    CssClass="table table-striped table-bordered table-hover"
+                     OnRowCommand="gridObat_RowCommand" OnSorting="gridObat_Sorting" OnSelectedIndexChanged="gridObat_SelectedIndexChanged" 
                     OnRowDeleting="gridObat_RowDeleting" OnRowDataBound="gridObat_RowDataBound">
                     <PagerSettings Mode="NumericFirstLast" FirstPageText="<<" LastPageText=">>" />
                     <Columns>
@@ -238,6 +245,7 @@
                         <asp:ImageField ControlStyle-Width="100" HeaderStyle-CssClass="table-bordered"  ControlStyle-Height = "100" DataImageUrlField ="Foto" HeaderText="Foto"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" >
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="15%"  CssClass="table table-bordered table-striped" />
                        </asp:ImageField>
+
                         <asp:TemplateField HeaderText="Aksi" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="15%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
@@ -256,12 +264,13 @@
                                 OnClick="lnkViewDetails_Click" Text="Detail" style="margin-left:20px"  CssClass="far fa-check-square"/>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:BoundField DataField="CreateBy" ItemStyle-CssClass="hiddencol" HeaderText="Creby" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
-                        <asp:BoundField DataField="CreateDate" ItemStyle-CssClass="hiddencol" HeaderText="createDate" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
-                        <asp:BoundField DataField="ModifiedBy" ItemStyle-CssClass="hiddencol" HeaderText="ModifiedBy" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
+                        <asp:BoundField DataField="Nama" ItemStyle-CssClass="hiddencol" HeaderText="Creby" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
+                        <asp:BoundField DataField="createDate" ItemStyle-CssClass="hiddencol" HeaderText="createDate" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
+                        <asp:BoundField DataField="Nama" ItemStyle-CssClass="hiddencol" HeaderText="ModifiedBy" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
                         <asp:BoundField DataField="ModifiedDate" ItemStyle-CssClass="hiddencol" HeaderText="ModifiedDate" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
                         <asp:BoundField DataField="status" ItemStyle-CssClass="hiddencol" HeaderText="Status" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
-                    </Columns>
+                        <asp:BoundField DataField="foto" ItemStyle-CssClass="hiddencol" HeaderText="Status" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
+                        </Columns>
                 </asp:GridView>
 
                 </div>
@@ -316,14 +325,7 @@
                   </div>
                 </div>
                     
-                   <div class="row form-group">
-                   <div class="col-md-3">
-                        <label for="Ket">Satuan</label>
-                    </div>
-                    <div class="col-md-5">
-                   <asp:TextBox ID="txtSatuanE" CssClass="form-control" runat="server" TextMode="MultiLine" />
-                  </div>
-                   </div>
+                   
                     
                   <div class="row form-group">
                     <div class="col-md-3">
@@ -364,10 +366,10 @@
                    <label for="Ket">Harga</label>
                     </div>
                     <div class="col-md-5">
-                   <asp:TextBox ID="txtHargaE" CssClass="form-control" runat="server" TextMode="Number" />
+                   <asp:TextBox ID="txtHargaEdit" CssClass="form-control" runat="server"  />
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
                         runat="server"
-                        ControlToValidate="txtHargaE"
+                        ControlToValidate="txtHargaEdit"
                         ForeColor="Red"
                         ValidationGroup="numb"
                         ErrorMessage="Isi data dengan benar"></asp:RequiredFieldValidator>
@@ -387,11 +389,23 @@
                     <div class="col-md-3">
                         <label class="col-sm-3 col-form-label text-label">Foto</label>
                     </div>
-                    <div class="col-sm-9">
+                 </div>
+
+                <div class="form-group row align-items-center">
+                        <label class="col-sm-3 col-form-label text-label"></label>
+                        <div class="col-sm-9">
+                            <div class="input-group">
+                                <asp:Image ID="editfoto" runat="server" style="height:200px;" />
+                            </div>
+                        </div>
+                    </div>
+
+                <div id="EditFotoView" runat="server"> 
+                   <div class="col-sm-9">
                    <div class="input-group">
-                  <figure class="img-upload-preview">
+                    <figure class="img-upload-preview">
                     <asp:FileUpload type="file" class="form-control form-control-user" ID="editUploadFile" runat="server" onchange="imgEdit();" />
-                  </figure>
+                    </figure>
                     </div>
                         <asp:RequiredFieldValidator
                                 id="RequiredFieldValidator18"
@@ -401,15 +415,10 @@
                                 Runat="server" />
                      </div>
                      </div>
-                    <div class="form-group row align-items-center">
-                        <label class="col-sm-3 col-form-label text-label"></label>
-                        <div class="col-sm-9">
-                            <div class="input-group">
-                                <asp:Image ID="editfoto" runat="server" style="height:200px;" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    
+                    <asp:Button ID="btnUbahFoto"  CssClass="btn btn-dark" runat="server" Text="Ubah Foto" OnClick="btnUbahFoto_Click"/>
+               </div>
+                        
                 <!-- /.card-body -->
 
                 <div class="card-footer">
@@ -423,12 +432,11 @@
           </div>
         </section>
 
-         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
     <asp:Panel ID="pnlGridViewDetails" runat="server" Width="490px" Height="400px"
         CssClass="pnlBackGround">
 
-        <br /><br />
         <asp:label style="margin-left:20px;" runat="server" class="col-sm-3 col-form-label text-label" Font-bold="true">DETAIL</asp:label>
         <br /><br />
         

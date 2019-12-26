@@ -203,7 +203,7 @@
                    <asp:TextBox ID="txtNoTelpE" CssClass="form-control" runat="server" TextMode="Number" />
                    <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" 
                          ControlToValidate="txtNoTelpE"
-                         ForeColor="Red" ValidationExpression="(\d[0-9]{12,13})$"
+                         ForeColor="Red" ValidationExpression="(\d[0-9]{10,13})$"
                          ErrorMessage = "Masukan minimal 12 Digit nomor telephone"/>     
                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2"
                         runat="server"
@@ -211,7 +211,7 @@
                         ForeColor="Red"
                         ValidationGroup="numb"
                         ErrorMessage="Isi data dengan benar"></asp:RequiredFieldValidator>
-                  </div>
+                  </div>    
                 </div>
 
                  <div class="row form-group">
@@ -325,7 +325,7 @@
                 <asp:GridView ID="gridUser" runat="server" CssClass="table table-hover"
                     AllowPaging="true"
                     AllowSorting="true" AutoGenerateColumns="false" DataKeyNames="IDUser" EmptyDataText="Tidak Ada Data" 
-                    PageSize="5" PagerStyle-CssClass="pagination" ShowHeaderWhenEmpty="true" OnPageIndexChanging="gridUser_PageIndexChanging"
+                    PageSize="5" ShowHeaderWhenEmpty="true" OnPageIndexChanging="gridUser_PageIndexChanging"
                     OnRowCommand="gridUser_RowCommand" OnSorting="gridUser_Sorting" OnSelectedIndexChanged="gridUser_SelectedIndexChanged"
                    OnRowDataBound="gridUser_RowDataBound" OnRowDeleting="gridUser_RowDeleting"
                     >
@@ -357,9 +357,9 @@
                         <asp:BoundField DataField="Username" ItemStyle-CssClass="hiddencol" HeaderText="Username" HeaderStyle-CssClass="hiddencol" NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="username" />
                         <asp:BoundField DataField="Password" ItemStyle-CssClass="hiddencol" HeaderText="Password" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="password" />
                         <asp:BoundField DataField="status" ItemStyle-CssClass="hiddencol" HeaderText="Status" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
-                        <asp:BoundField DataField="CreateBy" ItemStyle-CssClass="hiddencol" HeaderText="Creby" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
+                        <asp:BoundField DataField="nama" ItemStyle-CssClass="hiddencol" HeaderText="Creby" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
                         <asp:BoundField DataField="CreateDate" ItemStyle-CssClass="hiddencol" HeaderText="createDate" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
-                        <asp:BoundField DataField="ModifiedBy" ItemStyle-CssClass="hiddencol" HeaderText="ModifiedBy" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
+                        <asp:BoundField DataField="nama" ItemStyle-CssClass="hiddencol" HeaderText="ModifiedBy" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
                         <asp:BoundField DataField="ModifiedDate" ItemStyle-CssClass="hiddencol" HeaderText="ModifiedDate" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
                         
                          <asp:BoundField DataField="Deskripsi" HeaderStyle-CssClass="table-bordered" HeaderText="ID Role"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="IDRole" >

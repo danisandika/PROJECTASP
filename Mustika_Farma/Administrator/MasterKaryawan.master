@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage_Admin.master.cs" Inherits="MasterPage_Admin" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterKaryawan.master.cs" Inherits="Administrator_MasterKaryawan" %>
 
 <!DOCTYPE html>
 
@@ -119,9 +119,9 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="Dashboard.aspx" class="brand-link">
-      <img src="../AdminLTE/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+      <img src="../AdminLTE/dist/img/karyawan.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">Administrator</span>
+        <asp:ContentPlaceHolder ID="namaKaryawan" runat="server"></asp:ContentPlaceHolder>
     </a>
 
     <!-- Sidebar -->
@@ -149,58 +149,35 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="Obat.aspx" class="nav-link">
-              <i class="nav-icon fas fa-capsules"></i>
-              <p>Obat-Obatan</p>
+            <a href="../Karyawan/Pembelian.aspx" class="nav-link">
+              <i class="nav-icon fas fa-shopping-bag"></i>
+              <p>Pembelian</p>
             </a>
           </li>
 		  
 		 <li class="nav-item">
-            <a href="jenisObat.aspx" class="nav-link">
-              <i class="nav-icon fas fa-stethoscope"></i>
-              <p>Jenis Obat</p>
+            <a href="../Karyawan/penjualan.aspx" class="nav-link">
+              <i class="nav-icon fas fa-shopping-cart"></i>
+              <p>Transaksi Penjualan</p>
             </a>
           </li>
-         <%--  <li class="nav-item">
-            <a href="Lokasi_penyimpanan.aspx" class="nav-link">
-              <i class="nav-icon fas fa-table"></i>
-              <p>Lokasi Penyimpanan</p>
-            </a>
-          </li>--%>
+
 		  <li class="nav-item">
-            <a href="User.aspx" class="nav-link">
-              <i class="nav-icon fas  fa-user-md"></i>
-              <p>User</p>
+            <a href="../Karyawan/Pembayaran.aspx" class="nav-link">
+              <i class="nav-icon fas fa fa-money-bill"></i>
+              <p>Pembayaran</p>
             </a>
           </li>
 		   <li class="nav-item">
             <a href="Supplier.aspx" class="nav-link">
-              <i class="nav-icon fas  fa-user-plus"></i>
-              <p>Supplier</p>
+              <i class="nav-icon fas fa-sign-in-alt"></i>
+              <p>Antrian</p>
             </a>
           </li>
            <li class="nav-item">
-            <a href="UMember.aspx" class="nav-link">
+            <a href="../Karyawan/profile.aspx" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
-              <p>User Member</p>
-            </a>
-          </li>
-            <li class="nav-item">
-            <a href="Role.aspx" class="nav-link">
-              <i class="nav-icon fas fa-users-cog"></i>
-              <p>Role</p>
-            </a>
-          </li>
-            <li class="nav-item">
-            <a href="Dokter.aspx" class="nav-link">
-              <i class="nav-icon fas fa-plus-square"></i>
-              <p>Dokter</p>
-            </a>
-          </li>
-           <li class="nav-item">
-            <a href="jenisDokter.aspx" class="nav-link">
-              <i class="nav-icon fas fa-medkit"></i>
-              <p>Jenis Dokter</p>
+              <p>Profile User</p>
             </a>
           </li>
           </ul> 

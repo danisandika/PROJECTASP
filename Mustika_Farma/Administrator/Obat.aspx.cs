@@ -20,6 +20,7 @@ public partial class Administrator_Obat : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
+            EditFotoView.Visible = false;
             loadData();
             secAdd.Visible = false;
             secEdit.Visible = false;
@@ -96,36 +97,16 @@ public partial class Administrator_Obat : System.Web.UI.Page
             txtNamaObatE.Text = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[1].Text;
             txtJumlahE.Text = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[3].Text;
             txtKetE.Text = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[4].Text;
-            txtSatuanE.Text = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[6].Text;
-            txtHargaE.Text = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[7].Text;
+            ddlSatuanE.Text = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[6].Text;
+            txtHargaEdit.Text = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[7].Text;
             txtExpiredE.Text = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[8].Text;
-            editfoto.ImageUrl = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[9].Text;
+            editfoto.ImageUrl = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[16].Text;
 
             secAdd.Visible = false;
             secEdit.Visible = true;
             secView.Visible = false;
         }
-        //else if (e.CommandName == "cmDelete")
-        //{
-        //    String id = gridObat.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
-        //    lblID.Text = id;
-        //    SqlCommand com = new SqlCommand();
-        //    com.Connection = conn;
-        //    com.CommandText = "sp_DeleteObat";
-        //    com.CommandType = CommandType.StoredProcedure;
-        //    com.Parameters.AddWithValue("@IDObat", lblID.Text);
-
-
-        //    conn.Open();
-
-        //    int result = Convert.ToInt32(com.ExecuteNonQuery());
-        //    conn.Close();
-        //    loadData();
-
-        //    secView.Visible = true;
-        //    secEdit.Visible = false;
-        //    secAdd.Visible = false;
-        //}
+      
     }
 
     protected void gridObat_Sorting(object sender, GridViewSortEventArgs e)
@@ -189,8 +170,7 @@ public partial class Administrator_Obat : System.Web.UI.Page
 
     protected void EditbtnSave_Click1(object sender, EventArgs e)
     {
-        string filename = Guid.NewGuid() + System.IO.Path.GetFileName(editUploadFile.FileName).Substring(System.IO.Path.GetFileName(editUploadFile.FileName).Length - 4);
-        editUploadFile.SaveAs(Server.MapPath("obat_obat/") + filename);
+ 
 
         DateTime CreateDate = DateTime.Now;
         DateTime expired = Convert.ToDateTime(txtExpiredE.Text);
@@ -198,31 +178,67 @@ public partial class Administrator_Obat : System.Web.UI.Page
 
         SqlCommand com = new SqlCommand();
         com.Connection = conn;
-        com.CommandText = "[sp_UpdateObat]";
-        com.CommandType = CommandType.StoredProcedure;
-        com.Parameters.AddWithValue("@IDObat", lblID.Text);
-        com.Parameters.AddWithValue("@namaObat", txtNamaObatE.Text);
-        com.Parameters.AddWithValue("@IDJenis", ddlJenisObatE.SelectedValue);
-        com.Parameters.AddWithValue("@Keterangan", txtKetE.Text);
-        com.Parameters.AddWithValue("@IDLokasi", ddlLokasiE.SelectedValue);
-        com.Parameters.AddWithValue("@Satuan", ddlSatuanE.SelectedValue);
-        com.Parameters.AddWithValue("@Harga", txtHargaE.Text);
-        com.Parameters.AddWithValue("@Status", 1);
-        com.Parameters.AddWithValue("@JumlahObat", txtJumlahE.Text);
-        com.Parameters.AddWithValue("@Expired", expired);
-        com.Parameters.AddWithValue("@foto", "obat_obat/" + filename);
-        com.Parameters.AddWithValue("@ModifiedDate", ModifiedDate);
-        com.Parameters.AddWithValue("@ModifiedBy", 1);
 
-        conn.Open();
+        if (EditFotoView.Visible == true)
+        {
+            string filename = Guid.NewGuid() + System.IO.Path.GetFileName(editUploadFile.FileName).Substring(System.IO.Path.GetFileName(editUploadFile.FileName).Length - 4);
+            editUploadFile.SaveAs(Server.MapPath("obat_obat/") + filename);
 
-        int result = Convert.ToInt32(com.ExecuteNonQuery());
-        conn.Close();
-        loadData();
+            com.CommandText = "[sp_UpdateObat]";
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@IDObat", lblID.Text);
+            com.Parameters.AddWithValue("@namaObat", txtNamaObatE.Text);
+            com.Parameters.AddWithValue("@IDJenis", ddlJenisObatE.SelectedValue);
+            com.Parameters.AddWithValue("@Keterangan", txtKetE.Text);
+            com.Parameters.AddWithValue("@IDLokasi", ddlLokasiE.SelectedValue);
+            com.Parameters.AddWithValue("@Satuan", ddlSatuanE.SelectedValue);
+            com.Parameters.AddWithValue("@Harga", txtHargaEdit.Text);
+            com.Parameters.AddWithValue("@Status", 1);
+            com.Parameters.AddWithValue("@JumlahObat", txtJumlahE.Text);
+            com.Parameters.AddWithValue("@Expired", expired);
+            com.Parameters.AddWithValue("@foto", "obat_obat/" + filename);
+            com.Parameters.AddWithValue("@ModifiedDate", ModifiedDate);
+            com.Parameters.AddWithValue("@ModifiedBy", 1);
 
-        secView.Visible = true;
-        secEdit.Visible = false;
-        secAdd.Visible = false;
+            conn.Open();
+
+            int result = Convert.ToInt32(com.ExecuteNonQuery());
+            conn.Close();
+            loadData();
+
+            secView.Visible = true;
+            secEdit.Visible = false;
+            secAdd.Visible = false;
+        }
+        else if (EditFotoView.Visible == false)
+        {
+            com.CommandText = "[sp_UpdateObat]";
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@IDObat", lblID.Text);
+            com.Parameters.AddWithValue("@namaObat", txtNamaObatE.Text);
+            com.Parameters.AddWithValue("@IDJenis", ddlJenisObatE.SelectedValue);
+            com.Parameters.AddWithValue("@Keterangan", txtKetE.Text);
+            com.Parameters.AddWithValue("@IDLokasi", ddlLokasiE.SelectedValue);
+            com.Parameters.AddWithValue("@Satuan", ddlSatuanE.SelectedValue);
+            com.Parameters.AddWithValue("@Harga", txtHargaEdit.Text);
+            com.Parameters.AddWithValue("@Status", 1);
+            com.Parameters.AddWithValue("@JumlahObat", txtJumlahE.Text);
+            com.Parameters.AddWithValue("@Expired", expired);
+            com.Parameters.AddWithValue("@foto", "NULL");
+            com.Parameters.AddWithValue("@ModifiedDate", ModifiedDate);
+            com.Parameters.AddWithValue("@ModifiedBy", 1);
+
+            conn.Open();
+
+            int result = Convert.ToInt32(com.ExecuteNonQuery());
+            conn.Close();
+            loadData();
+
+            secView.Visible = true;
+            secEdit.Visible = false;
+            secAdd.Visible = false;
+        }
+        
     }
 
     protected void ddlStatusView_TextChanged(object sender, EventArgs e)
@@ -343,5 +359,10 @@ public partial class Administrator_Obat : System.Web.UI.Page
                 linkDelete.Visible = false;
             }
         }
+    }
+
+    protected void btnUbahFoto_Click(object sender, EventArgs e)
+    {
+        EditFotoView.Visible = true;
     }
 }

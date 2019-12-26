@@ -49,14 +49,7 @@
             </div>
           </div>
         </div>
-        <div class="input-group mb-3">
-         <asp:TextBox ID="txtPass" CssClass="form-control" runat="server" TextMode="MultiLine"  placeholder="Retype password" />
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-fingerprint"></span>
-            </div>
-          </div>
-        </div>
+       
         <center>
           <div class="col-4">
             <asp:Button ID="btnSave" class="btn btn-primary btn-block btn-flat" runat="server" Text="Registrasi" OnClick="btnSave_Click1"/>

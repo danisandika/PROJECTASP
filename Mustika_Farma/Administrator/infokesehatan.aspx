@@ -167,7 +167,8 @@ Info Kesehatan
                         <asp:BoundField DataField="Kategori" HeaderText="Kategori" HeaderStyle-CssClass="table-bordered"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Kategori" >
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
                         </asp:BoundField>
-                        <asp:BoundField DataField="Konten" HeaderText="Konten" HeaderStyle-CssClass="table-bordered"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Konten" >
+
+                        <asp:BoundField DataField="Konten"  HeaderText="Konten" HeaderStyle-CssClass="table-bordered"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Konten" >
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="30%"  CssClass="table table-bordered table-striped" />
                         </asp:BoundField>
                         <asp:BoundField DataField="waktuPost" HeaderText="waktuPost" HeaderStyle-CssClass="table-bordered" NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="waktuPost">
