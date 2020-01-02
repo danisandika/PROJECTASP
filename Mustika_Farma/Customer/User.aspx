@@ -243,11 +243,11 @@
               </div>
                 <div class="card-body table-responsive p-0 col-12">
                 
-                <asp:GridView ID="gridUser" runat="server" CssClass="table table-hover"
-                    AllowPaging="true"
+                <asp:GridView ID="gridUser" runat="server" CssClass="table table-striped table-bordered table-hover"
+                    AllowPaging="true" GridLines="Both" 
                     AllowSorting="true" AutoGenerateColumns="false" DataKeyNames="IDUser" EmptyDataText="Tidak Ada Data" 
                     PageSize="5" PagerStyle-CssClass="pagination" ShowHeaderWhenEmpty="true" OnPageIndexChanging="gridUser_PageIndexChanging"
-                    OnRowCommand="gridUser_RowCommand" OnSorting="gridUser_Sorting" OnSelectedIndexChanged="gridUser_SelectedIndexChanged" >
+                    OnRowCommand="gridUser_RowCommand" OnSorting="gridUser_Sorting" OnSelectxedIndexChanged="gridUser_SelectedIndexChanged" >
                     <PagerSettings Mode="NumericFirstLast" FirstPageText="<<" LastPageText=">>" />
                     <Columns>
                         <asp:TemplateField HeaderText="No" ItemStyle-HorizontalAlign="Center">

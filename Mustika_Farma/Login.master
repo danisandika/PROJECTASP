@@ -36,11 +36,11 @@
 
       <div class="social-auth-links text-center mb-3">
         <p>- OR -</p>
-        <a href="#" class="btn btn-block btn-primary">
-          <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
+        <a href="Login.aspx" class="btn btn-block btn-primary">
+          <i class="nav-icon fas  fa-user-plus"></i> Masuk Sebagai Karyawan
         </a>
         <a href="#" class="btn btn-block btn-danger">
-          <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
+          <i class="nav-icon fas fa-plus-square"></i> Masuk Sebagai Dokter
         </a>
       </div>
       <!-- /.social-auth-links -->

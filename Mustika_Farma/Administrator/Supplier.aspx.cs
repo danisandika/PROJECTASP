@@ -226,7 +226,9 @@ public partial class Administrator_Supplier : System.Web.UI.Page
 
     protected void btnCancelAdd_Click(object sender, EventArgs e)
     {
-
+        secView.Visible = true;
+        ViewMenu.Visible = false;
+        AddMenu.Visible = false;
     }
 
     protected void btnEdit_Click(object sender, EventArgs e)
@@ -258,7 +260,9 @@ public partial class Administrator_Supplier : System.Web.UI.Page
 
     protected void btnCancelEdit_Click(object sender, EventArgs e)
     {
-
+        secView.Visible = true;
+        AddMenu.Visible = false;
+        ViewMenu.Visible = false;
     }
 
     protected void btnTambah_Click1(object sender, EventArgs e)

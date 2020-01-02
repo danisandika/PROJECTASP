@@ -165,7 +165,9 @@ public partial class Administrator_Obat : System.Web.UI.Page
 
     protected void EditbtnCancel_Click(object sender, EventArgs e)
     {
-
+        secView.Visible = true;
+        secEdit.Visible = false;
+        secAdd.Visible = false;
     }
 
     protected void EditbtnSave_Click1(object sender, EventArgs e)

@@ -386,7 +386,7 @@
               </div>
                 <div class="card-body table-responsive p-0 col-12">
                 
-                <asp:GridView ID="gridDokter" runat="server" CssClass="table table-hover"
+                <asp:GridView ID="gridDokter" runat="server" CssClass="table table-striped table-bordered table-hover"
                     AllowPaging="true"
                     AllowSorting="true" AutoGenerateColumns="false" DataKeyNames="ID_Dokter" EmptyDataText="Tidak Ada Data" 
                     PageSize="5"  ShowHeaderWhenEmpty="true" OnPageIndexChanging="gridDokter_PageIndexChanging"
@@ -409,11 +409,10 @@
                         <asp:BoundField DataField="nama" HeaderStyle-CssClass="table-bordered" HeaderText="Nama Dokter"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Alamat" >
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="15%"  CssClass="table table-bordered table-striped"  />
                         </asp:BoundField>
-                        <asp:BoundField DataField="jenis_Kelamin" HeaderStyle-CssClass="table-bordered" HeaderText="Jenis Kelamin"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="NoTelp" >
-                            <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="8%"  CssClass="table table-bordered table-striped"  />
+                        <asp:BoundField DataField="jenis_Kelamin"  ItemStyle-CssClass="hiddencol"  HeaderStyle-CssClass="hiddencol"  HeaderText="Jenis Kelamin"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="NoTelp" >
                         </asp:BoundField>
                         <asp:BoundField DataField="alamat" HeaderStyle-CssClass="table-bordered" HeaderText="Alamat"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="TglLahir" >
-                            <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="8%" CssClass="table table-bordered table-striped"   />
+                            <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="18%" CssClass="table table-bordered table-striped"   />
                         </asp:BoundField>
                         <asp:BoundField DataField="email" HeaderText="Email" HeaderStyle-CssClass="table-bordered" NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Email" >
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="15%" CssClass="table table-bordered table-striped"  />
@@ -467,28 +466,63 @@
 
     <asp:Panel ID="pnlGridViewDetails" runat="server" Width="490px" Height="400px"
         CssClass="pnlBackGround">
+        <div class="row">
+         <div class="card-body">
+        <div class="row form-group">
+        <div class="col-md-5">
         <asp:label style="margin-left:20px;" runat="server" class="col-sm-3 col-form-label text-label" Font-bold="true">DETAIL</asp:label>
-        <br /><br />
+        </div>
+        </div>
+        <div class="row form-group">
+         <div class="col-md-5">
         <asp:label style="margin-left:20px" runat="server" class="col-sm-3 col-form-label text-label">Nama</asp:label>
+        </div>
+         <div class="col-md-5">
         <asp:Label ID="nama" runat="server" Text="nama"></asp:Label>
-        <br /><br />
+        </div></div>
+         
+        <div class="row form-group">
+         <div class="col-md-5">
          <asp:label style="margin-left:20px" runat="server" class="col-sm-3 col-form-label text-label">Jenis kelamin</asp:label>
-        <asp:Label ID="jenis_Kelamin" runat="server" Text="JenisKelamin"></asp:Label>
-        <br /><br />
-        <asp:label style="margin-left:20px" runat="server" class="col-sm-3 col-form-label text-label">Username</asp:label>
-        <asp:Label ID="username" runat="server" Text="CreateBy"></asp:Label>
-        <br /><br />
-        <asp:label style="margin-left:20px" runat="server" class="col-sm-3 col-form-label text-label">Password</asp:Label>
-        <asp:Label ID="password" runat="server" Text="Password"></asp:Label>
-        <br /><br />
-        <asp:label style="margin-left:20px" runat="server" class="col-sm-3 col-form-label text-label">Modified By</asp:Label>
-        <asp:Label ID="ModifiedBy" runat="server" Text="modiby"></asp:Label>
-        <br /><br />
-        <asp:label style="margin-left:20px" runat="server" class="col-sm-3 col-form-label text-label">Modified date</asp:Label>
-        <asp:Label ID="ModifiedDate" runat="server" Text="modidate"></asp:Label>
+        </div>
+        <div class="col-md-5">
+         <asp:Label ID="jenis_Kelamin" runat="server" Text="JenisKelamin"></asp:Label>
+       </div></div>
 
-        <br /><br /><br />
+         <div class="row form-group">
+         <div class="col-md-5">
+        <asp:label style="margin-left:20px" runat="server" class="col-sm-3 col-form-label text-label">Username</asp:label>
+        </div>
+        <div class="col-md-5">
+        <asp:Label ID="username" runat="server" Text="CreateBy"></asp:Label>
+        </div></div>
+
+         <div class="row form-group">
+         <div class="col-md-5">
+        <asp:label style="margin-left:20px" runat="server" class="col-sm-3 col-form-label text-label">Password</asp:Label>
+         </div>
+        <div class="col-md-5">
+        <asp:Label ID="password" runat="server" Text="Password"></asp:Label>
+        </div></div>
+        
+         <div class="row form-group">
+         <div class="col-md-5">
+        <asp:label style="margin-left:20px" runat="server" class="col-sm-3 col-form-label text-label">Modified By</asp:Label>
+        </div>
+        <div class="col-md-5">
+        <asp:Label ID="ModifiedBy" runat="server" Text="modiby"></asp:Label>
+        </div></div>
+
+         <div class="row form-group">
+         <div class="col-md-5">
+        <asp:label style="margin-left:20px" runat="server" class="col-sm-3 col-form-label text-label">Modified date</asp:Label>
+         </div>
+        <div class="col-md-5">
+        <asp:Label ID="ModifiedDate" runat="server" Text="modidate"></asp:Label>
+        </div></div>
+      
         <asp:Button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-left:25px" ID="btnclose" runat="server" Text="Kembali" OnClick="btnclose_Click" />
+  </div></div>
     </asp:Panel>
         <asp:Button ID="btnDummy" runat="server" Style="display: none;" />
     <asp:ModalPopupExtender ID="GridViewDetails" runat="server" TargetControlID="btnDummy"

@@ -213,135 +213,135 @@ public partial class Karyawan_Pembelian : System.Web.UI.Page
 
     protected void btnpenjualanobat_Click(object sender, EventArgs e)
     {
-    //    SqlDataAdapter dataAdapter = new SqlDataAdapter();
-    //    System.Data.SqlClient.SqlParameter param;
-    //    string date = DateTime.Now.ToString("yyyy-MM-dd");
-    //    string newId = idOtomatis();
-    //    int stokDB = 0;
+        SqlDataAdapter dataAdapter = new SqlDataAdapter();
+        System.Data.SqlClient.SqlParameter param;
+        string date = DateTime.Now.ToString("yyyy-MM-dd");
+        string newId = idOtomatis();
+        int stokDB = 0;
 
-    //    // insert command
-    //    SqlCommand insertCmd = new SqlCommand("[sp_inputPembelian]", conn);
-    //    insertCmd.CommandType = CommandType.StoredProcedure;
+        // insert command
+        SqlCommand insertCmd = new SqlCommand("[sp_inputPembelian]", conn);
+        insertCmd.CommandType = CommandType.StoredProcedure;
 
-    //    param = insertCmd.Parameters.Add("@IDPembelian", SqlDbType.VarChar, 20);
-    //    param.Direction = ParameterDirection.Input;
-    //    param.Value = newId;
+        param = insertCmd.Parameters.Add("@IDPembelian", SqlDbType.VarChar, 20);
+        param.Direction = ParameterDirection.Input;
+        param.Value = newId;
 
-    //    param = insertCmd.Parameters.Add("@IDKaryawan", SqlDbType.VarChar, 50);
-    //    param.Direction = ParameterDirection.Input;
-    //    param.Value = 1;
-    //    // param.Value = Session["creaby"].ToString();
+        param = insertCmd.Parameters.Add("@IDKaryawan", SqlDbType.VarChar, 50);
+        param.Direction = ParameterDirection.Input;
+        param.Value = 1;
+        // param.Value = Session["creaby"].ToString();
 
-    //    param = insertCmd.Parameters.Add("@tanggal", SqlDbType.DateTime);
-    //    param.Direction = ParameterDirection.Input;
-    //    param.Value = date;
+        param = insertCmd.Parameters.Add("@tanggal", SqlDbType.DateTime);
+        param.Direction = ParameterDirection.Input;
+        param.Value = date;
 
-    //    param = insertCmd.Parameters.Add("@TotalHarga", SqlDbType.Decimal);
-    //    param.Direction = ParameterDirection.Input;
-    //    param.Value = Convert.ToDecimal(txtTotalHargaPemesanan.Text);
+        param = insertCmd.Parameters.Add("@TotalHarga", SqlDbType.Decimal);
+        param.Direction = ParameterDirection.Input;
+        param.Value = Convert.ToDecimal(txtTotalHargaPemesanan.Text);
 
-    //    param = insertCmd.Parameters.Add("@status", SqlDbType.Int);
-    //    param.Direction = ParameterDirection.Input;
-    //    param.Value = 1;
+        param = insertCmd.Parameters.Add("@status", SqlDbType.Int);
+        param.Direction = ParameterDirection.Input;
+        param.Value = 1;
 
-    //    param = insertCmd.Parameters.Add("@IDSupplier", SqlDbType.Int);
-    //    param.Direction = ParameterDirection.Input;
-    //    param.Value = null;
-
-
-    //    conn.Open();
-    //    insertCmd.ExecuteNonQuery();
-    //    conn.Close();
-
-    //    foreach (GridViewRow gvr in grdDetailPenjualan.Rows)
-    //    {
-    //        DataRow dr = dt.NewRow();
-
-    //        dr["Colum0"] = Convert.ToInt32(gvr.Cells[0].Text);
-    //        dr["Colum1"] = gvr.Cells[1].Text;
-    //        dr["Colum2"] = gvr.Cells[2].Text;
-    //        dr["Colum3"] = gvr.Cells[3].Text;
-    //        dr["Colum4"] = gvr.Cells[4].Text;
-    //        //Untuk set txtQty & txtSub
-    //        int rowindex = Convert.ToInt32(gvr.Cells[0].Text) - 1;
-    //        TextBox qty = (TextBox)grdDetailPenjualan.Rows[rowindex].FindControl("txtQty");
-    //        TextBox sub = (TextBox)grdDetailPenjualan.Rows[rowindex].FindControl("txtSub");
-    //        //string q = qty.Text;
-    //        dr["Colum6"] = qty.Text;
-    //        dr["Colum7"] = sub.Text;
-    //        dt.Rows.Add(dr);
-    //    }
+        param = insertCmd.Parameters.Add("@IDSupplier", SqlDbType.Int);
+        param.Direction = ParameterDirection.Input;
+        param.Value = null;
 
 
-    //    int jml = dt.Rows.Count;
-    //    int i = 0;
-    //    foreach (DataRow row in dt.Rows)
-    //    {
-    //        TextBox txt = (TextBox)grdDetailPenjualan.Rows[i].FindControl("txtHarga");
-    //        TextBox txt1 = (TextBox)grdDetailPenjualan.Rows[i].FindControl("txtQty");
-    //        TextBox txt2 = (TextBox)grdDetailPenjualan.Rows[i].FindControl("txtSub");
+        conn.Open();
+        insertCmd.ExecuteNonQuery();
+        conn.Close();
+
+        foreach (GridViewRow gvr in grdDetailPenjualan.Rows)
+        {
+            DataRow dr = dt.NewRow();
+
+            dr["Colum0"] = Convert.ToInt32(gvr.Cells[0].Text);
+            dr["Colum1"] = gvr.Cells[1].Text;
+            dr["Colum2"] = gvr.Cells[2].Text;
+            dr["Colum3"] = gvr.Cells[3].Text;
+            dr["Colum4"] = gvr.Cells[4].Text;
+            //Untuk set txtQty & txtSub
+            int rowindex = Convert.ToInt32(gvr.Cells[0].Text) - 1;
+            TextBox qty = (TextBox)grdDetailPenjualan.Rows[rowindex].FindControl("txtQty");
+            TextBox sub = (TextBox)grdDetailPenjualan.Rows[rowindex].FindControl("txtSub");
+            //string q = qty.Text;
+            dr["Colum6"] = qty.Text;
+            dr["Colum7"] = sub.Text;
+            dt.Rows.Add(dr);
+        }
 
 
-    //        SqlCommand insert1 = new SqlCommand("[sp_InputDetailTransaksiPembelian]", conn);
-    //        insert1.CommandType = CommandType.StoredProcedure;
+        int jml = dt.Rows.Count;
+        int i = 0;
+        foreach (DataRow row in dt.Rows)
+        {
+            TextBox txt = (TextBox)grdDetailPenjualan.Rows[i].FindControl("txtHarga");
+            TextBox txt1 = (TextBox)grdDetailPenjualan.Rows[i].FindControl("txtQty");
+            TextBox txt2 = (TextBox)grdDetailPenjualan.Rows[i].FindControl("txtSub");
 
-    //        SqlCommand search = new SqlCommand("[sp_cekObat]", conn);
-    //        search.CommandType = CommandType.StoredProcedure;
 
-    //        SqlCommand updateStok = new SqlCommand("sp_UpdateStokTani", conn);
-    //        updateStok.CommandType = CommandType.StoredProcedure;
+            SqlCommand insert1 = new SqlCommand("[sp_InputDetailTransaksiPembelian]", conn);
+            insert1.CommandType = CommandType.StoredProcedure;
 
-    //        search.Parameters.AddWithValue("@IObat", Convert.ToInt32(row["Colum1"].ToString()));
+            SqlCommand search = new SqlCommand("[sp_cekObat]", conn);
+            search.CommandType = CommandType.StoredProcedure;
 
-    //        try
-    //        {
-    //            conn.Open();
-    //            SqlDataReader reader = search.ExecuteReader();
-    //            while (reader.Read())
-    //            {
-    //                stokDB = Convert.ToInt32(reader[0]);
-    //            }
-    //            conn.Close();
-    //        }
-    //        catch (Exception ex)
-    //        {
-    //            ex.ToString();
-    //        }
+            SqlCommand updateStok = new SqlCommand("sp_UpdateStokTani", conn);
+            updateStok.CommandType = CommandType.StoredProcedure;
 
-    //        insert1.Parameters.AddWithValue("IDPembelian", newId);
-    //        insert1.Parameters.AddWithValue("IDObat", Convert.ToInt32(row["Colum1"].ToString()));
-    //        insert1.Parameters.AddWithValue("jumlah", Convert.ToInt32(txt1.Text));
-    //        insert1.Parameters.AddWithValue("subTotal", Convert.ToDouble(txt2.Text));
+            search.Parameters.AddWithValue("@IObat", Convert.ToInt32(row["Colum1"].ToString()));
 
-    //        stokDB = stokDB - Convert.ToInt32(Convert.ToInt32(txt1.Text));
+            try
+            {
+                conn.Open();
+                SqlDataReader reader = search.ExecuteReader();
+                while (reader.Read())
+                {
+                    stokDB = Convert.ToInt32(reader[0]);
+                }
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                ex.ToString();
+            }
 
-    //        param = updateStok.Parameters.Add("@IDObat", SqlDbType.Int);
-    //        param.Direction = ParameterDirection.Input;
-    //        param.Value = Convert.ToInt32(row["Colum1"].ToString());
-    //        param = updateStok.Parameters.Add("@JumlahObat", SqlDbType.Int);
-    //        param.Direction = ParameterDirection.Input;
-    //        param.Value = stokDB;
-    //        conn.Close();
+            insert1.Parameters.AddWithValue("IDPembelian", newId);
+            insert1.Parameters.AddWithValue("IDObat", Convert.ToInt32(row["Colum1"].ToString()));
+            insert1.Parameters.AddWithValue("jumlah", Convert.ToInt32(txt1.Text));
+            insert1.Parameters.AddWithValue("subTotal", Convert.ToDouble(txt2.Text));
 
-    //        try
-    //        {
-    //            // INSERT DETAIL TRANSAKSI
-    //            conn.Open();
-    //            insert1.ExecuteNonQuery();
-    //            search.ExecuteNonQuery();
-    //            updateStok.ExecuteNonQuery();
-    //            conn.Close();
-    //        }
-    //        catch (Exception ex)
-    //        {
-    //            ex.ToString();
-    //        }
-    //        i++;
-    //    }
+            stokDB = stokDB - Convert.ToInt32(Convert.ToInt32(txt1.Text));
 
-    //    Response.Write("<script>alert('Transaksi Berhasil Dilakukan')</script>");
-    //    Server.Transfer("TransaksiPenjualan.aspx");
-   }
+            param = updateStok.Parameters.Add("@IDObat", SqlDbType.Int);
+            param.Direction = ParameterDirection.Input;
+            param.Value = Convert.ToInt32(row["Colum1"].ToString());
+            param = updateStok.Parameters.Add("@JumlahObat", SqlDbType.Int);
+            param.Direction = ParameterDirection.Input;
+            param.Value = stokDB;
+            conn.Close();
+
+            try
+            {
+                // INSERT DETAIL TRANSAKSI
+                conn.Open();
+                insert1.ExecuteNonQuery();
+                search.ExecuteNonQuery();
+                updateStok.ExecuteNonQuery();
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                ex.ToString();
+            }
+            i++;
+        }
+
+        Response.Write("<script>alert('Transaksi Berhasil Dilakukan')</script>");
+        Server.Transfer("TransaksiPenjualan.aspx");
+    }
 
     protected void grdObat_RowCommand(object sender, GridViewCommandEventArgs e)
     {
@@ -364,6 +364,7 @@ public partial class Karyawan_Pembelian : System.Web.UI.Page
             {
                 if (e.CommandName == "tambahPenjualan")
                 {
+                    Response.Write("<script>alert('Transaksi Berhasil Dilakukan')</script>");
                     int no = 1;
 
                     string jenistani = grdObat.Rows[index].Cells[1].Text;

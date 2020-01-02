@@ -1,5 +1,5 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterKaryawan.master.cs" Inherits="Administrator_MasterKaryawan" %>
-
+ 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -149,9 +149,16 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="../Karyawan/Pembelian.aspx" class="nav-link">
+            <a href="../Karyawan/beli.aspx" class="nav-link">
               <i class="nav-icon fas fa-shopping-bag"></i>
               <p>Pembelian</p>
+            </a>
+          </li>
+
+         <li class="nav-item">
+            <a href="../Karyawan/konf_pembelian.aspx" class="nav-link">
+              <i class="nav-icon fas fa fa-check"></i>
+              <p>Konfirmasi Pembelian</p>
             </a>
           </li>
 		  
@@ -200,7 +207,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active"> <asp:ContentPlaceHolder ID="title2" runat="server"></asp:ContentPlaceHolder></li>
+              <li class="breadcrumb-item"> <asp:ContentPlaceHolder ID="title2" runat="server"></asp:ContentPlaceHolder></li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->

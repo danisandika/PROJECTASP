@@ -200,26 +200,60 @@
 
     <asp:Panel ID="pnlGridViewDetails" runat="server" Width="490px" Height="400px"
         CssClass="pnlBackGround">
-
+         <div class="row">
+         <div class="card-body">
+         <div class="row form-group">
+        <div class="col-md-5">
+        <asp:label style="margin-left:20px;" runat="server" class="col-sm-3 col-form-label text-label" Font-bold="true"></asp:label>
+        </div>
+        </div>
+       <div class="row form-group">
+        <div class="col-md-5">
         <asp:label style="margin-left:20px;" runat="server" class="col-sm-3 col-form-label text-label" Font-bold="true">DETAIL</asp:label>
-        <br /><br />
+        </div>
+        </div>
+        <div class="row form-group">
+        <div class="col-md-5">
         <asp:label style="margin-left:20px" runat="server" class="col-sm-3 col-form-label text-label">Nama</asp:label>
+        </div>
+         <div class="col-md-5">
         <asp:Label ID="namaJenis" runat="server" Text="nama"></asp:Label>
-        <br /><br />
+        </div></div>
+
+         <div class="row form-group">
+         <div class="col-md-5">
         <asp:label style="margin-left:20px" runat="server" class="col-sm-3 col-form-label text-label">Dibuat Oleh</asp:label>
-        <asp:Label ID="CreateBy" runat="server" Text="CreateBy"></asp:Label>
-        <br /><br />
+       </div>
+        <div class="col-md-5">    
+       <asp:Label ID="CreateBy" runat="server" Text="CreateBy"></asp:Label>
+        </div></div>
+
+        <div class="row form-group">
+         <div class="col-md-5">
         <asp:label style="margin-left:20px" runat="server" class="col-sm-3 col-form-label text-label">Tanggal dibuat</asp:Label>
-        <asp:Label ID="CreateDate" runat="server" Text="Create Date"></asp:Label>
-        <br /><br />
+        </div>
+        <div class="col-md-5">
+       <asp:Label ID="CreateDate" runat="server" Text="Create Date"></asp:Label>
+         </div></div>
+
+         <div class="row form-group">
+         <div class="col-md-5">
         <asp:label style="margin-left:20px" runat="server" class="col-sm-3 col-form-label text-label">Diubah Oleh</asp:Label>
+         </div>
+        <div class="col-md-5">
         <asp:Label ID="ModifiedBy" runat="server" Text="modiby"></asp:Label>
-        <br /><br />
+        </div></div>
+
+        <div class="row form-group">
+         <div class="col-md-5">
         <asp:label style="margin-left:20px" runat="server" class="col-sm-3 col-form-label text-label">Tanggal Diubah</asp:Label>
+         </div>
+        <div class="col-md-5">
         <asp:Label ID="ModifiedDate" runat="server" Text="modidate"></asp:Label>
        
-        <br /><br /><br />
+        </div></div>
         <asp:Button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-left:25px" ID="btnclose" runat="server" Text="Kembali" OnClick="btnclose_Click" />
+     </div></div>
     </asp:Panel>
         <asp:Button ID="btnDummy" runat="server" Style="display: none;" />
     <asp:ModalPopupExtender ID="GridViewDetails" runat="server"  TargetControlID="btnDummy"

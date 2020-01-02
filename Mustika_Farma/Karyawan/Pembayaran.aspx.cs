@@ -11,4 +11,9 @@ public partial class Karyawan_Pembayaran : System.Web.UI.Page
     {
 
     }
+
+    protected void rbResep_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
 }

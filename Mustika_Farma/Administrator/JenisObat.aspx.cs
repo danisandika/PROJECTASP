@@ -34,8 +34,6 @@ public partial class Administrator_JenisObat : System.Web.UI.Page
         com.CommandType = CommandType.StoredProcedure;
         com.Parameters.AddWithValue("@namaJenis", txtSearch.Text);
         com.Parameters.AddWithValue("@deskripsi", txtSearch.Text);
-        //com.Parameters.AddWithValue("@keterangan", txtcari.Text);
-
 
         SqlDataAdapter adap = new SqlDataAdapter(com);
         adap.Fill(ds);

@@ -361,7 +361,7 @@ public partial class Administrator_Dokter : System.Web.UI.Page
         //Get the column value and assign it to label in panel
         //Change the index as per your need
         nama.Text = row.Cells[2].Text;
-        jenis_Kelamin.Text = row.Cells[2].Text;
+        jenis_Kelamin.Text = row.Cells[3].Text;
         username.Text= row.Cells[7].Text;
         password.Text= row.Cells[8].Text;
         ModifiedBy.Text = row.Cells[12].Text;

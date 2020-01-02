@@ -79,6 +79,7 @@ public partial class Login : System.Web.UI.Page
             {
                 nextPage = "Customer/Transaksi.aspx";
             }
+           
             else
             {
                 //user came straight to the login page so just send them to the 

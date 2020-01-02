@@ -185,12 +185,12 @@
               <p>User Member</p>
             </a>
           </li>
-            <li class="nav-item">
+           <%-- <li class="nav-item">
             <a href="Role.aspx" class="nav-link">
               <i class="nav-icon fas fa-users-cog"></i>
               <p>Role</p>
             </a>
-          </li>
+          </li>--%>
             <li class="nav-item">
             <a href="Dokter.aspx" class="nav-link">
               <i class="nav-icon fas fa-plus-square"></i>
