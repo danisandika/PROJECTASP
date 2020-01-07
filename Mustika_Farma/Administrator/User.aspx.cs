@@ -61,7 +61,7 @@ public partial class Administrator_User : System.Web.UI.Page
         com.Parameters.AddWithValue("@password", txtPass.Text);
         com.Parameters.AddWithValue("@createDate", CreateDate);
         com.Parameters.AddWithValue("@createBy", Session["creaby"]);
-        com.Parameters.AddWithValue("@IDROle", ddlRole.SelectedValue);
+        com.Parameters.AddWithValue("@IDRole", ddlRole.SelectedValue);
         conn.Open();
 
         int result = Convert.ToInt32(com.ExecuteNonQuery());
@@ -82,8 +82,9 @@ public partial class Administrator_User : System.Web.UI.Page
         com.Parameters.AddWithValue("@Nama", txtNamaE.Text);
         com.Parameters.AddWithValue("@Alamat", txtAlamatE.Text);
         com.Parameters.AddWithValue("@NoTelp", txtNoTelpE.Text);
-        com.Parameters.AddWithValue("@TglLahir", txtTanggalE.Text);
+        com.Parameters.AddWithValue("@TglLahir",tglLahir);
         com.Parameters.AddWithValue("@Email", txtEmailE.Text);
+        com.Parameters.AddWithValue("@IDRole", ddlROlee.SelectedValue);
         com.Parameters.AddWithValue("@status", 1);
         com.Parameters.AddWithValue("@username", txtUsernameE.Text);
         com.Parameters.AddWithValue("@password", txtPasswordE.Text);
@@ -164,11 +165,14 @@ public partial class Administrator_User : System.Web.UI.Page
             txtNamaE.Text = gridUser.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[1].Text;
             txtAlamatE.Text = gridUser.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[2].Text;
             txtNoTelpE.Text = gridUser.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[3].Text;
-            txtTanggalE.Text = gridUser.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[4].Text;
+
+            DateTime exp = Convert.ToDateTime(gridUser.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[4].Text);
+            txtTanggalE.Text = exp.ToString("yyyy-MM-dd");
+
             txtEmailE.Text = gridUser.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[5].Text;
             txtUsernameE.Text = gridUser.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[6].Text;
             txtPasswordE.Text = gridUser.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[7].Text;
-
+            ddlROlee.SelectedValue= gridUser.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[14].Text;
             secAdd.Visible = false;
             secEdit.Visible = true;
             secView.Visible = false;

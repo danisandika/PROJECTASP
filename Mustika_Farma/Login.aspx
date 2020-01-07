@@ -19,21 +19,14 @@
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-8">
-            <div class="icheck-primary">
-                <asp:CheckBox ID="remember" runat="server" />
-              <label for="remember">
-                Remember Me
-              </label>
-            </div>
-          </div>
+       
           <!-- /.col -->
+          <center>
           <div class="col-4">
             <asp:Button ID="btnSave" class="btn btn-primary btn-block btn-flat" runat="server" Text="Sign In" OnClick="btnSave_Click"/>
           </div>
+        </center>
           <!-- /.col -->
-        </div>
     </form>
 </asp:Content>
 

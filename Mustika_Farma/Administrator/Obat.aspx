@@ -270,7 +270,9 @@
                         <asp:BoundField DataField="ModifiedDate" ItemStyle-CssClass="hiddencol" HeaderText="ModifiedDate" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
                         <asp:BoundField DataField="status" ItemStyle-CssClass="hiddencol" HeaderText="Status" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
                         <asp:BoundField DataField="foto" ItemStyle-CssClass="hiddencol" HeaderText="Status" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
-                        </Columns>
+                        <asp:BoundField DataField="IDJenis" ItemStyle-CssClass="hiddencol" HeaderText="IDJenis" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
+                        
+                    </Columns>
                 </asp:GridView>
 
                 </div>
@@ -278,7 +280,6 @@
               </div>
             </div>
           </div>
-         </div>
         </section>
 
       <!--SECTION EDIT-->
@@ -304,13 +305,13 @@
                     <asp:TextBox ID="txtNamaObatE" CssClass="form-control" runat="server"/>
                   </div>
                 </div>
-
+                  <%--row yang status 0 masi ketampil, soalnya biar otomatis terisi gitu--%>
                   <div class="row form-group">
                     <div class="col-md-3">
                     <label for="IDJenisObat">ID Jenis Obat</label>
                     </div>
                     <div class="col-md-5">
-                  <asp:DropDownList ID="ddlJenisObatE" runat="server" CssClass="form-control" DataSourceID="dsJenis" DataTextField="namaJenis" DataValueField="IDJenis">
+                  <asp:DropDownList ID="ddlJenisObatE" runat="server" AppendDataBoundItems="true" CssClass="form-control" DataSourceID="dsJenis" DataTextField="namaJenis" DataValueField="IDJenis">
                     </asp:DropDownList>
                       <asp:SqlDataSource ID="dsJenisE" runat="server" ConnectionString="<%$ ConnectionStrings:Apotek %>" SelectCommand="DdlJenisObatE" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
                   </div>
@@ -382,7 +383,8 @@
                     </div>
                     <div class="col-md-5">
                    <asp:TextBox CssClass="form-control" ID="txtExpiredE" placeholder="Tanggal Lahir" runat="server" TextMode="Date" required></asp:TextBox>
-                  </div>
+                        <asp:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="txtExpiredE"></asp:CalendarExtender>
+                    </div>
                 </div>
 
                     <div class="form-group row align-items-center">

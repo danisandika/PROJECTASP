@@ -90,6 +90,30 @@
   <script src="Medicio/js/nivo-lightbox.min.js"></script>
   <script src="Medicio/js/custom.js"></script>
 
+
+     <%--POP UP DETAIL--%>
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+     <style>
+        .modalBackground
+        {
+            background-color: Gray;
+            filter: alpha(opacity=50);
+            opacity: 0.7;
+        }
+        .pnlBackGround
+        {
+            position: fixed;
+            top: 30%;
+            left: 10px;
+            width: 100px;
+            height: 45px;
+            text-align: left;
+            background-color: White;
+        }
+    </style>
 </body>
 
 </html>

@@ -236,8 +236,6 @@ public partial class Karyawan_Dokter_periksa : System.Web.UI.Page
         GridViewDetails.Hide();
     }
 
-
-
     protected void EditbtnSave_Click(object sender, EventArgs e)
     {
         DateTime CreateDate = DateTime.Now;

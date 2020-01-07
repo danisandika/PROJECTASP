@@ -49,16 +49,16 @@
                             </ItemTemplate>
                         </asp:TemplateField>
                         
-                        <asp:BoundField DataField="IDPembelian" HeaderStyle-CssClass="table-bordered" HeaderText="IDPembelian"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Nama" >
+                        <asp:BoundField DataField="IDPembelian" HeaderStyle-CssClass="table-bordered" HeaderText="IDPembelian"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="IDPembelian" >
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
                         </asp:BoundField>
-                        <asp:BoundField DataField="IDSupplier" HeaderStyle-CssClass="table-bordered" HeaderText="IDSupplier"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Alamat" >
+                        <asp:BoundField DataField="IDSupplier" HeaderStyle-CssClass="table-bordered" HeaderText="IDSupplier"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="IDSupplier" >
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="15%"  CssClass="table table-bordered table-striped"  />
                         </asp:BoundField>
-                        <asp:BoundField DataField="Tanggal" HeaderStyle-CssClass="table-bordered" HeaderText="Tanggal"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="NoTelp" >
+                        <asp:BoundField DataField="Tanggal" HeaderStyle-CssClass="table-bordered" HeaderText="Tanggal"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Tanggal" >
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="8%"  CssClass="table table-bordered table-striped"  />
                         </asp:BoundField>
-                        <asp:BoundField DataField="totalBayar" HeaderStyle-CssClass="table-bordered" HeaderText="Total Bayar"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="TglLahir" >
+                        <asp:BoundField DataField="totalBayar" HeaderStyle-CssClass="table-bordered" HeaderText="Total Bayar"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="totalBayar" >
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="8%" CssClass="table table-bordered table-striped"   />
                         </asp:BoundField>
 
@@ -93,6 +93,47 @@
          </div>
         </div>
         </section>
+
+<section class="content" id="secDetail" runat="server">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Detail</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+              <asp:GridView ID="grdDetail" AutoGenerateColumns="false" runat="server" CssClass="table table-striped table-bordered table-hover">
+                    <Columns> 
+                         <asp:TemplateField HeaderText="No" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
+                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="2%"  CssClass="table table-bordered table-striped" />
+                            <ItemTemplate>
+                                <%# Container.DataItemIndex +1 %>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+
+                         <asp:BoundField DataField="IDPembelian" HeaderStyle-CssClass="table-bordered" HeaderText="IDPembelian"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="IDTransaksi" >
+                            <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="namaObat" HeaderStyle-CssClass="table-bordered" HeaderText="Nama Obat"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="namaObat" >
+                            <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="15%"  CssClass="table table-bordered table-striped"  />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="Jumlah" HeaderStyle-CssClass="table-bordered" HeaderText="Jumlah"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="NoTelp" >
+                            <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="8%"  CssClass="table table-bordered table-striped"  />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="subTotal" HeaderStyle-CssClass="table-bordered" HeaderText="Sub Total"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="TglLahir" >
+                            <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="8%" CssClass="table table-bordered table-striped"   />
+                        </asp:BoundField>
+
+                          </Columns>
+                </asp:GridView>
+                   </div>
+            </div>
+          </div>
+             </div>
+            </div>   
+</section>
 
 </asp:Content>
 <asp:Content ID="Content7" ContentPlaceHolderID="footer" Runat="Server">

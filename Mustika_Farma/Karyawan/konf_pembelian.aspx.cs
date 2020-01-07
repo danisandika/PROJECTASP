@@ -19,6 +19,7 @@ public partial class Karyawan_konf_pembelian : System.Web.UI.Page
         if (!IsPostBack)
         {
             loadData();
+            secDetail.Visible = false;
         }
     }
 
@@ -48,7 +49,6 @@ public partial class Karyawan_konf_pembelian : System.Web.UI.Page
     {
         if (e.CommandName == "cmEdit")
         {
-
 
         }
         else if (e.CommandName == "delete")
@@ -116,7 +116,22 @@ public partial class Karyawan_konf_pembelian : System.Web.UI.Page
 
     protected void lnkViewDetails_Click(object sender, EventArgs e)
     {
+        GridViewRow row = (GridViewRow)((LinkButton)sender).Parent.Parent;
+        //Get the column value and assign it to label in panel
+        //Change the index as per your need
+        string id = row.Cells[1].Text;
 
+        SqlCommand com = new SqlCommand();
+        com.Connection = conn;
+        com.CommandText = "[sp_detail_Pembelian]";
+        com.CommandType = CommandType.StoredProcedure;
+        SqlDataAdapter adap = new SqlDataAdapter(com);
+        com.Parameters.AddWithValue("@IDPembelian", id);
+
+        adap.Fill(ds);
+        grdDetail.DataSource = ds;
+        grdDetail.DataBind();
+        secDetail.Visible = true;
     }
 
     protected void btnSearch_Click(object sender, EventArgs e)

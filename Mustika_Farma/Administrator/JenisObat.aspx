@@ -48,7 +48,7 @@
                     <label for="exampleInputPassword1">Deskripsi</label>
                     </div>
                     <div class="col-md-5">
-                    <asp:TextBox ID="txtDeskripsi" CssClass="form-control" runat="server" TextMode="MultiLine" />
+                    <asp:TextBox ID="txtDeskripsi" CssClass="form-control" runat="server" TextMode="MultiLine" Rows="4" />
                   </div>
                 </div>
                   
@@ -94,7 +94,7 @@
                     <label for="exampleInputPassword1">Deskripsi</label>
                     </div>
                     <div class="col-md-5">
-                      <asp:TextBox ID="txtEditDeskripsi" CssClass="form-control" runat="server" TextMode="MultiLine" />
+                      <asp:TextBox ID="txtEditDeskripsi" CssClass="form-control" runat="server" TextMode="MultiLine" Rows="5" />
                   </div>
                 </div>
                   

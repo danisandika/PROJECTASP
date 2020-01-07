@@ -507,10 +507,10 @@
         
          <div class="row form-group">
          <div class="col-md-5">
-        <asp:label style="margin-left:20px" runat="server" class="col-sm-3 col-form-label text-label">Modified By</asp:Label>
+        <asp:label style="margin-left:20px" runat="server" class="col-sm-3 col-form-label text-label">Create Date</asp:Label>
         </div>
         <div class="col-md-5">
-        <asp:Label ID="ModifiedBy" runat="server" Text="modiby"></asp:Label>
+        <asp:Label ID="CreateDate" runat="server" Text="modiby"></asp:Label>
         </div></div>
 
          <div class="row form-group">

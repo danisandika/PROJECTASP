@@ -30,7 +30,7 @@ public partial class Login_Dokter : System.Web.UI.Page
         nama = nama + "ID_Dokter".ToString();
         Session["creaby"] = nama;
       
-        SqlConnection conn;
+        SqlConnection conn; 
         conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Default"].ConnectionString);
         conn.Open();
         SqlCommand cmd = new SqlCommand("select * from Dokter where username=@username and password=@password", conn);

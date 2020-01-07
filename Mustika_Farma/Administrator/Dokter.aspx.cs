@@ -105,7 +105,7 @@ public partial class Administrator_Dokter : System.Web.UI.Page
             com.Parameters.AddWithValue("@ID_SP", ddlJenisE.SelectedValue);
             com.Parameters.AddWithValue("@foto", "Dokter/" + filename);
             com.Parameters.AddWithValue("@modifiedDate", ModifiedDate);
-            com.Parameters.AddWithValue("@modifiedBy", Session["creaby"]);
+            com.Parameters.AddWithValue("@ModifiedBy", Session["creaby"]);
             com.Parameters.AddWithValue("@ID_Jadwal", ddlJadwalE.SelectedValue);
 
             conn.Open();
@@ -140,7 +140,7 @@ public partial class Administrator_Dokter : System.Web.UI.Page
             com.Parameters.AddWithValue("@ID_SP", ddlJenisE.SelectedValue);
             com.Parameters.AddWithValue("@foto", "NULL");
             com.Parameters.AddWithValue("@modifiedDate", ModifiedDate);
-            com.Parameters.AddWithValue("@modifiedBy", Session["creaby"]);
+            com.Parameters.AddWithValue("@ModifiedBy", Session["creaby"]);
             com.Parameters.AddWithValue("@ID_Jadwal", ddlJadwalE.SelectedValue);
 
             conn.Open();
@@ -364,7 +364,7 @@ public partial class Administrator_Dokter : System.Web.UI.Page
         jenis_Kelamin.Text = row.Cells[3].Text;
         username.Text= row.Cells[7].Text;
         password.Text= row.Cells[8].Text;
-        ModifiedBy.Text = row.Cells[12].Text;
+        CreateDate.Text = row.Cells[11].Text;
         ModifiedDate.Text = row.Cells[13].Text;
 
 

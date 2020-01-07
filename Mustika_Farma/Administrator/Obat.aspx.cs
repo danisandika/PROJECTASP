@@ -95,11 +95,15 @@ public partial class Administrator_Obat : System.Web.UI.Page
             String id = gridObat.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
             lblID.Text = id;
             txtNamaObatE.Text = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[1].Text;
+            ddlJenisObatE.SelectedValue = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[17].Text;
             txtJumlahE.Text = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[3].Text;
             txtKetE.Text = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[4].Text;
-            ddlSatuanE.Text = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[6].Text;
+            ddlSatuanE.SelectedValue = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[6].Text;
             txtHargaEdit.Text = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[7].Text;
-            txtExpiredE.Text = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[8].Text;
+
+            DateTime exp = Convert.ToDateTime(gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[8].Text);
+            txtExpiredE.Text = exp.ToString("yyyy-MM-dd");
+
             editfoto.ImageUrl = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[16].Text;
 
             secAdd.Visible = false;
@@ -172,8 +176,7 @@ public partial class Administrator_Obat : System.Web.UI.Page
 
     protected void EditbtnSave_Click1(object sender, EventArgs e)
     {
- 
-
+       // EditFotoView.Visible = false;
         DateTime CreateDate = DateTime.Now;
         DateTime expired = Convert.ToDateTime(txtExpiredE.Text);
         DateTime ModifiedDate = DateTime.Now;
@@ -222,7 +225,7 @@ public partial class Administrator_Obat : System.Web.UI.Page
             com.Parameters.AddWithValue("@Keterangan", txtKetE.Text);
             com.Parameters.AddWithValue("@IDLokasi", ddlLokasiE.SelectedValue);
             com.Parameters.AddWithValue("@Satuan", ddlSatuanE.SelectedValue);
-            com.Parameters.AddWithValue("@Harga", txtHargaEdit.Text);
+            com.Parameters.AddWithValue("@Harga", Convert.ToDecimal(txtHargaEdit.Text));
             com.Parameters.AddWithValue("@Status", 1);
             com.Parameters.AddWithValue("@JumlahObat", txtJumlahE.Text);
             com.Parameters.AddWithValue("@Expired", expired);
@@ -279,8 +282,6 @@ public partial class Administrator_Obat : System.Web.UI.Page
             com.CommandText = "[sp_SelectObatNA]";
             com.CommandType = CommandType.StoredProcedure;
             com.Parameters.AddWithValue("@namaObat", txtSearch.Text);
-
-
 
             SqlDataAdapter adapt = new SqlDataAdapter(com);
             adapt.Fill(ds);

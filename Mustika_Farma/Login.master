@@ -39,7 +39,7 @@
         <a href="Login.aspx" class="btn btn-block btn-primary">
           <i class="nav-icon fas  fa-user-plus"></i> Masuk Sebagai Karyawan
         </a>
-        <a href="#" class="btn btn-block btn-danger">
+        <a href="Login_Dokter.aspx" class="btn btn-block btn-danger">
           <i class="nav-icon fas fa-plus-square"></i> Masuk Sebagai Dokter
         </a>
       </div>

@@ -98,21 +98,21 @@ Pembelian
                             </ItemTemplate>
                         </asp:TemplateField>
 
-                         <asp:TemplateField HeaderText="namaObat" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
+                         <asp:TemplateField HeaderText="namaObat" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center" SortExpression="namaObat">
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="2%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
                                 <asp:Label ID="labNama" runat="server" Text='<%#Bind("namaObat") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
 
-                         <asp:TemplateField HeaderText="JumlahObat" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
+                         <asp:TemplateField HeaderText="JumlahObat" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center"  SortExpression="JumlahObat">
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="2%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
                                 <asp:Label ID="labJumlahObat" runat="server" Text='<%#Bind("JumlahObat") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>   
                         
-                         <asp:TemplateField HeaderText="Keterangan" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Left">
+                         <asp:TemplateField HeaderText="Keterangan" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Left" SortExpression="Keterangan">
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="15%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
                                 <asp:Label ID="labKet" runat="server" Text='<%#Bind("Keterangan") %>'></asp:Label>
@@ -213,6 +213,9 @@ Pembelian
                           
                    </Columns>
                 </asp:GridView>
+
+               <asp:Label ID="lblJumlahPembelian" runat="server" Text='<%#Eval("valuefinal") %>'></asp:Label>
+
               </div>
               <!-- /.card-body -->
               <div class="card-footer clearfix">
@@ -241,7 +244,25 @@ Pembelian
                     <label for="exampleInputPassword1">Total Harga</label>
                     </div>
                     <div class="col-md-8">
-                    <asp:TextBox ID="txtHarga" CssClass="form-control" runat="server" />
+                    <asp:TextBox ID="txtHarga" CssClass="form-control" runat="server" Enabled="false"/>
+                  </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-md-3">
+                    <label for="exampleInputPassword1">Bayar</label>
+                    </div>
+                    <div class="col-md-8">
+                    <asp:TextBox ID="txtBayar" OnTextChanged="txtBayar_TextChanged" autopostback="True" CssClass="form-control" runat="server" />
+                  </div>
+                </div>
+
+             <div class="row form-group">
+                    <div class="col-md-3">
+                    <label for="exampleInputPassword1">Kembalian</label>
+                    </div>
+                    <div class="col-md-8">
+                    <asp:TextBox ID="txtKembalian" CssClass="form-control" runat="server" />
                   </div>
                 </div>
 

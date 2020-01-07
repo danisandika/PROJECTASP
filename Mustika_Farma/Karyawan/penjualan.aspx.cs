@@ -23,7 +23,7 @@ public partial class Karyawan_penjualan : System.Web.UI.Page
 
             string mainconn = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
             SqlConnection sqlconn = new SqlConnection(mainconn);
-            string sqlquery = "select IDObat,namaObat,IDJenis,JumlahObat,Satuan,Keterangan from obat";
+            string sqlquery = "select IDObat,namaObat,IDJenis,JumlahObat,Satuan,Keterangan,Harga from obat";
             SqlCommand com = new SqlCommand(sqlquery, sqlconn);
             sqlconn.Open();
             gridObat.DataSource = com.ExecuteReader();
@@ -85,6 +85,65 @@ public partial class Karyawan_penjualan : System.Web.UI.Page
 
     protected void keranjang_Click(object sender, EventArgs e)
     {
+        decimal valuefinal = 0;
+        DataTable dt = new DataTable();
+        dt.Columns.Add("namaObat");
+        dt.Columns.Add("Satuan");
+        dt.Columns.Add("jumlahBeli");
+        dt.Columns.Add("harga");
+
+        foreach (GridViewRow grow in gridObat.Rows)
+        {
+            var checkboxselect = grow.FindControl("CheckBox1") as CheckBox;
+            if (checkboxselect.Checked)
+            {
+                string Name = (grow.FindControl("labNama") as Label).Text;
+                string satuan = (grow.FindControl("labSat") as Label).Text;
+                string jumlah = (grow.FindControl("jumlahBeli") as TextBox).Text;
+                string harga = (grow.FindControl("labHarga") as Label).Text;
+
+                decimal hargatot = Convert.ToDecimal(harga) * Convert.ToInt16(jumlah);
+                dt.Rows.Add(Name, satuan, jumlah, hargatot);
+                valuefinal += hargatot;
+                    
+                lblJumlahPembelian.Text = "TOTAL PEMBAYARAN RP " + Convert.ToString(valuefinal);
+                //txtHarga.Text = Convert.ToString(valuefinal);
+            }
+
+            grdKeranjang.DataSource = dt;
+            grdKeranjang.DataBind();
+
+
+        }
+        Response.Write("<script>alert('Data berhasil dimasukkan kekeranjang');</script>");
 
     }
+
+    private double total = 0;
+    private double pembayaran = 0;
+
+    protected void txtBayar_TextChanged(object sender, EventArgs e)
+    {
+        //double bayar = Convert.ToDouble(txtBayar.Text);
+        //pembayaran = bayar;
+        //kembalian();
+    }
+
+    //public void kembalian()
+    //{
+    //    double num1 = Convert.ToDouble(txtHarga.Text);
+    //    total = num1;
+
+    //    double Kembalian = pembayaran - total;
+    //    txtKembalian.Text = Convert.ToString(Kembalian);
+    //    if (Kembalian < 0)
+    //    {
+    //        Response.Write("<script>alert('Uang Anda Tidak Mencukupi');</script>");
+    //    }
+    //    else
+    //    {
+    //        Response.Write("<script>alert('Terimakasih, Mohon ditunggu pesanannya ');</script>");
+    //    }
+
+    //}
 }

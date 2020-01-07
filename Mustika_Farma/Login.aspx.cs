@@ -77,9 +77,12 @@ public partial class Login : System.Web.UI.Page
             }
             else if (role == "3")
             {
-                nextPage = "Customer/Transaksi.aspx";
+                nextPage = "Customer/Riwayat.aspx";
             }
-           
+            else if (role == "4")
+            {
+                nextPage = "Karyawan/Dokter_periksa.aspx";
+            }
             else
             {
                 //user came straight to the login page so just send them to the 

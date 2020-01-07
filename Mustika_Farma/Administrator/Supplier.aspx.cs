@@ -224,13 +224,6 @@ public partial class Administrator_Supplier : System.Web.UI.Page
     
     }
 
-    protected void btnCancelAdd_Click(object sender, EventArgs e)
-    {
-        secView.Visible = true;
-        ViewMenu.Visible = false;
-        AddMenu.Visible = false;
-    }
-
     protected void btnEdit_Click(object sender, EventArgs e)
     {
         int nilai = 1;
@@ -387,5 +380,12 @@ public partial class Administrator_Supplier : System.Web.UI.Page
     {
         //Hide the modal popup extender
         GridViewDetails.Hide();
+    }
+
+    protected void btnCancelEdit_Click1(object sender, EventArgs e)
+    {
+        secView.Visible = true;
+        AddMenu.Visible = false;
+        ViewMenu.Visible = false;
     }
 }

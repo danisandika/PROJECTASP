@@ -150,7 +150,7 @@
             </div> 
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <asp:Button ID="btnSave" CssClass="btn btn-primary" runat="server" Text="Submit" OnClick="btnSave_Click"/>
+                  <asp:Button ID="btnSave" class="btn btn-success swalDefaultSuccess" runat="server" Text="Submit" OnClick="btnSave_Click"/>
                 </div>    
             </div>
               </div>
@@ -219,7 +219,7 @@
                   <label for="Role">Role</label>
                   </div>
                  <div class="col-md-5">
-                  <asp:DropDownList ID="ddlROlee" runat="server" CssClass="form-control" DataSourceID="dsroles" DataTextField="Deskripsi" DataValueField="IDROle">
+                  <asp:DropDownList ID="ddlROlee" runat="server" CssClass="form-control" DataSourceID="dsroles" DataTextField="Deskripsi" DataValueField="IDRole">
                   </asp:DropDownList>
                        <asp:SqlDataSource ID="dsroles" runat="server" ConnectionString="<%$ ConnectionStrings:Default %>" SelectCommand="select IDRole, Deskripsi from Role where [status] =1"></asp:SqlDataSource>
                   </div>
@@ -231,6 +231,7 @@
                     </div>
                      <div class="col-md-5">
                    <asp:TextBox ID="txtTanggalE" CssClass="form-control" runat="server" TextMode="Date" />
+                    <asp:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="txtTanggalE"></asp:CalendarExtender>
                   </div>
                 </div>
 
@@ -365,6 +366,8 @@
                          <asp:BoundField DataField="Deskripsi" HeaderStyle-CssClass="table-bordered" HeaderText="ID Role"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="IDRole" >
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="10%" CssClass="table table-bordered table-striped"  />
                         </asp:BoundField>
+                        <asp:BoundField DataField="IDRole" ItemStyle-CssClass="hiddencol" HeaderText="ModifiedBy" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
+
                         <asp:TemplateField HeaderText="Aksi" HeaderStyle-CssClass="table-bordered" ItemStyle-HorizontalAlign="Center">
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="30%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
@@ -463,4 +466,3 @@
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="footer" Runat="Server">
 </asp:Content>
-

@@ -107,26 +107,19 @@
                             </ItemTemplate>
                         </asp:TemplateField>
 
-                        <asp:TemplateField HeaderText="IDJenis" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
-                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="2%"  CssClass="table table-bordered table-striped" />
-                            <ItemTemplate>
-                                <asp:Label ID="labIDJenis" runat="server" Text='<%#Bind("IDJenis") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-
-                         <asp:TemplateField HeaderText="JumlahObat" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
-                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="2%"  CssClass="table table-bordered table-striped" />
-                            <ItemTemplate>
-                                <asp:Label ID="labJumlahObat" runat="server" Text='<%#Bind("JumlahObat") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>   
-                        
                          <asp:TemplateField HeaderText="Keterangan" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Left">
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="15%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
                                 <asp:Label ID="labKet" runat="server" Text='<%#Bind("Keterangan") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField> 
+
+                        <asp:TemplateField HeaderText="Harga" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
+                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="2%"  CssClass="table table-bordered table-striped" />
+                            <ItemTemplate>
+                                <asp:Label ID="labHarga" runat="server" Text='<%#Bind("harga") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
 
                         <asp:TemplateField HeaderText="Jumlah Beli" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
@@ -162,6 +155,118 @@
          </div>
         </div>
         </section>
+
+<section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Keranjang</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+              <asp:GridView ID="grdKeranjang" AutoGenerateColumns="false" runat="server" CssClass="table table-striped table-bordered table-hover">
+                    <Columns> 
+                         <asp:TemplateField HeaderText="No" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
+                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="2%"  CssClass="table table-bordered table-striped" />
+                            <ItemTemplate>
+                                <%# Container.DataItemIndex +1 %>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+
+                         <asp:TemplateField HeaderText="Nama Obat" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
+                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="15%"  CssClass="table table-bordered table-striped" />
+                            <ItemTemplate>
+                                <asp:Label ID="labNama" runat="server" Text='<%#Bind("namaObat") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                                                  
+                        <asp:TemplateField HeaderText="Satuan" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
+                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
+                            <ItemTemplate>
+                                <asp:Label ID="labSat" runat="server" Text='<%#Bind("Satuan") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField> 
+
+                        <asp:TemplateField HeaderText="Jumlah" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
+                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="5%"  CssClass="table table-bordered table-striped" />
+                            <ItemTemplate>
+                                <asp:Label ID="labJumlah" runat="server" Text='<%#Eval("jumlahBeli") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField> 
+
+                        <asp:TemplateField HeaderText="Harga Total" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
+                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="5%"  CssClass="table table-bordered table-striped" />
+                            <ItemTemplate>
+                                <asp:Label ID="labHarga" runat="server" Text='<%#Eval("harga") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField> 
+   
+                          
+                   </Columns>
+                </asp:GridView>
+
+               <asp:Label ID="lblJumlahPembelian" runat="server" Text='<%#Eval("valuefinal") %>'></asp:Label>
+
+              </div>
+              <div class="card-footer clearfix">
+             </div>
+            </div>
+          </div>
+             </div>
+            </div>
+
+          <!-- /.col -->
+
+<%--          <div class="col-md-4">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Transaksi Pembelian</h3>
+
+                <div class="card-tools">
+                 
+                    
+                </div>
+              </div>
+              <!-- /.card-header -->              
+                <div class="card-body">
+                
+                 <div class="row form-group">
+                    <div class="col-md-3">
+                    <label for="exampleInputPassword1">Total Harga</label>
+                    </div>
+                    <div class="col-md-8">
+                    <asp:TextBox ID="txtHarga" CssClass="form-control" runat="server" Enabled="false"/>
+                  </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-md-3">
+                    <label for="exampleInputPassword1">Bayar</label>
+                    </div>
+                    <div class="col-md-8">
+                    <asp:TextBox ID="txtBayar" OnTextChanged="txtBayar_TextChanged" autopostback="True" CssClass="form-control" runat="server" />
+                  </div>
+                </div>
+
+             <div class="row form-group">
+                    <div class="col-md-3">
+                    <label for="exampleInputPassword1">Kembalian</label>
+                    </div>
+                    <div class="col-md-8">
+                    <asp:TextBox ID="txtKembalian" CssClass="form-control" runat="server" />
+                  </div>
+                </div>
+
+           <div class="form-group">
+          <button type="submit" name="submit" class="btn btn-primary">Proses</button>
+          </div>
+            </div>
+            </div>
+
+             </div> --%>
+</section>
 
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="footer" Runat="Server">

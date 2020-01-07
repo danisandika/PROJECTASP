@@ -293,7 +293,7 @@
             </div>
         <div class="card-footer">
         <asp:Button ID="btnEdit" runat="server" Text="Ubah" OnClick="btnEdit_Click" class="btn btn-primary" />
-        <asp:Button ID="btnCancelEdit" runat="server" Text="Cancel" OnClick="btnCancelEdit_Click" class="btn btn-danger"/>
+        <asp:Button ID="btnCancelEdit" runat="server" Text="Cancel" OnClick="btnCancelEdit_Click1" class="btn btn-danger"/>
         </div>
     </div>
 </div>
