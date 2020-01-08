@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Administrator/MasterKaryawan.master" AutoEventWireup="true" CodeFile="konf_pembelian.aspx.cs" Inherits="Karyawan_konf_pembelian" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="title" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" Runat="Server">
@@ -52,9 +54,13 @@
                         <asp:BoundField DataField="IDPembelian" HeaderStyle-CssClass="table-bordered" HeaderText="IDPembelian"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="IDPembelian" >
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
                         </asp:BoundField>
-                        <asp:BoundField DataField="IDSupplier" HeaderStyle-CssClass="table-bordered" HeaderText="IDSupplier"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="IDSupplier" >
+
+                        <asp:BoundField DataField="IDSupplier" ItemStyle-CssClass="hiddencol" HeaderText="IDSupplier" HeaderStyle-CssClass="hiddencol" NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="IDSupplier" />
+
+                         <asp:BoundField DataField="NamaSupplier" HeaderStyle-CssClass="table-bordered" HeaderText="Nama Supplier"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="namaSupplier" >
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="15%"  CssClass="table table-bordered table-striped"  />
                         </asp:BoundField>
+
                         <asp:BoundField DataField="Tanggal" HeaderStyle-CssClass="table-bordered" HeaderText="Tanggal"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Tanggal" >
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="8%"  CssClass="table table-bordered table-striped"  />
                         </asp:BoundField>
@@ -70,16 +76,16 @@
                         </asp:TemplateField>
                        
                         <asp:TemplateField HeaderText="Aksi" HeaderStyle-CssClass="table-bordered" ItemStyle-HorizontalAlign="Center">
-                            <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="30%"  CssClass="table table-bordered table-striped" />
+                            <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
                                 <asp:LinkButton ID="lnkDelete" runat="server" CommandArgument='<%# Eval("IDPembelian")%>' 
-                                OnClick="lnkDelete_Click" Text="Batal" style="margin-left:20px" CssClass="far fa-check-square"/>
+                                ToolTip="Batalkan"><span class="far fa-trash-alt nav-icon"></asp:LinkButton>
                                 
                                 <asp:LinkButton ID="lnkEdit" runat="server" CommandArgument='<%# Eval("IDPembelian")%>' 
-                                OnClick="lnkEdit_Click" Text="Konfirmasi" style="margin-left:20px" CssClass="far fa-check-circle"/>
+                                OnClick="lnkEdit_Click" ToolTip="Konfirmasi" CssClass="far fa-check-circle"/>
                                 
                                 <asp:LinkButton ID="lnkViewDetails" runat="server" CommandArgument='<%# Eval("IDPembelian")%>' 
-                                OnClick="lnkViewDetails_Click" Text="Detail" style="margin-left:20px" CssClass="far fa-check-square"/>
+                                OnClick="lnkViewDetails_Click" Text="" CssClass="far fa-check-square" ToolTip="Detail"/>
                             </ItemTemplate>
                         </asp:TemplateField>
                     
@@ -104,7 +110,7 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-              <asp:GridView ID="grdDetail" AutoGenerateColumns="false" runat="server" CssClass="table table-striped table-bordered table-hover">
+              <asp:GridView ID="grdDetail" AutoGenerateColumns="false" runat="server" DataKeyNames="IDPembelian" CssClass="table table-striped table-bordered table-hover">
                     <Columns> 
                          <asp:TemplateField HeaderText="No" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="2%"  CssClass="table table-bordered table-striped" />
@@ -122,9 +128,19 @@
                         <asp:BoundField DataField="Jumlah" HeaderStyle-CssClass="table-bordered" HeaderText="Jumlah"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="NoTelp" >
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="8%"  CssClass="table table-bordered table-striped"  />
                         </asp:BoundField>
-                        <asp:BoundField DataField="subTotal" HeaderStyle-CssClass="table-bordered" HeaderText="Sub Total"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="TglLahir" >
+                        <asp:BoundField DataField="subTotal" DataFormatString="Rp {0:###,###,###}" HeaderStyle-CssClass="table-bordered" HeaderText="Sub Total"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="TglLahir" >
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="8%" CssClass="table table-bordered table-striped"   />
                         </asp:BoundField>
+
+                        <asp:BoundField DataField="IDSupplier" ItemStyle-CssClass="hiddencol" HeaderText="IDSupplier" HeaderStyle-CssClass="hiddencol" NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="IDSupplier" />
+
+                         <asp:TemplateField HeaderText="Aksi" HeaderStyle-CssClass="table-bordered" ItemStyle-HorizontalAlign="Center">
+                            <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="8%"  CssClass="table table-bordered table-striped" />
+                            <ItemTemplate>
+                                <asp:LinkButton ID="lnkEdit" runat="server" CommandArgument='<%# Eval("IDPembelian")%>' 
+                                OnClick="lnkEdit_Click1" Text="" CssClass="far fa-edit nav-icon" ToolTip="Edit"/>
+                            </ItemTemplate>
+                        </asp:TemplateField>
 
                           </Columns>
                 </asp:GridView>
@@ -135,6 +151,76 @@
             </div>   
 </section>
 
+     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+
+    <asp:Panel ID="pnlGridViewDetails" runat="server" Width="490px" Height="400px"
+        CssClass="pnlBackGround">
+        <div class="row">
+         <div class="card-body">
+        <div class="row form-group">
+        <div class="col-md-5">
+        <asp:label style="margin-left:20px;" runat="server" class="col-sm-3 col-form-label text-label" Font-bold="true">EDIT</asp:label>
+        </div>
+        </div>
+        <div class="row form-group">
+         <div class="col-md-5">
+        <asp:label style="margin-left:20px" runat="server" class="col-sm-3 col-form-label text-label">ID Pembelian</asp:label>
+        </div>
+         <div class="col-md-5">
+        <asp:Label ID="IDPembelian" runat="server" Text=""></asp:Label>
+        </div></div>
+         
+        <div class="row form-group">
+         <div class="col-md-5">
+         <asp:label style="margin-left:20px" runat="server" class="col-sm-3 col-form-label text-label">Nama Obat</asp:label>
+        </div>
+        <div class="col-md-5">
+         <asp:Label ID="namaObat" runat="server" Text=""></asp:Label>
+       </div></div>
+
+         <div class="row form-group">
+         <div class="col-md-5">
+        <asp:label style="margin-left:20px" runat="server" class="col-sm-3 col-form-label text-label">Jumlah</asp:label>
+        </div>
+        <div class="col-md-5">
+        <asp:Label ID="jumlah" runat="server" Text=""></asp:Label>
+        </div></div>
+
+         <div class="row form-group">
+         <div class="col-md-5">
+        <asp:label style="margin-left:20px" runat="server" class="col-sm-3 col-form-label text-label">SubTotal</asp:Label>
+         </div>
+        <div class="col-md-5">
+        <asp:Label ID="SubTotal" runat="server" Text=""></asp:Label>
+        </div></div>
+        <asp:TextBox ID="IDSupplier" runat="server" Visible="false"></asp:TextBox>
+
+         <div class="row form-group">
+         <div class="col-md-5">
+        <asp:label style="margin-left:20px" runat="server" class="col-sm-3 col-form-label text-label">Harga Jual</asp:Label>
+        </div>
+        <div class="col-md-5">
+            <asp:TextBox ID="hargaJual" runat="server"></asp:TextBox>
+        </div></div>
+        
+
+         <div class="row form-group">
+         <div class="col-md-5">
+        <asp:label style="margin-left:20px" runat="server" class="col-sm-3 col-form-label text-label">Kadaluarsa</asp:Label>
+         </div>
+        <div class="col-md-5">
+            <asp:TextBox ID="Kadaluarsa" runat="server" TextMode="Date"></asp:TextBox>
+        </div></div>
+      
+        <asp:Button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-left:25px" ID="btnclose" runat="server" Text="Kembali" OnClick="btnclose_Click" />
+        
+        <asp:Button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-left:25px" ID="btnUpdate" runat="server" Text="Perbarui" OnClick="btnUpdate_Click" />
+
+         </div></div>
+    </asp:Panel>
+        <asp:Button ID="btnDummy" runat="server" Style="display: none;" />
+    <asp:ModalPopupExtender  ID="GridViewDetails" runat="server" TargetControlID="btnDummy"
+        PopupControlID="pnlGridViewDetails" BackgroundCssClass="modalBackground"></asp:ModalPopupExtender>
 </asp:Content>
 <asp:Content ID="Content7" ContentPlaceHolderID="footer" Runat="Server">
 </asp:Content>

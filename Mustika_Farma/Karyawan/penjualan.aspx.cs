@@ -17,7 +17,7 @@ public partial class Karyawan_penjualan : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        EditFotoView.Visible = true;
+        uploadfile.Visible = true;
         if (!IsPostBack)
         {
 
@@ -37,13 +37,13 @@ public partial class Karyawan_penjualan : System.Web.UI.Page
     protected void rbResep_SelectedIndexChanged(object sender, EventArgs e)
     {
         int resep = Convert.ToInt32(rbResep.SelectedValue.ToString());
-        if (resep==1)
+        if (resep == 1)
         {
-            EditFotoView.Visible = true;
+            uploadfile.Visible = true;
         }
         else
         {
-            EditFotoView.Visible = false;
+            uploadfile.Visible = false;
         }
 
     }
@@ -105,7 +105,7 @@ public partial class Karyawan_penjualan : System.Web.UI.Page
                 decimal hargatot = Convert.ToDecimal(harga) * Convert.ToInt16(jumlah);
                 dt.Rows.Add(Name, satuan, jumlah, hargatot);
                 valuefinal += hargatot;
-                    
+
                 lblJumlahPembelian.Text = "TOTAL PEMBAYARAN RP " + Convert.ToString(valuefinal);
                 //txtHarga.Text = Convert.ToString(valuefinal);
             }
@@ -146,4 +146,47 @@ public partial class Karyawan_penjualan : System.Web.UI.Page
     //    }
 
     //}
+    protected string generateIDTrans()
+    {
+        string IDTrans = DateTime.Now.ToString("yyyyMMddhhmmss");
+        return IDTrans;
+    }
+
+    protected void btnProses_Click(object sender, EventArgs e)
+    {
+        string filename = Guid.NewGuid() + System.IO.Path.GetFileName(uploadfile.FileName).Substring(System.IO.Path.GetFileName(uploadfile.FileName).Length - 4);
+        uploadfile.SaveAs(Server.MapPath("Resep/") + filename);
+
+        try
+        {
+            string strIDPembelian = generateIDTrans();
+            try
+            {
+
+                DateTime tanggal = DateTime.Now;
+                SqlCommand insert = new SqlCommand("[sp_InputTransaksi]", conn);
+                insert.CommandType = CommandType.StoredProcedure;
+
+                insert.Parameters.AddWithValue("@IDTransaksi", strIDPembelian);
+                insert.Parameters.AddWithValue("@IDKaryawan", Session["creaby"]);
+                insert.Parameters.AddWithValue("@Tanggal", tanggal);
+                insert.Parameters.AddWithValue("@FotoResep", "Resep/" + filename);
+                insert.Parameters.AddWithValue("@totalBayar", lblJumlahPembelian.Text);
+                insert.Parameters.AddWithValue("@status", 2);
+
+                conn.Open();
+                insert.ExecuteNonQuery();
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                //Response.Write("<script>alert('Gagal');</script>");
+                Response.Write("<script>alert('Gagal1');</script>");
+
+            }
+        }
+        catch (Exception ex)
+        {
+        }
+    }
 }

@@ -67,6 +67,8 @@ public partial class Administrator_Obat : System.Web.UI.Page
         com.Parameters.AddWithValue("@foto", "obat_obat/" + filename);
         com.Parameters.AddWithValue("@createDate", CreateDate);
         com.Parameters.AddWithValue("@createBy", CreateBy);
+        com.Parameters.AddWithValue("@IDSupplier",ddlSupplier.SelectedValue);
+
 
         conn.Open();
 
@@ -95,16 +97,17 @@ public partial class Administrator_Obat : System.Web.UI.Page
             String id = gridObat.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
             lblID.Text = id;
             txtNamaObatE.Text = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[1].Text;
-            ddlJenisObatE.SelectedValue = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[17].Text;
+            ddlJenisObatE.SelectedValue = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[18].Text;
             txtJumlahE.Text = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[3].Text;
             txtKetE.Text = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[4].Text;
             ddlSatuanE.SelectedValue = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[6].Text;
-            txtHargaEdit.Text = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[7].Text;
+            txtHargaEdit.Text = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[19].Text;
+
 
             DateTime exp = Convert.ToDateTime(gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[8].Text);
             txtExpiredE.Text = exp.ToString("yyyy-MM-dd");
 
-            editfoto.ImageUrl = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[16].Text;
+            editfoto.ImageUrl = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[17].Text;
 
             secAdd.Visible = false;
             secEdit.Visible = true;
@@ -197,6 +200,7 @@ public partial class Administrator_Obat : System.Web.UI.Page
             com.Parameters.AddWithValue("@Keterangan", txtKetE.Text);
             com.Parameters.AddWithValue("@IDLokasi", ddlLokasiE.SelectedValue);
             com.Parameters.AddWithValue("@Satuan", ddlSatuanE.SelectedValue);
+
             com.Parameters.AddWithValue("@Harga", txtHargaEdit.Text);
             com.Parameters.AddWithValue("@Status", 1);
             com.Parameters.AddWithValue("@JumlahObat", txtJumlahE.Text);
@@ -301,11 +305,12 @@ public partial class Administrator_Obat : System.Web.UI.Page
         GridViewRow row = (GridViewRow)((LinkButton)sender).Parent.Parent;
         //Get the column value and assign it to label in panel
         //Change the index as per your need
+        Keterangan.Text = row.Cells[4].Text;
         namaObat.Text = row.Cells[1].Text;
-        CreateBy.Text = row.Cells[11].Text;
-        CreateDate.Text = row.Cells[12].Text;
-        ModifiedBy.Text = row.Cells[13].Text;
-        ModifiedDate.Text = row.Cells[14].Text;
+        CreateBy.Text = row.Cells[12].Text;
+        CreateDate.Text = row.Cells[13].Text;
+        ModifiedBy.Text = row.Cells[14].Text;
+        ModifiedDate.Text = row.Cells[15].Text;
         Expired.Text = row.Cells[8].Text;
 
         //Show the modal popup extender
@@ -314,7 +319,7 @@ public partial class Administrator_Obat : System.Web.UI.Page
 
     protected void gridObat_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
-        TableCell cell = gridObat.Rows[e.RowIndex].Cells[15];
+        TableCell cell = gridObat.Rows[e.RowIndex].Cells[16];
         string cells = cell.Text;
 
         SqlCommand com = new SqlCommand();
@@ -352,7 +357,7 @@ public partial class Administrator_Obat : System.Web.UI.Page
 
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
-            TableCell statusCell = e.Row.Cells[15];
+            TableCell statusCell = e.Row.Cells[16];
             if (statusCell.Text == "1")
             {
                 linkAktif.Visible = false;

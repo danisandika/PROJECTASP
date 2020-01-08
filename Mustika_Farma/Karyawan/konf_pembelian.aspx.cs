@@ -198,4 +198,57 @@ public partial class Karyawan_konf_pembelian : System.Web.UI.Page
             Response.Write("<script>alert('Data Gagal dimasukkan kekeranjang');</script>");
         }
     }
+
+    protected void lnkEdit_Click1(object sender, EventArgs e)
+    {
+        //Grab the selected row
+        GridViewRow row = (GridViewRow)((LinkButton)sender).Parent.Parent;
+        //Get the column value and assign it to label in panel
+        //Change the index as per your need
+        IDPembelian.Text= row.Cells[1].Text;
+        namaObat.Text = row.Cells[2].Text;
+        jumlah.Text= row.Cells[3].Text;
+        SubTotal.Text = row.Cells[4].Text;
+        IDSupplier.Text= row.Cells[5].Text;
+
+        //Show the modal popup extender
+        GridViewDetails.Show();
+    }
+    
+
+    protected void btnclose_Click(object sender, EventArgs e)
+    {
+        GridViewDetails.Hide();
+    }
+
+    protected void btnUpdate_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            SqlCommand com = new SqlCommand();
+            com.Connection = conn;
+            com.CommandText = "[sp_UpdateHargaJual]";
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@namaObat", namaObat.Text);
+            com.Parameters.AddWithValue("@harga", hargaJual.Text);
+            com.Parameters.AddWithValue("@IDSupplier", IDSupplier.Text);
+            com.Parameters.AddWithValue("@kadaluarsa", (Kadaluarsa.Text));
+
+
+
+            conn.Open();
+            int result = Convert.ToInt32(com.ExecuteNonQuery());
+            conn.Close();
+            Response.Write("<script>alert('Data Berhasil diupdate');</script>");
+
+        }
+        catch
+        {
+            Response.Write("<script>alert('Data Gagal diupdate');</script>");
+
+        }
+
+
+
+    }
 }

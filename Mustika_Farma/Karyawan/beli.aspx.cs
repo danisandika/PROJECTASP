@@ -19,7 +19,8 @@ public partial class Karyawan_beli : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            loadData();
+            //loadData();
+           
         }
     }
 
@@ -43,7 +44,7 @@ public partial class Karyawan_beli : System.Web.UI.Page
     protected void Keranjang_SelectedIndexChanged(object sender, EventArgs e)
     {
 
-        
+
     }
 
     private void sortGridView(string sortExpression, string direction)
@@ -151,7 +152,7 @@ public partial class Karyawan_beli : System.Web.UI.Page
 
     protected void rbResep_SelectedIndexChanged(object sender, EventArgs e)
     {
-       
+
     }
 
 
@@ -162,11 +163,11 @@ public partial class Karyawan_beli : System.Web.UI.Page
 
     protected void btnKeranjang_Click(object sender, EventArgs e)
     {
-        
+
 
     }
 
-   
+
     protected void keranjang_Click(object sender, EventArgs e)
     {
         decimal valuefinal = 0;
@@ -175,6 +176,7 @@ public partial class Karyawan_beli : System.Web.UI.Page
         dt.Columns.Add("Satuan");
         dt.Columns.Add("jumlah");
         dt.Columns.Add("harga");
+        dt.Columns.Add("IDObat");
 
         foreach (GridViewRow grow in gridObat.Rows)
         {
@@ -184,22 +186,29 @@ public partial class Karyawan_beli : System.Web.UI.Page
                 string Name = (grow.FindControl("labNama") as Label).Text;
                 string satuan = (grow.FindControl("labSat") as Label).Text;
                 string jumlah = (grow.FindControl("jumlahBeli") as TextBox).Text;
-                string harga = (grow.FindControl("harga") as TextBox).Text;
+                string harga = (grow.FindControl("harga") as Label).Text;
+                string IDObat = (grow.FindControl("labIDObat") as Label).Text;
 
                 decimal hargatot = Convert.ToDecimal(harga) * Convert.ToInt16(jumlah);
-                dt.Rows.Add(Name,satuan, jumlah, hargatot);
+                dt.Rows.Add(Name, satuan, jumlah, hargatot, IDObat);
                 valuefinal += hargatot;
 
                 lblJumlahPembelian.Text = "TOTAL PEMBAYARAN RP " + Convert.ToString(valuefinal);
                 txtHarga.Text = Convert.ToString(valuefinal);
             }
-            
+
             grdKeranjang.DataSource = dt;
             grdKeranjang.DataBind();
-           
+
 
         }
         Response.Write("<script>alert('Data berhasil dimasukkan kekeranjang');</script>");
+    }
+
+    protected string generateIDPembelian()
+    {
+        string IDPembelian = DateTime.Now.ToString("yyyyMMddhhmmss");
+        return IDPembelian;
     }
 
     protected void jumlahBeli_TextChanged(object sender, EventArgs e)
@@ -217,7 +226,7 @@ public partial class Karyawan_beli : System.Web.UI.Page
     {
         double bayar = Convert.ToDouble(txtBayar.Text);
         pembayaran = bayar;
-       
+
         kembalian();
     }
 
@@ -237,8 +246,86 @@ public partial class Karyawan_beli : System.Web.UI.Page
         }
         else
         {
-            Response.Write("<script>alert('Terimakasih, Mohon ditunggu pesanannya ');</script>");
         }
-       
+
+    }
+
+    protected void btnProses_Click1(object sender, EventArgs e)
+    {
+
+
+    }
+
+    protected void btnProses_Click(object sender, EventArgs e)
+    {
+
+        string strIDPembelian = generateIDPembelian();
+        DateTime tanggal = DateTime.Now;
+        SqlCommand insert = new SqlCommand("sp_InputPembelian", conn);
+        insert.CommandType = CommandType.StoredProcedure;
+
+        insert.Parameters.AddWithValue("@IDPembelian", strIDPembelian);
+        insert.Parameters.AddWithValue("@IDKaryawan", Session["creaby"]);
+        insert.Parameters.AddWithValue("@tanggal", tanggal);
+        insert.Parameters.AddWithValue("@IDSupplier", DDLSupplier.SelectedValue);
+        insert.Parameters.AddWithValue("@totalbayar", txtHarga.Text);
+
+        conn.Open();
+        insert.ExecuteNonQuery();
+        conn.Close();
+
+
+
+        foreach (GridViewRow grow in grdKeranjang.Rows)
+        {
+            /**
+                        SqlCommand tj = new SqlCommand("sp_inputjumlahobat", conn);
+                        tj.CommandType = CommandType.StoredProcedure;
+
+                        tj.Parameters.AddWithValue("IDObat", (grdKeranjang.Rows[i].Cells[5].Text));
+                        tj.Parameters.AddWithValue("jumlah", (grdKeranjang.Rows[i].Cells[3].Text));
+
+
+                        conn.Open();
+                        tj.ExecuteNonQuery();
+                        conn.Close();
+            **/
+
+            SqlCommand ins = new SqlCommand("sp_Inputdetailpembelian", conn);
+            ins.CommandType = CommandType.StoredProcedure;
+
+            ins.Parameters.AddWithValue("IDPembelian", strIDPembelian);
+            ins.Parameters.AddWithValue("jumlah", (grow.FindControl("labJumlah") as Label).Text);
+            ins.Parameters.AddWithValue("subTotal", (grow.FindControl("labHarga") as Label).Text);
+            ins.Parameters.AddWithValue("IDObat", (grow.FindControl("labIDObat") as Label).Text);
+
+            conn.Open();
+            ins.ExecuteNonQuery();
+            conn.Close();
+
+
+
+
+        }
+
+    }
+
+    protected void DDLSupplier_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void btnSupplier_Click(object sender, EventArgs e)
+    {
+        SqlCommand com = new SqlCommand();
+        com.Connection = conn;
+        com.CommandText = "[sp_SelectBeli_Supplier]";
+        com.CommandType = CommandType.StoredProcedure;
+        com.Parameters.AddWithValue("@IDSupplier", DDLSupplier.SelectedValue.ToString());
+
+        SqlDataAdapter adapt = new SqlDataAdapter(com);
+        adapt.Fill(ds);
+        gridObat.DataSource = ds;
+        gridObat.DataBind();
     }
 }

@@ -36,23 +36,34 @@
          </div>
 		</div>
 
-		<div id="EditFotoView" runat="server"> 
-            <div class="col-sm-9">
-            <div class="input-group">
-            <figure class="img-upload-preview">
-            <asp:FileUpload type="file" class="form-control form-control-user" ID="editUploadFile" runat="server" onchange="imgEdit();" />
-             </figure>
-              </div>
-        <asp:RequiredFieldValidator
-                id="RequiredFieldValidator18"
-                ControlToValidate="editUploadFile"
-                Text="(Required)"
-                ValidationGroup="frmEdit"
-                Runat="server" />
-        </div>
-        </div>
-        <button type="submit" name="submit" class="btn btn-primary">Proses</button>
-        </div>
+		 <div class="form-group row align-items-center">
+                <div class="col-md-3">
+                 <label class="col-sm-3 col-form-label text-label">Foto</label>
+                 </div>
+                 <div class="col-sm-9">
+                 <div class="input-group">
+                 <figure class="img-upload-preview">
+                     <asp:FileUpload type="file" class="form-control form-control-user" ID="uploadfile" runat="server" onchange="img();" />
+                 </figure>
+                </div>
+                       <asp:RequiredFieldValidator
+                            id="RequiredFieldValidator17"
+                            ControlToValidate="uploadfile"
+                            Text="(Required)"
+                            ValidationGroup="frmAdd"
+                            Runat="server" />
+                                               
+               </div>
+               </div>
+
+      <div class="form-group row align-items-center">
+                <label class="col-sm-3 col-form-label text-label"></label>
+                <div class="col-sm-9">
+                <div class="input-group">
+                <asp:Image ID="foto" runat="server" style="height:200px;" />
+                </div>
+                </div>
+                </div>  
       </div>
     </div>
 </div>
@@ -76,7 +87,7 @@
                     </div>
                      <div class="col-md-3">
                       <asp:LinkButton BackColor="SkyBlue" CssClass="col-lg-8" runat="server" ID="btnSearch" OnClick="btnSearch_Click">
-                          <span class="fa fa-search"></span></i></asp:LinkButton>
+                          <span class="fa fa-search"></span></asp:LinkButton>
                   </div>
                   </div>
                 </div>
@@ -144,9 +155,10 @@
 
                     </Columns>
                 </asp:GridView>
-
+               <div class="form-group">
                <asp:Button ID="keranjang" runat="server" CssClass="btn btn-primary" Text="Tambahkan ke keranjang" OnClick="keranjang_Click"/>             
-                </div>
+               </div>
+                    </div>
 
                 </div>
               </div>
@@ -211,64 +223,34 @@
 
               </div>
               <div class="card-footer clearfix">
+                    <div class="form-group">
+                <asp:Button ID="btnProses" runat="server" CssClass="btn btn-primary" Text="Proses" OnClick="btnProses_Click"/>                     
+                </div>
              </div>
             </div>
           </div>
              </div>
             </div>
 
-          <!-- /.col -->
-
-<%--          <div class="col-md-4">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Transaksi Pembelian</h3>
-
-                <div class="card-tools">
-                 
-                    
-                </div>
-              </div>
-              <!-- /.card-header -->              
-                <div class="card-body">
-                
-                 <div class="row form-group">
-                    <div class="col-md-3">
-                    <label for="exampleInputPassword1">Total Harga</label>
-                    </div>
-                    <div class="col-md-8">
-                    <asp:TextBox ID="txtHarga" CssClass="form-control" runat="server" Enabled="false"/>
-                  </div>
-                </div>
-
-                <div class="row form-group">
-                    <div class="col-md-3">
-                    <label for="exampleInputPassword1">Bayar</label>
-                    </div>
-                    <div class="col-md-8">
-                    <asp:TextBox ID="txtBayar" OnTextChanged="txtBayar_TextChanged" autopostback="True" CssClass="form-control" runat="server" />
-                  </div>
-                </div>
-
-             <div class="row form-group">
-                    <div class="col-md-3">
-                    <label for="exampleInputPassword1">Kembalian</label>
-                    </div>
-                    <div class="col-md-8">
-                    <asp:TextBox ID="txtKembalian" CssClass="form-control" runat="server" />
-                  </div>
-                </div>
-
-           <div class="form-group">
-          <button type="submit" name="submit" class="btn btn-primary">Proses</button>
-          </div>
-            </div>
-            </div>
-
-             </div> --%>
 </section>
 
+     <script>
+        function img() {
+            var url = inputToURL(document.getElementById("<%=uploadfile.ClientID%>"));
+            document.getElementById("<%=foto.ClientID%>").src = url;
+        }
+       <%-- function imgEdit() {
+            var url = inputToURL(document.getElementById("<%=editUploadFile.ClientID%>"));
+            document.getElementById("<%=editfoto.ClientID%>").src = url;--%>
+        //}
+        function inputToURL(inputElement) {
+            var file = inputElement.files[0];
+            return window.URL.createObjectURL(file);
+        }
+
+    </script>
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="footer" Runat="Server">
 </asp:Content>
+ 
 

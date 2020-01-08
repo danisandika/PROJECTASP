@@ -307,15 +307,13 @@
 
                 <asp:linkbutton CssClass="btn btn-block bg-gradient-primary col-2" runat="server" ID="btntambah" OnClick="btntambah_Click"><i class="fas fa-plus"></i> | Tambah</asp:linkbutton>
                  <label>Lihat Bedasarkan Status</label>
-                <asp:DropDownList ID="ddlStatusView" runat="server" class="form-control" Width="200px" OnTextChanged="ddlStatusView_TextChanged" AutoPostBack="true">
+                <div class="input-group-append">
+                 <asp:DropDownList ID="ddlStatusView" runat="server" class="form-control" Width="200px" OnTextChanged="ddlStatusView_TextChanged" AutoPostBack="true">
                  <asp:ListItem value="1" >Aktif</asp:ListItem>
                  <asp:ListItem Value="0" >Tidak Aktif</asp:ListItem>
                  <asp:ListItem Value="2" Selected="True">Semua</asp:ListItem>
                  </asp:DropDownList>
-                  <div class="card-tools">
-                  <div class="input-group input-group-sm" style="width: 150px;">
-                    <asp:TextBox id="txtSearch" CssClass="form-control float-right" runat="server"/>
-                    <div class="input-group-append">
+                    <asp:TextBox id="txtSearch" CssClass="form-control float-right" runat="server" Width="20%"/>                    
                       <asp:LinkButton CssClass="btn btn-default" runat="server" ID="btnSearch" OnClick="btnSearch_Click"><i class="fas fa-search"></i></asp:LinkButton>
                     </div>
                   </div>
@@ -372,20 +370,20 @@
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="30%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
                                 <asp:LinkButton runat="server" ID="linkEdit" CommandName="cmEdit" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
-                                    ToolTip="Edit Data"><span class="far fa-edit nav-icon">Edit</span>
+                                    ToolTip="Edit Data"><span class="far fa-edit nav-icon"></span>
                                 </asp:LinkButton>
                                 
                                 
                                  <asp:LinkButton runat="server" ID="linkDelete" CommandName="Delete" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
-                                ToolTip="linkDelete"><span class="far fa-trash-alt nav-icon" onclick="return confirm('Are you sure you want to delete this item?');">Delete</span></asp:LinkButton>
+                                ToolTip="linkDelete"><span class="far fa-trash-alt nav-icon" onclick="return confirm('Are you sure you want to delete this item?');"></span></asp:LinkButton>
                                 
                                 
                                  <asp:LinkButton runat="server" ID="linkAktif" CommandName="Delete" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
-                                ToolTip="linkAktif"><span class="far fa-check-circle" onclick="return confirm('Are you sure you want to delete this item?');">Aktif</span></asp:LinkButton>
+                                ToolTip="linkAktif"><span class="far fa-check-circle" onclick="return confirm('Are you sure you want to delete this item?');"></span></asp:LinkButton>
                                 
                                 
                                 <asp:LinkButton ID="lnkViewDetails" runat="server" CommandArgument='<%# Eval("IDUser")%>' 
-                                OnClick="lnkViewDetails_Click" Text="Detail" style="margin-left:20px" CssClass="far fa-check-square"/>
+                                OnClick="lnkViewDetails_Click" Text="" CssClass="far fa-check-square" ToolTip="Details"/>
                             </ItemTemplate>
                         </asp:TemplateField>
                     

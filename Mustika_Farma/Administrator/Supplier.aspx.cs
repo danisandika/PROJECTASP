@@ -388,4 +388,9 @@ public partial class Administrator_Supplier : System.Web.UI.Page
         AddMenu.Visible = false;
         ViewMenu.Visible = false;
     }
+
+    protected void btnCancelAdd_Click(object sender, EventArgs e)
+    {
+
+    }
 }

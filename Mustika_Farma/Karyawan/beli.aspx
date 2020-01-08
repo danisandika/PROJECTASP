@@ -32,20 +32,22 @@ Pembelian
           <div class="col-12">
             <div class="card-primary">
               <div class="card-header">
-        <h3 class="card-title ">Tambah Data Pembelian</h3>
-      </div>
+                <h3 class="card-title ">Tambah Data Pembelian</h3>
+               </div>
+               
+
       <div class="card-body">
         <div class="row">
         <div class="col-md-3">
         <label for="Supplier">Supplier</label>
         </div>
-        <div class="col-md-5">
-        <asp:DropDownList ID="DDLSupplier" runat="server" CssClass="form-control" DataSourceID="dsSupplier" DataTextField="NamaSupplier" DataValueField="IDSupplier">
-        </asp:DropDownList>
-            <asp:SqlDataSource ID="dsSupplier" runat="server" ConnectionString="<%$ ConnectionStrings:Default %>" SelectCommand="SELECT IDSupplier, NamaSupplier FROM Supplier WHERE (Status = 1)"></asp:SqlDataSource>
+        <div class="input-group-append">
+                 <asp:DropDownList ID="DDLSupplier" runat="server" OnTextChanged="DDLSupplier_TextChanged"  CssClass="form-control" DataSourceID="dsSupplier" DataTextField="NamaSupplier" DataValueField="IDSupplier">
+                   </asp:DropDownList>
+                    <asp:SqlDataSource ID="dsSupplier" runat="server" ConnectionString="<%$ ConnectionStrings:Default %>" SelectCommand="SELECT IDSupplier, NamaSupplier FROM Supplier WHERE (Status = 1)"></asp:SqlDataSource>
+      <asp:Button ID="btnSupplier" OnClick="btnSupplier_Click" runat="server" Text="Cari" ></asp:Button>
         </div>
-      </div>
-
+        </div>
         </div>
       </div>
        </div>
@@ -68,13 +70,6 @@ Pembelian
                    <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
                 <div class="row form-group">
-                    <div class="col-md-8">
-                    <asp:TextBox Width="350%" id="txtSearch" CssClass="form-control float-right" runat="server"/>
-                    </div>
-                     <div class="col-md-3">
-                      <asp:LinkButton BackColor="SkyBlue" CssClass="col-lg-8" runat="server" ID="btnSearch" OnClick="btnSearch_Click1">
-                          <span class="fa fa-search"></span></i></asp:LinkButton>
-                  </div>
                   </div>
                 </div>
                 </div>
@@ -98,15 +93,15 @@ Pembelian
                             </ItemTemplate>
                         </asp:TemplateField>
 
-                         <asp:TemplateField HeaderText="namaObat" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center" SortExpression="namaObat">
-                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="2%"  CssClass="table table-bordered table-striped" />
+                         <asp:TemplateField HeaderText="Nama Obat" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Left" SortExpression="namaObat">
+                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="5%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
                                 <asp:Label ID="labNama" runat="server" Text='<%#Bind("namaObat") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
 
-                         <asp:TemplateField HeaderText="JumlahObat" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center"  SortExpression="JumlahObat">
-                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="2%"  CssClass="table table-bordered table-striped" />
+                         <asp:TemplateField HeaderText="Jumlah Obat" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Right"  SortExpression="JumlahObat">
+                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="7%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
                                 <asp:Label ID="labJumlahObat" runat="server" Text='<%#Bind("JumlahObat") %>'></asp:Label>
                             </ItemTemplate>
@@ -133,12 +128,18 @@ Pembelian
                             </ItemTemplate>
                         </asp:TemplateField>  
 
-                        <asp:TemplateField HeaderText="Harga Satuan" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
+                        <asp:TemplateField HeaderText="Harga Satuan" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Right">
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
-                                 <asp:TextBox ID="harga" runat="server" AutoPostBack="true"></asp:TextBox>
+                                <asp:Label ID="harga" runat="server" Text='<%#Bind("Harga") %>' DataFormatString="Rp {0:###,###,###}"></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField> 
+
+                        <asp:TemplateField HeaderText="ID Obat" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center" Visible="false">
+                            <ItemTemplate>
+                                <asp:Label ID="labIDObat" runat="server" Text='<%#Bind("IDObat") %>' Visible="false"></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>  
 
                             <asp:TemplateField HeaderText="Tambahkan" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
                             <ItemStyle Font-Size="small" VerticalAlign="Middle" Width="2%"  CssClass="table table-bordered table-striped" />
@@ -182,31 +183,37 @@ Pembelian
                             </ItemTemplate>
                         </asp:TemplateField>
 
-                         <asp:TemplateField HeaderText="Nama Obat" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
+                         <asp:TemplateField HeaderText="Nama Obat" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Left">
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="20%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
                                 <asp:Label ID="labNama" runat="server" Text='<%#Bind("namaObat") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                                                   
-                        <asp:TemplateField HeaderText="Satuan" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
+                        <asp:TemplateField HeaderText="Satuan" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Left">
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
                                 <asp:Label ID="labSat" runat="server" Text='<%#Bind("Satuan") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField> 
 
-                        <asp:TemplateField HeaderText="Jumlah" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
+                        <asp:TemplateField HeaderText="Jumlah" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Right">
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
                                 <asp:Label ID="labJumlah" runat="server" Text='<%#Eval("jumlah") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField> 
 
-                        <asp:TemplateField HeaderText="Harga Total" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
+                        <asp:TemplateField HeaderText="Harga Total" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Right">
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
                                 <asp:Label ID="labHarga" runat="server" Text='<%#Eval("harga") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField> 
+
+                         <asp:TemplateField HeaderText="ID Obat" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Left" Visible="false">
+                            <ItemTemplate>
+                                <asp:Label ID="labIDObat" runat="server" Text='<%#Eval("IDObat") %>' Visible="false"></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField> 
    
@@ -267,8 +274,8 @@ Pembelian
                 </div>
 
            <div class="form-group">
-          <button type="submit" name="submit" class="btn btn-primary">Proses</button>
-          </div>
+                <asp:Button ID="btnProses" runat="server" CssClass="btn btn-primary" Text="Proses" OnClick="btnProses_Click"/>                     
+                </div>
             </div>
             </div>
 

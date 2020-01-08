@@ -365,24 +365,20 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Table Dokter</h3>
-                  <br />
+                 <h2>Tabel Dokter</h2>
 
                 <asp:linkbutton CssClass="btn btn-block bg-gradient-primary col-2" runat="server" ID="btntambah" OnClick="btntambah_Click"><i class="fas fa-plus"></i> | Tambah</asp:linkbutton>
                  <label>Lihat Bedasarkan Status</label>
-                <asp:DropDownList ID="ddlStatusView" runat="server" class="form-control" Width="200px" OnTextChanged="ddlStatusView_TextChanged" AutoPostBack="true">
+                <div class="input-group-append">
+                 <asp:DropDownList ID="ddlStatusView" runat="server" class="form-control" Width="200px" OnTextChanged="ddlStatusView_TextChanged" AutoPostBack="true">
                  <asp:ListItem value="1" >Aktif</asp:ListItem>
                  <asp:ListItem Value="0" >Tidak Aktif</asp:ListItem>
                  <asp:ListItem Value="2" Selected="True">Semua</asp:ListItem>
                  </asp:DropDownList>
-                  <div class="card-tools">
-                  <div class="input-group input-group-sm" style="width: 150px;">
-                    <asp:TextBox id="txtSearch" CssClass="form-control float-right" runat="server"/>
-                    <div class="input-group-append">
+                    <asp:TextBox id="txtSearch" CssClass="form-control float-right" runat="server" Width="20%"/>                    
                       <asp:LinkButton CssClass="btn btn-default" runat="server" ID="btnSearch" OnClick="btnSearch_Click"><i class="fas fa-search"></i></asp:LinkButton>
                     </div>
                   </div>
-                </div>
               </div>
                 <div class="card-body table-responsive p-0 col-12">
                 
@@ -395,7 +391,7 @@
                     >
                     <PagerSettings Mode="NumericFirstLast" FirstPageText="<<" LastPageText=">>" />
                     <Columns>
-                        <asp:TemplateField HeaderText="No" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign ="Center" >
+                        <asp:TemplateField HeaderText="No" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign ="Right" >
                            <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="5%"  CssClass="table table-bordered table-striped" />
                              <ItemTemplate >
                                 <%# Container.DataItemIndex +1 %> 
@@ -403,7 +399,7 @@
                             
                         </asp:TemplateField>
                         
-                        <asp:BoundField DataField="NIP" HeaderStyle-CssClass="table-bordered" HeaderText="NIP"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Nama" >
+                        <asp:BoundField DataField="NIP" HeaderStyle-CssClass="table-bordered" HeaderText="NIP"  NullDisplayText="-" ItemStyle-HorizontalAlign="Right" SortExpression="NIP" >
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
                         </asp:BoundField>
                         <asp:BoundField DataField="nama" HeaderStyle-CssClass="table-bordered" HeaderText="Nama Dokter"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Alamat" >
@@ -411,10 +407,10 @@
                         </asp:BoundField>
                         <asp:BoundField DataField="jenis_Kelamin"  ItemStyle-CssClass="hiddencol"  HeaderStyle-CssClass="hiddencol"  HeaderText="Jenis Kelamin"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="NoTelp" >
                         </asp:BoundField>
-                        <asp:BoundField DataField="alamat" HeaderStyle-CssClass="table-bordered" HeaderText="Alamat"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="TglLahir" >
+                        <asp:BoundField DataField="alamat" HeaderStyle-CssClass="table-bordered" HeaderText="Alamat"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="alamat" >
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="18%" CssClass="table table-bordered table-striped"   />
                         </asp:BoundField>
-                        <asp:BoundField DataField="email" HeaderText="Email" HeaderStyle-CssClass="table-bordered" NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Email" >
+                        <asp:BoundField DataField="email" HeaderText="Email" HeaderStyle-CssClass="table-bordered" NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="email" >
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="15%" CssClass="table table-bordered table-striped"  />
                         </asp:BoundField>
                         
@@ -432,23 +428,23 @@
                         <asp:BoundField DataField="foto" ItemStyle-CssClass="hiddencol" HeaderText="Status" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
                       
                           <asp:TemplateField HeaderText="Aksi" HeaderStyle-CssClass="table-bordered" ItemStyle-HorizontalAlign="Center">
-                            <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="30%"  CssClass="table table-bordered table-striped" />
+                            <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
                                 <asp:LinkButton runat="server" ID="linkEdit" CommandName="cmEdit" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
-                                    ToolTip="Edit Data"><span class="far fa-edit nav-icon">Edit</span>
+                                    ToolTip="Edit Data"><span class="far fa-edit nav-icon"></span>
                                 </asp:LinkButton>
                                 
                                 
                                  <asp:LinkButton runat="server" ID="linkDelete" CommandName="Delete" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
-                                ToolTip="linkDelete"><span class="far fa-trash-alt nav-icon" onclick="return confirm('Are you sure you want to delete this item?');">Delete</span></asp:LinkButton>
+                                ToolTip="linkDelete"><span class="far fa-trash-alt nav-icon" onclick="return confirm('Are you sure you want to delete this item?');"></span></asp:LinkButton>
                                 
                                 
                                  <asp:LinkButton runat="server" ID="linkAktif" CommandName="Delete" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
-                                ToolTip="linkAktif"><span class="far fa-check-circle" onclick="return confirm('Are you sure you want to delete this item?');">Aktif</span></asp:LinkButton>
+                                ToolTip="linkAktif"><span class="far fa-check-circle" onclick="return confirm('Are you sure you want to delete this item?');"></span></asp:LinkButton>
                                 
                                 
                                 <asp:LinkButton ID="lnkViewDetails" runat="server" CommandArgument='<%# Eval("ID_Dokter")%>' 
-                                OnClick="lnkViewDetails_Click" Text="Detail" style="margin-left:20px" CssClass="far fa-check-square"/>
+                                OnClick="lnkViewDetails_Click" Text="" ToolTip="Details" CssClass="far fa-check-square"/>
                             </ItemTemplate>
                         </asp:TemplateField>
                     
