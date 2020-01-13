@@ -19,7 +19,7 @@ public partial class Karyawan_beli : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            //loadData();
+            loadData();
            
         }
     }
@@ -170,7 +170,7 @@ public partial class Karyawan_beli : System.Web.UI.Page
 
     protected void keranjang_Click(object sender, EventArgs e)
     {
-        decimal valuefinal = 0;
+        double valuefinal = 0;
         DataTable dt = new DataTable();
         dt.Columns.Add("namaObat");
         dt.Columns.Add("Satuan");
@@ -189,7 +189,7 @@ public partial class Karyawan_beli : System.Web.UI.Page
                 string harga = (grow.FindControl("harga") as Label).Text;
                 string IDObat = (grow.FindControl("labIDObat") as Label).Text;
 
-                decimal hargatot = Convert.ToDecimal(harga) * Convert.ToInt16(jumlah);
+                double hargatot = Convert.ToDouble(harga) * Convert.ToInt16(jumlah);
                 dt.Rows.Add(Name, satuan, jumlah, hargatot, IDObat);
                 valuefinal += hargatot;
 
@@ -225,27 +225,19 @@ public partial class Karyawan_beli : System.Web.UI.Page
     protected void txtBayar_TextChanged(object sender, EventArgs e)
     {
         double bayar = Convert.ToDouble(txtBayar.Text);
-        pembayaran = bayar;
-
-        kembalian();
     }
 
-    private double total = 0;
-    private double pembayaran = 0;
 
     public void kembalian()
     {
-        double num1 = Convert.ToDouble(txtHarga.Text);
-        total = num1;
-
-        double Kembalian = pembayaran - total;
-        txtKembalian.Text = Convert.ToString(Kembalian);
-        if (Kembalian < 0)
+        double nilai = Convert.ToDouble(txtKembalian.Text);
+        if (nilai < 0)
         {
             Response.Write("<script>alert('Uang Anda Tidak Mencukupi');</script>");
         }
         else
         {
+            Response.Write("<script>alert('Silahkan tunggu Proses ');</script>");
         }
 
     }
@@ -271,26 +263,14 @@ public partial class Karyawan_beli : System.Web.UI.Page
         insert.Parameters.AddWithValue("@totalbayar", txtHarga.Text);
 
         conn.Open();
-        insert.ExecuteNonQuery();
+        insert.ExecuteNonQuery(); 
         conn.Close();
 
 
 
         foreach (GridViewRow grow in grdKeranjang.Rows)
         {
-            /**
-                        SqlCommand tj = new SqlCommand("sp_inputjumlahobat", conn);
-                        tj.CommandType = CommandType.StoredProcedure;
-
-                        tj.Parameters.AddWithValue("IDObat", (grdKeranjang.Rows[i].Cells[5].Text));
-                        tj.Parameters.AddWithValue("jumlah", (grdKeranjang.Rows[i].Cells[3].Text));
-
-
-                        conn.Open();
-                        tj.ExecuteNonQuery();
-                        conn.Close();
-            **/
-
+    
             SqlCommand ins = new SqlCommand("sp_Inputdetailpembelian", conn);
             ins.CommandType = CommandType.StoredProcedure;
 
@@ -302,10 +282,6 @@ public partial class Karyawan_beli : System.Web.UI.Page
             conn.Open();
             ins.ExecuteNonQuery();
             conn.Close();
-
-
-
-
         }
 
     }

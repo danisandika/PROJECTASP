@@ -28,33 +28,44 @@ public partial class Karyawan_Dokter_periksa : System.Web.UI.Page
 
     protected void btnSave_Click(object sender, EventArgs e)
     {
-        DateTime CreateDate = DateTime.Now;
-        SqlCommand com = new SqlCommand();
-        com.Connection = conn;
-        com.CommandText = "[sp_InputRiwayat]";
-        com.CommandType = CommandType.StoredProcedure;
-        //masih diakal2in
-        com.Parameters.AddWithValue("@ID_Dokter", Session["id"]);
-        com.Parameters.AddWithValue("@IDUser", ddlPasien.SelectedValue);
-        com.Parameters.AddWithValue("@berat", txtBerat.Text);
-        com.Parameters.AddWithValue("@tinggi", txtTinggi.Text);
-        com.Parameters.AddWithValue("@tensi", txtTensi.Text);
-        com.Parameters.AddWithValue("@gula", txtGula.Text);
-        com.Parameters.AddWithValue("@kolestrol", txtKolestrol.Text);
-        com.Parameters.AddWithValue("@pesan", txtPesan.Text);
-        com.Parameters.AddWithValue("@penyakit", txtPenyakit.Text);
-        com.Parameters.AddWithValue("@tanggal", CreateDate);
-        com.Parameters.AddWithValue("@status", 1);
+        try
+        {
+            DateTime CreateDate = DateTime.Now;
+            SqlCommand com = new SqlCommand();
+            com.Connection = conn;
+            com.CommandText = "[sp_InputRiwayat]";
+            com.CommandType = CommandType.StoredProcedure;
+            //masih diakal2in
+            com.Parameters.AddWithValue("@ID_Dokter",Session["creaby"]);
+            com.Parameters.AddWithValue("@IDUser", ddlPasien.SelectedValue);
+            com.Parameters.AddWithValue("@berat", txtBerat.Text);
+            com.Parameters.AddWithValue("@tinggi", txtTinggi.Text);
+            com.Parameters.AddWithValue("@tensi", txtTensi.Text);
+            com.Parameters.AddWithValue("@gula", txtGula.Text);
+            com.Parameters.AddWithValue("@kolestrol", txtKolestrol.Text);
+            com.Parameters.AddWithValue("@pesan", txtPesan.Text);
+            com.Parameters.AddWithValue("@penyakit", txtPenyakit.Text);
+            com.Parameters.AddWithValue("@tanggal", CreateDate);
+            com.Parameters.AddWithValue("@status", 1);
 
-        conn.Open();
+            conn.Open();
 
-        int result = Convert.ToInt32(com.ExecuteNonQuery());
-        conn.Close();
-        loadData();
+            int result = Convert.ToInt32(com.ExecuteNonQuery());
+            conn.Close();
+            loadData();
 
-        secView.Visible = true;
-        secEdit.Visible = false;
-        secAdd.Visible = false;
+            secView.Visible = true;
+            secEdit.Visible = false;
+            secAdd.Visible = false;
+            Response.Write("<script>alert('Data berhasil ditambahkan    ');</script>");
+
+        }
+        catch
+        {
+            Response.Write("<script>alert('Data Gagal Ditambahkan');</script>");
+
+        }
+
     }
 
     private DataSet loadData()
@@ -65,7 +76,7 @@ public partial class Karyawan_Dokter_periksa : System.Web.UI.Page
         com.CommandType = CommandType.StoredProcedure;
         com.Parameters.AddWithValue("@nama", txtSearch.Text);
         //masih diakalin
-        com.Parameters.AddWithValue("@dokter", "Dinda rizki");
+        com.Parameters.AddWithValue("@dokter", Convert.ToInt32(Session["creaby"]));
 
         SqlDataAdapter adap = new SqlDataAdapter(com);
         adap.Fill(ds);
@@ -246,7 +257,7 @@ public partial class Karyawan_Dokter_periksa : System.Web.UI.Page
         //masih diakal2in
 
         com.Parameters.AddWithValue("@IDRiwayat", lblID.Text);
-        com.Parameters.AddWithValue("@ID_Dokter", 1);
+        com.Parameters.AddWithValue("@ID_Dokter",Session["creaby"]);
         com.Parameters.AddWithValue("@IDUser", ddlNamaPasien.SelectedValue);
         com.Parameters.AddWithValue("@berat", txtBeratE.Text);
         com.Parameters.AddWithValue("@tinggi", txtTinggiE.Text);

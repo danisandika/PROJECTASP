@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-head runat="server">
   <meta charset="utf-8"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
   <title>Mustika Farma | <asp:ContentPlaceHolder ID="title" runat="server"></asp:ContentPlaceHolder>
@@ -149,9 +148,16 @@ head runat="server">
             </a>
           </li>
           <li class="nav-item">
-            <a href="../Karyawan/beli.aspx" class="nav-link">
+            <a href="../Karyawan/Dokter_periksa.aspx" class="nav-link">
               <i class="nav-icon fas fa-shopping-bag"></i>
               <p>Riwayat Penyakit</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="../Karyawan/beri_resep.aspx" class="nav-link">
+              <i class="nav-icon fa fa-list"></i>
+              <p>Beri Resep</p>
             </a>
           </li>
 

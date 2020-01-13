@@ -82,8 +82,7 @@ Pembelian
                     AllowSorting="true" AutoGenerateColumns="false" DataKeyNames="IDObat" EmptyDataText="Tidak Ada Data" 
                     PageSize="5"  ShowHeaderWhenEmpty="true" OnPageIndexChanging="gridObat_PageIndexChanging"
                     OnRowCommand="gridObat_RowCommand" OnSorting="gridObat_Sorting1" OnSelectedIndexChanged="gridObat_SelectedIndexChanged"
-                   OnRowDataBound="gridObat_RowDataBound" OnRowDeleting="gridObat_RowDeleting"
-                    >
+                   OnRowDataBound="gridObat_RowDataBound" OnRowDeleting="gridObat_RowDeleting">
                   <PagerSettings Mode="NumericFirstLast" FirstPageText="<<" LastPageText=">>" />
                     <Columns>
                         <asp:TemplateField HeaderText="No" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
@@ -117,7 +116,7 @@ Pembelian
                         <asp:TemplateField HeaderText="Jumlah Beli" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
-                                 <asp:TextBox ID="jumlahBeli" runat="server" AutoPostBack="true"></asp:TextBox>
+                                 <asp:TextBox ID="jumlahBeli" runat="server"></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField> 
 
@@ -126,14 +125,14 @@ Pembelian
                             <ItemTemplate>
                                 <asp:Label ID="labSat" runat="server" Text='<%#Bind("Satuan") %>'></asp:Label>
                             </ItemTemplate>
-                        </asp:TemplateField>  
+                        </asp:TemplateField>   
 
-                        <asp:TemplateField HeaderText="Harga Satuan" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Right">
-                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
+                        <asp:TemplateField HeaderText="ID Obat" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center" Visible="false">
                             <ItemTemplate>
                                 <asp:Label ID="harga" runat="server" Text='<%#Bind("Harga") %>' DataFormatString="Rp {0:###,###,###}"></asp:Label>
                             </ItemTemplate>
-                        </asp:TemplateField> 
+                        </asp:TemplateField>  
+
 
                         <asp:TemplateField HeaderText="ID Obat" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center" Visible="false">
                             <ItemTemplate>
@@ -141,12 +140,18 @@ Pembelian
                             </ItemTemplate>
                         </asp:TemplateField>  
 
+                          <asp:BoundField DataField="HargaBarang" DataFormatString="Rp {0:###,###,###}" HeaderStyle-CssClass="table-bordered"  HeaderText="Harga"  NullDisplayText="-" ItemStyle-HorizontalAlign="Right" SortExpression="Harga" >
+                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="15%"  CssClass="table table-bordered table-striped" />
+                        </asp:BoundField>
+
                             <asp:TemplateField HeaderText="Tambahkan" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
                             <ItemStyle Font-Size="small" VerticalAlign="Middle" Width="2%"  CssClass="table table-bordered table-striped" />
                              <ItemTemplate>
                                 <asp:CheckBox ID="CheckBox1" runat="server" />
                             </ItemTemplate>
                         </asp:TemplateField>
+                        
+
 
                     </Columns>
                 </asp:GridView>
@@ -207,16 +212,19 @@ Pembelian
                         <asp:TemplateField HeaderText="Harga Total" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Right">
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
-                                <asp:Label ID="labHarga" runat="server" Text='<%#Eval("harga") %>'></asp:Label>
+                                <asp:Label ID="labHarga" runat="server" Text='<%#Eval("Harga") %>'></asp:Label> 
                             </ItemTemplate>
                         </asp:TemplateField> 
 
-                         <asp:TemplateField HeaderText="ID Obat" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Left" Visible="false">
+
+
+                         <asp:TemplateField HeaderText="ID Obat" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Left" >
                             <ItemTemplate>
-                                <asp:Label ID="labIDObat" runat="server" Text='<%#Eval("IDObat") %>' Visible="false"></asp:Label>
+                                <asp:Label ID="labIDObat" runat="server" Text='<%#Eval("IDObat") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField> 
    
+                  
                           
                    </Columns>
                 </asp:GridView>
@@ -239,11 +247,11 @@ Pembelian
                 <h3 class="card-title">Transaksi Pembelian</h3>
 
                 <div class="card-tools">
-                 
-                    
                 </div>
               </div>
-              <!-- /.card-header -->              
+              <!-- /.card-header -->   
+                
+                           
                 <div class="card-body">
                 
                  <div class="row form-group">
@@ -251,7 +259,7 @@ Pembelian
                     <label for="exampleInputPassword1">Total Harga</label>
                     </div>
                     <div class="col-md-8">
-                    <asp:TextBox ID="txtHarga" CssClass="form-control" runat="server" Enabled="false"/>
+                    <asp:TextBox ID="txtHarga" CssClass="form-control" runat="server" Enabled="false" ClientIDMode="Static" OnClick="ComputeCosts();"/>
                   </div>
                 </div>
 
@@ -260,7 +268,7 @@ Pembelian
                     <label for="exampleInputPassword1">Bayar</label>
                     </div>
                     <div class="col-md-8">
-                    <asp:TextBox ID="txtBayar" OnTextChanged="txtBayar_TextChanged" autopostback="True" CssClass="form-control" runat="server" />
+                    <asp:TextBox ID="txtBayar" CssClass="form-control" runat="server" ClientIDMode="Static" OnClick="ComputeCosts();"/>
                   </div>
                 </div>
 
@@ -269,7 +277,7 @@ Pembelian
                     <label for="exampleInputPassword1">Kembalian</label>
                     </div>
                     <div class="col-md-8">
-                    <asp:TextBox ID="txtKembalian" CssClass="form-control" runat="server" />
+                    <asp:TextBox ID="txtKembalian" CssClass="form-control" runat="server" ClientIDMode="Static" OnClick="ComputeCosts();" />
                   </div>
                 </div>
 
@@ -278,12 +286,36 @@ Pembelian
                 </div>
             </div>
             </div>
-
              </div> 
             </div>
              </div>
        
     </section>
+
+<script>
+    $(document).ready(function () {
+        var total = $('#txtKembalian');
+        ComputeCosts();
+
+        total.blur(function () {
+            ComputeCosts();
+        });
+    });
+
+    function ComputeCosts() {
+        var amount1 = parseFloat($('#txtHarga').val());
+        var amount2 = parseFloat($('#txtBayar').val());
+
+        var totalGift = (amount2 - amount1);
+        if (totalGift < 0) {
+            $('#txtKembalian').val(totalGift);
+        }
+        else {
+            $('#txtKembalian').val(totalGift);
+        }
+    }
+</script>
+
 
 </asp:Content>
 <asp:Content ID="Content7" ContentPlaceHolderID="footer" Runat="Server">

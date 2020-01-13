@@ -69,16 +69,16 @@
                         </asp:TemplateField>
                        
                         <asp:TemplateField HeaderText="Aksi" HeaderStyle-CssClass="table-bordered" ItemStyle-HorizontalAlign="Center">
-                            <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="30%"  CssClass="table table-bordered table-striped" />
+                            <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
                                 <asp:LinkButton ID="lnkDelete" runat="server" CommandArgument='<%# Eval("IDTransaksi")%>' 
-                                OnClick="lnkDelete_Click" Text="Batal" style="margin-left:20px" CssClass="far fa-check-square"/>
-                                
+                                OnClick="lnkDelete_Click" Text="" ToolTip="Batal" CssClass="far fa-trash-alt nav-icon"/>
+
                                 <asp:LinkButton ID="lnkEdit" runat="server" CommandArgument='<%# Eval("IDTransaksi")%>' 
-                                OnClick="lnkEdit_Click" Text="Bayar" style="margin-left:20px" CssClass="far fa-check-circle"/>
-                                
+                                OnClick="lnkEdit_Click" Text="" ToolTip="Bayar" CssClass="far fa-check-circle"/>
+                                                                
                                 <asp:LinkButton ID="lnkViewDetails" runat="server" CommandArgument='<%# Eval("IDTransaksi")%>' 
-                                OnClick="lnkViewDetails_Click" Text="Detail" style="margin-left:20px" CssClass="far fa-check-square"/>
+                                OnClick="lnkViewDetails_Click" Text="" ToolTip="Detail" CssClass="far fa-check-square"/>
                             </ItemTemplate>
                         </asp:TemplateField>
                     
@@ -145,6 +145,7 @@
         </div></div>
 
         <asp:Button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-left:25px" ID="btnclose" runat="server" Text="Kembali" OnClick="btnclose_Click" />
+        <asp:Button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-left:25px" ID="btnBayar" runat="server" Text="Bayar" OnClick="btnBayar_Click" />
   </div></div>
     </asp:Panel>
         <asp:Button ID="btnDummy" runat="server" Style="display: none;" />
@@ -169,114 +170,35 @@
                                 <%# Container.DataItemIndex +1 %>
                             </ItemTemplate>
                         </asp:TemplateField>
-
-                         <asp:BoundField DataField="IDTransaksi" HeaderStyle-CssClass="table-bordered" HeaderText="IDTransaksi"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="IDTransaksi" >
-                            <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
-                        </asp:BoundField>
+                        <asp:TemplateField HeaderText="IDTransaksi"  HeaderStyle-Width="15%" ItemStyle-Width="15%">
+                             <ItemTemplate>
+                                <asp:Label style="margin-right:20px; margin-left:10px;" runat="server" ID="IDTransaksi" Text='<%#Eval("IDTransaksi") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:BoundField DataField="namaObat" HeaderStyle-CssClass="table-bordered" HeaderText="Nama Obat"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="namaObat" >
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="15%"  CssClass="table table-bordered table-striped"  />
                         </asp:BoundField>
-                        <asp:BoundField DataField="Jumlah" HeaderStyle-CssClass="table-bordered" HeaderText="Jumlah"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="NoTelp" >
-                            <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="8%"  CssClass="table table-bordered table-striped"  />
-                        </asp:BoundField>
+                        <asp:TemplateField HeaderText="Jumlah"  HeaderStyle-Width="15%" ItemStyle-Width="15%">
+                             <ItemTemplate>
+                                <asp:Label style="margin-right:20px; margin-left:10px;" runat="server" ID="Jumlah" Text='<%#Eval("Jumlah") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:BoundField DataField="subTotal" HeaderStyle-CssClass="table-bordered" HeaderText="Sub Total"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="TglLahir" >
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="8%" CssClass="table table-bordered table-striped"   />
                         </asp:BoundField>
-
-
-                          </Columns>
+                        <asp:TemplateField HeaderText="ID Obat"  HeaderStyle-Width="15%" ItemStyle-Width="15%">
+                             <ItemTemplate>
+                                <asp:Label style="margin-right:20px; margin-left:10px;" runat="server" ID="IDObat" Text='<%#Eval("IDObat") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                   </Columns>
                 </asp:GridView>
-                   </div>
+               </div>
             </div>
           </div>
-             </div>
-            </div>   
+         </div>
+         </div>   
 </section>
-
-
-<%--     <!-- /.card-header -->              
-                <div class="card-body">
-
-                 <div class="row form-group">
-                    <div class="col-md-3">
-                    <label for="exampleInputPassword1">Supplier</label>
-                    </div>
-                    <div class="col-md-8">
-                   <asp:DropDownList ID="jenisSupplier" runat="server" class="form-control" Width="200px" DataSourceID="dsJenis" DataTextField="NamaSupplier" DataValueField="IDSupplier">
-                    </asp:DropDownList>
-                       <asp:SqlDataSource ID="dsJenis" runat="server" ConnectionString="<%$ ConnectionStrings:Default %>" SelectCommand="SELECT  IDSupplier, NamaSupplier FROM Supplier WHERE (Status = 1)"></asp:SqlDataSource>
-         
-                  </div>
-                </div>
-
-                  <div class="row form-group">
-                    <div class="col-md-3">
-                    <label for="exampleInputEmail1">Tanggal Order</label>
-                    </div>
-                      <div class="col-md-8">
-                    <asp:TextBox ID="txtnamaJenis" CssClass="form-control" runat="server" TextMode="Date"/>
-                  </div>
-                </div>
-
-                  <div class="row form-group">
-                    <div class="col-md-3">
-                    <label for="exampleInputPassword1">Nomor Antrian</label>
-                    </div>
-                    <div class="col-md-8">
-                    <asp:TextBox ID="txtDeskripsi" CssClass="form-control" runat="server" />
-                  </div>
-                </div>
-
-                 <div class="row form-group">
-                   <div class="col-md-3">
-                   <label for="Ket">Resep Dokter</label>
-                    </div>
-                    <div class="col-md-5">
-                    <asp:RadioButtonList ID="rbResep" runat="server" OnSelectedIndexChanged="rbResep_SelectedIndexChanged" AutoPostBack="true">
-                     <asp:ListItem Selected="true"> Ada</asp:ListItem>
-                    <asp:ListItem >Tidak Ada</asp:ListItem>
-                    </asp:RadioButtonList>
-                  </div>
-                </div>
-            <div id="adaResep" runat="server">
-            <div class="row form-group">
-                <div class="col-md-3">
-                    <label for="exampleInputPassword1">Resep Dokter</label>
-                    </div>
-                   <div class="col-sm-9">
-                   <div class="input-group">
-                    <figure class="img-upload-preview">
-                    <asp:FileUpload type="file" class="form-control form-control-user" ID="editUploadFile" runat="server" onchange="imgEdit();" />
-                    </figure>
-                    </div>
-                        <asp:RequiredFieldValidator
-                                id="RequiredFieldValidator18"
-                                ControlToValidate="editUploadFile"
-                                Text="(Required)"
-                                ValidationGroup="frmEdit"
-                                Runat="server" />
-                     </div>
-                </div>
-            </div>
-
-                <div class="row form-group">
-                    <div class="col-md-3">
-                    <label for="exampleInputPassword1">Jumlah</label>
-                    </div>
-                    <div class="col-md-8">
-                    <asp:TextBox ID="txtJumlah" CssClass="form-control" runat="server" />
-                  </div>
-                </div>
-
-                 <div class="row form-group">
-                    <div class="col-md-3">
-                    <label for="exampleInputPassword1">Total Harga</label>
-                    </div>
-                    <div class="col-md-8">
-                    <asp:TextBox ID="txtHarga" CssClass="form-control" runat="server" />
-                  </div>
-                </div>
-            </div>--%>
         
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="footer" Runat="Server">

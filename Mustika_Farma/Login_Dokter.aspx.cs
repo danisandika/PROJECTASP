@@ -25,36 +25,46 @@ public partial class Login_Dokter : System.Web.UI.Page
         string nama;
         HttpCookie cookie = null;
         String encryptedStr = null;
-        
-        nama = "";
-        nama = nama + "ID_Dokter".ToString();
-        Session["creaby"] = nama;
-      
-        SqlConnection conn; 
-        conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Default"].ConnectionString);
-        conn.Open();
-        SqlCommand cmd = new SqlCommand("select * from Dokter where username=@username and password=@password", conn);
-        cmd.Parameters.AddWithValue("@username", txtNama.Text);
-        cmd.Parameters.AddWithValue("@password", txtPass.Text);
 
-       // int iddok = "ID_Dokter";
-        //Session["id"] = Convert.ToInt32(iddok);
-
-        SqlDataAdapter sda = new SqlDataAdapter(cmd);
-        DataTable dt = new DataTable();
-        sda.Fill(dt);
-        int i = cmd.ExecuteNonQuery();
-        conn.Close();
-
-        if (dt.Rows.Count > 0)
+        if (IsAuthentic(txtNama.Text, txtPass.Text))
         {
-            Response.Redirect("Karyawan/Dokter_periksa.aspx");
-        }
-        else
-        {
-            Response.Write("<script>alert('Password yang anda masukkan Salah')</script>");
-        }
+            //mengambil role dari user
+            nama = "";
+            DataSet ds = new DataSet();
+            ds = GetID(txtNama.Text);
 
+            foreach (DataRow row in ds.Tables[0].Rows)
+            {
+                nama = nama + row["ID_Dokter"].ToString();
+            }
+            Session["creaby"] = nama;
+
+
+            SqlConnection conn;
+            conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Default"].ConnectionString);
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("select * from Dokter where username=@username and password=@password", conn);
+            cmd.Parameters.AddWithValue("@username", txtNama.Text);
+            cmd.Parameters.AddWithValue("@password", txtPass.Text);
+
+            // int iddok = "ID_Dokter";
+            //Session["id"] = Convert.ToInt32(iddok);
+
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            int i = cmd.ExecuteNonQuery();
+            conn.Close();
+
+            if (dt.Rows.Count > 0)
+            {
+                Response.Redirect("Karyawan/Dokter_periksa.aspx");
+            }
+            else
+            {
+                Response.Write("<script>alert('Password yang anda masukkan Salah')</script>");
+            }
+        }
     }
 
     private bool IsAuthentic(string username, string password)
@@ -94,10 +104,12 @@ public partial class Login_Dokter : System.Web.UI.Page
     private DataSet GetID(string username)
     {
         DataSet ds = new DataSet();
-        string cmd = "SELECT idUser FROM [User] WHERE username = '" + username + "'";
+        string cmd = "SELECT ID_Dokter FROM Dokter WHERE username = '" + username + "'";
         try
         {
             //buat object connection
+           // Session["ic"] = cmd;
+
             SqlConnection conn;
             conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Default"].ConnectionString);
 

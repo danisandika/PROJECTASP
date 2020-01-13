@@ -64,9 +64,11 @@
                         <asp:BoundField DataField="Tanggal" HeaderStyle-CssClass="table-bordered" HeaderText="Tanggal"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Tanggal" >
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="8%"  CssClass="table table-bordered table-striped"  />
                         </asp:BoundField>
+
                         <asp:BoundField DataField="totalBayar" HeaderStyle-CssClass="table-bordered" HeaderText="Total Bayar"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="totalBayar" >
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="8%" CssClass="table table-bordered table-striped"   />
                         </asp:BoundField>
+
 
                         <asp:TemplateField HeaderText="Status" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign ="Center" >
                            <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="5%"  CssClass="table table-bordered table-striped" />
@@ -133,6 +135,10 @@
                         </asp:BoundField>
 
                         <asp:BoundField DataField="IDSupplier" ItemStyle-CssClass="hiddencol" HeaderText="IDSupplier" HeaderStyle-CssClass="hiddencol" NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="IDSupplier" />
+
+                        <asp:BoundField DataField="IDObat" ItemStyle-CssClass="hiddencol" HeaderText="IDObat" HeaderStyle-CssClass="hiddencol" NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="IDSupplier" />
+
+                        <asp:BoundField DataField="Expired" ItemStyle-CssClass="hiddencol" HeaderText="Expired" HeaderStyle-CssClass="hiddencol" NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="IDSupplier" />
 
                          <asp:TemplateField HeaderText="Aksi" HeaderStyle-CssClass="table-bordered" ItemStyle-HorizontalAlign="Center">
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="8%"  CssClass="table table-bordered table-striped" />
@@ -210,6 +216,16 @@
          </div>
         <div class="col-md-5">
             <asp:TextBox ID="Kadaluarsa" runat="server" TextMode="Date"></asp:TextBox>
+             <asp:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="Kadaluarsa"></asp:CalendarExtender>
+
+        </div></div>
+    
+         <div class="row form-group">
+         <div class="col-md-5">
+        <asp:label style="margin-left:20px" runat="server" class="col-sm-3 col-form-label text-label">IDObat</asp:Label>
+        </div>
+        <div class="col-md-5">
+            <asp:TextBox ID="IDObat" runat="server" Enabled="false"></asp:TextBox>
         </div></div>
       
         <asp:Button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-left:25px" ID="btnclose" runat="server" Text="Kembali" OnClick="btnclose_Click" />

@@ -91,6 +91,8 @@ public partial class Karyawan_penjualan : System.Web.UI.Page
         dt.Columns.Add("Satuan");
         dt.Columns.Add("jumlahBeli");
         dt.Columns.Add("harga");
+        dt.Columns.Add("IDObat");
+
 
         foreach (GridViewRow grow in gridObat.Rows)
         {
@@ -101,13 +103,14 @@ public partial class Karyawan_penjualan : System.Web.UI.Page
                 string satuan = (grow.FindControl("labSat") as Label).Text;
                 string jumlah = (grow.FindControl("jumlahBeli") as TextBox).Text;
                 string harga = (grow.FindControl("labHarga") as Label).Text;
+                string IDObat = (grow.FindControl("labIDObat") as Label).Text;
 
                 decimal hargatot = Convert.ToDecimal(harga) * Convert.ToInt16(jumlah);
-                dt.Rows.Add(Name, satuan, jumlah, hargatot);
+                dt.Rows.Add(Name, satuan, jumlah, hargatot,IDObat);
                 valuefinal += hargatot;
 
                 lblJumlahPembelian.Text = "TOTAL PEMBAYARAN RP " + Convert.ToString(valuefinal);
-                //txtHarga.Text = Convert.ToString(valuefinal);
+                lblTotalHarga.Text = Convert.ToString(valuefinal);
             }
 
             grdKeranjang.DataSource = dt;
@@ -154,39 +157,41 @@ public partial class Karyawan_penjualan : System.Web.UI.Page
 
     protected void btnProses_Click(object sender, EventArgs e)
     {
-        string filename = Guid.NewGuid() + System.IO.Path.GetFileName(uploadfile.FileName).Substring(System.IO.Path.GetFileName(uploadfile.FileName).Length - 4);
-        uploadfile.SaveAs(Server.MapPath("Resep/") + filename);
+       // string filename = Guid.NewGuid() + System.IO.Path.GetFileName(uploadfile.FileName).Substring(System.IO.Path.GetFileName(uploadfile.FileName).Length - 4);
+       // uploadfile.SaveAs(Server.MapPath("Resep/") + filename);
 
-        try
+        string strIDPembelian = generateIDTrans();
+
+        DateTime tanggal = DateTime.Now;
+        SqlCommand insert = new SqlCommand("[sp_InputTransaksi]", conn);
+        insert.CommandType = CommandType.StoredProcedure;
+
+        insert.Parameters.AddWithValue("@IDTransaksi", strIDPembelian);
+        insert.Parameters.AddWithValue("@IDKaryawan",Convert.ToInt16(Session["creaby"]));
+        insert.Parameters.AddWithValue("@Tanggal", tanggal);
+        insert.Parameters.AddWithValue("@FotoResep", DBNull.Value);
+        insert.Parameters.AddWithValue("@totalBayar",Convert.ToDecimal(lblTotalHarga.Text));
+        insert.Parameters.AddWithValue("@status", 2);
+
+        conn.Open();
+        insert.ExecuteNonQuery();
+        conn.Close();
+
+        foreach (GridViewRow grow in grdKeranjang.Rows)
         {
-            string strIDPembelian = generateIDTrans();
-            try
-            {
 
-                DateTime tanggal = DateTime.Now;
-                SqlCommand insert = new SqlCommand("[sp_InputTransaksi]", conn);
-                insert.CommandType = CommandType.StoredProcedure;
+            SqlCommand ins = new SqlCommand("[sp_InputDetailTransaksi]", conn);
+            ins.CommandType = CommandType.StoredProcedure;
 
-                insert.Parameters.AddWithValue("@IDTransaksi", strIDPembelian);
-                insert.Parameters.AddWithValue("@IDKaryawan", Session["creaby"]);
-                insert.Parameters.AddWithValue("@Tanggal", tanggal);
-                insert.Parameters.AddWithValue("@FotoResep", "Resep/" + filename);
-                insert.Parameters.AddWithValue("@totalBayar", lblJumlahPembelian.Text);
-                insert.Parameters.AddWithValue("@status", 2);
+            ins.Parameters.AddWithValue("IDTransaksi", strIDPembelian);
+            ins.Parameters.AddWithValue("jumlah", (grow.FindControl("labJumlah") as Label).Text);
+            ins.Parameters.AddWithValue("subTotal", (grow.FindControl("labHarga") as Label).Text);
+            ins.Parameters.AddWithValue("IDObat", (grow.FindControl("labIDObat") as Label).Text);
 
-                conn.Open();
-                insert.ExecuteNonQuery();
-                conn.Close();
-            }
-            catch (Exception ex)
-            {
-                //Response.Write("<script>alert('Gagal');</script>");
-                Response.Write("<script>alert('Gagal1');</script>");
-
-            }
+            conn.Open();
+            ins.ExecuteNonQuery();
+            conn.Close();
         }
-        catch (Exception ex)
-        {
-        }
+
     }
 }

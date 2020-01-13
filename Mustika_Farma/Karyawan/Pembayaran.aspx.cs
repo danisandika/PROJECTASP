@@ -21,7 +21,7 @@ public partial class Karyawan_Pembayaran : System.Web.UI.Page
         if (!IsPostBack)
         {
             loadData();
-            secDetail.Visible = false;
+            //secDetail.Visible = false;
         }
     }
 
@@ -105,7 +105,7 @@ public partial class Karyawan_Pembayaran : System.Web.UI.Page
 
         int result = Convert.ToInt32(com.ExecuteNonQuery());
         conn.Close();
-        loadData();
+        // loadData();
         //cek apakah ada data yg akan ditambahkan/ubah
         if (result != 0)
         {
@@ -129,6 +129,10 @@ public partial class Karyawan_Pembayaran : System.Web.UI.Page
 
         //Show the modal popup extender
         GridViewDetails.Show();
+
+        //coba simpan semua didetail bismillah
+       
+      
     }
 
     protected void lnkViewDetails_Click(object sender, EventArgs e)
@@ -149,8 +153,10 @@ public partial class Karyawan_Pembayaran : System.Web.UI.Page
         grdDetail.DataSource = ds;
         grdDetail.DataBind();
 
-        secDetail.Visible = true;
-      
+        grdDetail.Visible = true;
+
+        //secDetail.Visible = true;
+
     }
 
     protected void btnclose_Click(object sender, EventArgs e)
@@ -178,11 +184,37 @@ public partial class Karyawan_Pembayaran : System.Web.UI.Page
         if (Kembali < 0)
         {
             Response.Write("<script>alert('Uang Anda Tidak Mencukupi');</script>");
+
         }
         else
         {
+            //perulangan masih salah, semua keubah bukan berdasarkan IDObat yg berubah
+            foreach (GridViewRow grow in grdDetail.Rows)
+            {
+
+                //Waktu edit kenapa 
+                SqlCommand cm = new SqlCommand();
+                cm.Connection = conn;
+                cm.CommandText = "[sp_InputkonfTrans]";
+                cm.CommandType = CommandType.StoredProcedure;
+                cm.Parameters.AddWithValue("@IDTransaksi", (grow.FindControl("IDTransaksi") as Label).Text);
+                cm.Parameters.AddWithValue("@status", 1);
+
+                cm.Parameters.AddWithValue("@IDObat", (grow.FindControl("IDObat") as Label).Text);
+                cm.Parameters.AddWithValue("@jumlah", (grow.FindControl("jumlah") as Label).Text);
+
+                conn.Open();
+                int res = cm.ExecuteNonQuery();
+                conn.Close();
+            }
+
             Response.Write("<script>alert('Terimakasih, Mohon ditunggu pesanannya ');</script>");
         }
+
+    }
+
+    protected void btnBayar_Click(object sender, EventArgs e)
+    {
 
     }
 }

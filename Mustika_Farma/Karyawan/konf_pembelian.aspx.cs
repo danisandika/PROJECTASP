@@ -161,11 +161,11 @@ public partial class Karyawan_konf_pembelian : System.Web.UI.Page
         //cek apakah ada data yg akan ditambahkan/ubah
         if (result != 0)
         {
-            Response.Write("<script>alert('Data berhasil dimasukkan kekeranjang');</script>");
+            Response.Write("<script>alert('Data berhasil ditambahkan');</script>");
         }
         else
         {
-            Response.Write("<script>alert('Data Gagal dimasukkan kekeranjang');</script>");
+            Response.Write("<script>alert('Data Gagal ditambahkan');</script>");
         }
     }
 
@@ -210,6 +210,10 @@ public partial class Karyawan_konf_pembelian : System.Web.UI.Page
         jumlah.Text= row.Cells[3].Text;
         SubTotal.Text = row.Cells[4].Text;
         IDSupplier.Text= row.Cells[5].Text;
+        IDObat.Text = row.Cells[6].Text;
+
+        DateTime exp = Convert.ToDateTime(row.Cells[7].Text);
+        Kadaluarsa.Text = exp.ToString("yyyy-MM-dd");
 
         //Show the modal popup extender
         GridViewDetails.Show();
@@ -225,30 +229,34 @@ public partial class Karyawan_konf_pembelian : System.Web.UI.Page
     {
         try
         {
-            SqlCommand com = new SqlCommand();
-            com.Connection = conn;
-            com.CommandText = "[sp_UpdateHargaJual]";
-            com.CommandType = CommandType.StoredProcedure;
-            com.Parameters.AddWithValue("@namaObat", namaObat.Text);
-            com.Parameters.AddWithValue("@harga", hargaJual.Text);
-            com.Parameters.AddWithValue("@IDSupplier", IDSupplier.Text);
-            com.Parameters.AddWithValue("@kadaluarsa", (Kadaluarsa.Text));
+            //Waktu edit 
+                SqlCommand com = new SqlCommand();
+                com.Connection = conn;
+                com.CommandText = "[sp_UpdateHargaJual]";
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("@namaObat", namaObat.Text);
+                com.Parameters.AddWithValue("@harga",Convert.ToInt64(hargaJual.Text));
+                com.Parameters.AddWithValue("@IDSupplier",Convert.ToInt64(IDSupplier.Text));
+                com.Parameters.AddWithValue("@kadaluarsa",Convert.ToDateTime(Kadaluarsa.Text));
+                com.Parameters.AddWithValue("@IDPembelian",IDPembelian.Text);
 
+                com.Parameters.AddWithValue("@jumlah",Convert.ToInt64(jumlah.Text));
+                com.Parameters.AddWithValue("@IDObat",Convert.ToInt16(IDObat.Text));
 
-
-            conn.Open();
-            int result = Convert.ToInt32(com.ExecuteNonQuery());
-            conn.Close();
-            Response.Write("<script>alert('Data Berhasil diupdate');</script>");
-
+                conn.Open();
+                int result = Convert.ToInt32(com.ExecuteNonQuery());
+                conn.Close();
+                Response.Write("<script>alert('Data Berhasil diupdate');</script>");
+                hargaJual.Text = "";
         }
-        catch
+        catch (Exception ex)
         {
-            Response.Write("<script>alert('Data Gagal diupdate');</script>");
+            Response.Write("<script>alert('Data Gagal diupdate"+ ex.Message +"');</script>");
 
         }
-
-
-
     }
+
+   
+
+
 }
