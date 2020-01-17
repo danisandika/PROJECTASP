@@ -161,12 +161,12 @@
               <p>Jenis Obat</p>
             </a>
           </li>
-         <%--  <li class="nav-item">
+           <li class="nav-item">
             <a href="Lokasi_penyimpanan.aspx" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>Lokasi Penyimpanan</p>
             </a>
-          </li>--%>
+          </li>
 		  <li class="nav-item">
             <a href="User.aspx" class="nav-link">
               <i class="nav-icon fas  fa-user-md"></i>

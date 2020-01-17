@@ -97,7 +97,9 @@ public partial class Administrator_Lokasi_penyimpanan : System.Web.UI.Page
 
     protected void EditbtnCancel_Click(object sender, EventArgs e)
     {
-
+        secView.Visible = true;
+        secEdit.Visible = false;
+        secAdd.Visible = false;
     }
 
     protected void btntambah_Click(object sender, EventArgs e)

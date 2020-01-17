@@ -23,7 +23,7 @@ public partial class Karyawan_penjualan : System.Web.UI.Page
 
             string mainconn = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
             SqlConnection sqlconn = new SqlConnection(mainconn);
-            string sqlquery = "select IDObat,namaObat,IDJenis,JumlahObat,Satuan,Keterangan,Harga from obat";
+            string sqlquery = "select IDObat,namaObat,IDJenis,JumlahObat,Satuan,Keterangan,convert(int,Harga) as 'Harga',Harga as 'HargaBarang' from obat";
             SqlCommand com = new SqlCommand(sqlquery, sqlconn);
             sqlconn.Open();
             gridObat.DataSource = com.ExecuteReader();
@@ -44,6 +44,7 @@ public partial class Karyawan_penjualan : System.Web.UI.Page
         else
         {
             uploadfile.Visible = false;
+            lblFoto.Visible = false;
         }
 
     }
@@ -102,7 +103,7 @@ public partial class Karyawan_penjualan : System.Web.UI.Page
                 string Name = (grow.FindControl("labNama") as Label).Text;
                 string satuan = (grow.FindControl("labSat") as Label).Text;
                 string jumlah = (grow.FindControl("jumlahBeli") as TextBox).Text;
-                string harga = (grow.FindControl("labHarga") as Label).Text;
+                string harga = (grow.FindControl("Harga") as Label).Text;
                 string IDObat = (grow.FindControl("labIDObat") as Label).Text;
 
                 decimal hargatot = Convert.ToDecimal(harga) * Convert.ToInt16(jumlah);
@@ -127,28 +128,9 @@ public partial class Karyawan_penjualan : System.Web.UI.Page
 
     protected void txtBayar_TextChanged(object sender, EventArgs e)
     {
-        //double bayar = Convert.ToDouble(txtBayar.Text);
-        //pembayaran = bayar;
-        //kembalian();
+
     }
 
-    //public void kembalian()
-    //{
-    //    double num1 = Convert.ToDouble(txtHarga.Text);
-    //    total = num1;
-
-    //    double Kembalian = pembayaran - total;
-    //    txtKembalian.Text = Convert.ToString(Kembalian);
-    //    if (Kembalian < 0)
-    //    {
-    //        Response.Write("<script>alert('Uang Anda Tidak Mencukupi');</script>");
-    //    }
-    //    else
-    //    {
-    //        Response.Write("<script>alert('Terimakasih, Mohon ditunggu pesanannya ');</script>");
-    //    }
-
-    //}
     protected string generateIDTrans()
     {
         string IDTrans = DateTime.Now.ToString("yyyyMMddhhmmss");
@@ -157,41 +139,77 @@ public partial class Karyawan_penjualan : System.Web.UI.Page
 
     protected void btnProses_Click(object sender, EventArgs e)
     {
-       // string filename = Guid.NewGuid() + System.IO.Path.GetFileName(uploadfile.FileName).Substring(System.IO.Path.GetFileName(uploadfile.FileName).Length - 4);
-       // uploadfile.SaveAs(Server.MapPath("Resep/") + filename);
-
         string strIDPembelian = generateIDTrans();
 
-        DateTime tanggal = DateTime.Now;
-        SqlCommand insert = new SqlCommand("[sp_InputTransaksi]", conn);
-        insert.CommandType = CommandType.StoredProcedure;
-
-        insert.Parameters.AddWithValue("@IDTransaksi", strIDPembelian);
-        insert.Parameters.AddWithValue("@IDKaryawan",Convert.ToInt16(Session["creaby"]));
-        insert.Parameters.AddWithValue("@Tanggal", tanggal);
-        insert.Parameters.AddWithValue("@FotoResep", DBNull.Value);
-        insert.Parameters.AddWithValue("@totalBayar",Convert.ToDecimal(lblTotalHarga.Text));
-        insert.Parameters.AddWithValue("@status", 2);
-
-        conn.Open();
-        insert.ExecuteNonQuery();
-        conn.Close();
-
-        foreach (GridViewRow grow in grdKeranjang.Rows)
+        string selectedValue = rbResep.SelectedValue;
+        if (selectedValue == "1")
         {
+            string filename = Guid.NewGuid() + System.IO.Path.GetFileName(uploadfile.FileName).Substring(System.IO.Path.GetFileName(uploadfile.FileName).Length - 4);
+            uploadfile.SaveAs(Server.MapPath("Resep/") + filename);
+            DateTime tanggal = DateTime.Now;
+            SqlCommand insert = new SqlCommand("[sp_InputTransaksi]", conn);
+            insert.CommandType = CommandType.StoredProcedure;
 
-            SqlCommand ins = new SqlCommand("[sp_InputDetailTransaksi]", conn);
-            ins.CommandType = CommandType.StoredProcedure;
-
-            ins.Parameters.AddWithValue("IDTransaksi", strIDPembelian);
-            ins.Parameters.AddWithValue("jumlah", (grow.FindControl("labJumlah") as Label).Text);
-            ins.Parameters.AddWithValue("subTotal", (grow.FindControl("labHarga") as Label).Text);
-            ins.Parameters.AddWithValue("IDObat", (grow.FindControl("labIDObat") as Label).Text);
+            insert.Parameters.AddWithValue("@IDTransaksi", strIDPembelian);
+            insert.Parameters.AddWithValue("@IDKaryawan", Convert.ToInt16(Session["creaby"]));
+            insert.Parameters.AddWithValue("@Tanggal", tanggal);
+            insert.Parameters.AddWithValue("@FotoResep", "Resep/" + filename);
+            insert.Parameters.AddWithValue("@totalBayar", Convert.ToDecimal(lblTotalHarga.Text));
+            insert.Parameters.AddWithValue("@status", 2);
 
             conn.Open();
-            ins.ExecuteNonQuery();
+            insert.ExecuteNonQuery();
             conn.Close();
-        }
 
+            foreach (GridViewRow grow in grdKeranjang.Rows)
+            {
+
+                SqlCommand ins = new SqlCommand("[sp_InputDetailTransaksi]", conn);
+                ins.CommandType = CommandType.StoredProcedure;
+
+                ins.Parameters.AddWithValue("IDTransaksi", strIDPembelian);
+                ins.Parameters.AddWithValue("jumlah", (grow.FindControl("labJumlah") as Label).Text);
+                ins.Parameters.AddWithValue("subTotal", (grow.FindControl("labHarga") as Label).Text);
+                ins.Parameters.AddWithValue("IDObat", (grow.FindControl("labIDObat") as Label).Text);
+
+                conn.Open();
+                ins.ExecuteNonQuery();
+                conn.Close();
+            }
+
+        }
+        else
+        {
+            DateTime tanggal = DateTime.Now;
+            SqlCommand insert = new SqlCommand("[sp_InputTransaksi]", conn);
+            insert.CommandType = CommandType.StoredProcedure;
+
+            insert.Parameters.AddWithValue("@IDTransaksi", strIDPembelian);
+            insert.Parameters.AddWithValue("@IDKaryawan", Convert.ToInt16(Session["creaby"]));
+            insert.Parameters.AddWithValue("@Tanggal", tanggal);
+            insert.Parameters.AddWithValue("@FotoResep", DBNull.Value);
+            insert.Parameters.AddWithValue("@totalBayar", Convert.ToDecimal(lblTotalHarga.Text));
+            insert.Parameters.AddWithValue("@status", 2);
+
+            conn.Open();
+            insert.ExecuteNonQuery();
+            conn.Close();
+
+            foreach (GridViewRow grow in grdKeranjang.Rows)
+            {
+
+                SqlCommand ins = new SqlCommand("[sp_InputDetailTransaksi]", conn);
+                ins.CommandType = CommandType.StoredProcedure;
+
+                ins.Parameters.AddWithValue("IDTransaksi", strIDPembelian);
+                ins.Parameters.AddWithValue("jumlah", (grow.FindControl("labJumlah") as Label).Text);
+                ins.Parameters.AddWithValue("subTotal", (grow.FindControl("labHarga") as Label).Text);
+                ins.Parameters.AddWithValue("IDObat", (grow.FindControl("labIDObat") as Label).Text);
+
+                conn.Open();
+                ins.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
     }
 }

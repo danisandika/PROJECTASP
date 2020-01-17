@@ -68,7 +68,7 @@
                         <asp:TemplateField HeaderText="Jumlah Dosis" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
-                                 <asp:TextBox ID="jumlahBeli" runat="server" AutoPostBack="true"></asp:TextBox>
+                                 <asp:TextBox ID="jumlahBeli" runat="server"></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField> 
 

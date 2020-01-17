@@ -36,10 +36,16 @@
                 <div class="card-body">
                   <div class="row form-group">
                     <div class="col-md-3">
-                    <label for="exampleInputEmail1">Nama Jenis Dokter</label>
+                    <label for="exampleInputEmail1">Nama Jenis Dokter</label><span style="color:red">*</span>
                     </div>
                       <div class="col-md-5">
                     <asp:TextBox ID="txtnamaJenis" CssClass="form-control" runat="server"/>
+                           <asp:RequiredFieldValidator
+                            id="RequiredFieldValidator17"
+                            ControlToValidate="txtnamaJenis"
+                            Text="(Required)"
+                            ValidationGroup="frmAdd"
+                            Runat="server" />
                   </div>
                 </div>
 
@@ -82,7 +88,7 @@
                 <asp:Label ID="lblID" runat="server" Visible="false"></asp:Label>
                   <div class="row form-group">
                     <div class="col-md-3">
-                    <label for="exampleInputEmail1">Nama Jenis Dokter</label>
+                    <label for="exampleInputEmail1">Nama Jenis Dokter</label><span style="color:red">*</span>
                     </div>
                     <div class="col-md-5">
                     <asp:TextBox ID="txtEditnamaJenis" CssClass="form-control" runat="server"/>
@@ -170,11 +176,11 @@
                                 </asp:LinkButton>
                                 
                                   <asp:LinkButton runat="server" ID="linkDelete" CommandName="Delete" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
-                                ToolTip="linkDelete"><span class="far fa-trash-alt nav-icon" onclick="return confirm('Are you sure you want to delete this item?');"></span></asp:LinkButton>
+                                ToolTip="linkDelete"><span class="far fa-trash-alt nav-icon" onclick="return confirm('Apa kamu yakin untuk me-non aktifkan akun ini?');"></span></asp:LinkButton>
                                 
                                 
                                  <asp:LinkButton runat="server" ID="linkAktif" CommandName="Delete" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
-                                ToolTip="linkAktif"><span class="far fa-check-circle" onclick="return confirm('Are you sure you want to delete this item?');"></span></asp:LinkButton>
+                                ToolTip="linkAktif"><span class="far fa-check-circle" onclick="return confirm('Apa kamu yakin untuk me-aktifkan akun ini?');"></span></asp:LinkButton>
                                 
                                 <asp:LinkButton ID="lnkViewDetails" runat="server" CommandArgument='<%# Eval("ID_SP")%>' 
                                 OnClick="lnkViewDetails_Click" Text="" ToolTip="Details" CssClass="far fa-check-square"/>

@@ -33,7 +33,7 @@ public partial class Customer_Pembelian : System.Web.UI.Page
         com.CommandType = CommandType.StoredProcedure;
         //masih diakalin
          //com.Parameters.AddWithValue("@nama",Session["creaby"]);
-        com.Parameters.AddWithValue("@nama","Danis Andika");
+        com.Parameters.AddWithValue("@IDUser",Session["creaby"]);
 
         SqlDataAdapter adap = new SqlDataAdapter(com);
         adap.Fill(ds);
@@ -112,12 +112,12 @@ public partial class Customer_Pembelian : System.Web.UI.Page
         GridViewRow row = (GridViewRow)((LinkButton)sender).Parent.Parent;
         //Get the column value and assign it to label in panel
         //Change the index as per your need
-        nama.Text = row.Cells[5].Text;
-        berat.Text = row.Cells[6].Text;
-        tinggi.Text = row.Cells[7].Text;
-        tensi.Text = row.Cells[8].Text;
-        gula.Text = row.Cells[9].Text;
-        kolestrol.Text = row.Cells[10].Text;
+        nama.Text = row.Cells[6].Text;
+        berat.Text = row.Cells[7].Text;
+        tinggi.Text = row.Cells[8].Text;
+        tensi.Text = row.Cells[9].Text;
+        gula.Text = row.Cells[10].Text;
+        kolestrol.Text = row.Cells[11].Text;
 
         //Show the modal popup extender
         GridViewDetails.Show();

@@ -57,7 +57,10 @@
                         <asp:BoundField DataField="Tanggal" HeaderStyle-CssClass="table-bordered" HeaderText="Tanggal"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="NoTelp" >
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="8%"  CssClass="table table-bordered table-striped"  />
                         </asp:BoundField>
-                        <asp:BoundField DataField="totalBayar" HeaderStyle-CssClass="table-bordered" HeaderText="Total Bayar"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="TglLahir" >
+                        <asp:BoundField DataField="totalBayar" DataFormatString="Rp {0:###,###,###}" HeaderStyle-CssClass="table-bordered" HeaderText="Total Bayar"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="TglLahir" >
+                            <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="8%" CssClass="table table-bordered table-striped"   />
+                        </asp:BoundField>
+                         <asp:BoundField DataField="labtotalBayar" HeaderStyle-CssClass="table-bordered" HeaderText="Total Bayar"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="TglLahir" >
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="8%" CssClass="table table-bordered table-striped"   />
                         </asp:BoundField>
 
@@ -125,15 +128,15 @@
         <asp:label style="margin-left:20px" runat="server" class="col-sm-3 col-form-label text-label">Total Bayar</asp:label>
         </div>
         <div class="col-md-5">
-        <asp:Label ID="totalBayar" runat="server" Text="totalBayar"></asp:Label>
+             <asp:TextBox ID="txtHarga" CssClass="form-control" runat="server" Enabled="false" ClientIDMode="Static" OnClick="ComputeCosts();"/>
         </div></div>
 
          <div class="row form-group">
          <div class="col-md-5">
-        <asp:label style="margin-left:20px" runat="server" class="col-sm-3 col-form-label text-label">Bayar</asp:Label>
+        <asp:label style="margin-left:20px" runat="server" class="col-sm-3 col-form-label text-label" ClientIDMode="Static">Bayar</asp:Label>
          </div>
         <div class="col-md-5">
-            <asp:TextBox ID="Bayar" runat="server" OnTextChanged="Bayar_TextChanged"></asp:TextBox>
+            <asp:TextBox ID="txtBayar" CssClass="form-control" runat="server" ClientIDMode="Static" OnClick="ComputeCosts();"/>
         </div></div>
         
          <div class="row form-group">
@@ -141,11 +144,11 @@
         <asp:label style="margin-left:20px" runat="server" class="col-sm-3 col-form-label text-label">Kembalian</asp:Label>
         </div>
         <div class="col-md-5">
-            <asp:TextBox ID="Kembalian_uang" runat="server"></asp:TextBox>
+            <asp:TextBox ID="txtKembalian" CssClass="form-control" runat="server" ClientIDMode="Static" OnClick="ComputeCosts();" />
         </div></div>
 
         <asp:Button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-left:25px" ID="btnclose" runat="server" Text="Kembali" OnClick="btnclose_Click" />
-        <asp:Button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-left:25px" ID="btnBayar" runat="server" Text="Bayar" OnClick="btnBayar_Click" />
+        <asp:Button class="d-none d-sm-inline-block btn btn-sm btn-dark shadow-sm" style="margin-left:25px" ID="btnBayar" runat="server" Text="Bayar" OnClick="btnBayar_Click" />
   </div></div>
     </asp:Panel>
         <asp:Button ID="btnDummy" runat="server" Style="display: none;" />
@@ -178,12 +181,12 @@
                         <asp:BoundField DataField="namaObat" HeaderStyle-CssClass="table-bordered" HeaderText="Nama Obat"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="namaObat" >
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="15%"  CssClass="table table-bordered table-striped"  />
                         </asp:BoundField>
-                        <asp:TemplateField HeaderText="Jumlah"  HeaderStyle-Width="15%" ItemStyle-Width="15%">
+                        <asp:TemplateField HeaderText="Jumlah" HeaderStyle-Width="15%" ItemStyle-Width="15%">
                              <ItemTemplate>
                                 <asp:Label style="margin-right:20px; margin-left:10px;" runat="server" ID="Jumlah" Text='<%#Eval("Jumlah") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:BoundField DataField="subTotal" HeaderStyle-CssClass="table-bordered" HeaderText="Sub Total"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="TglLahir" >
+                        <asp:BoundField DataField="subTotal" DataFormatString="Rp {0:###,###,###}" HeaderStyle-CssClass="table-bordered" HeaderText="Sub Total"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="TglLahir" >
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="8%" CssClass="table table-bordered table-striped"   />
                         </asp:BoundField>
                         <asp:TemplateField HeaderText="ID Obat"  HeaderStyle-Width="15%" ItemStyle-Width="15%">
@@ -199,7 +202,32 @@
          </div>
          </div>   
 </section>
-        
+  
+<script>
+    $(document).ready(function () {
+        var total = $('#txtKembalian');
+        ComputeCosts();
+
+        total.blur(function () {
+            ComputeCosts();
+        });
+    });
+
+    function ComputeCosts() {
+        var amount1 = parseFloat($('#txtHarga').val());
+        var amount2 = parseFloat($('#txtBayar').val());
+
+        var dgift = (amount2 - amount1);
+        var totalGift = 'Rp ' + dgift.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+
+        if (totalGift < 0) {
+            $('#txtKembalian').val(totalGift);
+        }
+        else {
+            $('#txtKembalian').val(totalGift);
+        }
+    }
+</script>   
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="footer" Runat="Server">
 </asp:Content>

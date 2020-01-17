@@ -7,13 +7,12 @@
 <head>
     <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
 </head>
+
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+
   <div id="wrapper">
     <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
       <div class="top-area">     
-			<div class="cta-btn">
-			  <a href="../Login.aspx" class="btn btn-skin btn-lg">Login/Register</a>
-			</div>         
       </div>
       <div class="container navigation">
 

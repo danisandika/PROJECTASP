@@ -11,7 +11,13 @@
     Lokasi Penyimpanan
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="Content" Runat="Server">
-   <!--SECTION ADD-->
+       <style type="text/css">
+        .hiddencol
+        {
+        display:none;
+        } 
+    </style>
+    <!--SECTION ADD-->
      <section class="content" id="secAdd" runat="server">
       <div class="container-fluid">
         <div class="row">
@@ -170,19 +176,18 @@
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="20%"  CssClass="table table-bordered table-striped" />
                         </asp:BoundField>
 
-                        <asp:BoundField DataField="status"  HeaderStyle-CssClass="table-bordered" HeaderText="Status"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Status" >
-                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
-                        </asp:BoundField>
+                        <asp:BoundField DataField="status" ItemStyle-CssClass="hiddencol" HeaderText="status" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
+
                                              
                         <asp:TemplateField HeaderText="Aksi" HeaderStyle-CssClass="table-bordered" ItemStyle-HorizontalAlign="Center">
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="20%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
                                 <asp:LinkButton runat="server" ID="linkEdit" CommandName="cmEdit" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
-                                    ToolTip="Edit Data"><span class="far fa-edit nav-icon">Edit</span>
+                                    ToolTip="Edit Data"><span class="far fa-edit nav-icon"></span>
                                 </asp:LinkButton>
                                 |
                                 <asp:LinkButton runat="server" ID="linkDelete" CommandName="cmDelete" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
-                                    ToolTip="Delete Data"><span class="far fa-trash-alt nav-icon" onclick="return confirm('Are you sure you want to delete this item?');">Delete</span>
+                                    ToolTip="Delete Data"><span class="far fa-trash-alt nav-icon" onclick="return confirm('Apa kamu yakin meng-hapus data ?');"></span>
                                 </asp:LinkButton>
                             </ItemTemplate>
                         </asp:TemplateField>

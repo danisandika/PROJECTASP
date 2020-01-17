@@ -80,11 +80,11 @@
                         <asp:TemplateField HeaderText="Aksi" HeaderStyle-CssClass="table-bordered" ItemStyle-HorizontalAlign="Center">
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
-                                <asp:LinkButton ID="lnkDelete" runat="server" CommandArgument='<%# Eval("IDPembelian")%>' 
+                              <%--  <asp:LinkButton ID="lnkDelete" runat="server" CommandArgument='<%# Eval("IDPembelian")%>' 
                                 ToolTip="Batalkan"><span class="far fa-trash-alt nav-icon"></asp:LinkButton>
-                                
+                                --%>
                                 <asp:LinkButton ID="lnkEdit" runat="server" CommandArgument='<%# Eval("IDPembelian")%>' 
-                                OnClick="lnkEdit_Click" ToolTip="Konfirmasi" CssClass="far fa-check-circle"/>
+                                OnClick="lnkEdit_Click" ToolTip="Konfirmasi" CssClass="far fa-check-circle" />
                                 
                                 <asp:LinkButton ID="lnkViewDetails" runat="server" CommandArgument='<%# Eval("IDPembelian")%>' 
                                 OnClick="lnkViewDetails_Click" Text="" CssClass="far fa-check-square" ToolTip="Detail"/>
@@ -139,6 +139,9 @@
                         <asp:BoundField DataField="IDObat" ItemStyle-CssClass="hiddencol" HeaderText="IDObat" HeaderStyle-CssClass="hiddencol" NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="IDSupplier" />
 
                         <asp:BoundField DataField="Expired" ItemStyle-CssClass="hiddencol" HeaderText="Expired" HeaderStyle-CssClass="hiddencol" NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="IDSupplier" />
+
+                        <asp:BoundField DataField="Harga" ItemStyle-CssClass="hiddencol" HeaderText="Expired" HeaderStyle-CssClass="hiddencol" NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="IDSupplier" />
+
 
                          <asp:TemplateField HeaderText="Aksi" HeaderStyle-CssClass="table-bordered" ItemStyle-HorizontalAlign="Center">
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="8%"  CssClass="table table-bordered table-striped" />

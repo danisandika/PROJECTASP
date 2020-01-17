@@ -35,7 +35,7 @@ public partial class Karyawan_konf_pembelian : System.Web.UI.Page
         gridKonf.DataSource = ds;
         gridKonf.DataBind();
         return ds;
-
+        
     }
 
 
@@ -158,6 +158,8 @@ public partial class Karyawan_konf_pembelian : System.Web.UI.Page
         int result = Convert.ToInt32(com.ExecuteNonQuery());
         conn.Close();
         loadData();
+        secDetail.Visible = false;
+
         //cek apakah ada data yg akan ditambahkan/ubah
         if (result != 0)
         {
@@ -211,6 +213,7 @@ public partial class Karyawan_konf_pembelian : System.Web.UI.Page
         SubTotal.Text = row.Cells[4].Text;
         IDSupplier.Text= row.Cells[5].Text;
         IDObat.Text = row.Cells[6].Text;
+        hargaJual.Text = row.Cells[8].Text;
 
         DateTime exp = Convert.ToDateTime(row.Cells[7].Text);
         Kadaluarsa.Text = exp.ToString("yyyy-MM-dd");

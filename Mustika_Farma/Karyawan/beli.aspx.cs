@@ -20,7 +20,6 @@ public partial class Karyawan_beli : System.Web.UI.Page
         if (!IsPostBack)
         {
             loadData();
-           
         }
     }
 
@@ -29,9 +28,9 @@ public partial class Karyawan_beli : System.Web.UI.Page
     {
         SqlCommand com = new SqlCommand();
         com.Connection = conn;
-        com.CommandText = "[sp_SelectBeli]";
+        com.CommandText = "[sp_SelectBeli_Supplier]";
         com.CommandType = CommandType.StoredProcedure;
-        //com.Parameters.AddWithValue("@nama", txtSearch.Text);
+        com.Parameters.AddWithValue("@IDSupplier", DDLSupplier.SelectedValue);
 
         SqlDataAdapter adap = new SqlDataAdapter(com);
         adap.Fill(ds);
@@ -178,6 +177,7 @@ public partial class Karyawan_beli : System.Web.UI.Page
         dt.Columns.Add("harga");
         dt.Columns.Add("IDObat");
 
+
         foreach (GridViewRow grow in gridObat.Rows)
         {
             var checkboxselect = grow.FindControl("CheckBox1") as CheckBox;
@@ -283,6 +283,8 @@ public partial class Karyawan_beli : System.Web.UI.Page
             ins.ExecuteNonQuery();
             conn.Close();
         }
+        Response.Write("<script>alert('Pembelian Di proses');</script>");
+        loadData();
 
     }
 

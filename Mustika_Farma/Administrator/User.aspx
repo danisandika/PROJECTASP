@@ -35,7 +35,7 @@
                 <div class="card-body">
                   <div class="row form-group">
                      <div class="col-md-3">
-                    <label for="Obat">Nama User</label>
+                    <label for="Obat">Nama User</label><span style="color:red">*</span>
                     </div>
                      <div class="col-md-5">
                     <asp:TextBox ID="txtNama" CssClass="form-control" runat="server"/>
@@ -77,7 +77,7 @@
 
                   <div class="row form-group">
                  <div class="col-md-3">
-                  <label for="Role">Role</label>
+                  <label for="Role">Role</label><span style="color:red">*</span>
                 </div>
                  <div class="col-md-5">
                   <asp:DropDownList ID="ddlRole" runat="server" CssClass="form-control" DataSourceID="dsrole" DataTextField="Deskripsi" DataValueField="IDROle">
@@ -87,7 +87,7 @@
                 </div>
                   <div class="row form-group">
                     <div class="col-md-3">
-                      <label for="satuan">Tanggal</label>
+                      <label for="satuan">Tanggal</label><span style="color:red">*</span>
                     </div>
                      <div class="col-md-5">
                    <asp:TextBox ID="txtTanggal" CssClass="form-control" runat="server" TextMode="Date" />
@@ -101,7 +101,7 @@
 
                    <div class="row form-group">
                    <div class="col-md-3">
-                   <label for="Ket">Email</label>
+                   <label for="Ket">Email</label><span style="color:red">*</span>
                     </div>
                      <div class="col-md-5">
                    <asp:TextBox ID="txtEmail" CssClass="form-control" runat="server" />
@@ -119,7 +119,7 @@
                      
                    <div class="row form-group">
                      <div class="col-md-3">
-                   <label for="Ket">Username</label>
+                   <label for="Ket">Username</label><span style="color:red">*</span>
                     </div>
                      <div class="col-md-5">
                    <asp:TextBox ID="txtUsername" CssClass="form-control" runat="server" />
@@ -133,7 +133,7 @@
                      
                    <div class="row form-group">
                      <div class="col-md-3">
-                   <label for="Ket">Password</label>
+                   <label for="Ket">Password</label><span style="color:red">*</span>
                     </div>
                     <div class="col-md-5">
                    <asp:TextBox ID="txtPass" CssClass="form-control" runat="server" />
@@ -174,7 +174,7 @@
                  <div class="card-body">
                   <div class="row form-group">
                      <div class="col-md-3">
-                    <label for="Obat">Nama User</label>
+                    <label for="Obat">Nama User</label><span style="color:red">*</span>
                     </div>
                      <div class="col-md-5">
                     <asp:TextBox ID="txtNamaE" CssClass="form-control" runat="server"/>
@@ -216,7 +216,7 @@
 
                  <div class="row form-group">
                  <div class="col-md-3">
-                  <label for="Role">Role</label>
+                  <label for="Role">Role</label><span style="color:red">*</span>
                   </div>
                  <div class="col-md-5">
                   <asp:DropDownList ID="ddlROlee" runat="server" CssClass="form-control" DataSourceID="dsroles" DataTextField="Deskripsi" DataValueField="IDRole">
@@ -227,7 +227,7 @@
 
                   <div class="row form-group">
                    <div class="col-md-3">
-                   <label for="satuan">Tanggal</label>
+                   <label for="satuan">Tanggal</label><span style="color:red">*</span>
                     </div>
                      <div class="col-md-5">
                    <asp:TextBox ID="txtTanggalE" CssClass="form-control" runat="server" TextMode="Date" />
@@ -237,7 +237,7 @@
 
                    <div class="row form-group">
                     <div class="col-md-3">
-                   <label for="Ket">Email</label>
+                   <label for="Ket">Email</label><span style="color:red">*</span>
                     </div>
                    <div class="col-md-5">
                    <asp:TextBox ID="txtEmailE" CssClass="form-control" runat="server" />
@@ -255,7 +255,7 @@
                        
                    <div class="row form-group">
                    <div class="col-md-3">
-                   <label for="Ket">Username</label>
+                   <label for="Ket">Username</label><span style="color:red">*</span>
                     </div>
                      <div class="col-md-5">
                    <asp:TextBox ID="txtUsernameE" CssClass="form-control" runat="server" />
@@ -269,7 +269,7 @@
                      
                    <div class="row form-group">
                      <div class="col-md-3">
-                   <label for="Ket">Password</label>
+                   <label for="Ket">Password</label><span style="color:red">*</span>
                     </div>
                      <div class="col-md-5">
                    <asp:TextBox ID="txtPasswordE" CssClass="form-control" runat="server" />
@@ -339,7 +339,7 @@
                         </asp:TemplateField>
                         
                         <asp:BoundField DataField="Nama" HeaderStyle-CssClass="table-bordered" HeaderText="Nama"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Nama" >
-                            <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
+                            <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="20%"  CssClass="table table-bordered table-striped" />
                         </asp:BoundField>
                         <asp:BoundField DataField="Alamat" HeaderStyle-CssClass="table-bordered" HeaderText="Alamat"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Alamat" >
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="15%"  CssClass="table table-bordered table-striped"  />
@@ -351,7 +351,7 @@
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="8%" CssClass="table table-bordered table-striped"   />
                         </asp:BoundField>
                         <asp:BoundField DataField="Email" HeaderText="Email"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Email" >
-                            <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="15%" CssClass="table table-bordered table-striped"  />
+                            <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="20%" CssClass="table table-bordered table-striped"  />
                         </asp:BoundField>
                         <asp:BoundField DataField="Username" ItemStyle-CssClass="hiddencol" HeaderText="Username" HeaderStyle-CssClass="hiddencol" NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="username" />
                         <asp:BoundField DataField="Password" ItemStyle-CssClass="hiddencol" HeaderText="Password" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="password" />
@@ -361,7 +361,7 @@
                         <asp:BoundField DataField="nama" ItemStyle-CssClass="hiddencol" HeaderText="ModifiedBy" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
                         <asp:BoundField DataField="ModifiedDate" ItemStyle-CssClass="hiddencol" HeaderText="ModifiedDate" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
                         
-                         <asp:BoundField DataField="Deskripsi" HeaderStyle-CssClass="table-bordered" HeaderText="ID Role"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="IDRole" >
+                         <asp:BoundField DataField="Deskripsi" HeaderStyle-CssClass="table-bordered" HeaderText="Role"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="IDRole" >
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="10%" CssClass="table table-bordered table-striped"  />
                         </asp:BoundField>
                         <asp:BoundField DataField="IDRole" ItemStyle-CssClass="hiddencol" HeaderText="ModifiedBy" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>

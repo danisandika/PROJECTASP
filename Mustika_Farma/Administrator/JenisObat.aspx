@@ -36,10 +36,16 @@
                 <div class="card-body">
                   <div class="row form-group">
                     <div class="col-md-3">
-                    <label for="exampleInputEmail1">Nama Jenis Obat</label>
+                    <label for="exampleInputEmail1">Nama Jenis Obat</label><span style="color:red">*</span>
                     </div>
                       <div class="col-md-5">
                     <asp:TextBox ID="txtnamaJenis" CssClass="form-control" runat="server"/>
+                           <asp:RequiredFieldValidator
+                            id="RequiredFieldValidator17"
+                            ControlToValidate="txtnamaJenis"
+                            Text="(Required)"
+                            ValidationGroup="frmAdd"
+                            Runat="server" />
                   </div>
                 </div>
 
@@ -82,7 +88,7 @@
                 <asp:Label ID="lblID" runat="server" Visible="false"></asp:Label>
                   <div class="row form-group">
                     <div class="col-md-3">
-                    <label for="exampleInputEmail1">Nama Jenis Obat</label>
+                    <label for="exampleInputEmail1">Nama Jenis Obat</label><span style="color:red">*</span>
                     </div>
                     <div class="col-md-5">
                     <asp:TextBox ID="txtEditnamaJenis" CssClass="form-control" runat="server"/>

@@ -35,16 +35,22 @@
                 <div class="card-body">
                   <div class="row form-group">
                     <div class="col-md-3">
-                    <label for="Obat">Nama Obat</label>
+                    <label for="Obat">Nama Obat</label><span style="color:red">*</span>
                     </div>
                     <div class="col-md-5">
                     <asp:TextBox ID="txtnamaObat" CssClass="form-control" runat="server"/>
+                          <asp:RequiredFieldValidator ID="RequiredFieldValidator3"
+                        runat="server"
+                        ControlToValidate="txtnamaObat"
+                        ForeColor="Red"
+                        ValidationGroup="numb"
+                        ErrorMessage="Fata Harus Di Isi"></asp:RequiredFieldValidator>
                   </div>
                 </div>
 
                   <div class="row form-group">
                     <div class="col-md-3">
-                    <label for="IDJenisObat">ID Jenis Obat</label>
+                    <label for="IDJenisObat">ID Jenis Obat</label><span style="color:red">*</span>
                     </div>
                     <div class="col-md-5">
                   <asp:DropDownList ID="DDLJenisObat" runat="server" CssClass="form-control" DataSourceID="dsJenis" DataTextField="namaJenis" DataValueField="IDJenis">
@@ -55,7 +61,7 @@
 
                  <div class="row form-group">
                     <div class="col-md-3">
-                    <label for="IDJenisObat">Supplier</label>
+                    <label for="IDJenisObat">Supplier</label><span style="color:red">*</span>
                     </div>
                     <div class="col-md-5">
                   <asp:DropDownList ID="ddlSupplier" runat="server" CssClass="form-control" DataSourceID="dsSupplier" DataTextField="NamaSupplier" DataValueField="IDSupplier">
@@ -64,14 +70,14 @@
                   </div>
                    </div>
 
-                  <div class="row form-group">
+                <%--  <div class="row form-group">
                     <div class="col-md-3">
                    <label for="Ket">Jumlah Obat</label>
                     </div>
                     <div class="col-md-5">
                    <asp:TextBox ID="txtJumlah" CssClass="form-control" runat="server" TextMode="Number" />
                   </div>
-                  </div>
+                  </div>--%>
 
                   <div class="row form-group">
                     <div class="col-md-3">
@@ -84,7 +90,7 @@
 
                    <div class="row form-group">
                      <div class="col-md-3">
-                    <label for="IDJenisObat">Lokasi</label>
+                    <label for="IDJenisObat">Lokasi</label><span style="color:red">*</span>
                     </div>
                     <div class="col-md-5">
                          <asp:DropDownList ID="DDLLokasi" runat="server" CssClass="form-control" DataSourceID="dsLokasi" DataTextField="Nama_Lokasi" DataValueField="IDLokasi">
@@ -95,7 +101,7 @@
 
                    <div class="row form-group">
                     <div class="col-md-3">
-                   <label for="Ket">Satuan</label>
+                   <label for="Ket">Satuan</label><span style="color:red">*</span>
                     </div>
                     <div class="col-md-5">
                    <asp:DropDownList ID="ddlSatuan" runat="server" CssClass="form-control" >
@@ -108,7 +114,7 @@
 
                    <div class="row form-group">
                     <div class="col-md-3">
-                   <label for="Ket">Harga</label>
+                   <label for="Ket">Harga</label><span style="color:red">*</span>
                     </div>
                     <div class="col-md-5">
                    <asp:TextBox ID="txtHarga" CssClass="form-control" runat="server" TextMode="Number" />
@@ -123,16 +129,23 @@
 
                    <div class="row form-group">
                     <div class="col-md-3">
-                   <label for="Ket">Expired</label>
+                   <label for="Ket">Expired</label><span style="color:red">*</span>
                     </div>
                     <div class="col-md-5">
                    <asp:TextBox CssClass="form-control" ID="txtExpired" placeholder="Tanggal Lahir" runat="server" TextMode="Date" required></asp:TextBox>
-                  </div>
+                  <asp:TextBox ID="TextBox1" CssClass="form-control" runat="server" TextMode="Number" />
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator4"
+                        runat="server"
+                        ControlToValidate="txtExpired"
+                        ForeColor="Red"
+                        ValidationGroup="numb"
+                        ErrorMessage="Isi data dengan benar"></asp:RequiredFieldValidator>
+                    </div>
                 </div>
 
                  <div class="form-group row align-items-center">
                 <div class="col-md-3">
-                 <label class="col-sm-3 col-form-label text-label">Foto</label>
+                 <label class="col-sm-3 col-form-label text-label">Foto</label><span style="color:red">*</span>
                  </div>
                  <div class="col-sm-9">
                  <div class="input-group">
@@ -205,7 +218,7 @@
                      AutoGenerateColumns="false"
                      DataKeyNames="IDObat"
                      EmptyDataText="Tidak Ada Data" 
-                    PageSize="5"
+                     PageSize="5"
                      ShowHeaderWhenEmpty="true"
                      OnPageIndexChanging="gridObat_PageIndexChanging"
                     GridLines="Both" 
@@ -228,7 +241,7 @@
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="15%"  CssClass="table table-bordered table-striped" />
                         </asp:BoundField>
 
-                        <asp:BoundField DataField="JumlahObat" HeaderStyle-CssClass="table-bordered"  HeaderText="Jumlah Obat"  NullDisplayText="-" ItemStyle-HorizontalAlign="Right" SortExpression="JumlahObat" >
+                        <asp:BoundField DataField="JumlahObat" HeaderStyle-CssClass="table-bordered"  HeaderText="Stok Obat"  NullDisplayText="-" ItemStyle-HorizontalAlign="Right" SortExpression="JumlahObat" >
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
                         </asp:BoundField>
 
@@ -291,7 +304,6 @@
               
               </div>
             </div>
-          </div>
         </section>
 
       <!--SECTION EDIT-->
@@ -311,16 +323,16 @@
                 <div class="card-body">
                   <div class="row form-group">
                      <div class="col-md-3">
-                    <label for="Obat">Nama Obat</label>
+                    <label for="Obat">Nama Obat</label><span style="color:red">*</span>
                     </div>
                     <div class="col-md-5">
-                    <asp:TextBox ID="txtNamaObatE" CssClass="form-control" runat="server"/>
+                    <asp:TextBox ID="txtNamaObatE" CssClass="form-control" runat="server" />
                   </div>
                 </div>
                   <%--row yang status 0 masi ketampil, soalnya biar otomatis terisi gitu--%>
                   <div class="row form-group">
                     <div class="col-md-3">
-                    <label for="IDJenisObat">ID Jenis Obat</label>
+                    <label for="IDJenisObat">ID Jenis Obat</label><span style="color:red">*</span>
                     </div>
                     <div class="col-md-5">
                   <asp:DropDownList ID="ddlJenisObatE" runat="server" AppendDataBoundItems="true" CssClass="form-control" DataSourceID="dsJenisE" DataTextField="namaJenis" DataValueField="IDJenis">
@@ -331,7 +343,7 @@
 
                  <div class="row form-group">
                     <div class="col-md-3">
-                    <label for="IDJenisObat">Supplier</label>
+                    <label for="IDJenisObat">Supplier</label><span style="color:red">*</span>
                     </div>
                     <div class="col-md-5">
                   <asp:DropDownList ID="ddlSupplierE" runat="server" CssClass="form-control" DataSourceID="dsSupplierE" DataTextField="NamaSupplier" DataValueField="IDSupplier">
@@ -360,7 +372,7 @@
 
                    <div class="row form-group">
                     <div class="col-md-3">
-                       <label for="IDLokasi">Lokasi</label>
+                       <label for="IDLokasi">Lokasi</label><span style="color:red">*</span>
                     </div>
                     <div class="col-md-5">
                   <asp:DropDownList ID="ddlLokasiE" runat="server" CssClass="form-control" DataSourceID="dsLokasi" DataTextField="Nama_Lokasi" DataValueField="IDLokasi">
@@ -371,7 +383,7 @@
 
                    <div class="row form-group">
                     <div class="col-md-3">
-                   <label for="Ket">Satuan</label>
+                   <label for="Ket">Satuan</label><span style="color:red">*</span>
                     </div>
                     <div class="col-md-5">
                    <asp:DropDownList ID="ddlSatuanE" runat="server" CssClass="form-control" >
@@ -385,7 +397,7 @@
 
                    <div class="row form-group">
                     <div class="col-md-3">
-                   <label for="Ket">Harga</label>
+                   <label for="Ket">Harga</label><span style="color:red">*</span>
                     </div>
                     <div class="col-md-5">
                    <asp:TextBox ID="txtHargaEdit" CssClass="form-control" runat="server"  />
@@ -400,7 +412,7 @@
 
                    <div class="row form-group">
                     <div class="col-md-3">
-                   <label for="Expired">Expired</label>
+                   <label for="Expired">Expired</label><span style="color:red">*</span>
                     </div>
                     <div class="col-md-5">
                    <asp:TextBox CssClass="form-control" ID="txtExpiredE" placeholder="Tanggal Lahir" runat="server" TextMode="Date" required></asp:TextBox>

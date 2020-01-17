@@ -67,7 +67,6 @@ public partial class Administrator_Dokter : System.Web.UI.Page
         com.Parameters.AddWithValue("@foto", "Dokter/" + filename);
         com.Parameters.AddWithValue("@CreateDate", CreateDate);
         com.Parameters.AddWithValue("@CreateBy", Session["creaby"]);
-        com.Parameters.AddWithValue("@ID_Jadwal", ddlJadwal.SelectedValue);
     
         conn.Open();
 
@@ -106,7 +105,6 @@ public partial class Administrator_Dokter : System.Web.UI.Page
             com.Parameters.AddWithValue("@foto", "Dokter/" + filename);
             com.Parameters.AddWithValue("@modifiedDate", ModifiedDate);
             com.Parameters.AddWithValue("@ModifiedBy", Session["creaby"]);
-            com.Parameters.AddWithValue("@ID_Jadwal", ddlJadwalE.SelectedValue);
 
             conn.Open();
 
@@ -141,7 +139,6 @@ public partial class Administrator_Dokter : System.Web.UI.Page
             com.Parameters.AddWithValue("@foto", "NULL");
             com.Parameters.AddWithValue("@modifiedDate", ModifiedDate);
             com.Parameters.AddWithValue("@ModifiedBy", Session["creaby"]);
-            com.Parameters.AddWithValue("@ID_Jadwal", ddlJadwalE.SelectedValue);
 
             conn.Open();
 

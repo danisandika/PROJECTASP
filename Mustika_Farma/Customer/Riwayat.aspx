@@ -37,10 +37,12 @@
 
     <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="Home.aspx">Home</a></li>
+            <li><a href="Default.aspx">Home</a></li>
             <%--<li><a href="#service">Transaksi Penjualan</a></li>--%>
-            <%--<li><a href="#doctor">Pembayaran</a></li>--%>
-            <li><a href="Riwayat.aspx">Riwayat</a></li>
+            <li><a href="Booking.aspx">Booking Dokter</a></li>
+            <li class="active"><a href="Riwayat.aspx">Riwayat</a></li>
+			<a href="../Login.aspx" class="btn btn-skin btn-lg">Logout</a>
+
             <%--<li><a href="#pricing">Antrian</a></li>--%>
             
           </ul>
@@ -48,7 +50,7 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Section1" Runat="Server">
        <!--SECTION VIEW-->
-     <section id="secView" runat="server" class="home-section paddingbot-60">
+   <section id="secView" runat="server" class="home-section paddingbot-60">
    <div class="container marginbot-50">
      <div class="container-fluid">
         <div class="row">
@@ -63,21 +65,30 @@
                     <PagerSettings Mode="NumericFirstLast" FirstPageText="<<" LastPageText=">>" />
                     <Columns>
                         <asp:TemplateField HeaderText="No"  HeaderStyle-CssClass="table-bordered" ItemStyle-HorizontalAlign="Center">
+                        <HeaderStyle BackColor="#03cffc" Font-Bold="True" ForeColor="Black" />    
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="1%" CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
                                 <%# Container.DataItemIndex +1 %>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:BoundField DataField="NamaPasien"  HeaderStyle-CssClass="table-bordered" HeaderText="Nama Pasien"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="namaJenis" >
+                        <asp:BoundField DataField="nama"  HeaderStyle-CssClass="table-bordered" HeaderText="Nama Dokter"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="namaJenis" >
+                        <HeaderStyle BackColor="#03cffc" Font-Bold="True" ForeColor="Black" />    
+                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="20%"  CssClass="table table-bordered table-striped" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="nama_jenis" HeaderStyle-CssClass="table-bordered" HeaderText="Spesialis"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="deskripsi" >
+                        <HeaderStyle BackColor="#03cffc" Font-Bold="True" ForeColor="Black" />    
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="20%"  CssClass="table table-bordered table-striped" />
                         </asp:BoundField>
                         <asp:BoundField DataField="penyakit"  HeaderStyle-CssClass="table-bordered" HeaderText="Penyakit"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="deskripsi" >
+                        <HeaderStyle BackColor="#03cffc" Font-Bold="True" ForeColor="Black" />    
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="30%"  CssClass="table table-bordered table-striped" />
                         </asp:BoundField>
                         <asp:BoundField DataField="pesan"  HeaderStyle-CssClass="table-bordered" HeaderText="Pesan"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="deskripsi" >
+                        <HeaderStyle BackColor="#03cffc" Font-Bold="True" ForeColor="Black" />    
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="60%"  CssClass="table table-bordered table-striped" />
                         </asp:BoundField>
                         <asp:BoundField DataField="tanggal"  HeaderStyle-CssClass="table-bordered" HeaderText="Tanggal"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="deskripsi" >
+                        <HeaderStyle BackColor="#03cffc" Font-Bold="True" ForeColor="Black" />    
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="20%"  CssClass="table table-bordered table-striped" />
                         </asp:BoundField>
                         <asp:BoundField DataField="nama" ItemStyle-CssClass="hiddencol" HeaderText="Nama Dokter" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
@@ -87,12 +98,15 @@
                         <asp:BoundField DataField="gula" ItemStyle-CssClass="hiddencol" HeaderText="gula" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
                         <asp:BoundField DataField="kolestrol" ItemStyle-CssClass="hiddencol" HeaderText="kolestrol" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
                         <asp:BoundField DataField="status" ItemStyle-CssClass="hiddencol" HeaderText="Status" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
+                        <asp:BoundField DataField="IDUser" ItemStyle-CssClass="hiddencol" HeaderText="Nama Dokter" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
+
 
                         <asp:TemplateField HeaderText="Aksi"  HeaderStyle-CssClass="table-bordered" ItemStyle-HorizontalAlign="Center">
+                        <HeaderStyle BackColor="#03cffc" Font-Bold="True" ForeColor="Black" />    
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="20%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>                               
                                 <asp:LinkButton ID="lnkViewDetails" runat="server" CommandArgument='<%# Eval("IDRiwayat")%>' 
-                                OnClick="lnkViewDetails_Click" Text="Detail" style="margin-left:20px"  class="fa fa-check icon-success"/>
+                                OnClick="lnkViewDetails_Click" Text="" class="fa fa-check icon-success" ToolTip="Detail"/>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>

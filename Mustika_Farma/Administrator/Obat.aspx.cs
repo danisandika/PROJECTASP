@@ -58,7 +58,7 @@ public partial class Administrator_Obat : System.Web.UI.Page
         com.CommandType = CommandType.StoredProcedure;
         com.Parameters.AddWithValue("@namaObat", txtnamaObat.Text);
         com.Parameters.AddWithValue("@IDJenis", DDLJenisObat.SelectedValue);
-        com.Parameters.AddWithValue("@JumlahObat",Convert.ToInt16(txtJumlah.Text));
+        //com.Parameters.AddWithValue("@JumlahObat",Convert.ToInt16(txtJumlah.Text));
         com.Parameters.AddWithValue("@Keterangan", txtKet.Text);
         com.Parameters.AddWithValue("@IDLokasi", DDLLokasi.SelectedValue);
         com.Parameters.AddWithValue("@Satuan", ddlSatuan.SelectedValue);

@@ -45,7 +45,7 @@ public partial class Customer_Registrasi : System.Web.UI.Page
     {
         try
         {
-            string messageBody = "<br><br><font>Member GymSI</font><br><br>";
+            string messageBody = "<br><br><font>Member Mustika Farma</font><br><br>";
             string htmlTableStart = "<table style=\"border-collapse:collapse; text-align:center;\" >";
             string htmlTableEnd = "</table>";
             string htmlHeaderRowStart = "<tr style=\"background-color:#4267e3; color:#ffffff;\">";
@@ -111,35 +111,53 @@ public partial class Customer_Registrasi : System.Web.UI.Page
         DateTime tglLahir = Convert.ToDateTime(txtTanggal.Text);
         int CreateBy = 1;
         int role = 3;
-
+        bool exists = false;
         SqlCommand com = new SqlCommand();
         com.Connection = conn;
-        com.CommandText = "sp_InputUser";
-        com.CommandType = CommandType.StoredProcedure;
-        com.Parameters.AddWithValue("@Nama", txtNama.Text);
-        com.Parameters.AddWithValue("@Alamat", txtAlamat.Text);
-        com.Parameters.AddWithValue("@NoTelp", txtNoTelp.Text);
-        com.Parameters.AddWithValue("@TglLahir", tglLahir);
-        com.Parameters.AddWithValue("@Email", txtEmail.Text);
-        com.Parameters.AddWithValue("@status", 1);
-        com.Parameters.AddWithValue("@username",str);
-        com.Parameters.AddWithValue("@password", "MF@" + Convert.ToString(DateTime.Now.Year));
-        com.Parameters.AddWithValue("@createDate", CreateDate);
-        com.Parameters.AddWithValue("@createBy", CreateBy);
-        com.Parameters.AddWithValue("@IDROle", role);
+
         conn.Open();
 
-        int result = Convert.ToInt32(com.ExecuteNonQuery());
-        Response.Write("<script>alert('Berhasil Menjadi Member Baru')</script>");
+        using (SqlCommand cmd = new SqlCommand("select count (*) from [User] Where Email =@Email", conn))
+        {
+            cmd.Parameters.AddWithValue("@Email", txtEmail.Text);
+            exists = (int)cmd.ExecuteScalar() > 0;
+        }
 
-        conn.Close();
+        if (exists)
+        {
+            Response.Write("<script>alert('Email sudah pernah digunakan')</script>");
+            
+        }
+        else
+        {
+            com.CommandText = "sp_InputUser";
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@Nama", txtNama.Text);
+            com.Parameters.AddWithValue("@Alamat", txtAlamat.Text);
+            com.Parameters.AddWithValue("@NoTelp", txtNoTelp.Text);
+            com.Parameters.AddWithValue("@TglLahir", tglLahir);
+            com.Parameters.AddWithValue("@Email", txtEmail.Text);
+            com.Parameters.AddWithValue("@status", 1);
+            com.Parameters.AddWithValue("@username", str);
+            com.Parameters.AddWithValue("@password", "MF@" + Convert.ToString(DateTime.Now.Year));
+            com.Parameters.AddWithValue("@createDate", CreateDate);
+            com.Parameters.AddWithValue("@createBy", CreateBy);
+            com.Parameters.AddWithValue("@IDROle", role);
 
-        string isiEmail = "&nbsp;&nbsp;Kepada " + txtNama.Text + "," + Environment.NewLine + " berikut ini username dan password anda";
-        string htmlMember = getHtmlMember(str, "MF@" + Convert.ToString(DateTime.Now.Year)); //here you will be getting an html string 
-        string htmlString = isiEmail + Environment.NewLine + htmlMember + Environment.NewLine + " Sekian informasinya, atas perhatiannya kami ucapkan terima kasih." + Environment.NewLine + "<br/><br/> Hormat Kami<br/><br/>" + Environment.NewLine + " GymSI";
-        SendMail(txtEmail.Text, htmlString);
+            int result = Convert.ToInt32(com.ExecuteNonQuery());
+            Response.Write("<script>alert('Berhasil Menjadi Member Baru')</script>");
 
-        clearForm();
+            conn.Close();
+
+            string isiEmail = "&nbsp;&nbsp;Kepada " + txtNama.Text + "," + Environment.NewLine + " berikut ini username dan password anda";
+            string htmlMember = getHtmlMember(str, "MF@" + Convert.ToString(DateTime.Now.Year)); //here you will be getting an html string 
+            string htmlString = isiEmail + Environment.NewLine + htmlMember + Environment.NewLine + " Sekian informasinya, atas perhatiannya kami ucapkan terima kasih." + Environment.NewLine + "<br/><br/> Hormat Kami<br/><br/>" + Environment.NewLine + " Mustika Farma";
+            SendMail(txtEmail.Text, htmlString);
+
+            clearForm();
+        }
+
+       
     }
 
     public void clearForm()

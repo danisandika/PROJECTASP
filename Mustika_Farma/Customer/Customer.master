@@ -64,7 +64,7 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="#intro">Home</a></li>
             <li><a href="#service">Service</a></li>
-            <li><a href="#doctor">Pharmacist</a></li>
+            <li><a href="#doctor">Dokter</a></li>
             <li><a href="#facilities">Products</a></li>
           
             
@@ -95,9 +95,7 @@
                     <li><span class="fa fa-check fa-2x icon-success"></span> <span class="list"><strong>Complete Products </strong><br />Discover the most complete health products</span></li>
                     <li><span class="fa fa-check fa-2x icon-success"></span> <span class="list"><strong>Available at any time </strong><br />Need help? GoApotik customers are ready to serve</span></li>
                   </ul>
-                  <p class="text-right wow bounceIn" data-wow-delay="0.4s">
-                    <a href="#" class="btn btn-skin btn-lg">Learn more <i class="fa fa-angle-right"></i></a>
-                  </p>
+                 
                 </div>
               </div>
 
@@ -139,7 +137,7 @@
                 <i class="fa fa-list-alt fa-3x circled bg-skin"></i>
                 <h4 class="h-bold">Buy medication by prescription</h4>
                 <p>
-                 Redeem doctor's prescription with the best pharmacist
+                 Redeem doctor's prescription with the best Doctor
                 </p>
               </div>
             </div>
@@ -148,9 +146,9 @@
             <div class="wow fadeInUp" data-wow-delay="0.2s">
               <div class="box text-center">
                 <i class="fa fa-user-md fa-3x circled bg-skin"></i>
-                <h4 class="h-bold">Help by pharmacist</h4>
+                <h4 class="h-bold">Help by Doctor</h4>
                 <p>
-				The best pharmacists and experienced in their fields                
+				The best Doctors and experienced in their fields                
 				</p>
               </div>
             </div>
@@ -198,7 +196,7 @@
 
 
     <!-- Section: services -->
-    <section id="service" class="home-section nopadding paddingtop-60">
+    <section id="service" class="home-section paddingbot-60">
 
       <div class="container">
 
@@ -259,8 +257,8 @@
           <div class="col-lg-8 col-lg-offset-2">
             <div class="wow fadeInDown" data-wow-delay="0.1s">
               <div class="section-heading text-center">
-                <h2 class="h-bold">Pharmacist</h2>
-                <p>The best and experienced pharmacists with us</p>
+                <h2 class="h-bold">Doctor</h2>
+                <p>The best and experienced Doctor with us</p>
               </div>
             </div>
             <div class="divider-short"></div>
@@ -268,94 +266,22 @@
         </div>
       </div>
 
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
 
-            <div id="filters-container" class="cbp-l-filters-alignLeft">
-              <div data-filter="*" class="cbp-filter-item-active cbp-filter-item">All (
-                <div class="cbp-filter-counter"></div>)</div>
-              <div data-filter=".cardiologist" class="cbp-filter-item">Cardiologist (
-                <div class="cbp-filter-counter"></div>)</div>
-              <div data-filter=".psychiatrist" class="cbp-filter-item">Psychiatrist (
-                <div class="cbp-filter-counter"></div>)</div>
-              <div data-filter=".neurologist" class="cbp-filter-item">Neurologist (
-                <div class="cbp-filter-counter"></div>)</div>
+    <asp:Repeater ID="dokter" runat="server">    
+           <ItemTemplate>
+             <div style="display: inline-block; width:auto; height:auto">
+               
+                <div class="col-md-12 col-lg-12">
+                    <div class="cbp-caption-defaultWrap">
+                     <a href="#" class="img-prod"><img class="img-fluid" src="../Administrator/<%#Eval("foto") %>" alt="Colorlib Template" width="80px" height="80px">
+    				    </a>
+                    </div>
+                  <h4><%#Eval("nama") %></a></h4>
+                 <p class="price"><span class="price-sale"><%#Eval("namaJenis") %></span></p> 
             </div>
-
-            <div id="grid-container" class="cbp-l-grid-team">
-              <ul>
-                <li class="cbp-item psychiatrist">
-                  <a href="doctors/member1.html" class="cbp-caption cbp-singlePage">
-                    <div class="cbp-caption-defaultWrap">
-                      <img src="Medicio/img/team/1.jpg" alt="" width="100%"> </img>
-                    </div>
-                    <div class="cbp-caption-activeWrap">
-                      <div class="cbp-l-caption-alignCenter">
-                        <div class="cbp-l-caption-body">
-                          <div class="cbp-l-caption-text">VIEW PROFILE</div>
-                        </div>
-                      </div>
-                    </div>
-                  </a>
-                  <a href="<?php echo base_url('Medicio/doctors/member1.html" class="cbp-singlePage cbp-l-grid-team-name')?>">Alice Grue</a>
-                  <div class="cbp-l-grid-team-position">Psychiatrist</div>
-                </li>
-                <li class="cbp-item cardiologist">
-                  <a href="<?php echo base_url('Medicio/doctors/member2.html" class="cbp-caption cbp-singlePage')?>">
-                    <div class="cbp-caption-defaultWrap">
-                      <img src="Medicio/img/team/2.jpg" alt="" width="100%"/>
-                    </div>
-                    <div class="cbp-caption-activeWrap">
-                      <div class="cbp-l-caption-alignCenter">
-                        <div class="cbp-l-caption-body">
-                          <div class="cbp-l-caption-text">VIEW PROFILE</div>
-                        </div>
-                      </div>
-                    </div>
-                  </a>
-                  <a href="doctors/member2.html" class="cbp-singlePage cbp-l-grid-team-name">Joseph Murphy</a>
-                  <div class="cbp-l-grid-team-position">Cardiologist</div>
-                </li>
-                <li class="cbp-item cardiologist">
-                  <a href="doctors/member3.html" class="cbp-caption cbp-singlePage">
-                    <div class="cbp-caption-defaultWrap">
-                      <img src="Medicio/img/team/3.jpg" alt="" width="100%"/>
-                    </div>
-                    <div class="cbp-caption-activeWrap">
-                      <div class="cbp-l-caption-alignCenter">
-                        <div class="cbp-l-caption-body">
-                          <div class="cbp-l-caption-text">VIEW PROFILE</div>
-                        </div>
-                      </div>
-                    </div>
-                  </a>
-                  <a href="doctors/member3.html" class="cbp-singlePage cbp-l-grid-team-name">Alison Davis</a>
-                  <div class="cbp-l-grid-team-position">Cardiologist</div>
-                </li>
-                <li class="cbp-item neurologist">
-                  <a href="doctors/member4.html" class="cbp-caption cbp-singlePage">
-                    <div class="cbp-caption-defaultWrap">
-                      <img src="Medicio/img/team/4.jpg" alt="" width="100%" "/>
-                    </div>
-                    <div class="cbp-caption-activeWrap">
-                      <div class="cbp-l-caption-alignCenter">
-                        <div class="cbp-l-caption-body">
-                          <div class="cbp-l-caption-text">VIEW PROFILE</div>
-                        </div>
-                      </div>
-                    </div>
-                  </a>
-                  <a href="doctors/member4.html" class="cbp-singlePage cbp-l-grid-team-name">Adam Taylor</a>
-                  <div class="cbp-l-grid-team-position">Neurologist</div>
-                </li>
-
-              </ul>
             </div>
-          </div>
-        </div>
-      </div>
-
+           </ItemTemplate>
+    </asp:Repeater>
     </section>
     <!-- /Section: team -->
 
@@ -363,7 +289,7 @@
 
     <!-- Section: works -->
     <section id="facilities" class="home-section paddingbot-60">
-      <div class="container marginbot-50">
+     <div class="container marginbot-50">
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2">
             <div class="wow fadeInDown" data-wow-delay="0.1s">
@@ -377,25 +303,22 @@
         </div>
       </div>
 
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-12 col-md-12 col-lg-12">
-            <div class="wow bounceInUp" data-wow-delay="0.2s">
-              <div id="owl-works" class="owl-carousel">
-				 <?php
-                        $connect = mysqli_connect("localhost", "root", "","prg5_apotek");
-                        mysqli_select_db($connect,"prg5_apotek");
-                        $sql = mysqli_query($connect,"SELECT * FROM obat WHERE status = '1' ORDER BY IDObat ASC");
-                        if(mysqli_num_rows($sql) > 0){
-                            while($row = mysqli_fetch_array($sql)) { ?>
-							    <div class="item"><a href="<?php echo $row ['Foto'] ?>" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/1@2x.jpg"><img src="<?php echo $row ['Foto'] ?>" class="img-responsive" alt="img"></a></div>
-                            <?php } ?>
-                        <?php } ?>				
-               </div>
+    <asp:Repeater ID="obat" runat="server">    
+           <ItemTemplate>
+             <div style="display: inline-block; width:auto; height:auto">
+               
+                <div class="col-md-12 col-lg-12">
+                    <div class="cbp-caption-defaultWrap">
+                     <a href="#" class="img-prod"><img class="img-fluid" src="../Administrator/<%#Eval("Foto") %>" alt="Colorlib Template" width="80px" height="80px">
+    				    </a>
+                    </div>
+                  <h4><%#Eval("namaObat") %></a></h4>
+                <asp:label id="productrate" runat="server" Text='<%#String.Format("Rp" + "{0:#.00}", Eval("Harga"))%>' />
             </div>
-          </div>
-        </div>
-      </div>
+            </div>
+           </ItemTemplate>
+    </asp:Repeater>
+
     </section>
     <!-- /Section: works -->
 

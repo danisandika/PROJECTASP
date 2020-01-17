@@ -384,13 +384,15 @@ public partial class Administrator_Supplier : System.Web.UI.Page
 
     protected void btnCancelEdit_Click1(object sender, EventArgs e)
     {
-        secView.Visible = true;
+        ViewMenu.Visible = true;
+        EditMenu.Visible = false;
         AddMenu.Visible = false;
-        ViewMenu.Visible = false;
     }
 
     protected void btnCancelAdd_Click(object sender, EventArgs e)
     {
-
+        ViewMenu.Visible = true;
+        EditMenu.Visible = false;
+        AddMenu.Visible = false;
     }
 }

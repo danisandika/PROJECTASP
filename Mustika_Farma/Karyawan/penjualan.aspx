@@ -12,59 +12,8 @@
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="Content" Runat="Server">
 
-<!-- Main content -->
-<section class="content">
-<div class="row">
-  <div class="col-12">
-    <div class="card card-primary">
-      <div class="card-header">
-        <h3 class="card-title ">Tambah Data Penjualan</h3>
-      </div>
-      <!-- /.card-header -->
-      <div class="card-body">
-		<div class="row form-group">
-		<div class="col-sm-12">
-		<label>Resep Dokter</label>
-        </div>
-         <div class="col-md-5">
-                    <asp:RadioButtonList ID="rbResep" runat="server" AutoPostBack="True" OnSelectedIndexChanged="rbResep_SelectedIndexChanged">
-                     <asp:ListItem Value="1" selected="true">Ada</asp:ListItem>
-                    <asp:ListItem Value="0">Tidak Ada</asp:ListItem>
-                    </asp:RadioButtonList>
-         </div>
-		</div>
-
-		 <div class="form-group row align-items-center">
-                <div class="col-md-3">
-                 <label class="col-sm-3 col-form-label text-label">Foto</label>
-                 </div>
-                 <div class="col-sm-9">
-                 <div class="input-group">
-                 <figure class="img-upload-preview">
-                     <asp:FileUpload type="file" class="form-control form-control-user" ID="uploadfile" runat="server" onchange="img();" />
-                 </figure>
-                </div>
-                       <asp:RequiredFieldValidator
-                            id="RequiredFieldValidator17"
-                            ControlToValidate="uploadfile"
-                            Text="(Required)"
-                            ValidationGroup="frmAdd"
-                            Runat="server" />
-                                               
-               </div>
-               </div>
-
-      <div class="form-group row align-items-center">
-                <label class="col-sm-3 col-form-label text-label"></label>
-                <div class="col-sm-9">
-                <div class="input-group">
-                <asp:Image ID="foto" runat="server" style="height:200px;" />
-                </div>
-                </div>
-                </div>  
-      </div>
-    </div>
-</div>
+<section class="content" id="resepDokter" runat="server" >
+          
 </section>
 
 <section id="intro" class="intro">
@@ -123,13 +72,17 @@
                             </ItemTemplate>
                         </asp:TemplateField> 
 
-                        <asp:TemplateField HeaderText="Harga" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
-                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="2%"  CssClass="table table-bordered table-striped" />
+                      <asp:TemplateField HeaderText="Harga" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center" Visible="false">
                             <ItemTemplate>
-                                <asp:Label ID="labHarga" runat="server" Text='<%#Bind("harga") %>'></asp:Label>
+                                <asp:Label ID="harga" runat="server" Text='<%#Bind("Harga") %>' DataFormatString="Rp {0:###,###,###}"></asp:Label>
                             </ItemTemplate>
-                        </asp:TemplateField>
+                        </asp:TemplateField> 
 
+
+                         <asp:BoundField DataField="HargaBarang" DataFormatString="Rp {0:###,###,###}" HeaderStyle-CssClass="table-bordered"  HeaderText="Harga"  NullDisplayText="-" ItemStyle-HorizontalAlign="Right" SortExpression="Harga" >
+                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="15%"  CssClass="table table-bordered table-striped" />
+                        </asp:BoundField>
+                        
                         <asp:TemplateField HeaderText="Jumlah Beli" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
@@ -176,7 +129,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-8">
-            <div class="card">
+            <div class="card-primary">
               <div class="card-header">
                 <h3 class="card-title">Keranjang</h3>
               </div>
@@ -184,7 +137,7 @@
               <div class="card-body">
               <asp:GridView ID="grdKeranjang" AutoGenerateColumns="false" runat="server" CssClass="table table-striped table-bordered table-hover">
                     <Columns> 
-                         <asp:TemplateField HeaderText="No" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
+                         <asp:TemplateField HeaderText="No" HeaderStyle-CssClass="table-bordered" ItemStyle-HorizontalAlign="Center">
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="2%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
                                 <%# Container.DataItemIndex +1 %>
@@ -205,14 +158,14 @@
                             </ItemTemplate>
                         </asp:TemplateField> 
 
-                        <asp:TemplateField HeaderText="Jumlah" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
+                        <asp:TemplateField HeaderText="Jumlah" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Right">
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="5%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
                                 <asp:Label ID="labJumlah" runat="server" Text='<%#Eval("jumlahBeli") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField> 
 
-                        <asp:TemplateField HeaderText="Harga Total" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
+                        <asp:TemplateField HeaderText="Harga Total" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Right">
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="5%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
                                 <asp:Label ID="labHarga" runat="server" Text='<%#Eval("harga") %>'></asp:Label>
@@ -240,12 +193,68 @@
              </div>
             </div>
           </div>
-             </div>
-            </div>
+    <div class="col-md-4">
+            <div class="card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Transaksi Pembelian</h3>
+                </div>
+                <div class="card-tools">
+                    <div class="card-body">
+		            <div class="row form-group">
+		            <div class="col-sm-12">
+		            <label>Resep Dokter</label>
+                    </div>
+                     <div class="col-md-5">
+                    <asp:RadioButtonList ID="rbResep" runat="server" AutoPostBack="True" OnSelectedIndexChanged="rbResep_SelectedIndexChanged">
+                     <asp:ListItem Value="1" selected="true">Ada</asp:ListItem>
+                    <asp:ListItem Value="0">Tidak Ada</asp:ListItem>
+                    </asp:RadioButtonList>
+                    </div>
+		            </div>
+
+		 <div class="form-group row align-items-center">
+                    <div class="form-group row align-items-center">
+                    <div class="col-md-12">
+                     <label class="col-sm-3 col-form-label text-label" id="lblFoto" runat="server">Foto</label>
+                     </div>
+                     <div class="col-sm-12">
+                     <div class="input-group">
+                     <figure class="img-upload-preview">
+                         <asp:FileUpload type="file" class="form-control form-control-user" ID="uploadfile" runat="server" onchange="img();" />
+                     </figure>
+                    </div>
+                       <asp:RequiredFieldValidator
+                            id="RequiredFieldValidator17"
+                            ControlToValidate="uploadfile"
+                            Text="(Required)"
+                            ValidationGroup="frmAdd"
+                            Runat="server" />
+                                               
+               </div>
+               </div>
+
+                <div class="form-group row align-items-center">
+                <label class="col-sm-3 col-form-label text-label"></label>
+                <div class="col-sm-9">
+                <div class="input-group">
+                <asp:Image ID="foto" runat="server" style="height:200px;" />
+                </div>
+                </div>
+                </div>  
+
+                </div>
+              </div>                
+           </div>
+          </div>
+        </div>
+    </div>
+
+
+ </div>
 
 </section>
 
-     <script>
+    <script>
         function img() {
             var url = inputToURL(document.getElementById("<%=uploadfile.ClientID%>"));
             document.getElementById("<%=foto.ClientID%>").src = url;

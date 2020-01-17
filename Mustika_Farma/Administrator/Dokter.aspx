@@ -35,7 +35,7 @@
                 <div class="card-body">
                   <div class="row form-group">
                      <div class="col-md-3">
-                    <label for="Obat">Nama Dokter</label>
+                    <label for="Obat">Nama Dokter</label><span style="color:red">*</span>
                     </div>
                      <div class="col-md-5">
                     <asp:TextBox ID="txtNama" CssClass="form-control" runat="server"/>
@@ -49,7 +49,7 @@
 
                  <div class="row form-group">
                     <div class="col-md-3">
-                     <label for="Ket">NIP </label>
+                     <label for="Ket">NIP </label><span style="color:red">*</span>
                     </div>
                  <div class="col-md-5">
                    <asp:TextBox ID="txtNIP" CssClass="form-control" runat="server" TextMode="Number"/>
@@ -89,7 +89,7 @@
 
                      <div class="row form-group">
                      <div class="col-md-3">
-                    <label for="Obat">Username</label>
+                    <label for="Obat">Username</label><span style="color:red">*</span>
                     </div>
                      <div class="col-md-5">
                     <asp:TextBox ID="txtUname" CssClass="form-control" runat="server"/>
@@ -103,7 +103,7 @@
 
                    <div class="row form-group">
                    <div class="col-md-3">
-                   <label for="Ket">Email</label>
+                   <label for="Ket">Email</label><span style="color:red">*</span>
                     </div>
                      <div class="col-md-5">
                    <asp:TextBox ID="txtEmail" CssClass="form-control" runat="server" />
@@ -130,7 +130,7 @@
                   </div>
                 </div>  
                     
-                 <div class="row form-group">
+<%--                 <div class="row form-group">
                  <div class="col-md-3">
                   <label for="jenis">Jadwal Kerja</label>
                 </div>
@@ -139,7 +139,7 @@
                   </asp:DropDownList>
                        <asp:SqlDataSource ID="dsJadwal" runat="server" ConnectionString="<%$ ConnectionStrings:Default %>" SelectCommand="select ID_Jadwal,hari_Kerja from jadwal_Dokter where [status] =1"></asp:SqlDataSource>
                   </div>
-                </div>   
+                </div>   --%>
                          
                 <div class="form-group row align-items-center">
                 <div class="col-md-3">
@@ -194,7 +194,7 @@
                 <asp:Label ID="lblID" runat="server" Visible="false"></asp:Label>
                  <div class="row form-group">
                      <div class="col-md-3">
-                    <label for="Obat">Nama Dokter</label>
+                    <label for="Obat">Nama Dokter</label><span style="color:red">*</span>
                     </div>
                      <div class="col-md-5">
                     <asp:TextBox ID="txtNamaE" CssClass="form-control" runat="server"/>
@@ -208,7 +208,7 @@
 
                  <div class="row form-group">
                     <div class="col-md-3">
-                     <label for="Ket">NIP </label>
+                     <label for="Ket">NIP </label><span style="color:red">*</span>
                     </div>
                  <div class="col-md-5">
                    <asp:TextBox ID="txtNIPE" CssClass="form-control" runat="server" TextMode="Number"/>
@@ -222,7 +222,7 @@
 
                  <div class="row form-group">
                    <div class="col-md-3">
-                   <label for="Ket">Jenis Kelamin</label>
+                   <label for="Ket">Jenis Kelamin</label><span style="color:red">*</span>
                     </div>
                     <div class="col-md-5">
                     <asp:RadioButtonList ID="rbGender" runat="server" Text='<%# Bind("jenis_Kelamin")%>' >
@@ -248,7 +248,7 @@
 
                      <div class="row form-group">
                      <div class="col-md-3">
-                    <label for="Obat">Username</label>
+                    <label for="Obat">Username</label><span style="color:red">*</span>
                     </div>
                      <div class="col-md-5">
                     <asp:TextBox ID="txtUnameE" CssClass="form-control" runat="server"/>
@@ -262,7 +262,7 @@
 
                     <div class="row form-group">
                      <div class="col-md-3">
-                    <label for="Obat">Password</label>
+                    <label for="Obat">Password</label><span style="color:red">*</span>
                     </div>
                      <div class="col-md-5">
                     <asp:TextBox ID="txtPassE" CssClass="form-control" runat="server"/>
@@ -276,7 +276,7 @@
 
                    <div class="row form-group">
                    <div class="col-md-3">
-                   <label for="Ket">Email</label>
+                   <label for="Ket">Email</label><span style="color:red">*</span>
                     </div>
                      <div class="col-md-5">
                    <asp:TextBox ID="txtEmailE" CssClass="form-control" runat="server" />
@@ -294,7 +294,7 @@
                     
                  <div class="row form-group">
                  <div class="col-md-3">
-                  <label for="jenis">Jenis Dokter</label>
+                  <label for="jenis">Jenis Dokter</label><span style="color:red">*</span>
                 </div>
                  <div class="col-md-5">
                   <asp:DropDownList ID="ddlJenisE" runat="server" CssClass="form-control" DataSourceID="dsJenisE" DataTextField="nama_Jenis" DataValueField="ID_SP">
@@ -302,7 +302,7 @@
                        <asp:SqlDataSource ID="dsJenisE" runat="server" ConnectionString="<%$ ConnectionStrings:Default %>" SelectCommand="select ID_SP,nama_Jenis from jenis_Dokter where [status] =1"></asp:SqlDataSource>
                   </div>
                 </div>  
-                    
+<%--                    
                  <div class="row form-group">
                  <div class="col-md-3">
                   <label for="jenis">Jadwal Kerja</label>
@@ -312,7 +312,7 @@
                   </asp:DropDownList>
                        <asp:SqlDataSource ID="dsJadwalE" runat="server" ConnectionString="<%$ ConnectionStrings:Default %>" SelectCommand="select ID_Jadwal,hari_Kerja from jadwal_Dokter where [status] =1"></asp:SqlDataSource>
                   </div>
-                </div> 
+                </div> --%>
                     
                     <div class="form-group row align-items-center">
                     <div class="col-md-3">
@@ -407,9 +407,10 @@
                         </asp:BoundField>
                         <asp:BoundField DataField="jenis_Kelamin"  ItemStyle-CssClass="hiddencol"  HeaderStyle-CssClass="hiddencol"  HeaderText="Jenis Kelamin"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="NoTelp" >
                         </asp:BoundField>
-                        <asp:BoundField DataField="alamat" HeaderStyle-CssClass="table-bordered" HeaderText="Alamat"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="alamat" >
+                        <asp:BoundField DataField="nama_jenis" HeaderStyle-CssClass="table-bordered" HeaderText="Jenis Dokter"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="alamat" >
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="18%" CssClass="table table-bordered table-striped"   />
                         </asp:BoundField>
+
                         <asp:BoundField DataField="email" HeaderText="Email" HeaderStyle-CssClass="table-bordered" NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="email" >
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="15%" CssClass="table table-bordered table-striped"  />
                         </asp:BoundField>
@@ -426,7 +427,8 @@
                         <asp:BoundField DataField="ModifiedBy" ItemStyle-CssClass="hiddencol" HeaderText="ModifiedBy" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
                         <asp:BoundField DataField="ModifiedDate" ItemStyle-CssClass="hiddencol" HeaderText="ModifiedDate" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
                         <asp:BoundField DataField="foto" ItemStyle-CssClass="hiddencol" HeaderText="Status" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
-                      
+                        <asp:BoundField DataField="alamat"  ItemStyle-CssClass="hiddencol"  HeaderStyle-CssClass="hiddencol"  HeaderText="Jenis Kelamin"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="NoTelp" >
+                        </asp:BoundField>
                           <asp:TemplateField HeaderText="Aksi" HeaderStyle-CssClass="table-bordered" ItemStyle-HorizontalAlign="Center">
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
@@ -456,7 +458,6 @@
               </div>
             </div>
           </div>
-         </div>
         </section>
      <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 

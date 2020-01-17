@@ -37,9 +37,9 @@
             <div class="col-md-3">
             <asp:Label
                 id="lblNama"
-                Text="Nama Supplier  : "
+                Text="Nama Supplier  "
                 AssociatedControlID="txtNamaSupplier"
-                Runat="server" />
+                Runat="server" /><span style="color:red">*</span>
             </div>
             <div class="col-md-5">
             <asp:TextBox
@@ -60,9 +60,9 @@
             <div class="col-md-3">
             <asp:Label
                 id="lblAlamat"
-                Text="Alamat supplier : "
+                Text="Alamat supplier  "
                 AssociatedControlID="txtAlamat"
-                Runat="server" />
+                Runat="server" /><span style="color:red">*</span>
            </div>
             <div class="col-md-5">
             <asp:TextBox
@@ -84,9 +84,9 @@
              <div class="col-md-3">
             <asp:Label
                 id="lblEmail"
-                Text="Email : "
+                Text="Email"
                 AssociatedControlID="txtEmail"
-                Runat="server" />
+                Runat="server" /><span style="color:red">*</span>
            </div>
            <div class="col-md-5">
             <asp:TextBox
@@ -116,7 +116,7 @@
              <div class="col-md-3">
             <asp:Label
                 id="Label1"
-                Text="Nomor Telephone  : "
+                Text="Nomor Telephone"
                 AssociatedControlID="txtNamaSupplier"
                 Runat="server" />
            </div>
@@ -147,9 +147,9 @@
              <div class="col-md-3">
              <asp:Label
                 id="lblCreateBy"
-                Text="Create Date  : "
+                Text="Create Date  "
                 AssociatedControlID="txtTanggal"
-                Runat="server" />
+                Runat="server" /><span style="color:red">*</span>
             </div>
              <div class="col-md-5">
              <asp:TextBox CssClass="form-control" ID="txtTanggal" placeholder="Create Date" runat="server"></asp:TextBox>
@@ -187,9 +187,9 @@
              <div class="col-md-3">
             <asp:Label
                 id="lblENama"
-                Text="Nama Supplier  : "
+                Text="Nama Supplier   "
                 AssociatedControlID="txtNamaE"
-                Runat="server" />
+                Runat="server" /><span style="color:red">*</span>
             </div>
              <div class="col-md-5">
             <asp:TextBox
@@ -210,9 +210,9 @@
              <div class="col-md-3">
             <asp:Label
                 id="Label3"
-                Text="Alamat supplier : "
+                Text="Alamat supplier  "
                 AssociatedControlID="txtAlamatE"
-                Runat="server" />
+                Runat="server" /><span style="color:red">*</span>
            </div>
              <div class="col-md-5">
             <asp:TextBox
@@ -233,9 +233,9 @@
              <div class="col-md-3">
             <asp:Label
                 id="Label4"
-                Text="Email : "
+                Text="Email  "
                 AssociatedControlID="txtEmailE"
-                Runat="server" />
+                Runat="server" /><span style="color:red">*</span>
             </div>
              <div class="col-md-5">
             <asp:TextBox

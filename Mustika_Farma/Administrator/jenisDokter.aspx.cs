@@ -188,6 +188,7 @@ public partial class Administrator_jenisDokter : System.Web.UI.Page
 
     }
 
+
     protected void gridJenis_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
         TableCell cell = gridJenis.Rows[e.RowIndex].Cells[3];
@@ -197,10 +198,10 @@ public partial class Administrator_jenisDokter : System.Web.UI.Page
         com.Connection = conn;
 
         int id = Convert.ToInt32(gridJenis.DataKeys[e.RowIndex].Value.ToString());
-        com.CommandText = "sp_DeleteJenis";
+        com.CommandText = "sp_DeleteJenisDokter";
 
 
-        com.Parameters.AddWithValue("@idJenis", id);
+        com.Parameters.AddWithValue("@ID_SP", id);
         com.Parameters.AddWithValue("@status", cells);
         com.CommandType = CommandType.StoredProcedure;
 
@@ -218,6 +219,19 @@ public partial class Administrator_jenisDokter : System.Web.UI.Page
         else
         {
             loadData();
+        }
+    }
+
+    protected void gridDokter_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        foreach (GridViewRow rw in gridJenis.Rows)
+        {
+            Button btn = rw.FindControl("btnActive") as Button;
+            if (btn.Text == "Activate")
+            {
+                btn.Text = "DeActivate";
+            }
+            else { btn.Text = "Activate"; }
         }
     }
 

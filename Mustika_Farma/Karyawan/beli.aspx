@@ -45,7 +45,7 @@ Pembelian
                  <asp:DropDownList ID="DDLSupplier" runat="server" OnTextChanged="DDLSupplier_TextChanged"  CssClass="form-control" DataSourceID="dsSupplier" DataTextField="NamaSupplier" DataValueField="IDSupplier">
                    </asp:DropDownList>
                     <asp:SqlDataSource ID="dsSupplier" runat="server" ConnectionString="<%$ ConnectionStrings:Default %>" SelectCommand="SELECT IDSupplier, NamaSupplier FROM Supplier WHERE (Status = 1)"></asp:SqlDataSource>
-      <asp:Button ID="btnSupplier" OnClick="btnSupplier_Click" runat="server" Text="Cari" ></asp:Button>
+      <asp:Button ID="btnSupplier" OnClick="btnSupplier_Click" runat="server" Text="Cari" CssClass="btn btn-primary" ></asp:Button>
         </div>
         </div>
         </div>
@@ -99,7 +99,7 @@ Pembelian
                             </ItemTemplate>
                         </asp:TemplateField>
 
-                         <asp:TemplateField HeaderText="Jumlah Obat" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Right"  SortExpression="JumlahObat">
+                         <asp:TemplateField HeaderText="Stok Obat" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Right"  SortExpression="JumlahObat">
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="7%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
                                 <asp:Label ID="labJumlahObat" runat="server" Text='<%#Bind("JumlahObat") %>'></asp:Label>
@@ -127,7 +127,7 @@ Pembelian
                             </ItemTemplate>
                         </asp:TemplateField>   
 
-                        <asp:TemplateField HeaderText="ID Obat" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center" Visible="false">
+                        <asp:TemplateField HeaderText="Harga" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center" Visible="false">
                             <ItemTemplate>
                                 <asp:Label ID="harga" runat="server" Text='<%#Bind("Harga") %>' DataFormatString="Rp {0:###,###,###}"></asp:Label>
                             </ItemTemplate>
@@ -173,7 +173,8 @@ Pembelian
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-8">
-            <div class="card">
+            <div class="card-primary">
+
               <div class="card-header">
                 <h3 class="card-title">Keranjang</h3>
               </div>
@@ -216,14 +217,12 @@ Pembelian
                             </ItemTemplate>
                         </asp:TemplateField> 
 
-
-
-                         <asp:TemplateField HeaderText="ID Obat" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Left" >
+                         <asp:TemplateField HeaderText="ID Obat" ItemStyle-HorizontalAlign="Left" ItemStyle-CssClass="hiddencol" HeaderStyle-CssClass="hiddencol">
                             <ItemTemplate>
                                 <asp:Label ID="labIDObat" runat="server" Text='<%#Eval("IDObat") %>'></asp:Label>
                             </ItemTemplate>
-                        </asp:TemplateField> 
-   
+                        </asp:TemplateField>
+                          
                   
                           
                    </Columns>
@@ -242,7 +241,7 @@ Pembelian
           </div>
           <!-- /.col -->
           <div class="col-md-4">
-            <div class="card">
+            <div class="card-primary">
               <div class="card-header">
                 <h3 class="card-title">Transaksi Pembelian</h3>
 
@@ -306,7 +305,9 @@ Pembelian
         var amount1 = parseFloat($('#txtHarga').val());
         var amount2 = parseFloat($('#txtBayar').val());
 
-        var totalGift = (amount2 - amount1);
+        var dgift = (amount2 - amount1);
+        var totalGift = 'Rp ' + dgift.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+
         if (totalGift < 0) {
             $('#txtKembalian').val(totalGift);
         }
@@ -315,8 +316,6 @@ Pembelian
         }
     }
 </script>
-
-
 </asp:Content>
 <asp:Content ID="Content7" ContentPlaceHolderID="footer" Runat="Server">
 </asp:Content>

@@ -125,8 +125,8 @@ public partial class Karyawan_Pembayaran : System.Web.UI.Page
         //Change the index as per your need
         IDTransaksi.Text = row.Cells[1].Text;
         Tanggal.Text = row.Cells[3].Text;
-        totalBayar.Text = row.Cells[4].Text;
-
+       // totalBayar.Text = row.Cells[4].Text;
+        txtHarga.Text = row.Cells[5].Text;
         //Show the modal popup extender
         GridViewDetails.Show();
 
@@ -169,18 +169,21 @@ public partial class Karyawan_Pembayaran : System.Web.UI.Page
 
     protected void Bayar_TextChanged(object sender, EventArgs e)
     {
-        double bayar = Convert.ToDouble(Bayar.Text);
-        pembayaran = bayar;
-        kembalian();
+        //double bayar = Convert.ToDouble(Bayar.Text);
+        //pembayaran = bayar;
+        //kembalian();
     }
 
     public void kembalian()
     {
-        double num1 = Convert.ToDouble(totalBayar.Text);
+        double bayar = Convert.ToDouble(txtBayar.Text);
+        pembayaran = bayar;
+
+        double num1 = Convert.ToDouble(txtHarga.Text);
         total = num1;
 
         double Kembali = pembayaran - total;
-        Kembalian_uang.Text = Convert.ToString(Kembali);
+        txtKembalian.Text = Convert.ToString(Kembali);
         if (Kembali < 0)
         {
             Response.Write("<script>alert('Uang Anda Tidak Mencukupi');</script>");
@@ -215,6 +218,6 @@ public partial class Karyawan_Pembayaran : System.Web.UI.Page
 
     protected void btnBayar_Click(object sender, EventArgs e)
     {
-
+        kembalian();
     }
 }
