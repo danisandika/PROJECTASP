@@ -136,7 +136,7 @@ public partial class Karyawan_konf_pembelian : System.Web.UI.Page
 
     protected void btnSearch_Click(object sender, EventArgs e)
     {
-
+       
     }
 
     protected void lnkEdit_Click(object sender, EventArgs e)
@@ -213,7 +213,10 @@ public partial class Karyawan_konf_pembelian : System.Web.UI.Page
         SubTotal.Text = row.Cells[4].Text;
         IDSupplier.Text= row.Cells[5].Text;
         IDObat.Text = row.Cells[6].Text;
-        hargaJual.Text = row.Cells[8].Text;
+        
+        double hargajual = (Convert.ToDouble(row.Cells[8].Text)*5/100) + Convert.ToDouble(row.Cells[8].Text);
+
+        hargaJual.Text =Convert.ToString(hargajual);
 
         DateTime exp = Convert.ToDateTime(row.Cells[7].Text);
         Kadaluarsa.Text = exp.ToString("yyyy-MM-dd");
@@ -238,12 +241,12 @@ public partial class Karyawan_konf_pembelian : System.Web.UI.Page
                 com.CommandText = "[sp_UpdateHargaJual]";
                 com.CommandType = CommandType.StoredProcedure;
                 com.Parameters.AddWithValue("@namaObat", namaObat.Text);
-                com.Parameters.AddWithValue("@harga",Convert.ToInt64(hargaJual.Text));
+                com.Parameters.AddWithValue("@harga",Convert.ToDecimal(hargaJual.Text));
                 com.Parameters.AddWithValue("@IDSupplier",Convert.ToInt64(IDSupplier.Text));
                 com.Parameters.AddWithValue("@kadaluarsa",Convert.ToDateTime(Kadaluarsa.Text));
                 com.Parameters.AddWithValue("@IDPembelian",IDPembelian.Text);
 
-                com.Parameters.AddWithValue("@jumlah",Convert.ToInt64(jumlah.Text));
+                com.Parameters.AddWithValue("@jumlah",Convert.ToDecimal(jumlah.Text));
                 com.Parameters.AddWithValue("@IDObat",Convert.ToInt16(IDObat.Text));
 
                 conn.Open();
@@ -251,15 +254,17 @@ public partial class Karyawan_konf_pembelian : System.Web.UI.Page
                 conn.Close();
                 Response.Write("<script>alert('Data Berhasil diupdate');</script>");
                 hargaJual.Text = "";
+                
         }
         catch (Exception ex)
         {
             Response.Write("<script>alert('Data Gagal diupdate"+ ex.Message +"');</script>");
 
         }
+        
     }
 
    
-
+    
 
 }

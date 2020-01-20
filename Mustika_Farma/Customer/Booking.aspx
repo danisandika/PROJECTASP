@@ -37,19 +37,16 @@
     <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
           <ul class="nav navbar-nav">
             <li><a href="Default.aspx">Home</a></li>
-            <%--<li><a href="#service">Transaksi Penjualan</a></li>--%>
             <li class="active" ><a href="Booking.aspx">Booking Dokter</a></li>
             <li><a href="Riwayat.aspx">Riwayat</a></li>
-            <%--<li><a href="#pricing">Antrian</a></li>--%>
-			  <a href="../Login.aspx" class="btn btn-skin btn-lg">Logout</a>
-           
+			 <a href="../Login.aspx" class="btn btn-skin btn-lg">Logout</a>
           </ul>
         </div>
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="Section1" Runat="Server">
  
- <section id="secView" runat="server" class="home-section paddingbot-60">
+<section id="secView" runat="server" class="home-section paddingbot-60">
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
  
     <div class="container marginbot-50">
@@ -219,7 +216,6 @@
                             <ItemTemplate>                             
                                   <asp:LinkButton runat="server" ID="linkDelete" CommandName="Delete" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
                                 ToolTip="Batal" class="fa fa-remove"><span onclick="return confirm('Apa kamu yakin untuk me-non aktifkan akun ini?');"></span></asp:LinkButton>
-                                                                
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
@@ -229,7 +225,8 @@
 
         </div>
       </div>
-    </section>
+</body>
+</section>
     <!-- /Section: services -->
 
 

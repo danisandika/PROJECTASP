@@ -7,8 +7,6 @@ Konfirmasi_Booking
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="namaKaryawan" Runat="Server">
-</asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="sub_Title" Runat="Server">
  <h1>konfirmasi Booking</h1>
 </asp:Content>
@@ -34,23 +32,22 @@ Konfirmasi Booking
               <div class="card-header">
                 <h3 class="card-title">Data Pemeriksaan</h3>
               </div>
-                
+                <asp:Label ID="lblIDqu" runat="server" Text="" Visible="false"></asp:Label>
+                <asp:Label ID="labelIDUSer" runat="server" Text="Label" Visible="false"></asp:Label>
                 <div class="card-body">
 
                 <div class="row form-group">
                  <div class="col-md-3">
-                  <label for="pasien">Nama Pasien</label>
+                  <label for="pasien">Nama Pasien</label><span style="color:red">(*)</span>
                 </div>
                  <div class="col-md-5">
-                  <asp:DropDownList ID="ddlPasien" runat="server" CssClass="form-control" DataSourceID="dsPasien" DataTextField="Nama" DataValueField="IDUser">
-                  </asp:DropDownList>
-                       <asp:SqlDataSource ID="dsPasien" runat="server" ConnectionString="<%$ ConnectionStrings:Default %>" SelectCommand="select IDUser,Nama from [User] where [status] =1 and IDRole= 3"></asp:SqlDataSource>
-                  </div>
+                     <asp:Label ID="lblIDPasien" runat="server" Text="" readonly="true"></asp:Label>
+                 </div>
                 </div>
 
                   <div class="row form-group">
                      <div class="col-md-3">
-                    <label for="Obat">Penyakit</label>
+                    <label for="Obat">Penyakit</label> <span style="color:red">(*)</span>
                     </div>
                      <div class="col-md-5">
                     <asp:TextBox ID="txtPenyakit" CssClass="form-control" runat="server" TextMode="MultiLine"/>
@@ -64,7 +61,7 @@ Konfirmasi Booking
 
                  <div class="row form-group">
                     <div class="col-md-3">
-                     <label for="Ket">Berat Badan </label>
+                     <label for="Ket">Berat Badan (Kg) </label> <span style="color:red">(*)</span>
                     </div>
                  <div class="col-md-5">
                    <asp:TextBox ID="txtBerat" CssClass="form-control" runat="server" TextMode="Number"/>
@@ -79,7 +76,7 @@ Konfirmasi Booking
 
                  <div class="row form-group">
                    <div class="col-md-3">
-                   <label for="Ket">Tinggi Badan</label>
+                   <label for="Ket">Tinggi Badan (cm)</label> <span style="color:red">(*)</span>
                     </div>
                     <div class="col-md-5">
                    <asp:TextBox ID="txtTinggi" CssClass="form-control" runat="server" TextMode="Number" />
@@ -94,7 +91,7 @@ Konfirmasi Booking
 
                  <div class="row form-group">
                    <div class="col-md-3">
-                   <label for="Ket">Tensi</label>
+                   <label for="Ket">Tensi(SYS/DIA)</label> <span style="color:red">(*)</span>
                     </div>
                     <div class="col-md-5">
                    <asp:TextBox ID="txtTensi" CssClass="form-control" runat="server" />
@@ -124,32 +121,20 @@ Konfirmasi Booking
 
                 <div class="row form-group">
                    <div class="col-md-3">
-                   <label for="Ket">Gula Darah</label>
+                   <label for="Ket">Gula Darah(mg/dL)</label>
                     </div>
                     <div class="col-md-5">
                    <asp:TextBox ID="txtGula" CssClass="form-control" runat="server" TextMode="Number" />
-                   <asp:RequiredFieldValidator ID="RequiredFieldValidator10"
-                        runat="server"
-                        ControlToValidate="txtGula"
-                        ForeColor="Red"
-                        ValidationGroup="numb"
-                        ErrorMessage="Data Harus diisi dengan Angk"></asp:RequiredFieldValidator>
                   </div>
                 </div>
 
 
                 <div class="row form-group">
                    <div class="col-md-3">
-                   <label for="Ket">Kolestrol</label>
+                   <label for="Ket">Kolestrol(mg/dL)</label>
                     </div>
                     <div class="col-md-5">
                    <asp:TextBox ID="txtKolestrol" CssClass="form-control" runat="server" TextMode="Number" />
-                   <asp:RequiredFieldValidator ID="RequiredFieldValidator11"
-                        runat="server"
-                        ControlToValidate="txtKolestrol"
-                        ForeColor="Red"
-                        ValidationGroup="numb"
-                        ErrorMessage="Data Harus diisi dengan Angka"></asp:RequiredFieldValidator>
                   </div>
                 </div>
             </div>
@@ -177,7 +162,7 @@ Konfirmasi Booking
               </div>
                 
                 <div class="card-body">
-                <asp:Label ID="lblID" runat="server" Visible="false"></asp:Label>
+                <asp:Label ID="lblID" runat="server" Visible="true"></asp:Label>
                   <div class="row form-group">
                     <div class="col-md-3">
                     <label for="exampleInputEmail1">Nama Pasien</label>
@@ -317,7 +302,7 @@ Konfirmasi Booking
               <div class="card-header">
                 <h3 class="card-title">Table Riwayat</h3>
                   <br />
-
+                
                 <asp:linkbutton CssClass="btn btn-block bg-gradient-primary col-2" runat="server" ID="btntambahRiwayat" OnClick="btntambahRiwayat_Click"><i class="fas fa-plus"></i> | Tambah</asp:linkbutton>
                   <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
@@ -394,10 +379,6 @@ Konfirmasi Booking
                 </asp:GridView>
             
                  </div>
-                </div>    
-              </div>
-            </div>
-          </div>
         </section>
 
      <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
@@ -434,7 +415,7 @@ Konfirmasi Booking
 
         <div class="row form-group">
          <div class="col-md-5">
-        <asp:label style="margin-left:20px" runat="server" class="col-sm-3 col-form-label text-label">Tinggi</asp:Label>
+        <asp:label style="margin-left:20px" runat="server" class="col-sm-3 col-form-label text-label">Tinggi</asp:label>
         </div>
         <div class="col-md-5">
        <asp:Label ID="tinggi" runat="server" Text="Tinggi"></asp:Label>
@@ -662,7 +643,6 @@ Konfirmasi Booking
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Keranjang</h3>
-                  </br>
                   <asp:Label ID="lblIDTrans" runat="server"></asp:Label>
               </div>
               <div class="card-body">

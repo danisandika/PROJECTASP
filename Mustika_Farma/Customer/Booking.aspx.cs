@@ -25,7 +25,6 @@ public partial class Karyawan_Booking : System.Web.UI.Page
         string str = RandomString(10, false);
         txtBooking.Text = str;
         ddlvalue();
-
     }
 
     private void ddlvalue()
@@ -81,7 +80,8 @@ public partial class Karyawan_Booking : System.Web.UI.Page
         if (result > 0)
         {
             Response.Write("<script>alert('Booking berhasil dilakukan');</script>");
-            loadData();
+            Response.Redirect("Booking.aspx");
+           
         }
         else
         {
@@ -129,6 +129,33 @@ public partial class Karyawan_Booking : System.Web.UI.Page
 
     protected void gridBooking_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
+        TableCell cell = gridBooking.Rows[e.RowIndex].Cells[7];
+        string cells = cell.Text;
+
+        SqlCommand com = new SqlCommand();
+        com.Connection = conn;
+
+        string id = gridBooking.DataKeys[e.RowIndex].Value.ToString();
+        com.CommandText = "[sp_DeleteBooking]";
+
+
+        com.Parameters.AddWithValue("@IDBooking", id);
+        com.Parameters.AddWithValue("@status", cells);
+        com.CommandType = CommandType.StoredProcedure;
+
+        conn.Open();
+        int result = Convert.ToInt32(com.ExecuteNonQuery());
+        conn.Close();
+        if (result > 0)
+        {
+            gridBooking.EditIndex = -1;
+            Response.Redirect("Booking.aspx");
+
+        }
+        else
+        {
+
+        }
 
     }
 

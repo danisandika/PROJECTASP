@@ -27,8 +27,32 @@ public partial class Karyawan_konf_booking : System.Web.UI.Page
             secEditRiwayat.Visible = false;
             secViewRiwayat.Visible = false;
             Section1.Visible = false;
+
+           
         }
+        loadIDPasien();
     }
+
+    private void loadIDPasien()
+    {
+
+        SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Default"].ConnectionString);
+     
+        SqlDataReader myReader = null;
+        SqlCommand myCommand = new SqlCommand("select u.Nama as 'Nama', u.IDUser from Booking b, [User] u where b.IDBooking = @IDBooking and u.IDUser= b.IDUser", conn);
+        myCommand.Parameters.AddWithValue("@IDBooking", lblIDqu.Text);
+
+        conn.Open();
+        myReader = myCommand.ExecuteReader();
+        while (myReader.Read())
+        {
+            lblIDPasien.Text = myReader["Nama"].ToString();
+            labelIDUSer.Text = myReader["IDUser"].ToString();
+
+        }
+
+    }
+
 
     private DataSet tampilRiwayat()
     {
@@ -66,7 +90,7 @@ public partial class Karyawan_konf_booking : System.Web.UI.Page
     {
         string mainconn = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
         SqlConnection sqlconn = new SqlConnection(mainconn);
-        string sqlquery = "select IDObat,namaObat,IDJenis,JumlahObat,Satuan,Keterangan,convert(varchar,Harga) AS 'Harga' from obat";
+        string sqlquery = "select IDObat,namaObat,IDJenis,JumlahObat,Satuan,Keterangan,convert(varchar,Harga) AS 'Harga' from obat where obat.status=1";
         SqlCommand com = new SqlCommand(sqlquery, sqlconn);
         sqlconn.Open();
         gridObat.DataSource = com.ExecuteReader();
@@ -192,7 +216,7 @@ public partial class Karyawan_konf_booking : System.Web.UI.Page
             Response.Write("<script>alert('Data berhasil Ditambahkan');</script>");
             loadData();
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             Response.Write("<script>alert('Data Gagal Ditambahkan');</script>");
         }
@@ -258,7 +282,8 @@ public partial class Karyawan_konf_booking : System.Web.UI.Page
         if (e.CommandName == "cmEdit")
         {
             String id = gridBooking.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
-            
+            lblIDqu.Text = id;
+
             secKeranjang.Visible = true;
             secObat.Visible = true;
             secView.Visible = false;
@@ -326,8 +351,10 @@ public partial class Karyawan_konf_booking : System.Web.UI.Page
             com.CommandText = "[sp_InputRiwayat]";
             com.CommandType = CommandType.StoredProcedure;
             //masih diakal2in
+
+
             com.Parameters.AddWithValue("@ID_Dokter", Session["creaby"]);
-            com.Parameters.AddWithValue("@IDUser", ddlPasien.SelectedValue);
+            com.Parameters.AddWithValue("@IDUser", labelIDUSer.Text);
             com.Parameters.AddWithValue("@berat", txtBerat.Text);
             com.Parameters.AddWithValue("@tinggi", txtTinggi.Text);
             com.Parameters.AddWithValue("@tensi", txtTensi.Text);
@@ -370,7 +397,7 @@ public partial class Karyawan_konf_booking : System.Web.UI.Page
 
         com.Parameters.AddWithValue("@IDRiwayat", lblID.Text);
         com.Parameters.AddWithValue("@ID_Dokter", Session["creaby"]);
-        com.Parameters.AddWithValue("@IDUser", ddlNamaPasien.SelectedValue);
+        com.Parameters.AddWithValue("@IDUser", labelIDUSer.Text);
         com.Parameters.AddWithValue("@berat", txtBeratE.Text);
         com.Parameters.AddWithValue("@tinggi", txtTinggiE.Text);
         com.Parameters.AddWithValue("@tensi", txtTensiE.Text);
@@ -421,7 +448,7 @@ public partial class Karyawan_konf_booking : System.Web.UI.Page
         if (e.CommandName == "cmEdit")
         {
             String id = gridRiwayat.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
-            lblID.Text = id;
+            lblID.Text = id;    
             txtPenyakitE.Text = gridRiwayat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[2].Text;
             txtBeratE.Text = gridRiwayat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[6].Text;
             txtTinggiE.Text = gridRiwayat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[7].Text;
@@ -565,6 +592,7 @@ public partial class Karyawan_konf_booking : System.Web.UI.Page
         //Get the column value and assign it to label in panel
         //Change the index as per your need
         string id = row.Cells[1].Text;
+
         SqlCommand com = new SqlCommand();
         com.Connection = conn;
         com.CommandText = "[sp_statusBooking]";

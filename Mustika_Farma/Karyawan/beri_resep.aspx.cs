@@ -115,8 +115,8 @@ public partial class Karyawan_beri_resep : System.Web.UI.Page
     protected void btnProses_Click(object sender, EventArgs e)
     {
 
-        try
-        {
+        //try
+        //{
 
             string strID = generateIDTrans();
             DateTime tanggal = DateTime.Now;
@@ -124,15 +124,16 @@ public partial class Karyawan_beri_resep : System.Web.UI.Page
             insert.CommandType = CommandType.StoredProcedure;
 
             insert.Parameters.AddWithValue("@IDTransaksi", strID);
-            insert.Parameters.AddWithValue("@IDKaryawan",Session["creaby"]);
+            insert.Parameters.AddWithValue("@IDKaryawan",17); //customer
             insert.Parameters.AddWithValue("@Tanggal", tanggal);
             insert.Parameters.AddWithValue("@FotoResep", DBNull.Value);
             insert.Parameters.AddWithValue("@totalBayar",Convert.ToDecimal(lblTotal.Text));
             insert.Parameters.AddWithValue("@status", 2);
+            insert.Parameters.AddWithValue("@ID_Dokter",Convert.ToInt16(Session["creaby"]));
 
             conn.Open();
             insert.ExecuteNonQuery();
-            conn.Close();
+            conn.Close();               
 
             foreach (GridViewRow grow in grdKeranjang.Rows)
             {
@@ -151,10 +152,10 @@ public partial class Karyawan_beri_resep : System.Web.UI.Page
             }
             Response.Write("<script>alert('Data berhasil Ditambahkan');</script>");
             loadData();
-        }
-        catch (Exception ex)
-        {
-            Response.Write("<script>alert('Data Gagal Ditambahkan');</script>");
-        }
+        //}
+        //catch (Exception ex)
+        //{
+        //    Response.Write("<script>alert('Data Gagal Ditambahkan');</script>");
+        //}
     }
 }

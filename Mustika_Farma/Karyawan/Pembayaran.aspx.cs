@@ -124,9 +124,9 @@ public partial class Karyawan_Pembayaran : System.Web.UI.Page
         //Get the column value and assign it to label in panel
         //Change the index as per your need
         IDTransaksi.Text = row.Cells[1].Text;
-        Tanggal.Text = row.Cells[3].Text;
+        Tanggal.Text = row.Cells[4].Text;
        // totalBayar.Text = row.Cells[4].Text;
-        txtHarga.Text = row.Cells[5].Text;
+        txtHarga.Text = row.Cells[6].Text;
         //Show the modal popup extender
         GridViewDetails.Show();
 
@@ -154,9 +154,6 @@ public partial class Karyawan_Pembayaran : System.Web.UI.Page
         grdDetail.DataBind();
 
         grdDetail.Visible = true;
-
-        //secDetail.Visible = true;
-
     }
 
     protected void btnclose_Click(object sender, EventArgs e)
@@ -169,9 +166,7 @@ public partial class Karyawan_Pembayaran : System.Web.UI.Page
 
     protected void Bayar_TextChanged(object sender, EventArgs e)
     {
-        //double bayar = Convert.ToDouble(Bayar.Text);
-        //pembayaran = bayar;
-        //kembalian();
+        
     }
 
     public void kembalian()
@@ -194,12 +189,11 @@ public partial class Karyawan_Pembayaran : System.Web.UI.Page
             //perulangan masih salah, semua keubah bukan berdasarkan IDObat yg berubah
             foreach (GridViewRow grow in grdDetail.Rows)
             {
-
                 //Waktu edit kenapa 
                 SqlCommand cm = new SqlCommand();
                 cm.Connection = conn;
                 cm.CommandText = "[sp_InputkonfTrans]";
-                cm.CommandType = CommandType.StoredProcedure;
+                cm.CommandType = CommandType.StoredProcedure;   
                 cm.Parameters.AddWithValue("@IDTransaksi", (grow.FindControl("IDTransaksi") as Label).Text);
                 cm.Parameters.AddWithValue("@status", 1);
 

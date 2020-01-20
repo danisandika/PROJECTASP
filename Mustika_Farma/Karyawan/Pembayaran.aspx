@@ -8,8 +8,10 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="sub_Title" Runat="Server">
+  <h1>  Pembayaran</h1>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="title2" Runat="Server">
+    Pembayaran
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="Content" Runat="Server">
 <style type="text/css">
@@ -51,18 +53,23 @@
                         <asp:BoundField DataField="IDTransaksi" HeaderStyle-CssClass="table-bordered" HeaderText="IDTransaksi"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Nama" >
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
                         </asp:BoundField>
-                        <asp:BoundField DataField="IDKaryawan" HeaderStyle-CssClass="table-bordered" HeaderText="ID Karyawan"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Alamat" >
+
+                        <asp:BoundField DataField="IDKaryawan" ItemStyle-CssClass="hiddencol" HeaderText="Username" HeaderStyle-CssClass="hiddencol" NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="username" />
+                       
+                         <asp:BoundField DataField="Nama" HeaderStyle-CssClass="table-bordered" HeaderText="Nama Pasien"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Alamat" >
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="15%"  CssClass="table table-bordered table-striped"  />
                         </asp:BoundField>
+
                         <asp:BoundField DataField="Tanggal" HeaderStyle-CssClass="table-bordered" HeaderText="Tanggal"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="NoTelp" >
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="8%"  CssClass="table table-bordered table-striped"  />
                         </asp:BoundField>
-                        <asp:BoundField DataField="totalBayar" DataFormatString="Rp {0:###,###,###}" HeaderStyle-CssClass="table-bordered" HeaderText="Total Bayar"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="TglLahir" >
+
+                        <asp:BoundField DataField="totalBayar" DataFormatString="Rp {0:###,###,###}" HeaderStyle-CssClass="table-bordered" HeaderText="Total Bayar"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="totalBayar" >
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="8%" CssClass="table table-bordered table-striped"   />
                         </asp:BoundField>
-                         <asp:BoundField DataField="labtotalBayar" HeaderStyle-CssClass="table-bordered" HeaderText="Total Bayar"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="TglLahir" >
-                            <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="8%" CssClass="table table-bordered table-striped"   />
-                        </asp:BoundField>
+
+                        <asp:BoundField DataField="labtotalBayar" ItemStyle-CssClass="hiddencol" HeaderText="Bayar" HeaderStyle-CssClass="hiddencol" NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="totalBayar" />
+
 
                         <asp:TemplateField HeaderText="status" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign ="Center" >
                            <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="5%"  CssClass="table table-bordered table-striped" />
@@ -189,7 +196,7 @@
                         <asp:BoundField DataField="subTotal" DataFormatString="Rp {0:###,###,###}" HeaderStyle-CssClass="table-bordered" HeaderText="Sub Total"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="TglLahir" >
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="8%" CssClass="table table-bordered table-striped"   />
                         </asp:BoundField>
-                        <asp:TemplateField HeaderText="ID Obat"  HeaderStyle-Width="15%" ItemStyle-Width="15%">
+                        <asp:TemplateField HeaderText="ID Obat"  HeaderStyle-Width="15%" ItemStyle-Width="15%" >
                              <ItemTemplate>
                                 <asp:Label style="margin-right:20px; margin-left:10px;" runat="server" ID="IDObat" Text='<%#Eval("IDObat") %>'></asp:Label>
                             </ItemTemplate>

@@ -7,8 +7,6 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="namaKaryawan" Runat="Server">
-</asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="sub_Title" Runat="Server">
     Pemeriksaan
 </asp:Content>
@@ -65,7 +63,7 @@
 
                  <div class="row form-group">
                     <div class="col-md-3">
-                     <label for="Ket">Berat Badan </label>
+                     <label for="Ket">Berat Badan(Kg) </label> <span style="color:red">(*)</span>
                     </div>
                  <div class="col-md-5">
                    <asp:TextBox ID="txtBerat" CssClass="form-control" runat="server" TextMode="Number"/>
@@ -80,7 +78,7 @@
 
                  <div class="row form-group">
                    <div class="col-md-3">
-                   <label for="Ket">Tinggi Badan</label>
+                   <label for="Ket">Tinggi Badan(Cm)</label><span style="color:red">*</span>
                     </div>
                     <div class="col-md-5">
                    <asp:TextBox ID="txtTinggi" CssClass="form-control" runat="server" TextMode="Number" />
@@ -95,7 +93,7 @@
 
                  <div class="row form-group">
                    <div class="col-md-3">
-                   <label for="Ket">Tensi</label>
+                   <label for="Ket">Tensi(SYS/DIA)</label><span style="color:red">*</span>
                     </div>
                     <div class="col-md-5">
                    <asp:TextBox ID="txtTensi" CssClass="form-control" runat="server" />
@@ -125,32 +123,20 @@
 
                 <div class="row form-group">
                    <div class="col-md-3">
-                   <label for="Ket">Gula Darah</label>
+                   <label for="Ket">Gula Darah(mg/dL)</label>
                     </div>
                     <div class="col-md-5">
                    <asp:TextBox ID="txtGula" CssClass="form-control" runat="server" TextMode="Number" />
-                   <asp:RequiredFieldValidator ID="RequiredFieldValidator10"
-                        runat="server"
-                        ControlToValidate="txtGula"
-                        ForeColor="Red"
-                        ValidationGroup="numb"
-                        ErrorMessage="Data Harus diisi dengan Angk"></asp:RequiredFieldValidator>
                   </div>
                 </div>
 
 
                 <div class="row form-group">
                    <div class="col-md-3">
-                   <label for="Ket">Kolestrol</label>
+                   <label for="Ket">Kolestrol(mg/dL)</label>
                     </div>
                     <div class="col-md-5">
                    <asp:TextBox ID="txtKolestrol" CssClass="form-control" runat="server" TextMode="Number" />
-                   <asp:RequiredFieldValidator ID="RequiredFieldValidator11"
-                        runat="server"
-                        ControlToValidate="txtKolestrol"
-                        ForeColor="Red"
-                        ValidationGroup="numb"
-                        ErrorMessage="Data Harus diisi dengan Angka"></asp:RequiredFieldValidator>
                   </div>
                 </div>
             </div>

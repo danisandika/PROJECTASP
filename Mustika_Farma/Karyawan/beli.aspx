@@ -5,9 +5,6 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="namaKaryawan" Runat="Server">
-    <asp:Label ID="namaKaryawan" runat="server"></asp:Label>
-</asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="sub_Title" Runat="Server">
      <h1>Data Pembelian</h1>
 </asp:Content>

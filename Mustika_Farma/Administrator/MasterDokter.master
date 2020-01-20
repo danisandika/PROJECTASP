@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="../AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.css"/>
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="../AdminLTE/plugins/overlayScrollbars/css/OverlayScrollbars.min.css"/>
+
   <!-- Daterange picker -->
   <link rel="stylesheet" href="../AdminLTE/plugins/daterangepicker/daterangepicker.css"/>
   <!-- summernote -->
@@ -45,7 +46,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="Dashboard.aspx" class="nav-link">Home</a>
+        <a href="Home.aspx" class="nav-link">Home</a>
       </li>
       
     </ul>
@@ -117,11 +118,11 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="Dashboard.aspx" class="brand-link">
+<%--    <a href="Dashboard.aspx" class="brand-link">
       <img src="../AdminLTE/dist/img/karyawan.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
         <asp:ContentPlaceHolder ID="namaKaryawan" runat="server"></asp:ContentPlaceHolder>
-    </a>
+    </a>--%>
 
     <!-- Sidebar -->
     <div class="sidebar">
@@ -131,7 +132,7 @@
           <img src="../AdminLTE/dist/img/logo1.png" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="Dashboard.aspx" class="d-block">Mustika Farma</a>
+          <a href="Home.aspx" class="d-block">Mustika Farma</a>
         </div>
       </div>
 
@@ -142,7 +143,7 @@
                with font-awesome or any other icon font library -->
          
           <li class="nav-item">
-            <a href="Dashboard.aspx" class="nav-link">
+            <a href="Home.aspx" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>Dashboard</p>
             </a>
@@ -175,7 +176,7 @@
             </a>
           </li>
            <li class="nav-item">
-            <a href="../Karyawan/profile.aspx" class="nav-link">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
               <p>Profile Dokter</p>
             </a>

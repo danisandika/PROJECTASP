@@ -242,12 +242,6 @@ public partial class Karyawan_beli : System.Web.UI.Page
 
     }
 
-    protected void btnProses_Click1(object sender, EventArgs e)
-    {
-
-
-    }
-
     protected void btnProses_Click(object sender, EventArgs e)
     {
 
@@ -284,8 +278,7 @@ public partial class Karyawan_beli : System.Web.UI.Page
             conn.Close();
         }
         Response.Write("<script>alert('Pembelian Di proses');</script>");
-        loadData();
-
+        Response.Redirect("beli.aspx");
     }
 
     protected void DDLSupplier_TextChanged(object sender, EventArgs e)
