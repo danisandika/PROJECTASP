@@ -32,7 +32,7 @@ public partial class Karyawan_Booking : System.Web.UI.Page
         maxdate = mindate.AddDays(7);
         txtTanggal.Attributes["min"] = DateTime.Now.ToString("yyyy-MM-dd");
         txtTanggal.Attributes["max"] = DateTime.Now.AddDays(7).ToString("yyyy-MM-dd");
-
+        
     }
 
     //private void ddlvalue()
@@ -63,14 +63,14 @@ public partial class Karyawan_Booking : System.Web.UI.Page
         gridBooking.DataSource = ds;
         gridBooking.DataBind();
         return ds;
-
+       
     }
 
     protected void booking_Click(object sender, EventArgs e)
     {
         DateTime d = Convert.ToDateTime(txtantriandummy.Text);
         string strdate = d.ToString("yyyyMMdd");
-
+       
         SqlCommand com = new SqlCommand();
         com.Connection = conn;
 
@@ -83,9 +83,9 @@ public partial class Karyawan_Booking : System.Web.UI.Page
         //com.Parameters.AddWithValue("ID_Dokter", "");
         com.Parameters.AddWithValue("Deskripsi",txtDeskripsi.Text);
         com.Parameters.AddWithValue("no_antrian", strdate + txtantrian.Text);
-
+       
         conn.Open();
-
+        
 
         SqlCommand acom = new SqlCommand();
         acom.Connection = conn;
@@ -99,7 +99,7 @@ public partial class Karyawan_Booking : System.Web.UI.Page
 
         int result_antrian = Convert.ToInt32(acom.ExecuteNonQuery());
         int result = Convert.ToInt32(com.ExecuteNonQuery());
-
+        
         conn.Close();
 
         if (result > 0 && result_antrian > 0)
