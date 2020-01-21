@@ -32,10 +32,10 @@ Konfirmasi Booking
               <div class="card-header">
                 <h3 class="card-title">Data Pemeriksaan</h3>
               </div>
-                <asp:Label ID="lblIDqu" runat="server" Text="" Visible="false"></asp:Label>
-                <asp:Label ID="labelIDUSer" runat="server" Text="Label" Visible="false"></asp:Label>
+                <asp:Label ID="lblIDqu" runat="server" Text="" Visible="true"></asp:Label>
+                <asp:Label ID="labelIDUSer" runat="server" Text="Label" Visible="true"></asp:Label>
                 <div class="card-body">
-
+                    
                 <div class="row form-group">
                  <div class="col-md-3">
                   <label for="pasien">Nama Pasien</label><span style="color:red">(*)</span>
@@ -149,7 +149,7 @@ Konfirmasi Booking
               </div>
         </section>
 
-    <!--SECTION EDIT-->
+ <%--   <!--SECTION EDIT-->
      <section class="content" id="secEditRiwayat" runat="server">
       <div class="container-fluid">
         <div class="row">
@@ -292,7 +292,7 @@ Konfirmasi Booking
             </div>
           </div>
         </section>
-
+--%>
        <!--SECTION VIEW-->
      <section class="content" id="secViewRiwayat" runat="server">
       <div class="container-fluid">
@@ -467,13 +467,12 @@ Konfirmasi Booking
                 <h3 class="card-title">Table Pembookingan</h3>
                   <br />
 
-                 <label>Lihat Bedasarkan Status</label>
                 <div class="input-group-append">
-                 <asp:DropDownList ID="ddlStatusView" runat="server" class="form-control" Width="200px" OnTextChanged="ddlStatusView_TextChanged" AutoPostBack="true">
+<%--                 <asp:DropDownList ID="ddlStatusView" runat="server" class="form-control" Width="200px" OnTextChanged="ddlStatusView_TextChanged" AutoPostBack="true">
                  <asp:ListItem value="1" >Aktif</asp:ListItem>
                  <asp:ListItem Value="0" >Tidak Aktif</asp:ListItem>
                  <asp:ListItem Value="2" Selected="True">Semua</asp:ListItem>
-                 </asp:DropDownList>
+                 </asp:DropDownList>--%>
                     <asp:TextBox id="txtSearch" CssClass="form-control float-right" runat="server" Width="20%"/>                    
                       <asp:LinkButton CssClass="btn btn-default" runat="server" ID="btnSearch" OnClick="btnSearch_Click"><i class="fas fa-search"></i></asp:LinkButton>
                     </div>
@@ -502,33 +501,39 @@ Konfirmasi Booking
                         <asp:BoundField DataField="dateBooking"  HeaderStyle-CssClass="table-bordered" HeaderText="Tanggal Booking"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="deskripsi" >
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="15%"  CssClass="table table-bordered table-striped" />
                         </asp:BoundField>
-                         <asp:BoundField DataField="statusBooking"  HeaderStyle-CssClass="table-bordered" HeaderText="Status"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="deskripsi" >
-                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
-                         </asp:BoundField>
+                        <asp:BoundField DataField="statusBooking" ItemStyle-CssClass="hiddencol" HeaderText="Username" HeaderStyle-CssClass="hiddencol" NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="username" />         
                          <asp:BoundField DataField="Deskripsi"  HeaderStyle-CssClass="table-bordered" HeaderText="Deskripsi"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="deskripsi" >
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="20%"  CssClass="table table-bordered table-striped" />
                         </asp:BoundField>
                          <asp:BoundField DataField="NamaU"  HeaderStyle-CssClass="table-bordered" HeaderText="Nama Customer"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="deskripsi" >
-                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="30%"  CssClass="table table-bordered table-striped" />
+                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="20%"  CssClass="table table-bordered table-striped" />
                         </asp:BoundField>
                          <asp:BoundField DataField="NamaD"  HeaderStyle-CssClass="table-bordered" HeaderText="Nama Dokter"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="deskripsi" >
-                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="30%"  CssClass="table table-bordered table-striped" />
+                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="20%"  CssClass="table table-bordered table-striped" />
                         </asp:BoundField>
                         <asp:BoundField DataField="IDUser" ItemStyle-CssClass="hiddencol" HeaderText="Username" HeaderStyle-CssClass="hiddencol" NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="username" />
                         <asp:BoundField DataField="ID_Dokter" ItemStyle-CssClass="hiddencol" HeaderText="Password" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="password" />
-                        <asp:TemplateField HeaderText="Status" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign ="Center" >
-                           <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="5%"  CssClass="table table-bordered table-striped" />
+                       <%-- <asp:TemplateField HeaderText="Status" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign ="Center" >
+                           <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
                              <ItemTemplate >
                                  <span class="badge badge-warning">Menunggu</span>
                             </ItemTemplate>
-                        </asp:TemplateField>
+                        </asp:TemplateField>--%>
 
                         <asp:TemplateField HeaderText="Aksi"  HeaderStyle-CssClass="table-bordered" ItemStyle-HorizontalAlign="Center">
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="20%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
-                                <asp:LinkButton runat="server" ID="linkBooking" CommandName="cmEdit" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
+                                  <asp:LinkButton runat="server" ID="linkDelete" CommandName="Delete" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
+                                ToolTip="Selesai Pemeriksaan"><span class="far fa-check-circle" onclick="return confirm('Apa kamu yakin menyelesaikan pemeriksaan?');"></span></asp:LinkButton>
+                                
+                                
+                                 <asp:LinkButton runat="server" ID="linkAktif" CommandName="Delete" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
+                                ToolTip="Lanjutkan Pemeriksaan"><span class="far fa-check-circle" onclick="return confirm('Apa kamu yakin melanjutkan pemeriksaan?');"></span></asp:LinkButton>
+                                
+                                    <asp:LinkButton runat="server" ID="linkBooking" CommandName="cmEdit" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
                                     ToolTip="Periksa"><span class="far fa-edit nav-icon"></span>
                                 </asp:LinkButton>
+
                                 
                             </ItemTemplate>
                         </asp:TemplateField>
@@ -552,18 +557,33 @@ Konfirmasi Booking
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Table Obat</h3>
+                   <div class="card-tools">
+                  <div class="input-group input-group-sm" style="width: 150px;">
+                <div class="row form-group">
+                    <div class="col-md-8">
+                    <asp:TextBox Width="350%" id="txtCariObat" CssClass="form-control float-right" runat="server"/>
+                    </div>
+                     <div class="col-md-3">
+                      <asp:LinkButton BackColor="SkyBlue" CssClass="col-lg-8" runat="server" ID="lnkCariObat" OnClick="lnkCariObat_Click">
+                          <span class="fa fa-search"></span></asp:LinkButton>
+                  </div>
+                  </div>
+                </div>
+                </div>
               </div>
 
                 <div class="card-body table-responsive p-0 col-12">
-                
-                <asp:GridView ID="gridObat" runat="server"
+
+              <asp:Label ID="lblIDObat" runat="server" Visible="true"></asp:Label>
+              <asp:Label ID="lblKaryawan" runat="server" Visible="true"></asp:Label>
+
+                  <asp:GridView ID="gridObat" runat="server"
                      CssClass="table table-striped table-bordered table-hover"
-                    AllowPaging="false"
+                    AllowPaging="true"
                     AllowSorting="true" AutoGenerateColumns="false" DataKeyNames="IDObat" EmptyDataText="Tidak Ada Data" 
                     PageSize="5"  ShowHeaderWhenEmpty="true" OnPageIndexChanging="gridObat_PageIndexChanging"
                     OnRowCommand="gridObat_RowCommand" OnSorting="gridObat_Sorting" OnSelectedIndexChanged="gridObat_SelectedIndexChanged"
-                   OnRowDataBound="gridObat_RowDataBound" OnRowDeleting="gridObat_RowDeleting"
-                    >
+                   OnRowDataBound="gridObat_RowDataBound" OnRowDeleting="gridObat_RowDeleting" >
                     <Columns>
                         <asp:TemplateField HeaderText="No" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="2%"  CssClass="table table-bordered table-striped" />
@@ -572,52 +592,39 @@ Konfirmasi Booking
                             </ItemTemplate>
                         </asp:TemplateField>
 
-                         <asp:TemplateField HeaderText="namaObat" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
-                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="2%"  CssClass="table table-bordered table-striped" />
-                            <ItemTemplate>
-                                <asp:Label ID="labNama" runat="server" Text='<%#Bind("namaObat") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
+                         <asp:BoundField DataField="namaObat" HeaderStyle-CssClass="table-bordered"  HeaderText="Nama Obat"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Harga" >
+                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
+                        </asp:BoundField>
 
-                         <asp:TemplateField HeaderText="Keterangan" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Left">
+                         <asp:BoundField DataField="Keterangan" HeaderStyle-CssClass="table-bordered"  HeaderText="Keterangan"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Harga" >
+                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
+                        </asp:BoundField>
+
+                        <asp:BoundField DataField="Harga" ItemStyle-CssClass="hiddencol" HeaderText="" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
+
+                        <asp:BoundField DataField="HargaBarang" DataFormatString="Rp {0:###,###,###}" HeaderStyle-CssClass="table-bordered"  HeaderText="Harga"  NullDisplayText="-" ItemStyle-HorizontalAlign="Right" >
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="15%"  CssClass="table table-bordered table-striped" />
-                            <ItemTemplate>
-                                <asp:Label ID="labKet" runat="server" Text='<%#Bind("Keterangan") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField> 
-
-                        <asp:TemplateField HeaderText="Harga" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
-                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="2%"  CssClass="table table-bordered table-striped" />
-                            <ItemTemplate>
-                                <asp:Label ID="labHarga" runat="server" Text='<%#Bind("Harga") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-
-                        <asp:TemplateField HeaderText="Jumlah Dosis" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
+                        </asp:BoundField>
+                        
+                        <asp:TemplateField HeaderText="Jumlah Beli" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
                                  <asp:TextBox ID="jumlahBeli" runat="server"></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField> 
 
-                        <asp:TemplateField HeaderText="Satuan" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
-                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="2%"  CssClass="table table-bordered table-striped" />
-                            <ItemTemplate>
-                                <asp:Label ID="labSat" runat="server" Text='<%#Bind("Satuan") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>  
+                         <asp:BoundField DataField="Satuan" HeaderStyle-CssClass="table-bordered"  HeaderText="Satuan"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Harga" >
+                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
+                        </asp:BoundField>
 
-                        <asp:TemplateField HeaderText="ID Obat" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center" Visible="false">
-                            <ItemTemplate>
-                                <asp:Label ID="labIDObat" runat="server" Text='<%#Bind("IDObat") %>' Visible="false"></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>  
+                        <asp:BoundField DataField="IDObat" ItemStyle-CssClass="hiddencol" HeaderText="" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
 
-
-                            <asp:TemplateField HeaderText="Tambahkan" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
+                            <asp:TemplateField HeaderText="Periksa" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
                             <ItemStyle Font-Size="small" VerticalAlign="Middle" Width="2%"  CssClass="table table-bordered table-striped" />
                              <ItemTemplate>
-                                <asp:CheckBox ID="CheckBox1" runat="server" />
+                                <asp:LinkButton runat="server" ID="linkEdit" CommandName="cmEdit" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
+                                    ToolTip="Periksa"><span class="far fa-edit nav-icon"></span>
+                                </asp:LinkButton>                                
                             </ItemTemplate>
                         </asp:TemplateField>
 
@@ -639,74 +646,75 @@ Konfirmasi Booking
 <section class="content" id="secKeranjang" runat="server">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-8">
+          <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Keranjang</h3>
-                  <asp:Label ID="lblIDTrans" runat="server"></asp:Label>
+                <h2>Keranjang</h2>
+                  <br/>
+                <h4><asp:Label ID="lblIDTrans" runat="server"></asp:Label> </h4>
+
               </div>
               <div class="card-body">
-              <asp:GridView ID="grdKeranjang" AutoGenerateColumns="false" runat="server" CssClass="table table-striped table-bordered table-hover">
+                <asp:GridView ID="grdKeranjang" AutoGenerateColumns="false" runat="server" CssClass="table table-striped table-bordered table-hover">
                     <Columns> 
-                         <asp:TemplateField HeaderText="No" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
+                         <asp:TemplateField HeaderText="No" HeaderStyle-CssClass="table-bordered" ItemStyle-HorizontalAlign="Center">
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="2%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
                                 <%# Container.DataItemIndex +1 %>
                             </ItemTemplate>
                         </asp:TemplateField>
 
-                         <asp:TemplateField HeaderText="Nama Obat" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
-                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="15%"  CssClass="table table-bordered table-striped" />
+                         <asp:TemplateField HeaderText="Nama Obat" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Left">
+                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="35%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
-                                <asp:Label ID="labNama" runat="server" Text='<%#Bind("namaObat") %>'></asp:Label>
+                                <asp:Label ID="namaObat" runat="server" Text='<%#Bind("namaObat") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                                                   
-                        <asp:TemplateField HeaderText="Satuan" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
+                        <asp:TemplateField HeaderText="Satuan" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Left">
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
-                                <asp:Label ID="labSat" runat="server" Text='<%#Bind("Satuan") %>'></asp:Label>
+                                <asp:Label ID="Satuan" runat="server" Text='<%#Bind("Satuan") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField> 
 
-                        <asp:TemplateField HeaderText="Jumlah" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
-                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="5%"  CssClass="table table-bordered table-striped" />
+                        <asp:TemplateField HeaderText="Jumlah" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Right">
+                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
-                                <asp:Label ID="labJumlah" runat="server" Text='<%#Eval("jumlahBeli") %>'></asp:Label>
+                                <asp:Label ID="jumlah" runat="server" Text='<%#Eval("jumlah") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField> 
 
-                        <asp:TemplateField HeaderText="Harga Total" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
-                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="5%"  CssClass="table table-bordered table-striped" />
+                        <asp:TemplateField HeaderText="Harga Total" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Right">
+                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="20%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
-                                <asp:Label ID="labHarga" runat="server" Text='<%#Eval("harga") %>'></asp:Label>
+                                <asp:Label ID="harga" runat="server" Text='<%#Eval("harga") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField> 
-
-                         <asp:TemplateField HeaderText="ID Obat" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Left" Visible="false">
+   
+                         <asp:TemplateField HeaderText="ID Obat" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Left" >
                             <ItemTemplate>
-                                <asp:Label ID="labIDObat" runat="server" Text='<%#Eval("IDObat") %>' Visible="false"></asp:Label>
+                                <asp:Label ID="IDObat" runat="server" Text='<%#Eval("IDObat") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField> 
-                     
+                           
                    </Columns>
                 </asp:GridView>
 
                <asp:Label ID="lblJumlahPembelian" runat="server" Text='<%#Eval("valuefinal") %>'></asp:Label>
-               <asp:Label ID="lblTotal" runat="server" Text='<%#Eval("valuefinal") %>' Visible="false"></asp:Label>
+              <asp:Label ID="lblTotalHarga" runat="server" Text='<%#Eval("valuefinal") %>' Visible="false"></asp:Label>
 
               </div>
               <div class="card-footer clearfix">
                     <div class="form-group">
                 <asp:Button ID="btnProses" runat="server" CssClass="btn btn-primary" Text="Proses" OnClick="btnProses_Click"/>                     
+
                 </div>
 
              </div>
             </div>
           </div>
              </div>
-<%--                    <asp:Button ID="btnKonf_booking" runat="server" CssClass="btn btn-primary" Text="Selesai" OnClick="btnKonf_booking_Click"/>                     --%>
-
             </div>
 
 </section> 

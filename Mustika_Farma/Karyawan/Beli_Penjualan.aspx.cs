@@ -22,6 +22,7 @@ public partial class Karyawan_Beli_Penjualan : System.Web.UI.Page
         {
             loadData();
             SetInitialRow();
+          
         }
     }
 
@@ -138,7 +139,6 @@ public partial class Karyawan_Beli_Penjualan : System.Web.UI.Page
     {
         if (e.CommandName == "cmEdit")
         {
-
             string Name = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[1].Text;
             string satuan = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[5].Text;
             string jumlah = ((TextBox)gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[4].FindControl("txtJumlahBeli")).Text;
@@ -171,7 +171,7 @@ public partial class Karyawan_Beli_Penjualan : System.Web.UI.Page
                         rowIndex++;
                     }
                     dtr.Rows.Add(drr);
-                    ViewState["currentTable"] = dtr;
+                    //ViewState["currentTable"] = dtr;
 
                     grdKeranjang.DataSource = dtr;
                     grdKeranjang.DataBind();
@@ -186,6 +186,8 @@ public partial class Karyawan_Beli_Penjualan : System.Web.UI.Page
             if (ViewState["currentTable"] != null)
             {
                 DataTable dt = (DataTable)ViewState["currentTable"];
+                DataTable dt2 = (DataTable)ViewState["currentTable2"];
+                DataRow dr2 = null;
                 int row = dt.Rows.Count;
                 double valuefinal = 0;
                 if (row > 0)
@@ -203,7 +205,7 @@ public partial class Karyawan_Beli_Penjualan : System.Web.UI.Page
                             String id = gridObat.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
                             lblID.Text = id;
 
-                            double hargatot = Convert.ToDouble(harga) * Convert.ToInt16(jumlah);
+                            double hargatot = Convert.ToDouble(harga) * Convert.ToDouble(jumlah);
 
                             box1.Text = Name;
                             box2.Text = satuan;
@@ -211,6 +213,15 @@ public partial class Karyawan_Beli_Penjualan : System.Web.UI.Page
                             box4.Text = Convert.ToString(hargatot);
                             box5.Text = IDObat;
                             valuefinal += hargatot;
+
+                            dr2 = dt2.NewRow();
+                            dt2.Rows[i]["namaObat"] = box1.Text;
+                            dt2.Rows[i]["Satuan"] = box2.Text;
+                            dt2.Rows[i]["jumlah"] = box3.Text;
+                            dt2.Rows[i]["Harga"] = box4.Text;
+                            dt2.Rows[i]["IDObat"] = box5.Text;
+                            dt2.Rows.Add(dr2);
+                            ViewState["currentTable2"] = dt2;
 
                             lblJumlahPembelian.Text = "TOTAL PEMBAYARAN RP " + valuefinal; //Convert.ToString(valuefinal);
                             txtHarga.Text = Convert.ToString(valuefinal);
@@ -320,8 +331,9 @@ public partial class Karyawan_Beli_Penjualan : System.Web.UI.Page
         insert.CommandType = CommandType.StoredProcedure;
 
         insert.Parameters.AddWithValue("@IDPembelian", strIDPembelian);
-        insert.Parameters.AddWithValue("@IDKaryawan", Session["creaby"]);
+        //insert.Parameters.AddWithValue("@IDKaryawan", 1);
         insert.Parameters.AddWithValue("@tanggal", tanggal);
+        insert.Parameters.AddWithValue("@IDKaryawan", Session["creaby"]);
         insert.Parameters.AddWithValue("@IDSupplier", DDLSupplier.SelectedValue);
         insert.Parameters.AddWithValue("@totalbayar", txtHarga.Text);
 
@@ -329,24 +341,29 @@ public partial class Karyawan_Beli_Penjualan : System.Web.UI.Page
         insert.ExecuteNonQuery();
         conn.Close();
 
-        DataTable dt = (DataTable)ViewState["currentTable"];
+        DataTable dt = (DataTable)ViewState["currentTable2"];
         int row = dt.Rows.Count;
         for (int i = 0; i < row - 1; i++)
         {
             SqlCommand ins = new SqlCommand("sp_Inputdetailpembelian", conn);
             ins.CommandType = CommandType.StoredProcedure;
 
+            string coba2 = dt.Rows[i]["jumlah"].ToString();
+            string coba = dt.Rows[i]["IDObat"].ToString();
+
             ins.Parameters.AddWithValue("IDPembelian", strIDPembelian);
             ins.Parameters.AddWithValue("jumlah", dt.Rows[i]["jumlah"]);
             ins.Parameters.AddWithValue("subTotal", dt.Rows[i]["Harga"]);
             ins.Parameters.AddWithValue("IDObat", dt.Rows[i]["IDObat"]);
-            i++;
             conn.Open();
             ins.ExecuteNonQuery();
             conn.Close();
         }
+        AddNewRowTogrid();
+
         Response.Write("<script>alert('Pembelian Di proses');</script>");
         Response.Redirect("beli.aspx");
+
     }
 
     protected void DDLSupplier_TextChanged(object sender, EventArgs e)
@@ -394,6 +411,7 @@ public partial class Karyawan_Beli_Penjualan : System.Web.UI.Page
         dt.Rows.Add(dr);
 
         ViewState["currentTable"] = dt;
+        ViewState["currentTable2"] = dt;
         grdKeranjang.DataSource = dt;
         grdKeranjang.DataBind();
     }

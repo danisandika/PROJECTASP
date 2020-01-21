@@ -22,25 +22,26 @@ public partial class Karyawan_beri_resep : System.Web.UI.Page
         }
     }
 
-    private void loadData()
+    private DataSet loadData()
     {
-        string mainconn = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
-        SqlConnection sqlconn = new SqlConnection(mainconn);
-        string sqlquery = "select IDObat,namaObat,IDJenis,JumlahObat,Satuan,Keterangan,convert(varchar,Harga) AS 'Harga' from obat";
-        SqlCommand com = new SqlCommand(sqlquery, sqlconn);
-        sqlconn.Open();
-        gridObat.DataSource = com.ExecuteReader();
-        gridObat.DataBind();
-        sqlconn.Close();
+        SqlCommand com = new SqlCommand();
+        com.Connection = conn;
+        com.CommandText = "[sp_SelectJual]";
+        com.CommandType = CommandType.StoredProcedure;
+        com.Parameters.AddWithValue("@namaObat", txtSearch.Text);
 
-        string strID = generateIDTrans();
-        lblIDTrans.Text = "ID Transaksi " + strID;      
+        SqlDataAdapter adap = new SqlDataAdapter(com);
+        adap.Fill(ds);
+        gridObat.DataSource = ds;
+        gridObat.DataBind();
+        return ds;
     }
 
 
     protected void gridObat_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
-
+        gridObat.PageIndex = e.NewPageIndex;
+        loadData();
     }
 
     protected void gridObat_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -115,9 +116,8 @@ public partial class Karyawan_beri_resep : System.Web.UI.Page
     protected void btnProses_Click(object sender, EventArgs e)
     {
 
-        //try
-        //{
-
+        try
+        {
             string strID = generateIDTrans();
             DateTime tanggal = DateTime.Now;
             SqlCommand insert = new SqlCommand("[sp_InputTransaksi]", conn);
@@ -152,10 +152,15 @@ public partial class Karyawan_beri_resep : System.Web.UI.Page
             }
             Response.Write("<script>alert('Data berhasil Ditambahkan');</script>");
             loadData();
-        //}
-        //catch (Exception ex)
-        //{
-        //    Response.Write("<script>alert('Data Gagal Ditambahkan');</script>");
-        //}
+        }
+        catch (Exception ex)
+        {
+            Response.Write("<script>alert('Data Gagal Ditambahkan');</script>");
+        }
+    }
+
+    protected void btnSearch_Click(object sender, EventArgs e)
+    {
+        loadData();
     }
 }

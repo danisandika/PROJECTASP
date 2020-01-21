@@ -69,7 +69,7 @@ public partial class Karyawan_Booking : System.Web.UI.Page
         com.Parameters.AddWithValue("dateBooking",Convert.ToDateTime(txtTanggal.Text));
         com.Parameters.AddWithValue("IDUser",Session["creaby"]);
         com.Parameters.AddWithValue("statusBooking", 2);
-        com.Parameters.AddWithValue("ID_Dokter", ddlDokter.SelectedValue);
+        com.Parameters.AddWithValue("ID_Dokter", ddlDokter.SelectedValue.ToString());
         com.Parameters.AddWithValue("Deskripsi",txtDeskripsi.Text);
        
         conn.Open();

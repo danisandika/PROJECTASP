@@ -9,6 +9,16 @@ public partial class Administrator_MasterDokter : System.Web.UI.MasterPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["creaby"] == null)
+        {
+            Response.Redirect("Login.aspx");
+        }
 
+    }
+
+    protected void linkLogOut_Click(object sender, EventArgs e)
+    {
+        Session.Clear();
+        Session.Abandon();
     }
 }
