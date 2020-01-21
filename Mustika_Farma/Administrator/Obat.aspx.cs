@@ -45,36 +45,44 @@ public partial class Administrator_Obat : System.Web.UI.Page
 
     protected void btnSave_Click1(object sender, EventArgs e)
     {
-        string filename = Guid.NewGuid() + System.IO.Path.GetFileName(uploadfile.FileName).Substring(System.IO.Path.GetFileName(uploadfile.FileName).Length - 4);
-        uploadfile.SaveAs(Server.MapPath("obat_obat/") + filename);
+        try
+        {
+            string filename = Guid.NewGuid() + System.IO.Path.GetFileName(uploadfile.FileName).Substring(System.IO.Path.GetFileName(uploadfile.FileName).Length - 4);
+            uploadfile.SaveAs(Server.MapPath("obat_obat/") + filename);
 
-        DateTime CreateDate = DateTime.Now;
-        DateTime expired =Convert.ToDateTime(txtExpired.Text);
-        int CreateBy = 1;
+            DateTime CreateDate = DateTime.Now;
+            DateTime expired = Convert.ToDateTime(txtExpired.Text);
+            int CreateBy = 1;
 
-        SqlCommand com = new SqlCommand();
-        com.Connection = conn;
-        com.CommandText = "sp_InputObat";
-        com.CommandType = CommandType.StoredProcedure;
-        com.Parameters.AddWithValue("@namaObat", txtnamaObat.Text);
-        com.Parameters.AddWithValue("@IDJenis", DDLJenisObat.SelectedValue);
-        //com.Parameters.AddWithValue("@JumlahObat",Convert.ToInt16(txtJumlah.Text));
-        com.Parameters.AddWithValue("@Keterangan", txtKet.Text);
-        com.Parameters.AddWithValue("@IDLokasi", DDLLokasi.SelectedValue);
-        com.Parameters.AddWithValue("@Satuan", ddlSatuan.SelectedValue);
-        com.Parameters.AddWithValue("@Harga", Convert.ToDecimal(txtHarga.Text));
-        com.Parameters.AddWithValue("@Expired",expired);
-        com.Parameters.AddWithValue("@foto", "obat_obat/" + filename);
-        com.Parameters.AddWithValue("@createDate", CreateDate);
-        com.Parameters.AddWithValue("@createBy", CreateBy);
-        com.Parameters.AddWithValue("@IDSupplier",ddlSupplier.SelectedValue);
+            SqlCommand com = new SqlCommand();
+            com.Connection = conn;
+            com.CommandText = "sp_InputObat";
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@namaObat", txtnamaObat.Text);
+            com.Parameters.AddWithValue("@IDJenis", DDLJenisObat.SelectedValue);
+            com.Parameters.AddWithValue("@JumlahObat", Convert.ToInt16(0));
+            com.Parameters.AddWithValue("@Keterangan", txtKet.Text);
+            com.Parameters.AddWithValue("@IDLokasi", DDLLokasi.SelectedValue);
+            com.Parameters.AddWithValue("@Satuan", ddlSatuan.SelectedValue);
+            com.Parameters.AddWithValue("@Harga", Convert.ToDecimal(txtHarga.Text));
+            com.Parameters.AddWithValue("@Expired", expired);
+            com.Parameters.AddWithValue("@foto", "obat_obat/" + filename);
+            com.Parameters.AddWithValue("@createDate", CreateDate);
+            com.Parameters.AddWithValue("@createBy", CreateBy);
+            com.Parameters.AddWithValue("@IDSupplier", ddlSupplier.SelectedValue);
 
 
-        conn.Open();
+            conn.Open();
+            int result = Convert.ToInt32(com.ExecuteNonQuery());
+            conn.Close();
+            Response.Redirect("Obat.aspx");
+        }
+        catch (Exception ex)
+        {
+            Response.Write("<script>alert('Data Gagal Ditambahkan');</script>");
+        }
 
-        int result = Convert.ToInt32(com.ExecuteNonQuery());
-        conn.Close();
-       
+
     }
 
     protected void btntambah_Click(object sender, EventArgs e)

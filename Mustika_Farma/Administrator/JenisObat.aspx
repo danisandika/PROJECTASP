@@ -40,7 +40,7 @@
                     </div>
                       <div class="col-md-5">
                     <asp:TextBox ID="txtnamaJenis" CssClass="form-control" runat="server"/>
-                           <asp:RequiredFieldValidator
+                     <asp:RequiredFieldValidator
                             id="RequiredFieldValidator17"
                             ControlToValidate="txtnamaJenis"
                             Text="(Required)"

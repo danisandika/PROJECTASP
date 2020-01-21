@@ -145,7 +145,7 @@
           <li class="nav-item">
             <a href="Obat.aspx" class="nav-link">
               <i class="nav-icon fas fa-capsules"></i>
-              <p>Obat-Obatan</p>
+              <p>Obat</p>
             </a>
           </li>
 		  

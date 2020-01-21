@@ -50,7 +50,7 @@
 
                   <div class="row form-group">
                     <div class="col-md-3">
-                    <label for="IDJenisObat">ID Jenis Obat</label><span style="color:red">*</span>
+                    <label for="IDJenisObat">Jenis Obat</label><span style="color:red">*</span>
                     </div>
                     <div class="col-md-5">
                   <asp:DropDownList ID="DDLJenisObat" runat="server" CssClass="form-control" DataSourceID="dsJenis" DataTextField="namaJenis" DataValueField="IDJenis">
@@ -69,15 +69,6 @@
                        <asp:SqlDataSource ID="dsSupplier" runat="server" ConnectionString="<%$ ConnectionStrings:Default %>" SelectCommand="SELECT IDSupplier, NamaSupplier FROM Supplier WHERE (Status = 1)"></asp:SqlDataSource>
                   </div>
                    </div>
-
-                <%--  <div class="row form-group">
-                    <div class="col-md-3">
-                   <label for="Ket">Jumlah Obat</label>
-                    </div>
-                    <div class="col-md-5">
-                   <asp:TextBox ID="txtJumlah" CssClass="form-control" runat="server" TextMode="Number" />
-                  </div>
-                  </div>--%>
 
                   <div class="row form-group">
                     <div class="col-md-3">
@@ -133,7 +124,6 @@
                     </div>
                     <div class="col-md-5">
                    <asp:TextBox CssClass="form-control" ID="txtExpired" placeholder="Tanggal Lahir" runat="server" TextMode="Date" required></asp:TextBox>
-                  <asp:TextBox ID="TextBox1" CssClass="form-control" runat="server" TextMode="Number" />
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator4"
                         runat="server"
                         ControlToValidate="txtExpired"
@@ -176,7 +166,7 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <asp:Button ID="btnSave" CssClass="btn btn-primary" runat="server" Text="Submit" OnClick="btnSave_Click1"/>
+                  <asp:Button ID="btnSave" CssClass="btn btn-primary" runat="server" Text="Simpan" OnClick="btnSave_Click1"/>
                 </div>
               
             </div>
@@ -279,11 +269,11 @@
                                 </asp:LinkButton>
 
                                   <asp:LinkButton runat="server" ID="linkDelete" CommandName="Delete" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
-                                ToolTip="linkDelete"><span class="far fa-trash-alt nav-icon" onclick="return confirm('Are you sure you want to delete this item?');"></span></asp:LinkButton>
+                                ToolTip="linkDelete"><span class="far fa-trash-alt nav-icon" onclick="Apa anda yakin me- non aktifkan data?');"></span></asp:LinkButton>
                                 
                                 
                                  <asp:LinkButton runat="server" ID="linkAktif" CommandName="Delete" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
-                                ToolTip="linkAktif"><span class="far fa-check-circle" onclick="return confirm('Are you sure you want to delete this item?');"></span></asp:LinkButton>
+                                ToolTip="linkAktif"><span class="far fa-check-circle" onclick="return confirm('Apa anda yakin meng- aktifkan data?');"></span></asp:LinkButton>
                                 
                                 <asp:LinkButton ID="lnkViewDetails" runat="server" CommandArgument='<%# Eval("IDObat")%>' 
                                 OnClick="lnkViewDetails_Click" Text="Detail" ToolTip="Details"><span class="far fa-check-square"></span></asp:LinkButton>
@@ -332,7 +322,7 @@
                   <%--row yang status 0 masi ketampil, soalnya biar otomatis terisi gitu--%>
                   <div class="row form-group">
                     <div class="col-md-3">
-                    <label for="IDJenisObat">ID Jenis Obat</label><span style="color:red">*</span>
+                    <label for="IDJenisObat">Jenis Obat</label><span style="color:red">*</span>
                     </div>
                     <div class="col-md-5">
                   <asp:DropDownList ID="ddlJenisObatE" runat="server" AppendDataBoundItems="true" CssClass="form-control" DataSourceID="dsJenisE" DataTextField="namaJenis" DataValueField="IDJenis">
@@ -458,8 +448,8 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <asp:Button ID="EditbtnSave" CssClass="btn btn-primary" runat="server" Text="Submit" OnClick="EditbtnSave_Click1"/>
-                  <asp:Button ID="EditbtnCancel" CssClass="btn btn-danger" runat="server" Text="Cancel" OnClick="EditbtnCancel_Click"/>
+                  <asp:Button ID="EditbtnSave" CssClass="btn btn-primary" runat="server" Text="Simpan" OnClick="EditbtnSave_Click1"/>
+                  <asp:Button ID="EditbtnCancel" CssClass="btn btn-danger" runat="server" Text="Kembali" OnClick="EditbtnCancel_Click"/>
                 </div>
               
             </div>
