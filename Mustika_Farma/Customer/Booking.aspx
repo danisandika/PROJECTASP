@@ -66,19 +66,27 @@
                       <div id="errormessage"></div>
 
                         <div class="row">
-                          <div class="col-xs-6 col-sm-6 col-md-6">
+                            <asp:TextBox ID="txtBooking" runat="server" class="form-control input-md" style="display:none"></asp:TextBox>
+                            <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
-                              <label>ID Booking</label>
-                                <asp:TextBox ID="txtBooking" runat="server" class="form-control input-md" ReadOnly="true"></asp:TextBox>
+                              <label>No Antrian</label>
+                                <asp:TextBox ID="txtantrian" runat="server" class="form-control input-md" ReadOnly="true" ></asp:TextBox>
+                                <asp:TextBox ID="txtantriandummy" runat="server" class="form-control input-md iis" style="display:none"></asp:TextBox>
                                 <div class="validation"></div>
                             </div>
                           </div>
 
-
+                           <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                              <label>Jenis Dokter</label>
+                                 <asp:DropDownList ID="ddlJenisE" runat="server" CssClass="form-control" DataSourceID="dsJenisE" DataTextField="nama_Jenis" DataValueField="ID_SP" ></asp:DropDownList>
+                                 <asp:SqlDataSource ID="dsJenisE" runat="server" ConnectionString="<%$ ConnectionStrings:Default %>" SelectCommand="select ID_SP,nama_Jenis from jenis_Dokter where [status] =1"></asp:SqlDataSource>
+                            </div>
+                          </div>
                           <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
                                 <label>Tanggal Booking</label>
-                                <asp:TextBox ID="txtTanggal" runat="server" class="form-control input-md" TextMode="DateTimeLocal"></asp:TextBox>
+                                <asp:TextBox ID="txtTanggal" runat="server" class="form-control input-md ganti_tanggal" TextMode="Date" AutoPostBack="true" OnTextChanged="txtTanggal_TextChanged"></asp:TextBox>
                                 
                              <asp:RequiredFieldValidator ID="RequiredFieldValidator2"
                                 runat="server"
@@ -92,23 +100,9 @@
 
 
                         <div class="row">
-                          <div class="col-xs-6 col-sm-6 col-md-6">
-                            <div class="form-group">
-                              <label>Jenis Dokter</label>
-                                 <asp:DropDownList ID="ddlJenisE" runat="server" CssClass="form-control" DataSourceID="dsJenisE" DataTextField="nama_Jenis" DataValueField="ID_SP" OnTextChanged="ddlJenisE_TextChanged" AutoPostBack="true"></asp:DropDownList>
-                                 <asp:SqlDataSource ID="dsJenisE" runat="server" ConnectionString="<%$ ConnectionStrings:Default %>" SelectCommand="select ID_SP,nama_Jenis from jenis_Dokter where [status] =1"></asp:SqlDataSource>
-                            </div>
-                          </div>
+                          
 
-                          <div class="col-xs-6 col-sm-6 col-md-6">
-                            <div class="form-group">
-                              <label>Dokter</label>
-                                <asp:DropDownList ID="ddlDokter" runat="server" CssClass="form-control" DataTextField="nama" DataValueField="ID_Dokter" >
-                                  </asp:DropDownList>
-                                   <asp:SqlDataSource ID="dsDokter" runat="server" ConnectionString="<%$ ConnectionStrings:Default %>" SelectCommand="sp_pilihDokter" SelectCommandType="StoredProcedure" ></asp:SqlDataSource>
-                                                            
-                            </div>
-                          </div>
+                         
                     
                          <div class="col-xs-12 col-sm-12 col-md-12">
                                  <div class="form-group">
@@ -203,12 +197,13 @@
                         <HeaderStyle BackColor="#03cffc" Font-Bold="True" ForeColor="Black" />                              
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="60%"  CssClass="table table-bordered table-striped" />
                         </asp:BoundField>
-                        <asp:BoundField DataField="namaDokter"  HeaderStyle-CssClass="table-hover" HeaderText="Nama Dokter"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="deskripsi" >
+                        <asp:BoundField DataField="no_antrian"  HeaderStyle-CssClass="table-hover" HeaderText="No Antri"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="deskripsi" >
                         <HeaderStyle BackColor="#03cffc" Font-Bold="True" ForeColor="Black" />                              
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="60%"  CssClass="table table-bordered table-striped" />
                         </asp:BoundField>
+                        
                         <asp:BoundField DataField="statusBooking" ItemStyle-CssClass="hiddencol" HeaderText="Status" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
-                        <asp:BoundField DataField="ID_Dokter" ItemStyle-CssClass="hiddencol" HeaderText="Status" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
+                        
 
                         <asp:TemplateField HeaderText="Aksi"  HeaderStyle-CssClass="table-bordered" ItemStyle-HorizontalAlign="Center">
                         <HeaderStyle BackColor="#03cffc" Font-Bold="True" ForeColor="Black" />                              
@@ -228,6 +223,8 @@
 </body>
 </section>
     <!-- /Section: services -->
+ 
+
 
 
 
@@ -247,5 +244,12 @@
 <asp:Content ID="Content10" ContentPlaceHolderID="footer" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content11" ContentPlaceHolderID="ContentPlaceHolder2" Runat="Server">
+    <script>
+    $('.ganti_tanggal').change(function () {
+        var tanggal = this.value;
+        //console.log(tanggal);
+        $('.iis').val(tanggal);
+    })
+</script>
 </asp:Content>
 

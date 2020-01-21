@@ -15,6 +15,9 @@ public partial class Karyawan_Booking : System.Web.UI.Page
 {
     SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Default"].ConnectionString);
     DataSet ds = new DataSet();
+    SqlDataReader dr;
+    DateTime mindate = DateTime.MinValue;
+    DateTime maxdate = DateTime.MaxValue;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -24,21 +27,26 @@ public partial class Karyawan_Booking : System.Web.UI.Page
         }
         string str = RandomString(10, false);
         txtBooking.Text = str;
-        ddlvalue();
+        //ddlvalue();
+        mindate = DateTime.Today;
+        maxdate = mindate.AddDays(7);
+        txtTanggal.Attributes["min"] = DateTime.Now.ToString("yyyy-MM-dd");
+        txtTanggal.Attributes["max"] = DateTime.Now.AddDays(7).ToString("yyyy-MM-dd");
+        
     }
 
-    private void ddlvalue()
-    {
-        conn.Open();
-        SqlCommand read = new SqlCommand("[sp_pilihDokter]", conn);
-        read.CommandType = CommandType.StoredProcedure;
-        read.Parameters.AddWithValue("@ID_SP", ddlJenisE.SelectedValue.ToString());
-        SqlDataAdapter adap = new SqlDataAdapter(read);
-        adap.Fill(ds);
-        ddlDokter.DataSource = ds;
-        ddlDokter.DataBind();
-        conn.Close();
-    }
+    //private void ddlvalue()
+    //{
+    //    conn.Open();
+    //    SqlCommand read = new SqlCommand("[sp_pilihDokter]", conn);
+    //    read.CommandType = CommandType.StoredProcedure;
+    //    read.Parameters.AddWithValue("@ID_SP", ddlJenisE.SelectedValue.ToString());
+    //    SqlDataAdapter adap = new SqlDataAdapter(read);
+    //    adap.Fill(ds);
+    //    ddlDokter.DataSource = ds;
+    //    ddlDokter.DataBind();
+    //    conn.Close();
+    //}
 
     private DataSet loadData()
     {
@@ -60,6 +68,9 @@ public partial class Karyawan_Booking : System.Web.UI.Page
 
     protected void booking_Click(object sender, EventArgs e)
     {
+        DateTime d = Convert.ToDateTime(txtantriandummy.Text);
+        string strdate = d.ToString("yyyyMMdd");
+       
         SqlCommand com = new SqlCommand();
         com.Connection = conn;
 
@@ -69,19 +80,32 @@ public partial class Karyawan_Booking : System.Web.UI.Page
         com.Parameters.AddWithValue("dateBooking",Convert.ToDateTime(txtTanggal.Text));
         com.Parameters.AddWithValue("IDUser",Session["creaby"]);
         com.Parameters.AddWithValue("statusBooking", 2);
-        com.Parameters.AddWithValue("ID_Dokter", ddlDokter.SelectedValue);
+        //com.Parameters.AddWithValue("ID_Dokter", "");
         com.Parameters.AddWithValue("Deskripsi",txtDeskripsi.Text);
+        com.Parameters.AddWithValue("no_antrian", strdate + txtantrian.Text);
        
         conn.Open();
+        
 
+        SqlCommand acom = new SqlCommand();
+        acom.Connection = conn;
+        acom.CommandText = "[sp_insertantrian]";
+        acom.CommandType = CommandType.StoredProcedure;
+        acom.Parameters.AddWithValue("no_antrian",strdate+txtantrian.Text);
+        acom.Parameters.AddWithValue("jenis_antrian", ddlJenisE.SelectedValue.ToString());
+        acom.Parameters.AddWithValue("tanggal", DateTime.Now);
+        acom.Parameters.AddWithValue("status", 1);
+        acom.Parameters.AddWithValue("id_user", Session["creaby"]);
+
+        int result_antrian = Convert.ToInt32(acom.ExecuteNonQuery());
         int result = Convert.ToInt32(com.ExecuteNonQuery());
+        
         conn.Close();
 
-        if (result > 0)
+        if (result > 0 && result_antrian > 0)
         {
             Response.Write("<script>alert('Booking berhasil dilakukan');</script>");
             Response.Redirect("Booking.aspx");
-           
         }
         else
         {
@@ -104,12 +128,6 @@ public partial class Karyawan_Booking : System.Web.UI.Page
             return builder.ToString().ToLower();
         return builder.ToString();
     }
-
-    protected void ddlJenisE_TextChanged(object sender, EventArgs e)
-    {
-
-    }
-
 
 
     protected void gridBooking_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -167,5 +185,46 @@ public partial class Karyawan_Booking : System.Web.UI.Page
     protected void gridBooking_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
 
+    }
+
+    protected void txtTanggal_TextChanged(object sender, EventArgs e)
+    {
+        generateid();
+    }
+
+    protected string generateid()
+    {
+        long hitung;
+        DateTime d = Convert.ToDateTime(txtantriandummy.Text);
+        string strdate = d.ToString("yyyyMMdd");
+        //txtantrian.Text = txtTanggal.Text;
+
+        SqlCommand com = new SqlCommand();
+        com.Connection = conn;
+        conn.Open();
+        com.CommandText = "[sp_SelectLastantrian]";
+        com.CommandType = CommandType.StoredProcedure;
+        com.Parameters.AddWithValue("@strdate", strdate);
+        dr = com.ExecuteReader();
+        dr.Read();
+        if (dr.HasRows)
+        {
+            if (dr[0].ToString().Substring(0, 8) == strdate)
+            {
+                hitung = Convert.ToInt64(dr[0].ToString()) + 1;
+                string joinstr = "0000" + hitung;
+                txtantrian.Text = joinstr.Substring(joinstr.Length - 4, 4);
+            }
+            else
+            {
+                txtantrian.Text = "0001";
+            }
+        }
+        else
+        {
+            txtantrian.Text = "0001";
+        }
+        conn.Close();
+        return txtantrian.Text;
     }
 }
