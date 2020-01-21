@@ -129,18 +129,7 @@
                        <asp:SqlDataSource ID="dsJenis" runat="server" ConnectionString="<%$ ConnectionStrings:Default %>" SelectCommand="select ID_SP,nama_Jenis from jenis_Dokter where [status] =1"></asp:SqlDataSource>
                   </div>
                 </div>  
-                    
-<%--                 <div class="row form-group">
-                 <div class="col-md-3">
-                  <label for="jenis">Jadwal Kerja</label>
-                </div>
-                 <div class="col-md-5">
-                  <asp:DropDownList ID="ddlJadwal" runat="server" CssClass="form-control" DataSourceID="dsJadwal" DataTextField="hari_Kerja" DataValueField="ID_Jadwal">
-                  </asp:DropDownList>
-                       <asp:SqlDataSource ID="dsJadwal" runat="server" ConnectionString="<%$ ConnectionStrings:Default %>" SelectCommand="select ID_Jadwal,hari_Kerja from jadwal_Dokter where [status] =1"></asp:SqlDataSource>
-                  </div>
-                </div>   --%>
-                         
+                                            
                 <div class="form-group row align-items-center">
                 <div class="col-md-3">
                  <label class="col-sm-3 col-form-label text-label">Foto</label>

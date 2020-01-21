@@ -210,6 +210,13 @@
             <asp:TextBox ID="hargaJual" runat="server"></asp:TextBox>
         </div></div>
         
+         <div class="row form-group">
+         <div class="col-md-5">
+        <asp:label style="margin-left:20px" runat="server" class="col-sm-3 col-form-label text-label" Visible="false">Harga</asp:Label>
+        </div>
+        <div class="col-md-5">
+            <asp:TextBox ID="harga" runat="server" Visible="false"></asp:TextBox>
+        </div></div>
 
          <div class="row form-group">
          <div class="col-md-5">

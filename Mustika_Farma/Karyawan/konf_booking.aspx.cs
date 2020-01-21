@@ -16,23 +16,55 @@ public partial class Karyawan_konf_booking : System.Web.UI.Page
     private const string Descending = " DESC";
     protected void Page_Load(object sender, EventArgs e)
     {
+        string strID = generateIDTrans();
+        lblIDTrans.Text = "ID Transaksi " + strID;
         if (!IsPostBack)
         {
             tampilanBooking();
             loadData();
             tampilRiwayat();
+            AddNewRow();
             secObat.Visible = false;
             secKeranjang.Visible = false;
             secAddRiwayat.Visible = false;
-            secEditRiwayat.Visible = false;
+            //secEditRiwayat.Visible = false;
             secViewRiwayat.Visible = false;
             Section1.Visible = false;
+            loadData();
 
-           
         }
         loadIDPasien();
+        //loadData();
     }
 
+
+    private void AddNewRow()
+    {
+        DataTable dt = new DataTable();
+        DataRow dr = null;
+
+        dt.Columns.Add("namaObat");
+        dt.Columns.Add("Satuan");
+        dt.Columns.Add("jumlah");
+        dt.Columns.Add("Harga");
+        dt.Columns.Add("IDObat");
+
+
+        dr = dt.NewRow();
+
+        dr["namaObat"] = string.Empty;
+        dr["Satuan"] = string.Empty;
+        dr["jumlah"] = string.Empty;
+        dr["Harga"] = string.Empty;
+        dr["IDObat"] = string.Empty;
+
+
+        dt.Rows.Add(dr);
+
+        ViewState["currentTable"] = dt;
+        grdKeranjang.DataSource = dt;
+        grdKeranjang.DataBind();
+    }
     private void loadIDPasien()
     {
 
@@ -48,6 +80,8 @@ public partial class Karyawan_konf_booking : System.Web.UI.Page
         {
             lblIDPasien.Text = myReader["Nama"].ToString();
             labelIDUSer.Text = myReader["IDUser"].ToString();
+            lblKaryawan.Text= myReader["IDUser"].ToString();
+
 
         }
 
@@ -61,7 +95,7 @@ public partial class Karyawan_konf_booking : System.Web.UI.Page
         com.CommandText = "sp_SelectRiwayat";
         com.CommandType = CommandType.StoredProcedure;
         com.Parameters.AddWithValue("@nama", txtCariRiwayat.Text);
-        //masih diakalin
+        
         com.Parameters.AddWithValue("@dokter", Convert.ToInt32(Session["creaby"]));
 
         SqlDataAdapter adap = new SqlDataAdapter(com);
@@ -71,7 +105,7 @@ public partial class Karyawan_konf_booking : System.Web.UI.Page
         return ds;
     }
 
-    private void tampilanBooking()
+    private DataSet tampilanBooking()
     {
         SqlCommand com = new SqlCommand();
         com.Connection = conn;
@@ -83,24 +117,28 @@ public partial class Karyawan_konf_booking : System.Web.UI.Page
         adapt.Fill(ds);
         gridBooking.DataSource = ds;
         gridBooking.DataBind();
-
+        return ds;
     }
 
-    private void loadData()
+    
+
+    private DataSet loadData()
     {
-        string mainconn = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
-        SqlConnection sqlconn = new SqlConnection(mainconn);
-        string sqlquery = "select IDObat,namaObat,IDJenis,JumlahObat,Satuan,Keterangan,convert(varchar,Harga) AS 'Harga' from obat where obat.status=1";
-        SqlCommand com = new SqlCommand(sqlquery, sqlconn);
-        sqlconn.Open();
-        gridObat.DataSource = com.ExecuteReader();
+        SqlCommand com = new SqlCommand();
+        com.Connection = conn;
+        com.CommandText = "[sp_SelectJual]";
+        com.CommandType = CommandType.StoredProcedure;
+        com.Parameters.AddWithValue("@namaObat", txtCariObat.Text);
+
+        SqlDataAdapter adap = new SqlDataAdapter(com);
+        adap.Fill(ds);
+        gridObat.DataSource = ds;
         gridObat.DataBind();
-        sqlconn.Close();
+        return ds;
 
-        string strID = generateIDTrans();
-        lblIDTrans.Text = "ID Transaksi " + strID;
+       
     }
-
+   
 
     protected void gridObat_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
@@ -109,7 +147,107 @@ public partial class Karyawan_konf_booking : System.Web.UI.Page
 
     protected void gridObat_RowCommand(object sender, GridViewCommandEventArgs e)
     {
+        if (e.CommandName == "cmEdit")
+        {
+            string Name = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[1].Text;
+            string satuan = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[6].Text;            
+            string jumlah = ((TextBox)gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[5].FindControl("jumlahBeli")).Text;
+            string harga = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[3].Text;
+            string IDObat = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[7].Text;
 
+            int rowIndex = 0;
+            if (ViewState["currentTable"] != null)
+            {
+                DataTable dtr = (DataTable)ViewState["currentTable"];
+                DataRow drr = null;
+                if (dtr.Rows.Count > 0)
+                {
+                    for (int i = 1; i <= dtr.Rows.Count; i++)
+                    {
+                        Label box1 = (Label)grdKeranjang.Rows[rowIndex].Cells[1].FindControl("namaObat");
+                        Label box2 = (Label)grdKeranjang.Rows[rowIndex].Cells[2].FindControl("Satuan");
+                        Label box3 = (Label)grdKeranjang.Rows[rowIndex].Cells[3].FindControl("jumlah");
+                        Label box4 = (Label)grdKeranjang.Rows[rowIndex].Cells[4].FindControl("Harga");
+                        Label box5 = (Label)grdKeranjang.Rows[rowIndex].Cells[5].FindControl("IDObat");
+
+                        drr = dtr.NewRow();
+
+                        dtr.Rows[i - 1]["namaObat"] = box1.Text;
+                        dtr.Rows[i - 1]["Satuan"] = box2.Text;
+                        dtr.Rows[i - 1]["jumlah"] = box3.Text;
+                        dtr.Rows[i - 1]["Harga"] = box4.Text;
+                        dtr.Rows[i - 1]["IDObat"] = box5.Text;
+
+                        rowIndex++;
+                    }
+                    dtr.Rows.Add(drr);
+                    ViewState["currentTable"] = dtr;
+
+                    grdKeranjang.DataSource = dtr;
+                    grdKeranjang.DataBind();
+                }
+                else
+                {
+
+                }
+            }
+
+            rowIndex = 0;
+            if (ViewState["currentTable"] != null)
+            {
+                DataTable dt = (DataTable)ViewState["currentTable"];
+                int row = dt.Rows.Count;
+                double valuefinal = 0;
+                if (row > 0)
+                {
+                    for (int i = 0; i < row; i++)
+                    {
+                        Label box1 = (Label)grdKeranjang.Rows[rowIndex].Cells[1].FindControl("namaObat");
+                        Label box2 = (Label)grdKeranjang.Rows[rowIndex].Cells[2].FindControl("Satuan");
+                        Label box3 = (Label)grdKeranjang.Rows[rowIndex].Cells[3].FindControl("jumlah");
+                        Label box4 = (Label)grdKeranjang.Rows[rowIndex].Cells[4].FindControl("Harga");
+                        Label box5 = (Label)grdKeranjang.Rows[rowIndex].Cells[4].FindControl("IDObat");
+
+                        if (i == row - 2)
+                        {
+                            String id = gridObat.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
+                            lblIDObat.Text = id;
+
+                            double hargatot = Convert.ToDouble(harga) * Convert.ToDouble(jumlah);
+
+                            box1.Text = Name;
+                            box2.Text = satuan;
+                            box3.Text = jumlah.ToString();
+                            box4.Text = Convert.ToString(hargatot);
+                            box5.Text = IDObat;
+                            valuefinal += hargatot;
+
+                            lblJumlahPembelian.Text = "TOTAL PEMBAYARAN RP " + valuefinal; //Convert.ToString(valuefinal);
+                            lblTotalHarga.Text = Convert.ToString(valuefinal);
+                        }
+                        else if (i == row - 1)
+                        {
+                            box1.Text = dt.Rows[i]["namaObat"].ToString();
+                            box2.Text = dt.Rows[i]["Satuan"].ToString();
+                            box3.Text = dt.Rows[i]["jumlah"].ToString();
+                            box4.Text = dt.Rows[i]["Harga"].ToString();
+                            box5.Text = dt.Rows[i]["IDObat"].ToString();
+                        }
+                        else
+                        {
+                            box1.Text = dt.Rows[i]["namaObat"].ToString();
+                            box2.Text = dt.Rows[i]["Satuan"].ToString();
+                            box3.Text = dt.Rows[i]["jumlah"].ToString();
+                            box4.Text = dt.Rows[i]["Harga"].ToString();
+                            box5.Text = dt.Rows[i]["IDObat"].ToString();
+
+                            valuefinal += Convert.ToDouble(box4.Text);
+                        }
+                        rowIndex++;
+                    }
+                }
+            }
+        }
     }
 
     protected void gridObat_Sorting(object sender, GridViewSortEventArgs e)
@@ -134,6 +272,7 @@ public partial class Karyawan_konf_booking : System.Web.UI.Page
 
     protected void keranjang_Click(object sender, EventArgs e)
     {
+
         decimal valuefinal = 0;
         DataTable dt = new DataTable();
         dt.Columns.Add("namaObat");
@@ -141,6 +280,7 @@ public partial class Karyawan_konf_booking : System.Web.UI.Page
         dt.Columns.Add("jumlahBeli");
         dt.Columns.Add("harga");
         dt.Columns.Add("IDObat");
+
 
         foreach (GridViewRow grow in gridObat.Rows)
         {
@@ -150,21 +290,19 @@ public partial class Karyawan_konf_booking : System.Web.UI.Page
                 string Name = (grow.FindControl("labNama") as Label).Text;
                 string satuan = (grow.FindControl("labSat") as Label).Text;
                 string jumlah = (grow.FindControl("jumlahBeli") as TextBox).Text;
-                string harga = (grow.FindControl("labHarga") as Label).Text;
+                string harga = (grow.FindControl("Harga") as Label).Text;
                 string IDObat = (grow.FindControl("labIDObat") as Label).Text;
 
-                decimal hargatot = Convert.ToDecimal(harga) * Convert.ToInt16(jumlah);
+                decimal hargatot = Convert.ToDecimal(harga) * Convert.ToDecimal(jumlah);
                 dt.Rows.Add(Name, satuan, jumlah, hargatot, IDObat);
                 valuefinal += hargatot;
 
-                lblTotal.Text = Convert.ToString(valuefinal);
                 lblJumlahPembelian.Text = "TOTAL PEMBAYARAN RP " + Convert.ToString(valuefinal);
+                lblTotalHarga.Text = Convert.ToString(valuefinal);
             }
 
             grdKeranjang.DataSource = dt;
             grdKeranjang.DataBind();
-
-
         }
         Response.Write("<script>alert('Data berhasil dimasukkan kekeranjang');</script>");
 
@@ -178,37 +316,37 @@ public partial class Karyawan_konf_booking : System.Web.UI.Page
 
     protected void btnProses_Click(object sender, EventArgs e)
     {
-
         try
         {
-
             string strID = generateIDTrans();
             DateTime tanggal = DateTime.Now;
             SqlCommand insert = new SqlCommand("[sp_InputTransaksi]", conn);
             insert.CommandType = CommandType.StoredProcedure;
 
             insert.Parameters.AddWithValue("@IDTransaksi", strID);
-            insert.Parameters.AddWithValue("@IDKaryawan", Session["creaby"]);
+            insert.Parameters.AddWithValue("@IDKaryawan", Convert.ToInt16(lblKaryawan.Text)); //customer
             insert.Parameters.AddWithValue("@Tanggal", tanggal);
             insert.Parameters.AddWithValue("@FotoResep", DBNull.Value);
-            insert.Parameters.AddWithValue("@totalBayar", Convert.ToDecimal(lblTotal.Text));
+            insert.Parameters.AddWithValue("@totalBayar", Convert.ToDecimal(lblTotalHarga.Text));
             insert.Parameters.AddWithValue("@status", 2);
+            insert.Parameters.AddWithValue("@ID_Dokter", Convert.ToInt16(Session["creaby"]));
 
             conn.Open();
             insert.ExecuteNonQuery();
             conn.Close();
 
-            foreach (GridViewRow grow in grdKeranjang.Rows)
+            DataTable dt = (DataTable)ViewState["currentTable"];
+            int row = dt.Rows.Count;
+            for (int i = 0; i < row - 1; i++)
             {
-
                 SqlCommand ins = new SqlCommand("[sp_InputDetailTransaksi]", conn);
                 ins.CommandType = CommandType.StoredProcedure;
 
                 ins.Parameters.AddWithValue("IDTransaksi", strID);
-                ins.Parameters.AddWithValue("jumlah", (grow.FindControl("labJumlah") as Label).Text);
-                ins.Parameters.AddWithValue("subTotal", (grow.FindControl("labHarga") as Label).Text);
-                ins.Parameters.AddWithValue("IDObat", (grow.FindControl("labIDObat") as Label).Text);
-
+                ins.Parameters.AddWithValue("jumlah", dt.Rows[i]["jumlah"]);
+                ins.Parameters.AddWithValue("subTotal", dt.Rows[i]["harga"]);
+                ins.Parameters.AddWithValue("IDObat", dt.Rows[i]["IDObat"]);
+                i++;
                 conn.Open();
                 ins.ExecuteNonQuery();
                 conn.Close();
@@ -225,51 +363,51 @@ public partial class Karyawan_konf_booking : System.Web.UI.Page
     protected void ddlStatusView_TextChanged(object sender, EventArgs e)
     {
 
-        if (ddlStatusView.Text.Equals("2"))
-        {
-            SqlCommand com = new SqlCommand();
-            com.Connection = conn;
-            com.CommandText = "[sp_SelectBooking]";
-            com.CommandType = CommandType.StoredProcedure;
-            com.Parameters.AddWithValue("@IDBooking", txtSearch.Text);
-            com.Parameters.AddWithValue("@ID_Dokter", Session["creaby"]);
-            SqlDataAdapter adapt = new SqlDataAdapter(com);
-            adapt.Fill(ds);
-            gridBooking.DataSource = ds;
-            gridBooking.DataBind();
-        }
-        else if (ddlStatusView.Text.Equals("1"))
-        {
-            SqlCommand com = new SqlCommand();
-            com.Connection = conn;
-            com.CommandText = "[sp_SelectBookingAktif]";
-            com.CommandType = CommandType.StoredProcedure;
-            com.Parameters.AddWithValue("@IDBooking", txtSearch.Text);
-            com.Parameters.AddWithValue("@ID_Dokter", Session["creaby"]);
-            SqlDataAdapter adapt = new SqlDataAdapter(com);
-            adapt.Fill(ds);
-            gridBooking.DataSource = ds;
-            gridBooking.DataBind();
-        }
-        else if (ddlStatusView.Text.Equals("0"))
-        {
-            SqlCommand com = new SqlCommand();
-            com.Connection = conn;
-            com.CommandText = "[sp_SelectBookingNA]";
-            com.CommandType = CommandType.StoredProcedure;
-            com.Parameters.AddWithValue("@IDBooking", txtSearch.Text);
-            com.Parameters.AddWithValue("@ID_Dokter", Session["creaby"]);
-            SqlDataAdapter adapt = new SqlDataAdapter(com);
-            adapt.Fill(ds);
-            gridBooking.DataSource = ds;
-            gridBooking.DataBind();
-        }
+        //if (ddlStatusView.Text.Equals("2"))
+        //{
+        //    SqlCommand com = new SqlCommand();
+        //    com.Connection = conn;
+        //    com.CommandText = "[sp_SelectBooking]";
+        //    com.CommandType = CommandType.StoredProcedure;
+        //    com.Parameters.AddWithValue("@IDBooking", txtSearch.Text);
+        //    com.Parameters.AddWithValue("@ID_Dokter", Session["creaby"]);
+        //    SqlDataAdapter adapt = new SqlDataAdapter(com);
+        //    adapt.Fill(ds);
+        //    gridBooking.DataSource = ds;
+        //    gridBooking.DataBind();
+        //}
+        //else if (ddlStatusView.Text.Equals("1"))
+        //{
+        //    SqlCommand com = new SqlCommand();
+        //    com.Connection = conn;
+        //    com.CommandText = "[sp_SelectBookingAktif]";
+        //    com.CommandType = CommandType.StoredProcedure;
+        //    com.Parameters.AddWithValue("@IDBooking", txtSearch.Text);
+        //    com.Parameters.AddWithValue("@ID_Dokter", Session["creaby"]);
+        //    SqlDataAdapter adapt = new SqlDataAdapter(com);
+        //    adapt.Fill(ds);
+        //    gridBooking.DataSource = ds;
+        //    gridBooking.DataBind();
+        //}
+        //else if (ddlStatusView.Text.Equals("0"))
+        //{
+        //    SqlCommand com = new SqlCommand();
+        //    com.Connection = conn;
+        //    com.CommandText = "[sp_SelectBookingNA]";
+        //    com.CommandType = CommandType.StoredProcedure;
+        //    com.Parameters.AddWithValue("@IDBooking", txtSearch.Text);
+        //    com.Parameters.AddWithValue("@ID_Dokter", Session["creaby"]);
+        //    SqlDataAdapter adapt = new SqlDataAdapter(com);
+        //    adapt.Fill(ds);
+        //    gridBooking.DataSource = ds;
+        //    gridBooking.DataBind();
+        //}
     }
 
 
     protected void btnSearch_Click(object sender, EventArgs e)
     {
-
+        tampilanBooking();
     }
 
     protected void gridBooking_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -313,32 +451,36 @@ public partial class Karyawan_konf_booking : System.Web.UI.Page
         string id = gridBooking.DataKeys[e.RowIndex].Value.ToString();
         com.CommandText = "[sp_DeleteBooking]";
 
-       
         com.Parameters.AddWithValue("@IDBooking", id);
-        com.Parameters.AddWithValue("@status", cells);
+        com.Parameters.AddWithValue("@status", 1);
         com.CommandType = CommandType.StoredProcedure;
 
         conn.Open();
         int result = Convert.ToInt32(com.ExecuteNonQuery());
         conn.Close();
-        if (result > 0)
-        {
-            gridBooking.EditIndex = -1;
-            loadData();
-            secView.Visible = true;
-            secObat.Visible = false;
-            secKeranjang.Visible = false;
-        }
-        else
-        {
-            loadData();
-        }
+
+        Response.Redirect("konf_booking.aspx");
+
 
     }
 
     protected void gridBooking_RowDataBound(object sender, GridViewRowEventArgs e)
     {
-       
+        var linkDelete = (LinkButton)e.Row.FindControl("linkDelete");
+        var linkAktif = (LinkButton)e.Row.FindControl("linkAktif");
+
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            TableCell statusCell = e.Row.Cells[3];
+            if (statusCell.Text == "2")
+            {
+                linkAktif.Visible = false;
+            }
+            else if (statusCell.Text == "1")
+            {
+                linkDelete.Visible = false;
+            }
+        }
     }
 
     protected void btnSaveRiwayat_Click(object sender, EventArgs e)
@@ -372,7 +514,7 @@ public partial class Karyawan_konf_booking : System.Web.UI.Page
             loadData();
 
             secViewRiwayat.Visible = true;
-            secEditRiwayat.Visible = false;
+            //secEditRiwayat.Visible = false;
             secAddRiwayat.Visible = false;
             Response.Write("<script>alert('Data berhasil ditambahkan    ');</script>");
 
@@ -388,47 +530,48 @@ public partial class Karyawan_konf_booking : System.Web.UI.Page
     protected void EditbtnSaveRiwayat_Click(object sender, EventArgs e)
     {
 
-        DateTime CreateDate = DateTime.Now;
-        SqlCommand com = new SqlCommand();
-        com.Connection = conn;
-        com.CommandText = "[sp_UpdateRiwayat]";
-        com.CommandType = CommandType.StoredProcedure;
-        //masih diakal2in
+        //DateTime CreateDate = DateTime.Now;
+        //SqlCommand com = new SqlCommand();
+        //com.Connection = conn;
+        //com.CommandText = "[sp_UpdateRiwayat]";
+        //com.CommandType = CommandType.StoredProcedure;
+        ////masih diakal2in
 
-        com.Parameters.AddWithValue("@IDRiwayat", lblID.Text);
-        com.Parameters.AddWithValue("@ID_Dokter", Session["creaby"]);
-        com.Parameters.AddWithValue("@IDUser", labelIDUSer.Text);
-        com.Parameters.AddWithValue("@berat", txtBeratE.Text);
-        com.Parameters.AddWithValue("@tinggi", txtTinggiE.Text);
-        com.Parameters.AddWithValue("@tensi", txtTensiE.Text);
-        com.Parameters.AddWithValue("@gula", txtGulaE.Text);
-        com.Parameters.AddWithValue("@kolestrol", txtKolestrolE.Text);
-        com.Parameters.AddWithValue("@pesan", txtPesanE.Text);
-        com.Parameters.AddWithValue("@penyakit", txtPenyakitE.Text);
+        //com.Parameters.AddWithValue("@IDRiwayat", lblID.Text);
+        //com.Parameters.AddWithValue("@ID_Dokter", Session["creaby"]);
+        //com.Parameters.AddWithValue("@IDUser", labelIDUSer.Text);
+        //com.Parameters.AddWithValue("@berat", txtBeratE.Text);
+        //com.Parameters.AddWithValue("@tinggi", txtTinggiE.Text);
+        //com.Parameters.AddWithValue("@tensi", txtTensiE.Text);
+        //com.Parameters.AddWithValue("@gula", txtGulaE.Text);
+        //com.Parameters.AddWithValue("@kolestrol", txtKolestrolE.Text);
+        //com.Parameters.AddWithValue("@pesan", txtPesanE.Text);
+        //com.Parameters.AddWithValue("@penyakit", txtPenyakitE.Text);
 
-        conn.Open();
+        //conn.Open();
 
-        int result = Convert.ToInt32(com.ExecuteNonQuery());
-        conn.Close();
-        loadData();
+        //int result = Convert.ToInt32(com.ExecuteNonQuery());
+        //conn.Close();
+        //loadData();
 
-        secViewRiwayat.Visible = true;
-        secEditRiwayat.Visible = false;
-        secAddRiwayat.Visible = false;
+        //secViewRiwayat.Visible = true;
+        //secEditRiwayat.Visible = false;
+        //secAddRiwayat.Visible = false;
     }
 
     protected void EditbtnCancelRiwayat_Click(object sender, EventArgs e)
     {
         secViewRiwayat.Visible = true;
-        secEditRiwayat.Visible = false;
+        //secEditRiwayat.Visible = false;
         secAddRiwayat.Visible = false;
     }
 
     protected void btntambahRiwayat_Click(object sender, EventArgs e)
     {
         secAddRiwayat.Visible = true;
-        secEditRiwayat.Visible = false;
+        //secEditRiwayat.Visible = false;
         secViewRiwayat.Visible = false;
+        
 
     }
 
@@ -447,19 +590,19 @@ public partial class Karyawan_konf_booking : System.Web.UI.Page
     {
         if (e.CommandName == "cmEdit")
         {
-            String id = gridRiwayat.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
-            lblID.Text = id;    
-            txtPenyakitE.Text = gridRiwayat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[2].Text;
-            txtBeratE.Text = gridRiwayat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[6].Text;
-            txtTinggiE.Text = gridRiwayat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[7].Text;
-            txtTensiE.Text = gridRiwayat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[8].Text;
-            txtPesanE.Text = gridRiwayat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[3].Text;
-            txtGulaE.Text = gridRiwayat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[9].Text;
-            txtKolestrolE.Text = gridRiwayat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[10].Text;
+            //String id = gridRiwayat.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
+            //lblID.Text = id;    
+            //txtPenyakitE.Text = gridRiwayat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[2].Text;
+            //txtBeratE.Text = gridRiwayat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[6].Text;
+            //txtTinggiE.Text = gridRiwayat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[7].Text;
+            //txtTensiE.Text = gridRiwayat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[8].Text;
+            //txtPesanE.Text = gridRiwayat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[3].Text;
+            //txtGulaE.Text = gridRiwayat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[9].Text;
+            //txtKolestrolE.Text = gridRiwayat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[10].Text;
 
-            secAddRiwayat.Visible = false;
-            secEditRiwayat.Visible = true;
-            secViewRiwayat.Visible = false;
+            //secAddRiwayat.Visible = false;
+            //secEditRiwayat.Visible = true;
+            //secViewRiwayat.Visible = false;
         }
     }
 
@@ -503,7 +646,7 @@ public partial class Karyawan_konf_booking : System.Web.UI.Page
             gridRiwayat.EditIndex = -1;
             loadData();
             secViewRiwayat.Visible = true;
-            secEditRiwayat.Visible = false;
+            //secEditRiwayat.Visible = false;
             secAddRiwayat.Visible = false;
         }
         else
@@ -602,5 +745,35 @@ public partial class Karyawan_konf_booking : System.Web.UI.Page
         adapt.Fill(ds);
         gridBooking.DataSource = ds;
         gridBooking.DataBind();
+    }
+
+    protected void lnkCariObat_Click(object sender, EventArgs e)
+    {
+        loadData();
+    }
+
+    protected void btnSelesai_Click(object sender, EventArgs e)
+    {
+        string id = lblIDqu.Text;
+        SqlCommand com = new SqlCommand();
+        com.Connection = conn;
+        com.CommandText = "[sp_DeleteBooking]";
+
+        com.Parameters.AddWithValue("@IDBooking", id);
+        com.Parameters.AddWithValue("@status", 1);
+        com.CommandType = CommandType.StoredProcedure;
+
+        conn.Open();
+        int result = Convert.ToInt32(com.ExecuteNonQuery());
+        conn.Close();
+
+        if (result > 0)
+        {
+            Response.Write("<script>alert('Data berhasil dimasukkan kekeranjang');</script>");
+        }
+        else
+        {
+            Response.Write("<script>alert('Data Gagal dimasukkan kekeranjang');</script>");
+        }
     }
 }

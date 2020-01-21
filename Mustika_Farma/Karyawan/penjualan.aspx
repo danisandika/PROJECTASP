@@ -139,7 +139,7 @@
                         </asp:TemplateField>
 
                          <asp:TemplateField HeaderText="Nama Obat" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
-                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="15%"  CssClass="table table-bordered table-striped" />
+                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="25%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
                                 <asp:Label ID="namaObat" runat="server" Text='<%#Bind("namaObat") %>'></asp:Label>
                             </ItemTemplate>
@@ -153,14 +153,14 @@
                         </asp:TemplateField> 
 
                         <asp:TemplateField HeaderText="Jumlah" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Right">
-                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="5%"  CssClass="table table-bordered table-striped" />
+                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="20%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
                                 <asp:Label ID="jumlah" runat="server" Text='<%#Eval("jumlah") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField> 
 
                         <asp:TemplateField HeaderText="Harga Total" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Right">
-                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="5%"  CssClass="table table-bordered table-striped" />
+                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="20%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
                                 <asp:Label ID="harga" runat="server" Text='<%#Eval("harga") %>'></asp:Label>
                             </ItemTemplate>
@@ -176,7 +176,7 @@
                 </asp:GridView>
 
                <asp:Label ID="lblJumlahPembelian" runat="server" Text='<%#Eval("valuefinal") %>'></asp:Label>
-              <asp:Label ID="lblTotalHarga" runat="server" Text='<%#Eval("valuefinal") %>' Visible="false"></asp:Label>
+              <asp:Label ID="lblTotalHarga" runat="server" Text='<%#Eval("valuefinal") %>'></asp:Label>
 
 
               </div>

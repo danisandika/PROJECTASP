@@ -41,7 +41,7 @@
             <%--<li><a href="#service">Transaksi Penjualan</a></li>--%>
             <li><a href="Booking.aspx">Booking Dokter</a></li>
             <li class="active"><a href="Riwayat.aspx">Riwayat</a></li>
-			<a href="../Login.aspx" class="btn btn-skin btn-lg">Logout</a>
+              <asp:LinkButton ID="lnkLogOut" OnClick="lnkLogOut_Click" runat="server" class="btn btn-skin btn-lg">LogOut</asp:LinkButton>
 
             <%--<li><a href="#pricing">Antrian</a></li>--%>
             

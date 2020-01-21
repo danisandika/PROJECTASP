@@ -21,14 +21,28 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
+               <div class="card-header">
                 <h3 class="card-title">Table Obat</h3>
+                   <div class="card-tools">
+                    <div class="input-group input-group-sm" style="width: 150px;">
+                    <div class="row form-group">
+                    <div class="col-md-8">
+                    <asp:TextBox Width="350%" id="txtSearch" CssClass="form-control float-right" runat="server"/>
+                    </div>
+                     <div class="col-md-3">
+                      <asp:LinkButton BackColor="SkyBlue" CssClass="col-lg-8" runat="server" ID="btnSearch" OnClick="btnSearch_Click">
+                          <span class="fa fa-search"></span></asp:LinkButton>
+                  </div>
+                  </div>
+                </div>
+                </div>
               </div>
 
                 <div class="card-body table-responsive p-0 col-12">
                 
                 <asp:GridView ID="gridObat" runat="server"
                      CssClass="table table-striped table-bordered table-hover"
-                    AllowPaging="false"
+                    AllowPaging="true"
                     AllowSorting="true" AutoGenerateColumns="false" DataKeyNames="IDObat" EmptyDataText="Tidak Ada Data" 
                     PageSize="5"  ShowHeaderWhenEmpty="true" OnPageIndexChanging="gridObat_PageIndexChanging"
                     OnRowCommand="gridObat_RowCommand" OnSorting="gridObat_Sorting" OnSelectedIndexChanged="gridObat_SelectedIndexChanged"
