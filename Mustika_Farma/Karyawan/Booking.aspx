@@ -153,7 +153,7 @@
                   </div>
                 </div>
         <div class="row">
-            <asp:Button ID="btnSaveRiwayat" CssClass="btn btn-primary" runat="server" Text="Tambahkab" OnClick="btnSaveRiwayat_Click"/>
+            <asp:Button ID="btnSaveRiwayat" CssClass="btn btn-primary" runat="server" Text="Tambahkan" OnClick="btnSaveRiwayat_Click"/>
         </div>
             </div>                                           
             </div>
@@ -178,14 +178,14 @@
                   <br />
 
                 <div class="input-group-append">
-                    <asp:TextBox id="txtSearch" CssClass="form-control float-right" runat="server" Width="20%"/>                    
-                      <asp:LinkButton CssClass="btn btn-default" runat="server" ID="btnSearch" OnClick="btnSearch_Click"><i class="fas fa-search"></i></asp:LinkButton>
+                    <asp:TextBox id="txtSearchBooking" CssClass="form-control float-right" runat="server" Width="20%"/>                    
+                      <asp:LinkButton CssClass="btn btn-default" runat="server" ID="btnSearch" OnClick="btnSearch_Click1"><i class="fas fa-search"></i></asp:LinkButton>
                     </div>
                   </div>
                 </div>
               </div>
                 <div class="card-body table-responsive p-0 col-12">
-                
+                 <asp:TextBox ID="idUserBooking" runat="server" style="display:none;"/>                 
                 <asp:GridView ID="gridBooking" runat="server" CssClass="table table-hover"
                     AllowPaging="true" 
                     AllowSorting="true" AutoGenerateColumns="false" DataKeyNames="IDBooking" EmptyDataText="Tidak Ada Data" 
@@ -213,7 +213,7 @@
                          <asp:BoundField DataField="NamaU"  HeaderStyle-CssClass="table-bordered" HeaderText="Nama Customer"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="NamaU" >
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="20%"  CssClass="table table-bordered table-striped" />
                         </asp:BoundField>
-                       
+                        
                         <asp:BoundField DataField="IDUser" ItemStyle-CssClass="hiddencol" HeaderText="Username" HeaderStyle-CssClass="hiddencol" NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="username" />
                         <asp:BoundField DataField="ID_Dokter" ItemStyle-CssClass="hiddencol" HeaderText="Password" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="password" />
                         <asp:TemplateField HeaderText="Aksi"  HeaderStyle-CssClass="table-bordered" ItemStyle-HorizontalAlign="Center">
@@ -252,10 +252,10 @@
                   <div class="input-group input-group-sm" style="width: 150px;">
                 <div class="row form-group">
                     <div class="col-md-8">
-                    <asp:TextBox Width="350%" id="TextBox1" CssClass="form-control float-right" runat="server"/>
+                    <asp:TextBox Width="350%" id="txtSearch" CssClass="form-control float-right" runat="server"/>
                     </div>
                      <div class="col-md-3">
-                      <asp:LinkButton BackColor="SkyBlue" CssClass="col-lg-8" runat="server" ID="LinkButton1" OnClick="btnSearch_Click">
+                      <asp:LinkButton BackColor="SkyBlue" CssClass="col-lg-8" runat="server" ID="cariObat" OnClick="cariObat_Click">
                           <span class="fa fa-search"></span></asp:LinkButton>
                   </div>
                   </div>

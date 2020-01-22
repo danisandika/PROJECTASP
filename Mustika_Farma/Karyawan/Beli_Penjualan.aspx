@@ -256,6 +256,8 @@
                     </div>
                     <div class="col-md-8">
                     <asp:TextBox ID="txtKembalian" CssClass="form-control" runat="server" ClientIDMode="Static" OnClick="ComputeCosts();" />
+                    <asp:TextBox ID="txtKembaliDuit" CssClass="form-control" runat="server" Visible="false" />
+
                   </div>
                 </div>
 

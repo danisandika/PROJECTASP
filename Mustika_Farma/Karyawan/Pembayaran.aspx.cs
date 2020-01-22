@@ -74,12 +74,40 @@ public partial class Karyawan_Pembayaran : System.Web.UI.Page
 
     protected void gridKonf_Sorting(object sender, GridViewSortEventArgs e)
     {
+        string sortExpression = e.SortExpression;
 
+        if (GridViewSortDirection == SortDirection.Ascending)
+        {
+            GridViewSortDirection = SortDirection.Descending;
+            sortGridView(sortExpression, Descending);
+        }
+        else
+        {
+            GridViewSortDirection = SortDirection.Ascending;
+            sortGridView(sortExpression, Ascending);
+        }
     }
 
     protected void gridKonf_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
+       
+    }
 
+   
+
+    public SortDirection GridViewSortDirection
+    {
+        get
+        {
+            if (ViewState["sortDirection"] == null)
+                ViewState["sortDirection"] = SortDirection.Ascending;
+            return (SortDirection)ViewState["sortDirection"];
+        }
+
+        set
+        {
+            ViewState["sortDirection"] = value;
+        }
     }
 
     protected void gridKonf_SelectedIndexChanged(object sender, EventArgs e)

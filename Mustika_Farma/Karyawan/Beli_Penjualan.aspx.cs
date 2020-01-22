@@ -140,112 +140,120 @@ public partial class Karyawan_Beli_Penjualan : System.Web.UI.Page
         if (e.CommandName == "cmEdit")
         {
             string Name = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[1].Text;
+            string stok = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[2].Text;
             string satuan = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[5].Text;
             string jumlah = ((TextBox)gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[4].FindControl("txtJumlahBeli")).Text;
             string harga = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[6].Text;
             string IDObat = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[7].Text;
 
-            int rowIndex = 0;
-            if (ViewState["currentTable"] != null)
+            if (jumlah=="")
             {
-                DataTable dtr = (DataTable)ViewState["currentTable"];
-                DataRow drr = null;
-                if (dtr.Rows.Count > 0)
-                {
-                    for (int i = 1; i <= dtr.Rows.Count; i++)
-                    {
-                        Label box1 = (Label)grdKeranjang.Rows[rowIndex].Cells[1].FindControl("namaObat");
-                        Label box2 = (Label)grdKeranjang.Rows[rowIndex].Cells[2].FindControl("Satuan");
-                        Label box3 = (Label)grdKeranjang.Rows[rowIndex].Cells[3].FindControl("jumlah");
-                        Label box4 = (Label)grdKeranjang.Rows[rowIndex].Cells[4].FindControl("Harga");
-                        Label box5 = (Label)grdKeranjang.Rows[rowIndex].Cells[5].FindControl("IDObat");
-
-                        drr = dtr.NewRow();
-
-                        dtr.Rows[i - 1]["namaObat"] = box1.Text;
-                        dtr.Rows[i - 1]["Satuan"] = box2.Text;
-                        dtr.Rows[i - 1]["jumlah"] = box3.Text;
-                        dtr.Rows[i - 1]["Harga"] = box4.Text;
-                        dtr.Rows[i - 1]["IDObat"] = box5.Text;
-
-                        rowIndex++;
-                    }
-                    dtr.Rows.Add(drr);
-                    //ViewState["currentTable"] = dtr;
-
-                    grdKeranjang.DataSource = dtr;
-                    grdKeranjang.DataBind();
-                }
-                else
-                {
-
-                }
+                Response.Write("<script>alert('Tambahkan stok');</script>");
             }
-
-            rowIndex = 0;
-            if (ViewState["currentTable"] != null)
+            else
             {
-                DataTable dt = (DataTable)ViewState["currentTable"];
-                DataTable dt2 = (DataTable)ViewState["currentTable2"];
-                DataRow dr2 = null;
-                int row = dt.Rows.Count;
-                double valuefinal = 0;
-                if (row > 0)
-                {
-                    for (int i = 0; i < row; i++)
+                    int rowIndex = 0;
+                    if (ViewState["currentTable"] != null)
                     {
-                        Label box1 = (Label)grdKeranjang.Rows[rowIndex].Cells[1].FindControl("namaObat");
-                        Label box2 = (Label)grdKeranjang.Rows[rowIndex].Cells[2].FindControl("Satuan");
-                        Label box3 = (Label)grdKeranjang.Rows[rowIndex].Cells[3].FindControl("jumlah");
-                        Label box4 = (Label)grdKeranjang.Rows[rowIndex].Cells[4].FindControl("Harga");
-                        Label box5 = (Label)grdKeranjang.Rows[rowIndex].Cells[4].FindControl("IDObat");
-
-                        if (i == row - 2)
+                        DataTable dtr = (DataTable)ViewState["currentTable"];
+                        DataRow drr = null;
+                        if (dtr.Rows.Count > 0)
                         {
-                            String id = gridObat.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
-                            lblID.Text = id;
+                            for (int i = 1; i <= dtr.Rows.Count; i++)
+                            {
+                                Label box1 = (Label)grdKeranjang.Rows[rowIndex].Cells[1].FindControl("namaObat");
+                                Label box2 = (Label)grdKeranjang.Rows[rowIndex].Cells[2].FindControl("Satuan");
+                                Label box3 = (Label)grdKeranjang.Rows[rowIndex].Cells[3].FindControl("jumlah");
+                                Label box4 = (Label)grdKeranjang.Rows[rowIndex].Cells[4].FindControl("Harga");
+                                Label box5 = (Label)grdKeranjang.Rows[rowIndex].Cells[5].FindControl("IDObat");
 
-                            double hargatot = Convert.ToDouble(harga) * Convert.ToDouble(jumlah);
+                                drr = dtr.NewRow();
 
-                            box1.Text = Name;
-                            box2.Text = satuan;
-                            box3.Text = jumlah.ToString();
-                            box4.Text = Convert.ToString(hargatot);
-                            box5.Text = IDObat;
-                            valuefinal += hargatot;
+                                dtr.Rows[i - 1]["namaObat"] = box1.Text;
+                                dtr.Rows[i - 1]["Satuan"] = box2.Text;
+                                dtr.Rows[i - 1]["jumlah"] = box3.Text;
+                                dtr.Rows[i - 1]["Harga"] = box4.Text;
+                                dtr.Rows[i - 1]["IDObat"] = box5.Text;
 
-                            dr2 = dt2.NewRow();
-                            dt2.Rows[i]["namaObat"] = box1.Text;
-                            dt2.Rows[i]["Satuan"] = box2.Text;
-                            dt2.Rows[i]["jumlah"] = box3.Text;
-                            dt2.Rows[i]["Harga"] = box4.Text;
-                            dt2.Rows[i]["IDObat"] = box5.Text;
-                            dt2.Rows.Add(dr2);
-                            ViewState["currentTable2"] = dt2;
+                                rowIndex++;
+                            }
+                            dtr.Rows.Add(drr);
+                            //ViewState["currentTable"] = dtr;
 
-                            lblJumlahPembelian.Text = "TOTAL PEMBAYARAN RP " + valuefinal; //Convert.ToString(valuefinal);
-                            txtHarga.Text = Convert.ToString(valuefinal);
-                        }
-                        else if (i == row - 1)
-                        {
-                            box1.Text = dt.Rows[i]["namaObat"].ToString();
-                            box2.Text = dt.Rows[i]["Satuan"].ToString();
-                            box3.Text = dt.Rows[i]["jumlah"].ToString();
-                            box4.Text = dt.Rows[i]["Harga"].ToString();
-                            box5.Text = dt.Rows[i]["IDObat"].ToString();
+                            grdKeranjang.DataSource = dtr;
+                            grdKeranjang.DataBind();
                         }
                         else
                         {
-                            box1.Text = dt.Rows[i]["namaObat"].ToString();
-                            box2.Text = dt.Rows[i]["Satuan"].ToString();
-                            box3.Text = dt.Rows[i]["jumlah"].ToString();
-                            box4.Text = dt.Rows[i]["Harga"].ToString();
-                            box5.Text = dt.Rows[i]["IDObat"].ToString();
 
-                            valuefinal += Convert.ToDouble(box4.Text);
                         }
-                        rowIndex++;
                     }
+
+                    rowIndex = 0;
+                    if (ViewState["currentTable"] != null)
+                    {
+                        DataTable dt = (DataTable)ViewState["currentTable"];
+                        DataTable dt2 = (DataTable)ViewState["currentTable2"];
+                        DataRow dr2 = null;
+                        int row = dt.Rows.Count;
+                        double valuefinal = 0;
+                        if (row > 0)
+                        {
+                            for (int i = 0; i < row; i++)
+                            {
+                                Label box1 = (Label)grdKeranjang.Rows[rowIndex].Cells[1].FindControl("namaObat");
+                                Label box2 = (Label)grdKeranjang.Rows[rowIndex].Cells[2].FindControl("Satuan");
+                                Label box3 = (Label)grdKeranjang.Rows[rowIndex].Cells[3].FindControl("jumlah");
+                                Label box4 = (Label)grdKeranjang.Rows[rowIndex].Cells[4].FindControl("Harga");
+                                Label box5 = (Label)grdKeranjang.Rows[rowIndex].Cells[4].FindControl("IDObat");
+
+                                if (i == row - 2)
+                                {
+                                    String id = gridObat.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
+                                    lblID.Text = id;
+
+                                    double hargatot = Convert.ToDouble(harga) * Convert.ToDouble(jumlah);
+
+                                    box1.Text = Name;
+                                    box2.Text = satuan;
+                                    box3.Text = jumlah.ToString();
+                                    box4.Text = Convert.ToString(hargatot);
+                                    box5.Text = IDObat;
+                                    valuefinal += hargatot;
+
+                                    dr2 = dt2.NewRow();
+                                    dt2.Rows[i]["namaObat"] = box1.Text;
+                                    dt2.Rows[i]["Satuan"] = box2.Text;
+                                    dt2.Rows[i]["jumlah"] = box3.Text;
+                                    dt2.Rows[i]["Harga"] = box4.Text;
+                                    dt2.Rows[i]["IDObat"] = box5.Text;
+                                    dt2.Rows.Add(dr2);
+                                    ViewState["currentTable2"] = dt2;
+
+                                    lblJumlahPembelian.Text = "TOTAL PEMBAYARAN RP " + valuefinal; //Convert.ToString(valuefinal);
+                                    txtHarga.Text = Convert.ToString(valuefinal);
+                                }
+                                else if (i == row - 1)
+                                {
+                                    box1.Text = dt.Rows[i]["namaObat"].ToString();
+                                    box2.Text = dt.Rows[i]["Satuan"].ToString();
+                                    box3.Text = dt.Rows[i]["jumlah"].ToString();
+                                    box4.Text = dt.Rows[i]["Harga"].ToString();
+                                    box5.Text = dt.Rows[i]["IDObat"].ToString();
+                                }
+                                else
+                                {
+                                    box1.Text = dt.Rows[i]["namaObat"].ToString();
+                                    box2.Text = dt.Rows[i]["Satuan"].ToString();
+                                    box3.Text = dt.Rows[i]["jumlah"].ToString();
+                                    box4.Text = dt.Rows[i]["Harga"].ToString();
+                                    box5.Text = dt.Rows[i]["IDObat"].ToString();
+
+                                    valuefinal += Convert.ToDouble(box4.Text);
+                                }
+                                rowIndex++;
+                            }
+                        }
                 }
             }
         }
@@ -288,7 +296,8 @@ public partial class Karyawan_Beli_Penjualan : System.Web.UI.Page
     protected string generateIDPembelian()
     {
         string IDPembelian = DateTime.Now.ToString("yyyyMMddhhmmss");
-        return IDPembelian;
+        string strID = "PB" + IDPembelian;
+        return strID;
     }
 
     protected void jumlahBeli_TextChanged(object sender, EventArgs e)
@@ -324,14 +333,20 @@ public partial class Karyawan_Beli_Penjualan : System.Web.UI.Page
 
     protected void btnProses_Click(object sender, EventArgs e)
     {
+        double txtKembaliDuit = Convert.ToDouble(txtBayar.Text) - Convert.ToDouble(txtHarga.Text); ;
 
+        if (txtKembaliDuit < 0)
+        {
+            Response.Write("<script>alert('Uang Anda Tidak Mencukupi');</script>");
+        }
+        else
+        { 
         string strIDPembelian = generateIDPembelian();
         DateTime tanggal = DateTime.Now;
         SqlCommand insert = new SqlCommand("sp_InputPembelian", conn);
         insert.CommandType = CommandType.StoredProcedure;
 
         insert.Parameters.AddWithValue("@IDPembelian", strIDPembelian);
-        //insert.Parameters.AddWithValue("@IDKaryawan", 1);
         insert.Parameters.AddWithValue("@tanggal", tanggal);
         insert.Parameters.AddWithValue("@IDKaryawan", Session["creaby"]);
         insert.Parameters.AddWithValue("@IDSupplier", DDLSupplier.SelectedValue);
@@ -363,7 +378,7 @@ public partial class Karyawan_Beli_Penjualan : System.Web.UI.Page
 
         Response.Write("<script>alert('Pembelian Di proses');</script>");
         Response.Redirect("beli.aspx");
-
+        }
     }
 
     protected void DDLSupplier_TextChanged(object sender, EventArgs e)

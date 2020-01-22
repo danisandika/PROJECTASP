@@ -16,9 +16,10 @@ public partial class Administrator_MasterDokter : System.Web.UI.MasterPage
 
     }
 
-    protected void linkLogOut_Click(object sender, EventArgs e)
+    protected void lnkLogOut_Click(object sender, EventArgs e)
     {
         Session.Clear();
         Session.Abandon();
+        Response.Redirect("../Login.aspx");
     }
 }

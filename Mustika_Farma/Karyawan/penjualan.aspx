@@ -71,7 +71,7 @@
                          <asp:BoundField DataField="namaObat" HeaderStyle-CssClass="table-bordered"  HeaderText="Nama Obat"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Harga" >
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
                         </asp:BoundField>
-
+                        
                          <asp:BoundField DataField="Keterangan" HeaderStyle-CssClass="table-bordered"  HeaderText="Keterangan"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Harga" >
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
                         </asp:BoundField>
@@ -94,6 +94,10 @@
                         </asp:BoundField>
 
                         <asp:BoundField DataField="IDObat" ItemStyle-CssClass="hiddencol" HeaderText="" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
+
+                         <asp:BoundField DataField="JumlahObat" HeaderStyle-CssClass="table-bordered"  HeaderText="Stok Obat"  NullDisplayText="-" ItemStyle-HorizontalAlign="Right" SortExpression="Harga" >
+                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="5%"  CssClass="table table-bordered table-striped" />
+                        </asp:BoundField>
 
                             <asp:TemplateField HeaderText="Tambahkan" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
                             <ItemStyle Font-Size="small" VerticalAlign="Middle" Width="2%"  CssClass="table table-bordered table-striped" />

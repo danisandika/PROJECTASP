@@ -50,17 +50,17 @@
                             </ItemTemplate>
                         </asp:TemplateField>
                         
-                        <asp:BoundField DataField="IDTransaksi" HeaderStyle-CssClass="table-bordered" HeaderText="IDTransaksi"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Nama" >
+                        <asp:BoundField DataField="IDTransaksi" HeaderStyle-CssClass="table-bordered" HeaderText="IDTransaksi"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="IDTransaksi" >
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
                         </asp:BoundField>
 
                         <asp:BoundField DataField="IDKaryawan" ItemStyle-CssClass="hiddencol" HeaderText="Username" HeaderStyle-CssClass="hiddencol" NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="username" />
                        
-                         <asp:BoundField DataField="Nama" HeaderStyle-CssClass="table-bordered" HeaderText="Nama Pasien"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Alamat" >
+                         <asp:BoundField DataField="Nama" HeaderStyle-CssClass="table-bordered" HeaderText="Nama Pasien"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Nama" >
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="15%"  CssClass="table table-bordered table-striped"  />
                         </asp:BoundField>
 
-                        <asp:BoundField DataField="Tanggal" HeaderStyle-CssClass="table-bordered" HeaderText="Tanggal"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="NoTelp" >
+                        <asp:BoundField DataField="Tanggal" HeaderStyle-CssClass="table-bordered" HeaderText="Tanggal"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Tanggal" >
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="8%"  CssClass="table table-bordered table-striped"  />
                         </asp:BoundField>
 
@@ -68,7 +68,7 @@
                             <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="8%" CssClass="table table-bordered table-striped"   />
                         </asp:BoundField>
 
-                        <asp:BoundField DataField="labtotalBayar" ItemStyle-CssClass="hiddencol" HeaderText="Bayar" HeaderStyle-CssClass="hiddencol" NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="totalBayar" />
+                        <asp:BoundField DataField="labtotalBayar" ItemStyle-CssClass="hiddencol" HeaderText="Bayar" HeaderStyle-CssClass="hiddencol" NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="labtotalBayar" />
 
 
                         <asp:TemplateField HeaderText="status" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign ="Center" >

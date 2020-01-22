@@ -26,9 +26,10 @@ public partial class Karyawan_Booking : System.Web.UI.Page
             secKeranjang.Visible = false;
             secObat.Visible = false;
             secViewRiwayat.Visible = false;
-            loadIDPasien();
+            
            
         }
+        loadIDPasien();
 
     }
 
@@ -138,7 +139,7 @@ public partial class Karyawan_Booking : System.Web.UI.Page
         com.Connection = conn;
         com.CommandText = "SELECT_BOOKING";
         com.CommandType = CommandType.StoredProcedure;
-        com.Parameters.AddWithValue("@IDBooking", txtSearch.Text);
+        com.Parameters.AddWithValue("@IDBooking", txtSearchBooking.Text);
         com.Parameters.AddWithValue("@ID_Dokter", Session["creaby"]);
         SqlDataAdapter adapt = new SqlDataAdapter(com);
         adapt.Fill(ds);
@@ -157,6 +158,9 @@ public partial class Karyawan_Booking : System.Web.UI.Page
     {
         if (e.CommandName == "cmEdit")
         {
+            String id = gridObat.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
+            lblID.Text = id;
+
             string Name = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[1].Text;
             string satuan = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[6].Text;
             string jumlah = ((TextBox)gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[5].FindControl("jumlahBeli")).Text;
@@ -202,8 +206,8 @@ public partial class Karyawan_Booking : System.Web.UI.Page
             rowIndex = 0;
             if (ViewState["currentTable"] != null)
             {
-                String id = gridObat.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
-                lblID.Text = id;
+                //String id = gridObat.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
+                //lblID.Text = id;
 
                 DataTable dt = (DataTable)ViewState["currentTable"];
                 DataTable dt2 = (DataTable)ViewState["currentTable2"];
@@ -340,7 +344,7 @@ public partial class Karyawan_Booking : System.Web.UI.Page
     protected void btnProses_Click(object sender, EventArgs e)
     {
         string strIDPembelian = generateIDTrans();
-
+        string IDuser = idUserBooking.Text;
 
         string strID = generateIDTrans();
         DateTime tanggal = DateTime.Now;
@@ -348,7 +352,7 @@ public partial class Karyawan_Booking : System.Web.UI.Page
         insert.CommandType = CommandType.StoredProcedure;
 
         insert.Parameters.AddWithValue("@IDTransaksi", strID);
-        insert.Parameters.AddWithValue("@IDKaryawan", Convert.ToInt16(lblID.Text)); //customer
+        insert.Parameters.AddWithValue("@IDKaryawan", Convert.ToInt16(IDuser)); //customer
         insert.Parameters.AddWithValue("@Tanggal", tanggal);
         insert.Parameters.AddWithValue("@FotoResep", DBNull.Value);
         insert.Parameters.AddWithValue("@totalBayar", Convert.ToDecimal(lblTotalHarga.Text));
@@ -431,6 +435,7 @@ public partial class Karyawan_Booking : System.Web.UI.Page
             //loadData();
             String id = gridBooking.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
             lblIDqu.Text = id;
+            idUserBooking.Text = gridBooking.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[6].Text;
             secBooking.Visible = false;
             secViewRiwayat.Visible = true;
             secObat.Visible = true;
@@ -530,5 +535,17 @@ public partial class Karyawan_Booking : System.Web.UI.Page
     {
         secBooking.Visible = false;
         secKeranjang.Visible = false;
+    }
+
+
+
+    protected void cariObat_Click(object sender, EventArgs e)
+    {
+        loadData();
+    }
+
+    protected void btnSearch_Click1(object sender, EventArgs e)
+    {
+        tampilanBooking();
     }
 }

@@ -99,6 +99,7 @@
                         <asp:ListItem Value="Butir">Butir</asp:ListItem>
                         <asp:ListItem Value="Botol">Botol</asp:ListItem>
                         <asp:ListItem Value="Blister">Blister</asp:ListItem>
+                        <asp:ListItem Value="Pcs">Pcs</asp:ListItem>
                     </asp:DropDownList>
                   </div>
                 </div>
@@ -380,7 +381,7 @@
                         <asp:ListItem Value="Butir">Butir</asp:ListItem>
                         <asp:ListItem Value="Botol">Botol</asp:ListItem>
                         <asp:ListItem Value="Blister">Blister</asp:ListItem>
-                       
+                        <asp:ListItem Value="Pcs">Pcs</asp:ListItem>
                     </asp:DropDownList>
                   </div>
                 </div>
