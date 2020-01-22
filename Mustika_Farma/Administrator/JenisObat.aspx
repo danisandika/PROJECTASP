@@ -40,12 +40,10 @@
                     </div>
                       <div class="col-md-5">
                     <asp:TextBox ID="txtnamaJenis" CssClass="form-control" runat="server"/>
-                     <asp:RequiredFieldValidator
-                            id="RequiredFieldValidator17"
-                            ControlToValidate="txtnamaJenis"
-                            Text="(Required)"
-                            ValidationGroup="frmAdd"
-                            Runat="server" />
+                        <asp:RequiredFieldValidator runat="server" id="reqName" 
+                            controltovalidate="txtnamaJenis" 
+                            errormessage="Data Harus diisi!" />
+   
                   </div>
                 </div>
 
@@ -92,6 +90,9 @@
                     </div>
                     <div class="col-md-5">
                     <asp:TextBox ID="txtEditnamaJenis" CssClass="form-control" runat="server"/>
+                        <asp:RequiredFieldValidator runat="server" id="RequiredFieldValidator1" 
+                            controltovalidate="txtEditnamaJenis" 
+                            errormessage="Data Harus diisi!" />
                   </div>
                   </div>
 
@@ -178,11 +179,11 @@
                                 </asp:LinkButton>
                                 
                                   <asp:LinkButton runat="server" ID="linkDelete" CommandName="Delete" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
-                                ToolTip="linkDelete"><span class="far fa-trash-alt nav-icon" onclick="return confirm('Are you sure you want to delete this item?');"></span></asp:LinkButton>
+                                ToolTip="linkDelete"><span class="far fa-trash-alt nav-icon" onclick="return confirm('Apakah Anda yakin me-nonaktifkan data ini?');"></span></asp:LinkButton>
                                 
                                 
                                  <asp:LinkButton runat="server" ID="linkAktif" CommandName="Delete" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
-                                ToolTip="linkAktif"><span class="far fa-check-circle" onclick="return confirm('Are you sure you want to delete this item?');"></span></asp:LinkButton>
+                                ToolTip="linkAktif"><span class="far fa-check-circle" onclick="return confirm('Apakah Anda yakin untuk meaktifkan data ini?');"></span></asp:LinkButton>
                                 
                                 <asp:LinkButton ID="lnkViewDetails" runat="server" CommandArgument='<%# Eval("IDJenis")%>' 
                                 OnClick="lnkViewDetails_Click" Text="" CssClass="far fa-check-square" ToolTip="Details"/>

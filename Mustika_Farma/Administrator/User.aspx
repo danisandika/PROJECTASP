@@ -116,45 +116,16 @@
                          ErrorMessage = "Format Email Salah"/>
                   </div>
                   </div>   
-                     
-                   <div class="row form-group">
-                     <div class="col-md-3">
-                   <label for="Ket">Username</label><span style="color:red">*</span>
-                    </div>
-                     <div class="col-md-5">
-                   <asp:TextBox ID="txtUsername" CssClass="form-control" runat="server" />
-                  <asp:RequiredFieldValidator ID="RequiredFieldValidator6"
-                        runat="server"
-                        ControlToValidate="txtUsername"
-                        ForeColor="Red"
-                        ErrorMessage="Harus diisi"></asp:RequiredFieldValidator>
-                  </div>  
-                  </div>       
-                     
-                   <div class="row form-group">
-                     <div class="col-md-3">
-                   <label for="Ket">Password</label><span style="color:red">*</span>
-                    </div>
-                    <div class="col-md-5">
-                   <asp:TextBox ID="txtPass" CssClass="form-control" runat="server" />
-                   <asp:RequiredFieldValidator ID="RequiredFieldValidator7"
-                        runat="server"
-                        ControlToValidate="txtPass"
-                        ForeColor="Red"
-                        ErrorMessage="Harus diisi"></asp:RequiredFieldValidator>
-                  </div> 
                 </div>
-            </div>
                                              
-            </div>
-            </div> 
+                </div>
+                </div> 
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <asp:Button ID="btnSave" class="btn btn-success swalDefaultSuccess" runat="server" Text="Submit" OnClick="btnSave_Click"/>
+                  <asp:Button ID="btnSave" class="btn btn-success swalDefaultSuccess" runat="server" Text="Simpan" OnClick="btnSave_Click"/>
                 </div>    
-            </div>
+             </div>
               </div>
-            </div>
         </section>
 
       <!--SECTION EDIT-->
@@ -283,8 +254,8 @@
      
 
                 <div class="card-footer">
-                  <asp:Button ID="EditbtnSave" CssClass="btn btn-primary" runat="server" Text="Submit" OnClick="EditbtnSave_Click"/>
-                  <asp:Button ID="EditbtnCancel" CssClass="btn btn-danger" runat="server" Text="Cancel" OnClick="EditbtnCancel_Click"/>
+                  <asp:Button ID="EditbtnSave" CssClass="btn btn-primary" runat="server" Text="Simpan" OnClick="EditbtnSave_Click"/>
+                  <asp:Button ID="EditbtnCancel" CssClass="btn btn-danger" runat="server" Text="Kembali" OnClick="EditbtnCancel_Click"/>
                 </div>
               
                  </div>
@@ -375,11 +346,11 @@
                                 
                                 
                                  <asp:LinkButton runat="server" ID="linkDelete" CommandName="Delete" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
-                                ToolTip="linkDelete"><span class="far fa-trash-alt nav-icon" onclick="return confirm('Are you sure you want to delete this item?');"></span></asp:LinkButton>
+                                ToolTip="linkDelete"><span class="far fa-trash-alt nav-icon" onclick="return confirm('Apa anda yakin me- non aktifkan data??');"></span></asp:LinkButton>
                                 
                                 
                                  <asp:LinkButton runat="server" ID="linkAktif" CommandName="Delete" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
-                                ToolTip="linkAktif"><span class="far fa-check-circle" onclick="return confirm('Are you sure you want to delete this item?');"></span></asp:LinkButton>
+                                ToolTip="linkAktif"><span class="far fa-check-circle" onclick="return confirm('Apa anda yakin meng- aktifkan data?');"></span></asp:LinkButton>
                                 
                                 
                                 <asp:LinkButton ID="lnkViewDetails" runat="server" CommandArgument='<%# Eval("IDUser")%>' 

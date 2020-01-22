@@ -39,12 +39,12 @@
                     </div>
                     <div class="col-md-5">
                     <asp:TextBox ID="txtnamaObat" CssClass="form-control" runat="server"/>
-                          <asp:RequiredFieldValidator ID="RequiredFieldValidator3"
+                       <asp:RequiredFieldValidator ID="RequiredFieldValidator3"
                         runat="server"
                         ControlToValidate="txtnamaObat"
                         ForeColor="Red"
                         ValidationGroup="numb"
-                        ErrorMessage="Fata Harus Di Isi"></asp:RequiredFieldValidator>
+                        ErrorMessage="Data Harus Di Isi"></asp:RequiredFieldValidator>
                   </div>
                 </div>
 
@@ -269,7 +269,7 @@
                                 </asp:LinkButton>
 
                                   <asp:LinkButton runat="server" ID="linkDelete" CommandName="Delete" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
-                                ToolTip="linkDelete"><span class="far fa-trash-alt nav-icon" onclick="Apa anda yakin me- non aktifkan data?');"></span></asp:LinkButton>
+                                ToolTip="linkDelete"><span class="far fa-trash-alt nav-icon" onclick="return confirm('Apa anda yakin menon-aktifkan data?');"></span></asp:LinkButton>
                                 
                                 
                                  <asp:LinkButton runat="server" ID="linkAktif" CommandName="Delete" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'

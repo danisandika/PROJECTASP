@@ -43,40 +43,48 @@ public partial class Administrator_Dokter : System.Web.UI.Page
 
     protected void btnSave_Click(object sender, EventArgs e)
     {
-        string filename = Guid.NewGuid() + System.IO.Path.GetFileName(uploadfile.FileName).Substring(System.IO.Path.GetFileName(uploadfile.FileName).Length - 4);
-        uploadfile.SaveAs(Server.MapPath("Dokter/") + filename);
+        try
+        {
+            string filename = Guid.NewGuid() + System.IO.Path.GetFileName(uploadfile.FileName).Substring(System.IO.Path.GetFileName(uploadfile.FileName).Length - 4);
+            uploadfile.SaveAs(Server.MapPath("Dokter/") + filename);
 
-        DateTime CreateDate = DateTime.Now;
-        string password ="MUSTIKA2019";
-        DateTime ModifiedDate = DateTime.Now;
+            DateTime CreateDate = DateTime.Now;
+            string password = "MUSTIKA2019";
+            DateTime ModifiedDate = DateTime.Now;
 
 
-        SqlCommand com = new SqlCommand();
-        com.Connection = conn;
-        com.CommandText = "[sp_InputDokter]";
-        com.CommandType = CommandType.StoredProcedure;
-        com.Parameters.AddWithValue("@NIP", txtNIP.Text);
-        com.Parameters.AddWithValue("@nama", txtNama.Text);
-        com.Parameters.AddWithValue("@jenis_Kelamin", rbGender.SelectedValue);
-        com.Parameters.AddWithValue("@alamat", txtAlamat.Text);
-        com.Parameters.AddWithValue("@username", txtUname.Text);
-        com.Parameters.AddWithValue("@password",password);
-        com.Parameters.AddWithValue("@status", 1);
-        com.Parameters.AddWithValue("@email", txtEmail.Text);
-        com.Parameters.AddWithValue("@ID_SP", ddlJenis.SelectedValue);
-        com.Parameters.AddWithValue("@foto", "Dokter/" + filename);
-        com.Parameters.AddWithValue("@CreateDate", CreateDate);
-        com.Parameters.AddWithValue("@CreateBy", Session["creaby"]);
-    
-        conn.Open();
+            SqlCommand com = new SqlCommand();
+            com.Connection = conn;
+            com.CommandText = "[sp_InputDokter]";
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@NIP", txtNIP.Text);
+            com.Parameters.AddWithValue("@nama", txtNama.Text);
+            com.Parameters.AddWithValue("@jenis_Kelamin", rbGender.SelectedValue);
+            com.Parameters.AddWithValue("@alamat", txtAlamat.Text);
+            com.Parameters.AddWithValue("@username", txtUname.Text);
+            com.Parameters.AddWithValue("@password", password);
+            com.Parameters.AddWithValue("@status", 1);
+            com.Parameters.AddWithValue("@email", txtEmail.Text);
+            com.Parameters.AddWithValue("@ID_SP", ddlJenis.SelectedValue);
+            com.Parameters.AddWithValue("@foto", "Dokter/" + filename);
+            com.Parameters.AddWithValue("@CreateDate", CreateDate);
+            com.Parameters.AddWithValue("@CreateBy", Session["creaby"]);
 
-        int result = Convert.ToInt32(com.ExecuteNonQuery());
-        conn.Close();
-        loadData();
+            conn.Open();
 
-        secView.Visible = true;
-        secEdit.Visible = false;
-        secAdd.Visible = false;
+            int result = Convert.ToInt32(com.ExecuteNonQuery());
+            conn.Close();
+            loadData();
+
+            secView.Visible = true;
+            secEdit.Visible = false;
+            secAdd.Visible = false;
+        }
+        catch (Exception)
+        {
+            Response.Write("<script>alert('Data Gagal Ditambahkan');</script>");
+
+        }
     }
 
     protected void EditbtnSave_Click(object sender, EventArgs e)
@@ -158,9 +166,10 @@ public partial class Administrator_Dokter : System.Web.UI.Page
 
     protected void EditbtnCancel_Click(object sender, EventArgs e)
     {
-        secView.Visible = true;
         secEdit.Visible = false;
         secAdd.Visible = false;
+        secView.Visible = true;
+        
     }
 
     protected void btntambah_Click(object sender, EventArgs e)
@@ -192,7 +201,7 @@ public partial class Administrator_Dokter : System.Web.UI.Page
             txtNamaE.Text = gridDokter.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[2].Text;
 
             editfoto.ImageUrl = gridDokter.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[14].Text;
-            txtAlamatE.Text = gridDokter.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[4].Text;
+            txtAlamatE.Text = gridDokter.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[15].Text;
             txtEmailE.Text = gridDokter.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[5].Text;
             txtUnameE.Text = gridDokter.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[7].Text;
             txtPassE.Text = gridDokter.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[8].Text;

@@ -184,27 +184,24 @@ public partial class Administrator_Lokasi_penyimpanan : System.Web.UI.Page
             secEdit.Visible = true;
             secView.Visible = false;
         }
-        else if (e.CommandName == "cmDelete")
-        {
-            String id = gridLokasi.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
-            lblID.Text = id;
-            SqlCommand com = new SqlCommand();
-            com.Connection = conn;
-            com.CommandText = "sp_HapusLokasi";
-            com.CommandType = CommandType.StoredProcedure;
-            com.Parameters.AddWithValue("@IDLokasi", lblID.Text);
+       
+    }
 
+    protected void gridJenis_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        //TableCell cell = gridLokasi.Rows[e.RowIndex].Cells[4];
+        //string cells = cell.Text;
 
-            conn.Open();
+        //String id = gridLokasi.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
+        //lblID.Text = id;
+        //SqlCommand com = new SqlCommand();
+        //com.Connection = conn;
+        //com.CommandText = "sp_HapusLokasi";
+        //com.CommandType = CommandType.StoredProcedure;
+        //com.Parameters.AddWithValue("@IDLokasi", lblID.Text);
+        //com.Parameters.AddWithValue("@status", cells);
 
-            int result = Convert.ToInt32(com.ExecuteNonQuery());
-            conn.Close();
-            loadData();
-
-            secView.Visible = true;
-            secEdit.Visible = false;
-            secAdd.Visible = false;
-        }
+       
     }
 
     protected void ddlStatusView_TextChanged(object sender, EventArgs e)
@@ -247,6 +244,58 @@ public partial class Administrator_Lokasi_penyimpanan : System.Web.UI.Page
             adapt.Fill(ds);
             gridLokasi.DataSource = ds;
             gridLokasi.DataBind();
+        }
+    }
+
+    protected void gridLokasi_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+
+        var linkDelete = (LinkButton)e.Row.FindControl("linkDelete");
+        var linkAktif = (LinkButton)e.Row.FindControl("linkAktif");
+
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            TableCell statusCell = e.Row.Cells[4];
+            if (statusCell.Text == "1")
+            {
+                linkAktif.Visible = false;
+            }
+            else if (statusCell.Text == "0")
+            {
+                linkDelete.Visible = false;
+            }
+        }
+    }
+
+    protected void gridLokasi_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        TableCell cell = gridLokasi.Rows[e.RowIndex].Cells[4];
+        string cells = cell.Text;
+
+        SqlCommand com = new SqlCommand();
+        com.Connection = conn;
+
+        int id = Convert.ToInt32(gridLokasi.DataKeys[e.RowIndex].Value.ToString());
+        com.CommandText = "sp_HapusLokasi";
+        com.CommandType = CommandType.StoredProcedure;
+        com.Parameters.AddWithValue("@IDLokasi", id);
+        com.Parameters.AddWithValue("@status", cells);
+        com.CommandType = CommandType.StoredProcedure;
+
+        conn.Open();
+        int result = Convert.ToInt32(com.ExecuteNonQuery());
+        conn.Close();
+        if (result > 0)
+        {
+            gridLokasi.EditIndex = -1;
+            loadData();
+            secView.Visible = true;
+            secEdit.Visible = false;
+            secAdd.Visible = false;
+        }
+        else
+        {
+            loadData();
         }
     }
 }

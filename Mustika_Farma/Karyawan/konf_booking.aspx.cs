@@ -109,7 +109,7 @@ public partial class Karyawan_konf_booking : System.Web.UI.Page
     {
         SqlCommand com = new SqlCommand();
         com.Connection = conn;
-        com.CommandText = "[sp_SelectBooking]";
+        com.CommandText = "SELECT_BOOKING";
         com.CommandType = CommandType.StoredProcedure;
         com.Parameters.AddWithValue("@IDBooking", txtSearch.Text);
         com.Parameters.AddWithValue("@ID_Dokter", Session["creaby"]);
@@ -362,46 +362,6 @@ public partial class Karyawan_konf_booking : System.Web.UI.Page
 
     protected void ddlStatusView_TextChanged(object sender, EventArgs e)
     {
-
-        //if (ddlStatusView.Text.Equals("2"))
-        //{
-        //    SqlCommand com = new SqlCommand();
-        //    com.Connection = conn;
-        //    com.CommandText = "[sp_SelectBooking]";
-        //    com.CommandType = CommandType.StoredProcedure;
-        //    com.Parameters.AddWithValue("@IDBooking", txtSearch.Text);
-        //    com.Parameters.AddWithValue("@ID_Dokter", Session["creaby"]);
-        //    SqlDataAdapter adapt = new SqlDataAdapter(com);
-        //    adapt.Fill(ds);
-        //    gridBooking.DataSource = ds;
-        //    gridBooking.DataBind();
-        //}
-        //else if (ddlStatusView.Text.Equals("1"))
-        //{
-        //    SqlCommand com = new SqlCommand();
-        //    com.Connection = conn;
-        //    com.CommandText = "[sp_SelectBookingAktif]";
-        //    com.CommandType = CommandType.StoredProcedure;
-        //    com.Parameters.AddWithValue("@IDBooking", txtSearch.Text);
-        //    com.Parameters.AddWithValue("@ID_Dokter", Session["creaby"]);
-        //    SqlDataAdapter adapt = new SqlDataAdapter(com);
-        //    adapt.Fill(ds);
-        //    gridBooking.DataSource = ds;
-        //    gridBooking.DataBind();
-        //}
-        //else if (ddlStatusView.Text.Equals("0"))
-        //{
-        //    SqlCommand com = new SqlCommand();
-        //    com.Connection = conn;
-        //    com.CommandText = "[sp_SelectBookingNA]";
-        //    com.CommandType = CommandType.StoredProcedure;
-        //    com.Parameters.AddWithValue("@IDBooking", txtSearch.Text);
-        //    com.Parameters.AddWithValue("@ID_Dokter", Session["creaby"]);
-        //    SqlDataAdapter adapt = new SqlDataAdapter(com);
-        //    adapt.Fill(ds);
-        //    gridBooking.DataSource = ds;
-        //    gridBooking.DataBind();
-        //}
     }
 
 
@@ -466,21 +426,7 @@ public partial class Karyawan_konf_booking : System.Web.UI.Page
 
     protected void gridBooking_RowDataBound(object sender, GridViewRowEventArgs e)
     {
-        var linkDelete = (LinkButton)e.Row.FindControl("linkDelete");
-        var linkAktif = (LinkButton)e.Row.FindControl("linkAktif");
-
-        if (e.Row.RowType == DataControlRowType.DataRow)
-        {
-            TableCell statusCell = e.Row.Cells[3];
-            if (statusCell.Text == "2")
-            {
-                linkAktif.Visible = false;
-            }
-            else if (statusCell.Text == "1")
-            {
-                linkDelete.Visible = false;
-            }
-        }
+       
     }
 
     protected void btnSaveRiwayat_Click(object sender, EventArgs e)
@@ -530,33 +476,6 @@ public partial class Karyawan_konf_booking : System.Web.UI.Page
     protected void EditbtnSaveRiwayat_Click(object sender, EventArgs e)
     {
 
-        //DateTime CreateDate = DateTime.Now;
-        //SqlCommand com = new SqlCommand();
-        //com.Connection = conn;
-        //com.CommandText = "[sp_UpdateRiwayat]";
-        //com.CommandType = CommandType.StoredProcedure;
-        ////masih diakal2in
-
-        //com.Parameters.AddWithValue("@IDRiwayat", lblID.Text);
-        //com.Parameters.AddWithValue("@ID_Dokter", Session["creaby"]);
-        //com.Parameters.AddWithValue("@IDUser", labelIDUSer.Text);
-        //com.Parameters.AddWithValue("@berat", txtBeratE.Text);
-        //com.Parameters.AddWithValue("@tinggi", txtTinggiE.Text);
-        //com.Parameters.AddWithValue("@tensi", txtTensiE.Text);
-        //com.Parameters.AddWithValue("@gula", txtGulaE.Text);
-        //com.Parameters.AddWithValue("@kolestrol", txtKolestrolE.Text);
-        //com.Parameters.AddWithValue("@pesan", txtPesanE.Text);
-        //com.Parameters.AddWithValue("@penyakit", txtPenyakitE.Text);
-
-        //conn.Open();
-
-        //int result = Convert.ToInt32(com.ExecuteNonQuery());
-        //conn.Close();
-        //loadData();
-
-        //secViewRiwayat.Visible = true;
-        //secEditRiwayat.Visible = false;
-        //secAddRiwayat.Visible = false;
     }
 
     protected void EditbtnCancelRiwayat_Click(object sender, EventArgs e)
@@ -590,19 +509,7 @@ public partial class Karyawan_konf_booking : System.Web.UI.Page
     {
         if (e.CommandName == "cmEdit")
         {
-            //String id = gridRiwayat.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
-            //lblID.Text = id;    
-            //txtPenyakitE.Text = gridRiwayat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[2].Text;
-            //txtBeratE.Text = gridRiwayat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[6].Text;
-            //txtTinggiE.Text = gridRiwayat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[7].Text;
-            //txtTensiE.Text = gridRiwayat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[8].Text;
-            //txtPesanE.Text = gridRiwayat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[3].Text;
-            //txtGulaE.Text = gridRiwayat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[9].Text;
-            //txtKolestrolE.Text = gridRiwayat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[10].Text;
-
-            //secAddRiwayat.Visible = false;
-            //secEditRiwayat.Visible = true;
-            //secViewRiwayat.Visible = false;
+          
         }
     }
 
@@ -689,22 +596,7 @@ public partial class Karyawan_konf_booking : System.Web.UI.Page
 
     protected void gridRiwayat_RowDataBound(object sender, GridViewRowEventArgs e)
     {
-
-        var linkDelete = (LinkButton)e.Row.FindControl("linkDelete");
-        var linkAktif = (LinkButton)e.Row.FindControl("linkAktif");
-
-        if (e.Row.RowType == DataControlRowType.DataRow)
-        {
-            TableCell statusCell = e.Row.Cells[11];
-            if (statusCell.Text == "1")
-            {
-                linkAktif.Visible = false;
-            }
-            else if (statusCell.Text == "0")
-            {
-                linkDelete.Visible = false;
-            }
-        }
+        
     }
 
     protected void lnkViewDetails_Click(object sender, EventArgs e)

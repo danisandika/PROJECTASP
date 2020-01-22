@@ -65,39 +65,11 @@ public partial class Administrator_Supplier : System.Web.UI.Page
             txtAlamatE.Text = grdMenu.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[2].Text;
             txtEmailE.Text = grdMenu.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[3].Text;
             txtNoTelpE.Text = grdMenu.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[4].Text;
-            //txtTanggalE.Text = grdMenu.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[8].Text;
-            //txtTanggalME.Text = DateTime.Now.ToString("dd-MM-yyyy");
-            //string status = grdMenu.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[6].Text;
-            //if (status.Equals(0))
-            //{
-            //    rbAktif.Checked = true;
-
-            //}
-            //else
-            //{
-            //    rbTidak.Checked = true;
-            //}
             AddMenu.Visible = false;
             EditMenu.Visible = true;
             ViewMenu.Visible = false;
         }
-        //else if (e.CommandName == "Hapus")
-        //{
-        //    SqlCommand com = new SqlCommand();
-        //    com.Connection = con;
-        //    com.CommandText = "[sp_HapusSupplier]";
-        //    com.CommandType = CommandType.StoredProcedure;
-        //    string id = grdMenu.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
-        //    com.Parameters.AddWithValue("@IDSupplier", id);
-        //    com.Parameters.AddWithValue("@ModifiedBy", 1);
-        //    con.Open();
-        //    int result = Convert.ToInt32(com.ExecuteNonQuery());
-        //    con.Close();
-        //    loadData();
-        //    ViewMenu.Visible = true;
-        //    EditMenu.Visible = false;
-        //    AddMenu.Visible = false;
-        //}
+
     }
 
     protected void grdMenu_Sorting(object sender, GridViewSortEventArgs e)
@@ -156,77 +128,38 @@ public partial class Administrator_Supplier : System.Web.UI.Page
 
     protected void btnAdd_Click(object sender, EventArgs e)
     {
-        string uname = txtNamaSupplier.Text.ToUpper();
-        SqlDataAdapter dataAdapter = new SqlDataAdapter();
-        System.Data.SqlClient.SqlParameter param;
-        int nilai = 1;
+            string uname = txtNamaSupplier.Text.ToUpper();
+            DateTime CreateDate = DateTime.Now;
 
-        try
-        {
-            // insert command
-            SqlCommand insertCmd = new SqlCommand("[sp_InputSupplier]", con);
-            insertCmd.CommandType = CommandType.StoredProcedure;
+            SqlCommand com = new SqlCommand();
+            com.Connection = con;
+            com.CommandText = "sp_InputSupplier";
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@NamaSupplier",uname);
+            com.Parameters.AddWithValue("@AlamatSupplier", txtAlamat.Text);
+            com.Parameters.AddWithValue("@Email", txtEmail.Text);
+            com.Parameters.AddWithValue("@NoHp", txtPhoneInsert.Text);
+            com.Parameters.AddWithValue("@Status",1);
+            com.Parameters.AddWithValue("@CreateDate", CreateDate);
+            com.Parameters.AddWithValue("@createBy", Session["creaby"]);
+            com.Parameters.AddWithValue("@ModifiedDate", CreateDate);
+            com.Parameters.AddWithValue("@ModifiedBy", Session["creaby"]);
 
+        con.Open();
 
+            int result = Convert.ToInt32(com.ExecuteNonQuery());
+            con.Close();
+            loadData();
 
-            param = insertCmd.Parameters.Add("@NamaSupplier", SqlDbType.VarChar);
-            param.Direction = ParameterDirection.Input;
-            param.Value = uname;
-
-            param = insertCmd.Parameters.Add("@AlamatSupplier", SqlDbType.VarChar);
-            param.Direction = ParameterDirection.Input;
-            param.Value = txtAlamat.Text;
-
-
-            param = insertCmd.Parameters.Add("@Email", SqlDbType.VarChar);
-            param.Direction = ParameterDirection.Input;
-            param.Value = txtEmail.Text;
-
-            param = insertCmd.Parameters.Add("@NoHp", SqlDbType.VarChar);
-            param.Direction = ParameterDirection.Input;
-            param.Value = txtPhoneInsert.Text;
-
-            param = insertCmd.Parameters.Add("@Status", SqlDbType.Int);
-            param.Direction = ParameterDirection.Input;
-            param.Value = Convert.ToInt16(nilai);
-
-            param = insertCmd.Parameters.Add("@CreateBy", SqlDbType.Int);
-            param.Direction = ParameterDirection.Input;
-            param.Value = Convert.ToInt16(Session["creaby"]);
-            // masih diakalin, karena belum buat login
-
-
-            param = insertCmd.Parameters.Add("@CreateDate", SqlDbType.Date);
-            param.Direction = ParameterDirection.Input;
-            param.Value = Convert.ToDateTime(txtTanggal.Text);
-
-            param = insertCmd.Parameters.Add("@ModifiedBy", SqlDbType.Int);
-            param.Direction = ParameterDirection.Input;
-            param.Value = "NULL";
-
-            param = insertCmd.Parameters.Add("@ModifiedDate", SqlDbType.Date);
-            param.Direction = ParameterDirection.Input;
-            param.Value = "NULL";
-            con.Open();
-
-            insertCmd.ExecuteNonQuery();
-
-            Response.Write("<script>alert('Data Added!')</script>");
+            Response.Write("<script>alert('Data Berhasil Ditambahkan!')</script>");
             con.Close();
             Server.Transfer("Supplier.aspx");
 
         }
-        catch
-        {
-            con.Close();
-      
-        }
-    
-    }
+
 
     protected void btnEdit_Click(object sender, EventArgs e)
     {
-        int nilai = 1;
         int status = 1;
        
         SqlCommand com = new SqlCommand();
@@ -365,7 +298,7 @@ public partial class Administrator_Supplier : System.Web.UI.Page
     {
         //Grab the selected row
         GridViewRow row = (GridViewRow)((LinkButton)sender).Parent.Parent;
-        //Get the column value and assign it to label in panel
+        //Get the column value and assign it to label in panel  
         //Change the index as per your need
         Nama.Text = row.Cells[1].Text;
         CreateBy.Text = row.Cells[6].Text;

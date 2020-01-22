@@ -35,18 +35,6 @@ public partial class Karyawan_Booking : System.Web.UI.Page
         
     }
 
-    //private void ddlvalue()
-    //{
-    //    conn.Open();
-    //    SqlCommand read = new SqlCommand("[sp_pilihDokter]", conn);
-    //    read.CommandType = CommandType.StoredProcedure;
-    //    read.Parameters.AddWithValue("@ID_SP", ddlJenisE.SelectedValue.ToString());
-    //    SqlDataAdapter adap = new SqlDataAdapter(read);
-    //    adap.Fill(ds);
-    //    ddlDokter.DataSource = ds;
-    //    ddlDokter.DataBind();
-    //    conn.Close();
-    //}
 
     private DataSet loadData()
     {

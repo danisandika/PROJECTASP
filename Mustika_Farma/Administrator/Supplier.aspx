@@ -47,13 +47,10 @@
                 class="form-control form-control-user"
                 Text='<%# Bind("NamaSupplier") %>'
                 Runat="server" />
+            <asp:RequiredFieldValidator runat="server" id="reqName" 
+                            controltovalidate="txtNamaSupplier" 
+                            errormessage="Data Harus diisi!" />
            </div>
-            <asp:RequiredFieldValidator
-                id="valNama"
-                ControlToValidate="txtNamaSupplier"
-                Text="(Required)"
-                ValidationGroup="frmAdd"
-                Runat="server" />
             </div>
 
             <div class="row form-group">
@@ -71,12 +68,9 @@
                 Text='<%# Bind("AlamatSupplier") %>'
                 Runat="server" TextMode="MultiLine"/>
            
-            <asp:RequiredFieldValidator
-                id="valAlamat"
-                ControlToValidate="txtAlamat"
-                Text="(Required)"
-                ValidationGroup="frmAdd"
-                Runat="server" />
+            <asp:RequiredFieldValidator runat="server" id="RequiredFieldValidator6" 
+                            controltovalidate="txtAlamat" 
+                            errormessage="Data Harus diisi!" />
             </div>
             </div>
 
@@ -95,13 +89,10 @@
                 Text='<%# Bind("EmailSupplier") %>'
                 Runat="server" TextMode="Email" />
            
-            <asp:RequiredFieldValidator
-                id="val3mail"
-                ControlToValidate="txtEmail"
-                Text="(Required)"
-                ValidationGroup="frmAdd"
-                Runat="server" />
-            
+             <asp:RequiredFieldValidator runat="server" id="RequiredFieldValidator7" 
+                            controltovalidate="txtEmail" 
+                            errormessage="Data Harus diisi!" />
+                          
                 <asp:RegularExpressionValidator
                  ID="RegularExpressionValidator2"
                  runat="server" 
@@ -113,36 +104,24 @@
             </div>
 
             <div class="row form-group">
-             <div class="col-md-3">
-            <asp:Label
-                id="Label1"
-                Text="Nomor Telephone"
-                AssociatedControlID="txtNamaSupplier"
-                Runat="server" />
-           </div>
-             <div class="col-md-5">
-            <asp:TextBox
-                id="txtPhoneInsert"
-                  class="form-control form-control-user"
-                Text='<%# Bind("Phone") %>'
-                Runat="server" />
-            
-            <asp:RequiredFieldValidator
-                id="valPhone"
-                ControlToValidate="txtPhoneInsert"
-                Text="(Required)"
-                ValidationGroup="frmAdd"
-                Runat="server" />
-            
-            <asp:RegularExpressionValidator 
-                ID="RegularExpressionValidator1" 
-                runat="server"
-                ControlToValidate="txtPhoneInsert"
-                ErrorMessage="Only numeric allowed"
-                Text="Only Numeric"
-                ValidationExpression="^[0-9]*$"/>
-            </div>
-            </div>
+                   <div class="col-md-3">
+                   <label for="Ket">Nomor Telepon</label>
+                    </div>
+                    <div class="col-md-5">
+                     <asp:TextBox ID="txtPhoneInsert" CssClass="form-control" runat="server" TextMode="Number" />
+                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" 
+                         ControlToValidate="txtPhoneInsert"
+                         ForeColor="Red" ValidationExpression="(\d[0-9]{10,13})$"
+                         ErrorMessage = "Masukan minimal 12 Digit nomor telephone"/>
+                   <asp:RequiredFieldValidator ID="RequiredFieldValidator5"
+                        runat="server"
+                        ControlToValidate="txtPhoneInsert"
+                        ForeColor="Red"
+                        ValidationGroup="numb"
+                        ErrorMessage="Data Harus diisi dengan Angk"></asp:RequiredFieldValidator>
+                  </div>
+                </div>
+
             <div class="row form-group">
              <div class="col-md-3">
              <asp:Label
@@ -161,8 +140,8 @@
             </div>
             </div>
         <div class="card-footer">
-        <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" class="btn btn-primary col-1" />
-        <asp:Button ID="btnCancelAdd" runat="server" Text="Cancel" OnClick="btnCancelAdd_Click" class="btn btn-danger col-1"/>
+        <asp:Button ID="btnAdd" runat="server" Text="Simpan" OnClick="btnAdd_Click" class="btn btn-primary col-1" />
+        <asp:Button ID="btnCancelAdd" runat="server" Text="Kembali" OnClick="btnCancelAdd_Click" class="btn btn-danger col-1"/>
     </div>
     </div>
 </div>
@@ -198,12 +177,9 @@
                 Text='<%# Bind("NamaSupplier") %>'
                 Runat="server" />
 
-            <asp:RequiredFieldValidator
-                id="RequiredFieldValidator1"
-                ControlToValidate="txtNamaE"
-                Text="(Required)"
-                ValidationGroup="frmedit"
-                Runat="server" />
+            <asp:RequiredFieldValidator runat="server" id="RequiredFieldValidator1" 
+                            controltovalidate="txtNamaE" 
+                            errormessage="Data Harus diisi!" />
             </div>
             </div>
             <div class="row form-group">
@@ -221,12 +197,9 @@
                 Text='<%# Bind("AlamatSupplier") %>'
                 Runat="server" />
 
-            <asp:RequiredFieldValidator
-                id="RequiredFieldValidator2"
-                ControlToValidate="txtAlamatE"
-                Text="(Required)"
-                ValidationGroup="frmedit"
-                Runat="server" />
+            <asp:RequiredFieldValidator runat="server" id="RequiredFieldValidator2" 
+                            controltovalidate="txtAlamatE" 
+                            errormessage="Data Harus diisi!" />
             </div>
             </div>
             <div class="row form-group">
@@ -244,12 +217,9 @@
                 Text='<%# Bind("EmailSupplier") %>'
                 Runat="server" />
 
-            <asp:RequiredFieldValidator
-                id="RequiredFieldValidator3"
-                ControlToValidate="txtEmailE"
-                Text="(Required)"
-                ValidationGroup="frmedit"
-                Runat="server" />
+            <asp:RequiredFieldValidator runat="server" id="RequiredFieldValidator3" 
+                            controltovalidate="txtEmailE" 
+                            errormessage="Data Harus diisi!" />
 
             <asp:RegularExpressionValidator
                  ID="RegularExpressionValidator3"
@@ -309,7 +279,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Table Jenis Obat</h3>
+                <h3 class="card-title">Table Supplier</h3>
                   <br />
                 <asp:linkbutton CssClass="btn btn-block bg-gradient-primary col-2" runat="server" ID="Linkbutton1" OnClick="btnTambah_Click1"><i class="fas fa-plus"></i> | Tambah</asp:linkbutton>
                  <label>Lihat Bedasarkan Status</label>
@@ -364,7 +334,7 @@
                    <asp:BoundField DataField="Status" ItemStyle-CssClass="hiddencol" HeaderText="Status" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
                         <asp:BoundField DataField="nama" ItemStyle-CssClass="hiddencol" HeaderText="Creby" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
                         <asp:BoundField DataField="CreateDate" ItemStyle-CssClass="hiddencol" HeaderText="createDate" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
-                        <asp:BoundField DataField="nama" ItemStyle-CssClass="hiddencol" HeaderText="ModifiedBy" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
+                        <asp:BoundField DataField="namaM" ItemStyle-CssClass="hiddencol" HeaderText="ModifiedBy" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
                         <asp:BoundField DataField="ModifiedDate" ItemStyle-CssClass="hiddencol" HeaderText="ModifiedDate" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
                   
                       <asp:TemplateField HeaderText="Aksi" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
@@ -374,11 +344,11 @@
                                 ToolTip="Ubah Data Table"><span class="far fa-edit nav-icon"></span></asp:LinkButton>
                         
                                 <asp:LinkButton runat="server" ID="linkDelete" CommandName="Delete" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
-                                ToolTip="linkDelete"><span class="far fa-trash-alt nav-icon" onclick="return confirm('Are you sure you want to delete this item?');"></span></asp:LinkButton>
+                                ToolTip="linkDelete"><span class="far fa-trash-alt nav-icon" onclick="return confirm('Apakah Anda yakin me-nonaktifkan data ini?');"></span></asp:LinkButton>
                                 
                                 
                                  <asp:LinkButton runat="server" ID="linkAktif" CommandName="Delete" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
-                                ToolTip="linkAktif"><span class="far fa-check-circle" onclick="return confirm('Are you sure you want to delete this item?');"></span></asp:LinkButton>
+                                ToolTip="linkAktif"><span class="far fa-check-circle" onclick="return confirm('Apakah Anda yakin untuk meaktifkan data ini?');"></span></asp:LinkButton>
                                 
                                 <asp:LinkButton ID="lnkViewDetails" runat="server" CommandArgument='<%# Eval("IDSupplier")%>' 
                                 OnClick="lnkViewDetails_Click" Text="" ToolTip="Details" CssClass="far fa-check-square"/>     

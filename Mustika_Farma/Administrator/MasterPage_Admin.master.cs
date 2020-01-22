@@ -16,7 +16,7 @@ public partial class MasterPage_Admin : System.Web.UI.MasterPage
 
     }
 
-    protected void lnkLogOut_Click(object sender, EventArgs e)
+    protected void lnkLogOut_Click1(object sender, EventArgs e)
     {
         Session.Clear();
         Session.Abandon();

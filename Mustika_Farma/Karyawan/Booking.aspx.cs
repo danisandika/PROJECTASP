@@ -26,10 +26,9 @@ public partial class Karyawan_Booking : System.Web.UI.Page
             secKeranjang.Visible = false;
             secObat.Visible = false;
             secViewRiwayat.Visible = false;
-            //loadIDPasien();
+            loadIDPasien();
+           
         }
-        loadIDPasien();
-        loadData();
 
     }
 
@@ -41,7 +40,7 @@ public partial class Karyawan_Booking : System.Web.UI.Page
         SqlDataReader myReader = null;
         SqlCommand myCommand = new SqlCommand("select u.Nama as 'Nama', u.IDUser from Booking b, [User] u where b.IDBooking = @IDBooking and u.IDUser= b.IDUser", conn);
         myCommand.Parameters.AddWithValue("@IDBooking", lblIDqu.Text);
-
+        
         conn.Open();
         myReader = myCommand.ExecuteReader();
         while (myReader.Read())
@@ -137,7 +136,7 @@ public partial class Karyawan_Booking : System.Web.UI.Page
     {
         SqlCommand com = new SqlCommand();
         com.Connection = conn;
-        com.CommandText = "[sp_SelectBooking]";
+        com.CommandText = "SELECT_BOOKING";
         com.CommandType = CommandType.StoredProcedure;
         com.Parameters.AddWithValue("@IDBooking", txtSearch.Text);
         com.Parameters.AddWithValue("@ID_Dokter", Session["creaby"]);
@@ -158,7 +157,6 @@ public partial class Karyawan_Booking : System.Web.UI.Page
     {
         if (e.CommandName == "cmEdit")
         {
-            
             string Name = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[1].Text;
             string satuan = gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[6].Text;
             string jumlah = ((TextBox)gridObat.Rows[Convert.ToInt32(e.CommandArgument.ToString())].Cells[5].FindControl("jumlahBeli")).Text;
@@ -204,6 +202,9 @@ public partial class Karyawan_Booking : System.Web.UI.Page
             rowIndex = 0;
             if (ViewState["currentTable"] != null)
             {
+                String id = gridObat.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
+                lblID.Text = id;
+
                 DataTable dt = (DataTable)ViewState["currentTable"];
                 DataTable dt2 = (DataTable)ViewState["currentTable2"];
                 DataRow dr2 = null;
@@ -221,8 +222,7 @@ public partial class Karyawan_Booking : System.Web.UI.Page
 
                         if (i == row - 2)
                         {
-                            String id = gridObat.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
-                            lblID.Text = id;
+
                             double hargatot = Convert.ToDouble(harga) * Convert.ToDouble(jumlah);
 
                             box1.Text = Name;
@@ -359,7 +359,7 @@ public partial class Karyawan_Booking : System.Web.UI.Page
         insert.ExecuteNonQuery();
         conn.Close();
 
-        DataTable dt = (DataTable)ViewState["currentTable"];
+        DataTable dt = (DataTable)ViewState["currentTable2"];
         int row = dt.Rows.Count;
         for (int i = 0; i < row - 1; i++)
         {
@@ -376,7 +376,7 @@ public partial class Karyawan_Booking : System.Web.UI.Page
         }
         AddNewRowTogrid();
         Response.Write("<script>alert('Data berhasil Ditambahkan');</script>");
-        loadData();
+        //loadData();
     }
 
     private void AddNewRowTogrid()
@@ -428,7 +428,7 @@ public partial class Karyawan_Booking : System.Web.UI.Page
     {
         if (e.CommandName == "cmEdit")
         {
-            loadData();
+            //loadData();
             String id = gridBooking.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
             lblIDqu.Text = id;
             secBooking.Visible = false;
@@ -469,28 +469,14 @@ public partial class Karyawan_Booking : System.Web.UI.Page
         int result = Convert.ToInt32(com.ExecuteNonQuery());
         conn.Close();
 
-        Response.Redirect("konf_booking.aspx");
+        Response.Redirect("Booking.aspx");
 
 
     }
 
     protected void gridBooking_RowDataBound(object sender, GridViewRowEventArgs e)
     {
-        var linkDelete = (LinkButton)e.Row.FindControl("linkDelete");
-        var linkAktif = (LinkButton)e.Row.FindControl("linkAktif");
-
-        if (e.Row.RowType == DataControlRowType.DataRow)
-        {
-            TableCell statusCell = e.Row.Cells[3];
-            if (statusCell.Text == "2")
-            {
-                linkAktif.Visible = false;
-            }
-            else if (statusCell.Text == "1")
-            {
-                linkDelete.Visible = false;
-            }
-        }
+      
     }
 
 
@@ -539,4 +525,10 @@ public partial class Karyawan_Booking : System.Web.UI.Page
     }
 
 
+
+    protected void resep_dok_Click(object sender, EventArgs e)
+    {
+        secBooking.Visible = false;
+        secKeranjang.Visible = false;
+    }
 }

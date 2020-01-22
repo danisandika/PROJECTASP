@@ -79,7 +79,7 @@ public partial class Login : System.Web.UI.Page
             {
                 //user came straight to the login page so just send them to the 
                 //homepage
-                nextPage = "Karyawan/Beli.aspx";
+                nextPage = "Karyawan/Dashboard.aspx";
 
             }
             else if (role == "3")

@@ -79,11 +79,7 @@
                     </div>
                      <div class="col-md-5">
                     <asp:TextBox ID="txtAlamat" CssClass="form-control" runat="server" TextMode="MultiLine"/>
-                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
-                        runat="server"
-                        ControlToValidate="txtAlamat"
-                        ForeColor="Red"
-                        ErrorMessage="Harus diisi"></asp:RequiredFieldValidator>
+                    
                   </div>
                 </div>
 
@@ -132,7 +128,7 @@
                                             
                 <div class="form-group row align-items-center">
                 <div class="col-md-3">
-                 <label class="col-sm-3 col-form-label text-label">Foto</label>
+                 <label class="col-sm-3 col-form-label text-label">Foto</label><span style="color:red">*</span>
                  </div>
                  <div class="col-sm-9">
                  <div class="input-group">
@@ -158,7 +154,7 @@
                 </div>
                 </div>
                 </div>  
-                    <asp:Button ID="btnSave" CssClass="btn btn-primary" runat="server" Text="Submit" OnClick="btnSave_Click"/>           
+                    <asp:Button ID="btnSave" CssClass="btn btn-primary" runat="server" Text="Simpan" OnClick="btnSave_Click"/>           
             </div>                                                         
             </div>
             </div> 
@@ -337,8 +333,8 @@
                 </div>
 
                 <div class="card-footer">
-                  <asp:Button ID="EditbtnSave" CssClass="btn btn-primary" runat="server" Text="Submit" OnClick="EditbtnSave_Click"/>
-                  <asp:Button ID="EditbtnCancel" CssClass="btn btn-danger" runat="server" Text="Cancel" OnClick="EditbtnCancel_Click"/>
+                  <asp:Button ID="EditbtnSave" CssClass="btn btn-primary" runat="server" Text="Simpan" OnClick="EditbtnSave_Click"/>
+                  <asp:Button ID="EditbtnCancel" CssClass="btn btn-danger" runat="server" Text="Kembali" OnClick="EditbtnCancel_Click"/>
                 </div>
               
                  </div>
@@ -427,11 +423,11 @@
                                 
                                 
                                  <asp:LinkButton runat="server" ID="linkDelete" CommandName="Delete" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
-                                ToolTip="linkDelete"><span class="far fa-trash-alt nav-icon" onclick="return confirm('Are you sure you want to delete this item?');"></span></asp:LinkButton>
+                                ToolTip="linkDelete"><span class="far fa-trash-alt nav-icon" onclick="return confirm('Apa anda yakin menon-aktifkan data?');"></span></asp:LinkButton>
                                 
                                 
                                  <asp:LinkButton runat="server" ID="linkAktif" CommandName="Delete" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
-                                ToolTip="linkAktif"><span class="far fa-check-circle" onclick="return confirm('Are you sure you want to delete this item?');"></span></asp:LinkButton>
+                                ToolTip="linkAktif"><span class="far fa-check-circle" onclick="return confirm('Apa anda yakin meng-aktifkan data?');"></span></asp:LinkButton>
                                 
                                 
                                 <asp:LinkButton ID="lnkViewDetails" runat="server" CommandArgument='<%# Eval("ID_Dokter")%>' 

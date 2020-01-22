@@ -40,12 +40,11 @@
                     </div>
                       <div class="col-md-5">
                     <asp:TextBox ID="txtnamaJenis" CssClass="form-control" runat="server"/>
-                           <asp:RequiredFieldValidator
-                            id="RequiredFieldValidator17"
-                            ControlToValidate="txtnamaJenis"
-                            Text="(Required)"
-                            ValidationGroup="frmAdd"
-                            Runat="server" />
+                      <asp:RequiredFieldValidator ID="RequiredFieldValidator7"
+                        runat="server"
+                        ControlToValidate="txtnamaJenis"
+                        ForeColor="Red"
+                        ErrorMessage="Harus diisi"></asp:RequiredFieldValidator>
                   </div>
                 </div>
 
@@ -62,7 +61,7 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <asp:Button ID="btnSave" CssClass="btn btn-primary" runat="server" Text="Submit" OnClick="btnSave_Click"/>
+                  <asp:Button ID="btnSave" CssClass="btn btn-primary" runat="server" Text="Simpan" OnClick="btnSave_Click"/>
                 </div>
               
             </div>
@@ -92,6 +91,11 @@
                     </div>
                     <div class="col-md-5">
                     <asp:TextBox ID="txtEditnamaJenis" CssClass="form-control" runat="server"/>
+                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
+                        runat="server"
+                        ControlToValidate="txtEditnamaJenis"
+                        ForeColor="Red"
+                        ErrorMessage="Harus diisi"></asp:RequiredFieldValidator>
                   </div>
                   </div>
 
@@ -108,7 +112,7 @@
                 <!-- /.card-body -->
                 
                 <div class="card-footer">
-                  <asp:Button ID="EditbtnSave" CssClass="btn btn-primary" runat="server" Text="Submit" OnClick="EditbtnSave_Click"/>
+                  <asp:Button ID="EditbtnSave" CssClass="btn btn-primary" runat="server" Text="Simpan" OnClick="EditbtnSave_Click"/>
                   <asp:Button ID="EditbtnCancel" CssClass="btn btn-danger" runat="server" Text="Cancel" OnClick="EditbtnCancel_Click"/>
                 </div>
               

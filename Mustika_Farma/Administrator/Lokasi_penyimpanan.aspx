@@ -32,18 +32,24 @@
                 <div class="card-body">
                   <div class="row form-group">
                     <div class="col-md-3">
-                    <label for="exampleInputEmail1">Nama Lokasi</label>
+                    <label for="exampleInputEmail1">Nama Lokasi</label><span style="color:red">*</span>
                     </div>
                     <div class="col-md-5">
                     <asp:TextBox ID="txtNamaLok" CssClass="form-control" runat="server"/>
+                    <asp:RequiredFieldValidator runat="server" id="reqName" 
+                            controltovalidate="txtNamaLok" 
+                            errormessage="Data Harus diisi!" />
                   </div>
                 </div>
                   <div class="row form-group">
                     <div class="col-md-3">
-                      <label for="exampleInputPassword1">Tempat Lokasi</label>
+                      <label for="exampleInputPassword1">Tempat Lokasi</label><span style="color:red">*</span>
                     </div>
                       <div class="col-md-5">
                         <asp:TextBox ID="txtTempatLok" CssClass="form-control" runat="server" TextMode="MultiLine" />
+                          <asp:RequiredFieldValidator runat="server" id="RequiredFieldValidator1" 
+                            controltovalidate="txtTempatLok" 
+                            errormessage="Data Harus diisi!" />
                   </div>
                 </div>
 
@@ -84,19 +90,25 @@
                  <div class="card-body">
                   <div class="row form-group">
                     <div class="col-md-3">
-                    <label for="exampleInputEmail1">Nama Lokasi</label>
+                    <label for="exampleInputEmail1">Nama Lokasi</label><span style="color:red">*</span>
                     </div>
                     <div class="col-md-5">
                     <asp:TextBox ID="txtNamaE" CssClass="form-control" runat="server"/>
+                          <asp:RequiredFieldValidator runat="server" id="RequiredFieldValidator2" 
+                            controltovalidate="txtNamaE" 
+                            errormessage="Data Harus diisi!" />
                   </div>
                 </div>
 
                   <div class="row form-group">
                     <div class="col-md-3">
-                    <label for="exampleInputPassword1">Tempat Lokasi</label>
+                    <label for="exampleInputPassword1">Tempat Lokasi</label><span style="color:red">*</span>
                     </div>
                     <div class="col-md-5">
                     <asp:TextBox ID="txtTempatE" CssClass="form-control" runat="server" TextMode="MultiLine" />
+                         <asp:RequiredFieldValidator runat="server" id="RequiredFieldValidator3" 
+                            controltovalidate="txtTempatE" 
+                            errormessage="Data Harus diisi!" />
                   </div>
                 </div>
                   <div class="row form-group">
@@ -114,8 +126,8 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <asp:Button ID="EditbtnSave" CssClass="btn btn-primary" runat="server" Text="Submit" OnClick="EditbtnSave_Click"/>
-                  <asp:Button ID="EditbtnCancel" CssClass="btn btn-danger" runat="server" Text="Cancel" OnClick="EditbtnCancel_Click"/>
+                  <asp:Button ID="EditbtnSave" CssClass="btn btn-primary" runat="server" Text="Simpan" OnClick="EditbtnSave_Click"/>
+                  <asp:Button ID="EditbtnCancel" CssClass="btn btn-danger" runat="server" Text="Kembali" OnClick="EditbtnCancel_Click"/>
                 </div>
               
             </div>
@@ -154,8 +166,8 @@
                 <asp:GridView ID="gridLokasi" runat="server" CssClass="table table-hover"
                     AllowPaging="true"
                     AllowSorting="true" AutoGenerateColumns="false" DataKeyNames="IDLokasi" EmptyDataText="Tidak Ada Data" 
-                    PageSize="5" PagerStyle-CssClass="pagination" ShowHeaderWhenEmpty="true" OnPageIndexChanging="gridLokasi_PageIndexChanging"
-                    OnRowCommand="gridLokasi_RowCommand" OnSorting="gridLokasi_Sorting" OnSelectedIndexChanged="gridLokasi_SelectedIndexChanged" >
+                    PageSize="5" OnRowDataBound="gridLokasi_RowDataBound" PagerStyle-CssClass="pagination" ShowHeaderWhenEmpty="true" OnPageIndexChanging="gridLokasi_PageIndexChanging"
+                     OnRowDeleting="gridLokasi_RowDeleting" OnRowCommand="gridLokasi_RowCommand" OnSorting="gridLokasi_Sorting" OnSelectedIndexChanged="gridLokasi_SelectedIndexChanged" >
                     <PagerSettings Mode="NumericFirstLast" FirstPageText="<<" LastPageText=">>" />
                     <Columns>
                         <asp:TemplateField HeaderText="No"  HeaderStyle-CssClass="table-bordered" ItemStyle-HorizontalAlign="Center">
@@ -185,8 +197,11 @@
                                 <asp:LinkButton runat="server" ID="linkEdit" CommandName="cmEdit" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
                                     ToolTip="Edit Data"><span class="far fa-edit nav-icon"></span>
                                 </asp:LinkButton>
-                                |
-                                <asp:LinkButton runat="server" ID="linkDelete" CommandName="cmDelete" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
+                                
+                                 <asp:LinkButton runat="server" ID="linkAktif" CommandName="Delete" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
+                                ToolTip="linkAktif"><span class="far fa-check-circle" onclick="return confirm('Apakah Anda yakin untuk meaktifkan data ini?');"></span></asp:LinkButton>
+                                
+                                <asp:LinkButton runat="server" ID="linkDelete" CommandName="Delete" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
                                     ToolTip="Delete Data"><span class="far fa-trash-alt nav-icon" onclick="return confirm('Apa kamu yakin meng-hapus data ?');"></span>
                                 </asp:LinkButton>
                             </ItemTemplate>
