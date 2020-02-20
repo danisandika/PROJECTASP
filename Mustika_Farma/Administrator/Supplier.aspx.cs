@@ -49,12 +49,6 @@ public partial class Administrator_Supplier : System.Web.UI.Page
         return ds;
     }
 
-    protected void grdMenu_PageIndexChanging(object sender, GridViewPageEventArgs e)
-    {
-        grdMenu.PageIndex = e.NewPageIndex;
-        loadData();
-    }
-
     protected void grdMenu_RowCommand(object sender, GridViewCommandEventArgs e)
     {
         if (e.CommandName == "Ubah")
@@ -327,5 +321,11 @@ public partial class Administrator_Supplier : System.Web.UI.Page
         ViewMenu.Visible = true;
         EditMenu.Visible = false;
         AddMenu.Visible = false;
+    }
+
+    protected void grdMenu_PageIndexChanging1(object sender, GridViewPageEventArgs e)
+    {
+        grdMenu.PageIndex = e.NewPageIndex;
+        loadData();
     }
 }

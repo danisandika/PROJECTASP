@@ -22,4 +22,10 @@ public partial class Administrator_MasterKaryawan : System.Web.UI.MasterPage
         Session.Abandon();
         Response.Redirect("../Login.aspx");
     }
+
+
+    protected void lnkEdit_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("profile.aspx");
+    }
 }

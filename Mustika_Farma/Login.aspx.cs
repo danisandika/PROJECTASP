@@ -88,7 +88,11 @@ public partial class Login : System.Web.UI.Page
             }
             else if (role == "4")
             {
-                nextPage = "Karyawan/Dokter_periksa.aspx";
+                nextPage = "Karyawan/Home.aspx";
+            }
+            else if (role == "5")
+            {
+                nextPage = "Manager/Laporan.aspx";
             }
             else
             {

@@ -14,6 +14,8 @@ public partial class Karyawan_konf_pembelian : System.Web.UI.Page
     DataSet ds = new DataSet();
     private const string Ascending = " ASC";
     private const string Descending = " DESC";
+    DateTime maxdate = DateTime.MaxValue;
+    DateTime mindate = DateTime.MinValue;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -21,6 +23,11 @@ public partial class Karyawan_konf_pembelian : System.Web.UI.Page
             loadData();
             secDetail.Visible = false;
         }
+        mindate = DateTime.Today;
+        maxdate = mindate.AddDays(7);
+
+        Kadaluarsa.Attributes["max"] = DateTime.Now.AddDays(30).ToString("yyyy-MM-dd");
+
     }
 
     private DataSet loadData()

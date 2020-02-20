@@ -59,7 +59,8 @@ public partial class Administrator_JenisObat : System.Web.UI.Page
         int result = Convert.ToInt32(com.ExecuteNonQuery());
         conn.Close();
         loadData();
-        
+        clear();
+
         secView.Visible = true;
         secEdit.Visible = false;
         secAdd.Visible = false;
@@ -84,10 +85,11 @@ public partial class Administrator_JenisObat : System.Web.UI.Page
         int result = Convert.ToInt32(com.ExecuteNonQuery());
         conn.Close();
         loadData();
-
+        clear();
         secView.Visible = true;
         secEdit.Visible = false;
         secAdd.Visible = false;
+        clear();
     }
 
     protected void gridJenis_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -296,5 +298,14 @@ public partial class Administrator_JenisObat : System.Web.UI.Page
 
         //Show the modal popup extender
         GridViewDetails.Show();
+    }
+
+    private void clear() {
+        txtDeskripsi.Text = "";
+        txtEditDeskripsi.Text = "";
+        txtEditnamaJenis.Text = "";
+        txtnamaJenis.Text = "";
+        txtEditnamaJenis.Text = "";
+
     }
 }

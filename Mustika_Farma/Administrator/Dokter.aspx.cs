@@ -75,7 +75,7 @@ public partial class Administrator_Dokter : System.Web.UI.Page
             int result = Convert.ToInt32(com.ExecuteNonQuery());
             conn.Close();
             loadData();
-
+            clear();
             secView.Visible = true;
             secEdit.Visible = false;
             secAdd.Visible = false;
@@ -123,7 +123,7 @@ public partial class Administrator_Dokter : System.Web.UI.Page
             }
             conn.Close();
             loadData();
-
+            clear();
             secView.Visible = true;
             secEdit.Visible = false;
             secAdd.Visible = false;
@@ -157,7 +157,7 @@ public partial class Administrator_Dokter : System.Web.UI.Page
             }
             conn.Close();
             loadData();
-
+            clear();
             secView.Visible = true;
             secEdit.Visible = false;
             secAdd.Visible = false;
@@ -181,7 +181,7 @@ public partial class Administrator_Dokter : System.Web.UI.Page
 
     protected void btnSearch_Click(object sender, EventArgs e)
     {
-
+        loadData();
     }
 
     protected void gridDokter_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -391,5 +391,21 @@ public partial class Administrator_Dokter : System.Web.UI.Page
     protected void btnUbahFoto_Click(object sender, EventArgs e)
     {
         EditFotoView.Visible = true;
+    }
+
+    private void clear()
+    {
+        txtAlamat.Text = "";
+        txtAlamatE.Text = "";
+        txtEmail.Text = "";
+        txtEmailE.Text = "";
+        txtEmail.Text="";
+        txtNama.Text = "";
+        txtNamaE.Text = "";
+        txtNIP.Text = "";
+        txtNIPE.Text = "";
+        txtPassE.Text = "";
+        txtUname.Text = "";
+        txtUnameE.Text = "";
     }
 }

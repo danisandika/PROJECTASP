@@ -96,14 +96,12 @@
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="5%"  CssClass="table table-bordered table-striped" />
                         </asp:BoundField>
 
-                         <asp:BoundField DataField="Keterangan" HeaderStyle-CssClass="table-bordered"  HeaderText="Keterangan"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Harga" >
-                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="15%"  CssClass="table table-bordered table-striped" />
-                        </asp:BoundField>
+                        <asp:BoundField DataField="Keterangan" ItemStyle-CssClass="hiddencol" HeaderText="Status" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
                         
                         <asp:TemplateField HeaderText="Jumlah Beli" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
-                                 <asp:TextBox ID="txtJumlahBeli" DataField="txtJumlahBeli" runat="server"></asp:TextBox>
+                                 <asp:TextBox ID="txtJumlahBeli" DataField="txtJumlahBeli" TextMode="Number" runat="server"></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField> 
 
@@ -135,7 +133,7 @@
                     </Columns>
                 </asp:GridView>
 
-               <asp:Button ID="keranjang" runat="server" CssClass="btn btn-primary" Text="Tambahkan ke keranjang" OnClick="keranjang_Click"/>             
+<%--               <asp:Button ID="keranjang" runat="server" CssClass="btn btn-primary" Text="Tambahkan ke keranjang" OnClick="keranjang_Click"/>             --%>
                 </div>
 
                 </div>
@@ -246,7 +244,7 @@
                     <label for="exampleInputPassword1">Bayar</label>
                     </div>
                     <div class="col-md-8">
-                    <asp:TextBox ID="txtBayar" CssClass="form-control" runat="server" ClientIDMode="Static" OnClick="ComputeCosts();"/>
+                    <asp:TextBox ID="txtBayar" TextMode="Number" CssClass="form-control" runat="server" ClientIDMode="Static" OnClick="ComputeCosts();"/>
                   </div>
                 </div>
 

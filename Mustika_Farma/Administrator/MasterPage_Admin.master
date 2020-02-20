@@ -34,6 +34,8 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"/>
   <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+ 
+ 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <form role="form" runat="server" id="form1">
@@ -61,11 +63,9 @@
           <i class="far fa-user"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-           
-          <asp:LinkButton ID="lnkEditProfil" runat="server"></asp:LinkButton> <i class="fas fa-users-cog mr-2"></i> Edit Profil
-          </a>
+          <div class="dropdown-divider"></div> 
+          <i class="fas fa-users-cog mr-2"></i><asp:LinkButton ID="lnkEdit" runat="server" OnClick="lnkEdit_Click">Edit Profil</asp:LinkButton>
+          
 
           <div class="dropdown-divider"></div>
            <i class="fas fa-users-cog mr-2"></i><asp:LinkButton ID="lnkLogOut" runat="server" OnClick="lnkLogOut_Click1">LogOut</asp:LinkButton>
@@ -166,6 +166,13 @@
               <p>Jenis Dokter</p>
             </a>
           </li>
+              <li class="nav-item">
+            <a href="profile.aspx" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>Profile User</p>
+            </a>
+          </li>
+
           </ul> 
          
       </nav>

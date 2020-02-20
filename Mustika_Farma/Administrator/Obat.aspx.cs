@@ -26,6 +26,11 @@ public partial class Administrator_Obat : System.Web.UI.Page
             secEdit.Visible = false;
             secView.Visible = true;
         }
+        DateTime mindate = DateTime.MinValue;
+        mindate = DateTime.Today;
+        txtExpired.Attributes["min"] = DateTime.Now.ToString("yyyy-MM-dd");
+        txtExpiredE.Attributes["min"] = DateTime.Now.ToString("yyy-MM-dd");
+
     }
 
     private DataSet loadData()
@@ -50,9 +55,11 @@ public partial class Administrator_Obat : System.Web.UI.Page
             string filename = Guid.NewGuid() + System.IO.Path.GetFileName(uploadfile.FileName).Substring(System.IO.Path.GetFileName(uploadfile.FileName).Length - 4);
             uploadfile.SaveAs(Server.MapPath("obat_obat/") + filename);
 
+           
             DateTime CreateDate = DateTime.Now;
             DateTime expired = Convert.ToDateTime(txtExpired.Text);
             int CreateBy = 1;
+
 
             SqlCommand com = new SqlCommand();
             com.Connection = conn;
@@ -65,7 +72,7 @@ public partial class Administrator_Obat : System.Web.UI.Page
             com.Parameters.AddWithValue("@IDLokasi", DDLLokasi.SelectedValue);
             com.Parameters.AddWithValue("@Satuan", ddlSatuan.SelectedValue);
             com.Parameters.AddWithValue("@Harga", Convert.ToDecimal(txtHarga.Text));
-            com.Parameters.AddWithValue("@Expired", expired);
+            com.Parameters.AddWithValue("@Expired", Convert.ToDateTime(txtExpired.Text));
             com.Parameters.AddWithValue("@foto", "obat_obat/" + filename);
             com.Parameters.AddWithValue("@createDate", CreateDate);
             com.Parameters.AddWithValue("@createBy", CreateBy);
@@ -212,7 +219,7 @@ public partial class Administrator_Obat : System.Web.UI.Page
             com.Parameters.AddWithValue("@Harga", txtHargaEdit.Text);
             com.Parameters.AddWithValue("@Status", 1);
             com.Parameters.AddWithValue("@JumlahObat", txtJumlahE.Text);
-            com.Parameters.AddWithValue("@Expired", expired);
+            com.Parameters.AddWithValue("@Expired", Convert.ToDateTime(txtExpiredE.Text));
             com.Parameters.AddWithValue("@foto", "obat_obat/" + filename);
             com.Parameters.AddWithValue("@ModifiedDate", ModifiedDate);
             com.Parameters.AddWithValue("@ModifiedBy", 1);
@@ -240,7 +247,7 @@ public partial class Administrator_Obat : System.Web.UI.Page
             com.Parameters.AddWithValue("@Harga", Convert.ToDecimal(txtHargaEdit.Text));
             com.Parameters.AddWithValue("@Status", 1);
             com.Parameters.AddWithValue("@JumlahObat", txtJumlahE.Text);
-            com.Parameters.AddWithValue("@Expired", expired);
+            com.Parameters.AddWithValue("@Expired", Convert.ToDateTime(txtExpiredE.Text));
             com.Parameters.AddWithValue("@foto", "NULL");
             com.Parameters.AddWithValue("@ModifiedDate", ModifiedDate);
             com.Parameters.AddWithValue("@ModifiedBy", 1);
@@ -313,7 +320,7 @@ public partial class Administrator_Obat : System.Web.UI.Page
         GridViewRow row = (GridViewRow)((LinkButton)sender).Parent.Parent;
         //Get the column value and assign it to label in panel
         //Change the index as per your need
-        Keterangan.Text = row.Cells[4].Text;
+        //Keterangan.Text = row.Cells[4].Text;
         namaObat.Text = row.Cells[1].Text;
         CreateBy.Text = row.Cells[12].Text;
         CreateDate.Text = row.Cells[13].Text;

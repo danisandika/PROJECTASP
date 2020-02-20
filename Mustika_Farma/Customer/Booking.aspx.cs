@@ -27,7 +27,6 @@ public partial class Karyawan_Booking : System.Web.UI.Page
         }
         string str = RandomString(10, false);
         txtBooking.Text = str;
-        //ddlvalue();
         mindate = DateTime.Today;
         maxdate = mindate.AddDays(7);
         txtTanggal.Attributes["min"] = DateTime.Now.ToString("yyyy-MM-dd");

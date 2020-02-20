@@ -12,6 +12,7 @@ public partial class Karyawan_Booking : System.Web.UI.Page
 {
     SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Default"].ConnectionString);
     DataSet ds = new DataSet();
+    DataSet dso = new DataSet();
     private const string Ascending = " ASC";
     private const string Descending = " DESC";
 
@@ -127,10 +128,10 @@ public partial class Karyawan_Booking : System.Web.UI.Page
         com.Parameters.AddWithValue("@namaObat", txtSearch.Text);
 
         SqlDataAdapter adap = new SqlDataAdapter(com);
-        adap.Fill(ds);
-        gridObat.DataSource = ds;
+        adap.Fill(dso);
+        gridObat.DataSource = dso;
         gridObat.DataBind();
-        return ds;
+        return dso;
     }
 
     private DataSet tampilanBooking()
@@ -156,8 +157,10 @@ public partial class Karyawan_Booking : System.Web.UI.Page
 
     protected void gridObat_RowCommand(object sender, GridViewCommandEventArgs e)
     {
+        
         if (e.CommandName == "cmEdit")
         {
+            
             String id = gridObat.DataKeys[Convert.ToInt32(e.CommandArgument.ToString())].Value.ToString();
             lblID.Text = id;
 

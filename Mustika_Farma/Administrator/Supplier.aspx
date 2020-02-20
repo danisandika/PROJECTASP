@@ -295,20 +295,21 @@
               </div>
 
          <div class="card-body table-responsive p-0 col-12">
-                <asp:GridView CssClass="table table-hover"
+                <asp:GridView CssClass="table table-striped table-bordered table-hover"
                 id="grdMenu"
                 DataKeyNames="IDSupplier"
-                AllowPaging="true"
+                AllowPaging="true"   PageSize="5"
                 AllowSorting="true"
                 AutoGenerateColumns="false"
                 GridLines="Both"
                 Runat="server"
                 OnSelectedIndexChanged="grdMenu_SelectedIndexChanged"
-                OnPageIndexChanging="grdMenu_PageIndexChanging"
+                OnPageIndexChanging="grdMenu_PageIndexChanging1"
                 OnRowCommand="grdMenu_RowCommand"
                 OnSorting="grdMenu_Sorting"
                 OnRowDeleting="grdMenu_RowDeleting"
-                OnRowDataBound="grdMenu_RowDataBound">
+                OnRowDataBound="grdMenu_RowDataBound"
+              >
                 <Columns>
                     <asp:TemplateField HeaderText="No. "  HeaderStyle-CssClass="table-bordered" ItemStyle-HorizontalAlign="Center">
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="2%"  CssClass="table table-bordered table-striped" />

@@ -344,8 +344,7 @@ public partial class Karyawan_penjualan : System.Web.UI.Page
         string selectedValue = rbResep.SelectedValue;
         if (selectedValue == "1")
         {
-            //try
-            //{
+            
                 string filename = Guid.NewGuid() + System.IO.Path.GetFileName(uploadfile.FileName).Substring(System.IO.Path.GetFileName(uploadfile.FileName).Length - 4);
                 uploadfile.SaveAs(Server.MapPath("Resep/") + filename);
                 DateTime tanggal = DateTime.Now;
@@ -359,7 +358,6 @@ public partial class Karyawan_penjualan : System.Web.UI.Page
                 insert.Parameters.AddWithValue("@totalBayar", Convert.ToDecimal(lblTotalHarga.Text));
                 insert.Parameters.AddWithValue("@status", 2);
                 insert.Parameters.AddWithValue("@ID_Dokter", DBNull.Value);
-
 
                 conn.Open();
                 insert.ExecuteNonQuery();
@@ -382,11 +380,7 @@ public partial class Karyawan_penjualan : System.Web.UI.Page
                 }
                 AddNewRowTogrid();
         }
-        //    catch (Exception ex)
-        //    {
-        //        Response.Write("<script>alert('Masukkan Foto');</script>");
-        //    }
-        //}
+        
         else
         {
             DateTime tanggal = DateTime.Now;

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Administrator/MasterPage_Admin.master" AutoEventWireup="true" CodeFile="Dokter.aspx.cs" Inherits="Administrator_Dokter" %>
+﻿ <%@ Page Title="" Language="C#" MasterPageFile="~/Administrator/MasterPage_Admin.master" AutoEventWireup="true" CodeFile="Dokter.aspx.cs" Inherits="Administrator_Dokter" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
@@ -122,7 +122,7 @@
                  <div class="col-md-5">
                   <asp:DropDownList ID="ddlJenis" runat="server" CssClass="form-control" DataSourceID="dsJenis" DataTextField="nama_Jenis" DataValueField="ID_SP">
                   </asp:DropDownList>
-                       <asp:SqlDataSource ID="dsJenis" runat="server" ConnectionString="<%$ ConnectionStrings:Default %>" SelectCommand="select ID_SP,nama_Jenis from jenis_Dokter where [status] =1"></asp:SqlDataSource>
+                       <asp:SqlDataSource ID="dsJenis" runat="server" ConnectionString="<%$ConnectionStrings:Default %>" SelectCommand="select ID_SP,nama_Jenis from jenis_Dokter where [status] =1"></asp:SqlDataSource>
                   </div>
                 </div>  
                                             

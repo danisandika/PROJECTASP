@@ -72,9 +72,7 @@
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
                         </asp:BoundField>
                         
-                         <asp:BoundField DataField="Keterangan" HeaderStyle-CssClass="table-bordered"  HeaderText="Keterangan"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Harga" >
-                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
-                        </asp:BoundField>
+                        <asp:BoundField DataField="Keterangan" ItemStyle-CssClass="hiddencol" HeaderText="Status" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
 
                         <asp:BoundField DataField="Harga" ItemStyle-CssClass="hiddencol" HeaderText="" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
 
@@ -85,7 +83,7 @@
                         <asp:TemplateField HeaderText="Jumlah Beli" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
-                                 <asp:TextBox ID="jumlahBeli" runat="server"></asp:TextBox>
+                                 <asp:TextBox ID="jumlahBeli" TextMode="Number" runat="server"></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField> 
 
@@ -111,7 +109,7 @@
                     </Columns>
                 </asp:GridView>
                <div class="form-group">
-               <asp:Button ID="keranjang" runat="server" CssClass="btn btn-primary" Text="Tambahkan ke keranjang" OnClick="keranjang_Click"/>             
+<%--               <asp:Button ID="keranjang" runat="server" CssClass="btn btn-primary" Text="Tambahkan ke keranjang" OnClick="keranjang_Click"/>             --%>
                </div>
                     </div>
 
@@ -180,7 +178,7 @@
                 </asp:GridView>
 
                <asp:Label ID="lblJumlahPembelian" runat="server" Text='<%#Eval("valuefinal") %>'></asp:Label>
-              <asp:Label ID="lblTotalHarga" runat="server" Text='<%#Eval("valuefinal") %>'></asp:Label>
+              <asp:Label ID="lblTotalHarga" runat="server" Text='<%#Eval("valuefinal") %>' Visible="false"></asp:Label>
 
 
               </div>
@@ -194,7 +192,7 @@
     <div class="col-md-4">
             <div class="card-primary">
               <div class="card-header">
-                <h3 class="card-title">Transaksi Pembelian</h3>
+                <h3 class="card-title">Transaksi Penjualan</h3>
                 </div>
                 <div class="card-tools">
                     <div class="card-body">

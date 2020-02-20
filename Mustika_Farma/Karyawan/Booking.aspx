@@ -47,8 +47,8 @@
               <div class="card-header">
                 <h3 class="card-title">Data Pemeriksaan</h3>
               </div>
-                <asp:Label ID="lblIDqu" runat="server" Text="" Visible="true"></asp:Label>
-                <asp:Label ID="labelIDUSer" runat="server" Text="Label" Visible="true"></asp:Label>
+                <asp:Label ID="lblIDqu" runat="server" Text="" Visible="false"></asp:Label>
+                <asp:Label ID="labelIDUSer" runat="server" Text="Label" Visible="false"></asp:Label>
                 <div class="card-body">
                     
                 <div class="row form-group">
@@ -56,7 +56,7 @@
                   <label for="pasien">Nama Pasien</label><span style="color:red">(*)</span>
                 </div>
                  <div class="col-md-5">
-                     <asp:Label ID="lblIDPasien" runat="server" Text="" readonly="true"></asp:Label>
+                     <asp:Label ID="lblIDPasien" runat="server" Text="" readonly="false"></asp:Label>
                  </div>
                 </div>
 
@@ -246,7 +246,7 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Table Obat</h3>
-                <asp:Label ID="lblKaryawan" runat="server" Visible="true" Text=""></asp:Label>
+                <asp:Label ID="lblKaryawan" runat="server" Visible="false" Text=""></asp:Label>
 
                    <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
@@ -285,9 +285,7 @@
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
                         </asp:BoundField>
 
-                         <asp:BoundField DataField="Keterangan" HeaderStyle-CssClass="table-bordered"  HeaderText="Keterangan"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left" SortExpression="Harga" >
-                            <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
-                        </asp:BoundField>
+                        <asp:BoundField DataField="Keterangan" ItemStyle-CssClass="hiddencol" HeaderText="" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
 
                         <asp:BoundField DataField="Harga" ItemStyle-CssClass="hiddencol" HeaderText="" HeaderStyle-CssClass="hiddencol"  NullDisplayText="-" ItemStyle-HorizontalAlign="Left"/>
 
@@ -298,7 +296,7 @@
                         <asp:TemplateField HeaderText="Jumlah Beli" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign="Center">
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="10%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
-                                 <asp:TextBox ID="jumlahBeli" runat="server"></asp:TextBox>
+                                 <asp:TextBox ID="jumlahBeli" TextMode="Number" runat="server"></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField> 
 
@@ -316,11 +314,11 @@
                                 </asp:LinkButton>                                
                             </ItemTemplate>
                         </asp:TemplateField>
-
+                            
                     </Columns>
                 </asp:GridView>
                <div class="form-group">
-               <asp:Button ID="keranjang" runat="server" CssClass="btn btn-primary" Text="Tambahkan ke keranjang" OnClick="keranjang_Click"/>             
+<%--               <asp:Button ID="keranjang" runat="server" CssClass="btn btn-primary" Text="Tambahkan ke keranjang" OnClick="keranjang_Click"/>             --%>
                </div>
                     </div>
 

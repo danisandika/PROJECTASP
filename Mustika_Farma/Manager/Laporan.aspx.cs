@@ -58,7 +58,7 @@ public partial class Manager_Laporan : System.Web.UI.Page
             Bulan.Add(row["Bulan"].ToString());
             Pendapatan.Add(Convert.ToInt32(row["Pendapatan"]));
         }
-       
+
         string[] Buland = Bulan.ToArray();
         int[] jumlahd = Pendapatan.ToArray();
 
@@ -67,7 +67,8 @@ public partial class Manager_Laporan : System.Web.UI.Page
     }
 
 
-    public void GENTOARRAY() {
+    public void GENTOARRAY()
+    {
         List<string> Bulans = new List<string>();
 
         List<int> Pembelian = new List<int>();

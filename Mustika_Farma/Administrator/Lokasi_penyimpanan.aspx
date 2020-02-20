@@ -163,7 +163,7 @@
               </div>
                 <div class="card-body table-responsive p-0 col-12">
                 
-                <asp:GridView ID="gridLokasi" runat="server" CssClass="table table-hover"
+                <asp:GridView ID="gridLokasi" runat="server" CssClass="table table-striped table-bordered table-hover"
                     AllowPaging="true"
                     AllowSorting="true" AutoGenerateColumns="false" DataKeyNames="IDLokasi" EmptyDataText="Tidak Ada Data" 
                     PageSize="5" OnRowDataBound="gridLokasi_RowDataBound" PagerStyle-CssClass="pagination" ShowHeaderWhenEmpty="true" OnPageIndexChanging="gridLokasi_PageIndexChanging"

@@ -145,7 +145,7 @@
               </div>
                 <div class="card-body table-responsive p-0 col-12">
                 
-                <asp:GridView ID="gridJenis" runat="server" CssClass="table table-hover"
+                <asp:GridView ID="gridJenis" runat="server" CssClass="table table-striped table-bordered table-hover"
                     AllowPaging="true" 
                     AllowSorting="true" AutoGenerateColumns="false" DataKeyNames="idjenis" EmptyDataText="Tidak Ada Data" 
                     PageSize="5" ShowHeaderWhenEmpty="true" OnPageIndexChanging="gridJenis_PageIndexChanging"

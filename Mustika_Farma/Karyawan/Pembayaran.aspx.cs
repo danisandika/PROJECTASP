@@ -137,11 +137,11 @@ public partial class Karyawan_Pembayaran : System.Web.UI.Page
         //cek apakah ada data yg akan ditambahkan/ubah
         if (result != 0)
         {
-            Response.Write("<script>alert('Data berhasil dimasukkan kekeranjang');</script>");
+            Response.Write("<script>alert('Data berhasil Dihapus');</script>");
         }
         else
         {
-            Response.Write("<script>alert('Data Gagal dimasukkan kekeranjang');</script>");
+            Response.Write("<script>alert('Data Gagal ');</script>");
         }
     }
 

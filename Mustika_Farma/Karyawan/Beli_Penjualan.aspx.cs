@@ -377,7 +377,7 @@ public partial class Karyawan_Beli_Penjualan : System.Web.UI.Page
         AddNewRowTogrid();
 
         Response.Write("<script>alert('Pembelian Di proses');</script>");
-        Response.Redirect("beli.aspx");
+        Response.Redirect("Beli_Penjualan.aspx");
         }
     }
 

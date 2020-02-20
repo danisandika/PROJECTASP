@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
         <div class="input-group mb-3">
-         <asp:TextBox ID="txtNama" CssClass="form-control" runat="server" placeholder="Nama"/>
+         <asp:TextBox ID="txtNama" required="true" CssClass="form-control" runat="server" placeholder="Nama"/>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -18,7 +18,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-         <asp:TextBox ID="txtNoTelp" CssClass="form-control" runat="server" placeholder="No Telp" />
+         <asp:TextBox ID="txtNoTelp" TextMode="Number" CssClass="form-control" runat="server" placeholder="No Telp" />
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-phone"></span>
@@ -34,8 +34,12 @@
           </div>
         </div>
         <div class="input-group mb-3">
-         <asp:TextBox ID="txtEmail" CssClass="form-control" runat="server" placeholder="Email" />
-          <div class="input-group-append">
+         <asp:TextBox ID="txtEmail" required="true" CssClass="form-control" runat="server" placeholder="Email" />
+            <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" 
+            ControlToValidate="txtEmail"
+            ForeColor="Red" ValidationExpression="^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"
+            ErrorMessage = "Format Email Salah"/>
+            <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
             </div>

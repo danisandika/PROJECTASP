@@ -70,11 +70,11 @@ public partial class Dashboard : System.Web.UI.Page
         SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Default"].ConnectionString);
         conn.Open();
         SqlDataReader myReade = null;
-        SqlCommand myComma = new SqlCommand("SELECT top 1 o.JumlahObat, o.namaObat FROM detailTransaksi dt, Obat o, Transaksi t WHERE dt.IDObat = o.IDObat and dt.IDTransaksi = t.IDTransaksi and t.status = 1 order by o.JumlahObat asc", conn);
+        SqlCommand myComma = new SqlCommand(" select count (email_pengguna) as 'Jumlah' from master_pengguna where status=1", conn);
         myReade = myComma.ExecuteReader();
         while (myReade.Read())
         {
-            lblstok.Text = myReade["namaObat"].ToString();
+            lblstok.Text = myReade["Jumlah"].ToString();
 
         }
         conn.Close();

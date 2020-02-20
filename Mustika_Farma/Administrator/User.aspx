@@ -71,7 +71,7 @@
                         ControlToValidate="txtNotelp"
                         ForeColor="Red"
                         ValidationGroup="numb"
-                        ErrorMessage="Data Harus diisi dengan Angk"></asp:RequiredFieldValidator>
+                        ErrorMessage="Data Harus diisi dengan Angka"></asp:RequiredFieldValidator>
                   </div>
                 </div>
 
@@ -302,7 +302,7 @@
                     <PagerSettings Mode="NumericFirstLast" FirstPageText="<<" LastPageText=">>" />
                     <Columns>
                         <asp:TemplateField HeaderText="No" HeaderStyle-CssClass="table-bordered"  ItemStyle-HorizontalAlign ="Center" >
-                           <ItemStyle Font-Size="Large" VerticalAlign="Middle" Width="5%"  CssClass="table table-bordered table-striped" />
+                           <ItemStyle Font-Size="Small" VerticalAlign="Middle" Width="5%"  CssClass="table table-bordered table-striped" />
                              <ItemTemplate >
                                 <%# Container.DataItemIndex +1 %> 
                             </ItemTemplate>

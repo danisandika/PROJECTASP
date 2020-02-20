@@ -58,7 +58,7 @@ public partial class Login_Dokter : System.Web.UI.Page
 
             if (dt.Rows.Count > 0)
             {
-                Response.Redirect("Karyawan/Dokter_periksa.aspx");
+                Response.Redirect("Karyawan/Home.aspx");
             }
             else
             {
@@ -91,7 +91,7 @@ public partial class Login_Dokter : System.Web.UI.Page
             if (password == obj.ToString())
             {
                 autentik = true;
-                nextPage = "Karyawan/Dokter_periksa.aspx";
+                nextPage = "Karyawan/Home.aspx";
             }
         }
         catch (Exception xcp)

@@ -22,4 +22,9 @@ public partial class Administrator_MasterManager : System.Web.UI.MasterPage
         Session.Abandon();
         Response.Redirect("../Login.aspx");
     }
+
+    protected void lnkEdit_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("Profile.aspx");
+    }
 }

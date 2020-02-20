@@ -355,18 +355,18 @@
                             <ItemStyle Font-Size="Medium" VerticalAlign="Middle" Width="20%"  CssClass="table table-bordered table-striped" />
                             <ItemTemplate>
                                 <asp:LinkButton runat="server" ID="linkEdit" CommandName="cmEdit" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
-                                    ToolTip="Edit Data"><span class="far fa-edit nav-icon">Edit</span>
+                                    ToolTip="Edit Data"><span class="far fa-edit nav-icon"></span>
                                 </asp:LinkButton>
                                 
                                   <asp:LinkButton runat="server" ID="linkDelete" CommandName="Delete" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
-                                ToolTip="linkDelete"><span class="far fa-trash-alt nav-icon" onclick="return confirm('Are you sure you want to delete this item?');">Delete</span></asp:LinkButton>
+                                ToolTip="linkDelete"><span class="far fa-trash-alt nav-icon" onclick="return confirm('Are you sure you want to delete this item?');"></span></asp:LinkButton>
                                 
                                 
                                  <asp:LinkButton runat="server" ID="linkAktif" CommandName="Delete" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'
-                                ToolTip="linkAktif"><span class="far fa-check-circle" onclick="return confirm('Are you sure you want to delete this item?');">Aktif</span></asp:LinkButton>
+                                ToolTip="linkAktif"><span class="far fa-check-circle" onclick="return confirm('Are you sure you want to delete this item?');"></span></asp:LinkButton>
                                 
                                 <asp:LinkButton ID="lnkViewDetails" runat="server" CommandArgument='<%# Eval("IDRiwayat")%>' 
-                                OnClick="lnkViewDetails_Click" Text="Detail" style="margin-left:20px"  CssClass="far fa-check-square"/>
+                                OnClick="lnkViewDetails_Click" Text=""  CssClass="far fa-check-square"/>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>

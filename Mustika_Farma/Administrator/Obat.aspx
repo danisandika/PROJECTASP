@@ -479,13 +479,13 @@
         <asp:Label ID="namaObat" runat="server" Text="nama"></asp:Label>
        </div></div>
         
-        <div class="row form-group">
+       <%-- <div class="row form-group">
         <div class="col-md-5">
         <asp:label style="margin-left:20px" runat="server" class="col-sm-3 col-form-label text-label">Keterangan</asp:label>
          </div>
          <div class="col-md-5">
         <asp:Label ID="Keterangan" runat="server" Text="Keterangan"></asp:Label>
-       </div></div>
+       </div></div>--%>
 
          <div class="row form-group">
          <div class="col-md-5">
